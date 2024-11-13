@@ -1,0 +1,176 @@
+@import "../style/variables";
+@import "../style/animation";
+:host {
+
+
+
+::ng-deep {
+  section {
+  .btn-text {
+    @media(min-width: 1024px) {
+      font-size:1.2em;
+    }
+    @media (max-width: 575px) {
+      font-size:1.4em;
+    }
+  }
+  h2.section-header {
+    min-height: 135px;
+    @media (max-width: 575px) {
+      font-size:1.4em;
+    }
+  }
+   @media (max-width: 767px) {
+   .progress-wrapper.large {
+        height: 142px !important;
+        width: 142px !important;
+    }
+  }
+
+
+    height: 100%;
+    min-height: 370px;
+    .section-header-container {
+      text-align: center;
+    }
+
+    @media (max-width: 767px) {
+      min-height: 350px;
+      .section-header-container {
+        padding-top: 25px !important;
+      }
+  }
+    .section-body {
+     
+      @include fadein;
+      @media( min-width:767px){
+        padding-top: 5px;
+        &.renewal {
+          margin-top: -10px;
+        }
+      }
+    }
+
+  }
+
+  .applications {
+    app-form-section {
+      display: block;
+  
+      section{
+        min-height: 506px !important;
+      }
+    }
+  }
+}
+
+ul {
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   margin-top: 20px;
+   li {
+    border-bottom: 3px solid $gphc-background;
+   
+    &:hover, &:focus {
+      border-bottom-color: $gphc-accent-yellow;
+      color: $gphc-purple;
+      cursor: pointer;
+      a {
+        color: $gphc-purple !important;
+      }
+    }
+   a {
+     cursor: pointer;
+     display: flex;
+     border: none !important;
+     border-bottom: 5px solid $gphc-background;
+     transition: 200ms linear background-color;
+     padding:7px 5px 7px 5px;
+     padding-bottom: 7px !important;
+     align-items: center;
+   
+
+     .filename {
+       flex-grow: 1;
+     }
+
+     i {
+     
+      font-size: 1.5em;
+      &:not(.fa-download) {
+        margin-right: 10px;
+      }
+      
+    }
+   }
+  }
+
+ }
+
+} 
+
+i {
+
+  padding-bottom: 15px;
+  display: block;
+
+    &:not(.completed) {
+      color: $gphc-blue;
+    }
+    font-size: 173px;
+
+    &.error {
+      color: $error;
+      font-size: 167px;
+    }
+    @media (max-width: 767px) {
+      font-size: 164px !important;
+      &.fa-check-circle {
+        margin-top: -12px;
+        margin-bottom: 16px;
+      }
+    }
+
+
+    &.notdue {
+      font-size: 143px;
+      padding-top: 15px;
+      color: $gphc-background;
+      @media(max-width:767px) {
+        font-size: 133px !important;
+        padding-top:0;
+      }
+    }
+
+
+    &.user {
+        color: $gphc-purple;
+        font-size: 153px;
+        @media (max-width: 767px){
+          font-size:123px
+        }
+    }
+
+}
+
+.tile-label {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+ 
+@media (max-width:767px) {
+  .margin-10{
+    margin:10px;
+  }
+}
+
+// https://mygphc.atlassian.net/browse/FC-23
+::ng-deep app-user-badge.trainee-userBadge {
+  app-form-section{
+  section:hover{
+  box-shadow: 0 0 0 7px #fcc340;
+  background-color: #8080804d;
+  }
+}
+}

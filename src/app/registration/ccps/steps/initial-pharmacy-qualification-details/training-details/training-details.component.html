@@ -1,0 +1,133 @@
+<ng-container *ngFor="let training of trainingDetails; let i = index;">
+  <div class="row" *ngIf="!trainingDetailsExists">
+    <div class="col-md-6">
+      <app-gphc-icon class="deleteIcon"
+                     *ngIf="i !== editTrainingRow"
+                     [showLabelAlways]="true"
+                     [iconType]="'edit'"
+                     (click)="editTrainingDetails(i)"
+                     [disabled]="isEditTrainingDetails && i !== editTrainingRow"
+                     [ngClass]="{'iconDisabled':(isEditTrainingDetails && i !== editTrainingRow)}">
+      </app-gphc-icon>
+      <app-gphc-icon [disabled]="isEditTrainingDetails && i !== editTrainingRow"
+      [ngClass]="{'iconDisabled':(isEditTrainingDetails && i !== editTrainingRow)}" 
+      [showLabelAlways]="true" [iconType]="'delete'" (click)="deleteTrainingDetails(i)">
+      </app-gphc-icon>
+    </div>
+    <br />
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [class.invalid]="(siteName.touched && siteName?.errors?.required === true) || (touched && getErrorOnDelete(training)) || (training.trainingSiteName && training.trainingSiteName.length > 2000)">
+        <label for="title">Training site name</label><br />
+        <input type="text" class="form-control" *ngIf="i !== editTrainingRow" [readonly]="i !== editTrainingRow" [value]="training?.trainingSiteName" />
+        <input type="text" class="form-control"
+               [hidden]="i !== editTrainingRow"
+               #siteName="ngModel"
+               name="siteName_{{i}}"
+               [readonly]="false"
+               [(ngModel)]="training.trainingSiteName"
+               required 
+               maxlength="2001"/>
+        <p class="form-error" *ngIf="training.trainingSiteName && training.trainingSiteName.length > 2000 ">
+            You can only enter a maximum of 2000 characters in this field
+        </p>
+        <app-collapsible [trigger]="siteName?.touched && siteName?.errors?.required === true">
+          <p class="form-error">
+            Training site name is mandatory
+          </p>
+        </app-collapsible>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" [class.invalid]="(siteAddress?.touched && siteAddress?.errors?.required === true) || (touched && getErrorOnDelete(training)) || (training.trainingSiteAddress && training.trainingSiteAddress.length > 3000 )">
+        <label for="title">Training site address</label><br />
+        <textarea type="text" class="form-control"
+               name="siteAddress_{{i}}" maxlength="3001"
+               [(ngModel)]="training.trainingSiteAddress"
+               required #siteAddress="ngModel"
+               [readonly]="i !== editTrainingRow"></textarea>
+        <p class="form-error" *ngIf="training.trainingSiteAddress && training.trainingSiteAddress.length > 3000 ">
+          You can only enter a maximum of 3000 characters in this field
+        </p>
+               
+        <app-collapsible [trigger]="siteAddress?.touched && siteAddress?.errors?.required === true">
+          <p class="form-error">
+            Training site address is mandatory
+          </p>
+        </app-collapsible>
+      </div>
+    </div>
+    <div class="col-md-3" *ngIf="training.deleteButtonFlag">
+      <button (click)="deleteTraining(i)" class="btn btn-primary">
+        Delete
+      </button>
+    </div>
+  </div>
+  <div class="row">
+      
+   <div class="col-md-3">
+    <div class="form-group" [class.invalid]="(startDateTouched && startDate?.invalid === true) || (touched && getErrorOnDelete(training)) || (dateRangeInvalid && i === editTrainingRow)">
+      <label for="title">Start date</label><br />
+      <input type="text" *ngIf="i !== editTrainingRow; else editStartDate" class="form-control" [readonly]="true" [value]="training?.trainingStartDate | utcDate" />
+
+      <app-utc-date-picker [hidden]="i !== editTrainingRow" required #startDate="ngModel" name="startDate_{{i}}" [(ngModel)]="training.trainingStartDate"
+                           [max]="currentDate" (click)="isDatePickerClicked('startDate')" (ngModelChange)="onDateChange( training)">
+      </app-utc-date-picker>
+
+      <app-collapsible [trigger]=" startDateTouched && startDate?.invalid === true">
+        <p class="form-error">
+          Training start date is mandatory
+        </p>
+      </app-collapsible>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group" [class.invalid]="(endDateTouched && endDate?.invalid === true) || (touched && getErrorOnDelete(training)) || (dateRangeInvalid && i === editTrainingRow)">
+      <label for="title">End date</label><br />
+      <input type="text" *ngIf="i !== editTrainingRow; else editEndDate" class="form-control" [readonly]="true" [value]="training?.trainingEndDate | utcDate" />
+      <app-utc-date-picker [hidden]="i !== editTrainingRow" required #endDate="ngModel" name="endDate_{{i}}" [(ngModel)]="training.trainingEndDate"
+                           [max]="currentDate" (click)="isDatePickerClicked('endDate')" (ngModelChange)="onDateChange(training)">
+      </app-utc-date-picker>
+      <app-collapsible [trigger]="endDateTouched && endDate?.invalid === true">
+        <p class="form-error">
+          Training end date is mandatory
+        </p>
+      </app-collapsible>
+    </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <app-collapsible [trigger]="(dateRangeInvalid && i === editTrainingRow)">
+          <p class="form-error">
+            Invalid date range - start and end date must not overlap
+          </p>
+        </app-collapsible>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row" *ngIf="i === editTrainingRow">
+    <div class="col-md-6">
+      <button [disabled]="!allowSave(training)" (click)="updateTraining(i, editedTrainingDetails)" class="float-right btn btn-primary lm-2 mrg-btm-55">
+        Save
+      </button>
+    </div>
+  </div>
+
+</ng-container>
+
+<div class="row">
+  <div class="col-md-6" *ngIf="addTrainingFlag && !trainingDetailsExists">
+    <button (click)="addNew()" class="float-right btn btn-primary">
+      Add training details
+    </button>
+  </div>
+</div>

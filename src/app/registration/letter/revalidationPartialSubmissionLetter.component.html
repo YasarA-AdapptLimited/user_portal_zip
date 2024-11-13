@@ -1,0 +1,121 @@
+<app-banner [loading]="loading">
+    <div class="banner-left">
+      <div style="display:flex">
+        <h1 class="sm-show" style="flex-grow:1">Notice of remediation</h1>
+        <div class="button-container">
+          <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+            <i class="fa fa-print fa-xs" style="font-size: 1.5em;"></i>
+          </button>
+          <div class="btn-text">Print</div>
+        </div>
+        <div class="button-container">
+          <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+            <i class="fa fa-arrow-left fa-xs" style="font-size: 1.5em;"></i>
+          </button>
+          <div class="btn-text">Back</div>
+        </div>
+      </div>
+    </div>
+  
+  </app-banner>
+  
+  <div class="content fadein" *ngIf="!loading && !failed">
+  
+    <section class="letter-header">
+  
+      <app-letter-header [registrant]="auth?.user?.registrant" [registrantAddress]="auth?.user?.address"></app-letter-header>
+  
+      <section class="section-to-print">
+        <section class="">
+
+          <h2 class="notice">Notice of Remediation</h2>
+
+          <div class="main-content" style="margin-top: 40px;">           
+
+            <p>
+              You were required to submit your revalidation by {{ letter?.data.Date | date: 'd MMMM yyyy' }}, however, we have found that your
+              submission was incomplete. You have now been placed in remediation and have six weeks from the date
+              shown above to submit a full set of revalidation records.
+            </p>
+
+           <b>
+            What should I do next?
+           </b>
+
+            <p>
+            You should submit your revalidation records to us through myGPhC within six weeks.
+            </p>
+
+            <p>
+            If you have a good reason why you are not able to submit some or all of your revalidation records, you
+            should tell us. You can request an extension to your submission deadline, or to complete fewer entries
+            covering the same period.
+            </p>
+
+            <p>
+            To do this, log on to myGPhC, and click on ‘Tell us why you can’t submit’ on the revalidation page. Fill
+            in the form and submit it with supporting documents and we will consider your request.
+            </p>
+
+            <p>
+            If you do submit records to us during the remediation period, your submission will automatically be
+            selected for review.
+            </p>
+
+
+            <b>
+            Why do you need my revalidation records?
+            </b>
+
+            <p>
+            We have a statutory duty to make sure pharmacy professionals practise safely and effectively. Our
+            revalidation requirements allow pharmacists and pharmacy technicians to show that they keep their
+            knowledge and skills up to date in order to maintain and improve their practice.
+            </p>
+
+            <b>
+            What if I don’t want to renew my registration?
+            </b>
+
+            <p>
+            If you’re not intending to renew your registration, tell us that you no longer want to be registered by
+            completing an <a href="https://www.pharmacyregulation.org/pharmacists/changes-registration/leaving-register" target="_blank">Application for voluntary removal form</a>. This helps us to keep the register information
+            accurate and allows you to choose when you leave the register. There is no charge to leave the register.
+            </p>
+
+            <b>
+            What happens if I don’t submit my records without good reason?
+            </b>
+
+            <p>
+            If you do not submit your records by the end of the remediation period and do not provide a good reason
+            why, we will take further action and begin the process to remove you from the register. This is called
+            ‘administrative removal’.
+            </p>
+
+            <p>
+            If you are removed from the register through this process and you later reapply to be registered, we will
+            expect to receive and review your revalidation records as part of your application.
+            </p>
+
+            <p>
+            For further information on the revalidation requirements, <a href="https://assets.pharmacyregulation.org/files/document/gphc_revalidation_framework_january_2018.pdf" target="_blank">please refer to the revalidation framework</a>.
+            </p>
+  
+            <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+          </div>
+        </section>
+      </section>
+    </section>
+  </div>
+
+
+
+
+
+
+
+
+
+
+

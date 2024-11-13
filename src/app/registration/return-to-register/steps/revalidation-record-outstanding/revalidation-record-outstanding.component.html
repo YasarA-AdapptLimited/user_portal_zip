@@ -1,0 +1,26 @@
+<ng-template #content>
+    <h2 class="step-header" class="spacer">  {{title}}</h2>
+        <p class="important">
+            Our records show that you did not submit a full revalidation record for your last registration year. 
+            You will need to complete and submit your revalidation record within 28 days of the date that you submit 
+            this application for restoration, otherwise we will not process this application.
+            <br/>
+            To complete your revalidation please click on the ‘Revalidation’ tab and follow the instructions 
+            shown after you have submitted this application. 
+            If you have a valid reason for not submitting a full revalidation record for your restoration, please 
+            <a href="https://www.pharmacyregulation.org/about-us/contact-us" target="_blank">contact us</a>. 
+        </p>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <mat-checkbox (change)="validate()" [(ngModel)]="returnToRegisterDetail.hasConfirmedRevalidationSubmission"
+                        name="hasAcknowledged" #acknowledgement="ngModel">
+                        I acknowledge that I have read and understood that I must submit a full 
+                        revalidation record before my application can be processed, or that I have 
+                        recently contacted the GPhC about my revalidation record.
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+</ng-template>

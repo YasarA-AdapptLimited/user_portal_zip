@@ -1,0 +1,171 @@
+<app-banner [info]="true">
+  <div class="banner-left">
+    <h1 class="sm-show">Sign-in FAQs</h1>
+    <p class="intro-text">
+      Frequently asked questions regarding signing in
+    </p>
+  </div>
+</app-banner>
+<div class="content spread no-boxes">
+  <section>
+    <div class="row">
+
+      <div class="col-12 col-xl-8 faq-content fadein">
+        <app-faq>
+          <h2>I’m a registrant. How do I sign up for the first time?</h2>
+          <div>
+            <p>To sign in to myGPhC for the first time and create your account, you will need:</p>
+            <ul>
+              <li>a valid personal email address (this should be an address which only you have access to)</li>
+              <li>your activation code which we recently sent you in a letter</li>
+            </ul>
+            <p>
+              Your activation code is the same as your last renewal number. <a faqLink="noCode">What if I don’t have a code?</a>
+            </p>
+
+            <p>Follow these steps to sign in for the first time and create your new myGPhC account.</p>
+            <p>Step 1: Click on the link to myGPhC on the GPhC website. </p>
+            <img src="/assets/signin-faq/signin-1.png" alt="myGPhC home page" />
+            <p>Step 2: You will see a sign in screen. Click on ‘sign in’ button in the centre of the screen.
+            </p>
+            <img src="/assets/signin-faq/signin-2.png" alt="sign in button" />
+            <p>A pop up window will appear. Click ‘Sign up now’.</p>
+            <img src="/assets/signin-faq/signin-2b.png" alt="sign in dialog" />
+            <p>Step 3: Type the email address that you want to use to login to myGPhC
+            </p>
+            <img src="/assets/signin-faq/signin-3-rev.png" alt="enter email address dialog" />
+            <p>Click the ‘Send verification code’ button.
+            </p>
+            <p>Step 4: Check your personal email inbox for a verification email from Microsoft on behalf of Dev_Azure_AD . You
+              may need to check your ‘Junk’ or ‘Spam’ folder if you can’t see it in your main inbox.</p>
+            <img src="/assets/signin-faq/signin-5.png" alt="email with verification code" />
+            <p>Note the verification code in the email and navigate back to the myGphC sign in page.
+            </p>
+            <p>Step 5: Type the code into the ‘Verification code’ field and click on ‘Verify code’.
+            </p>
+            <img src="/assets/signin-faq/signin-6-rev.png" alt="enter verification code dialog" />
+            <p>Step 6: Create a password and type it into both the ‘New Password’ and ‘Confirm New Password’ fields. The characters
+              you enter into the two fields must match. If your password is not sufficiently complex, a prompt will tell
+              you what types of characters your password must contain to meet the site security requirements.
+            </p>
+            <img src="/assets/signin-faq/signin-7-rev.png" alt="enter password and confirm password" />
+            <p>When you have completed the password fields, click ‘Create’.  You will see an ‘Activate your account’ screen.
+            </p>
+
+            <p>Step 7: Enter your GPhC registration number into the ‘Registration number’ field and click on ‘Verify’.
+            </p>
+            <img src="/assets/signin-faq/signin-8.png" alt="activate your account" />
+            <p>Step 8: Check the name displayed is your name as registered with the GPhC. If it is, click ‘Yes – this correct’
+              to confirm. If you do not see your name, click ‘No - this is incorrect’. Repeat the process and make sure you
+              enter your registration details correctly. </p>
+            <img src="/assets/signin-faq/signin-9.png" alt="confirm your identity" />
+
+            <p>If you still do not see your name displayed, contact us on
+              <b>0203 713 8000</b> or email
+              <b>info@pharmacyregulation.org</b>.
+            </p>
+
+            <p>Step 9: Complete the ‘Date of birth’ and ‘Postcode’ fields with your details. Enter the code you received in
+              the letter we recently sent you.
+            </p>
+            <img src="/assets/signin-faq/signin-10.png" alt="personal details" />
+            <p>When you have entered all the information into each field, click ‘Activate’.
+            </p>
+
+            <p>Step 10: When you click on the ‘Activate’ button, you will see the message below confirming that you have activated
+              your account. Click on the button to sign out.
+            </p>
+
+            <img src="/assets/signin-faq/signin-11.png" alt="account activated" />
+            <p>Your myGPhC account is now ready. To use it, sign on using the email address and password you set up. Click on
+              “Sign in”
+            </p>
+            <img src="/assets/signin-faq/signin-11b.png" alt="sign in" />
+
+
+          </div>
+        </app-faq>
+
+
+        <app-faq faqId="noCode">
+          <h2>What if I don’t have a code?</h2>
+          <div>
+            <p>If you have not received the letter with your activation code, and you do not still have your last renewal notice, send an
+              email to <b>info@pharmacyregulation.org</b>.
+              A member of our customer services team will then post your activation code to you at the address we currently hold for
+              you.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>I haven’t received the verification code sent to my email</h2>
+          <div>
+            <p>
+              Firstly, check the ‘Junk’ or ‘Spam’ folder in your email inbox. 
+            </p>
+            <p>
+              Sometimes it can take time to receive the verification email. We recommend that you wait 24 hours to receive the email, before requesting a new verification code.
+            </p>
+            <p>
+              If you request a code more than once, make sure that you use the most recent one to activate your account. Each time your request it, a verification code will be sent, and the previous code will no longer work. 
+              So if you have requested the code twice for example, make sure you use the code from the second email you receive.
+            </p>
+            <p>
+              Make sure you don’t refresh the page when you request a code as you may resend your details and generate another request.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>I’ve forgotten my password</h2>
+          <div>
+            <p>Click on the ‘myGPhC’ link on the GPhC website. Enter the email address that you use to login to the system and
+              then click on the ‘Forgot your password’ link.
+
+            </p>
+            <img src="/assets/signin-faq/signin-forgot.png" alt="forgot password" />
+            <p>You will receive an email with instructions on how to reset your password.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>I’ve changed my email account</h2>
+          <div>
+            <p>If you have moved to a new email account, or you want to receive information from the GPhC at a different email
+              address, you need to update your email details. Sign in to your MyGPhC account as normal and then click on
+              the “Account” tab on the home screen.
+            </p>
+            <img src="/assets/signin-faq/signin-account.png" alt="account tab" />
+            <p>Navigate to the Email field in the “Contact” area of the screen and click on the edit button.
+            </p>
+            <img src="/assets/signin-faq/signin-account2.png" alt="edit contact" />
+            <p>Enter your new email address into the highlighted field and click on ‘save’.
+            </p>
+            <img src="/assets/signin-faq/signin-account3.png" alt="enter email address" />
+            <p>The prompt explains that we will need to verify your new email address. We will do this by sending you a verification
+              link to your new email address. Follow the instructions in this email to change the email address that you
+              use for logging in to MyGPhC.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>I’m having technical difficulties logging in to my account</h2>
+          <div>
+            <p>Please see our <a href="https://www.pharmacyregulation.org/setting-your-mygphc-account-troubleshooting-tips" target="_blank">top troubleshooting tips on how to resolve common technical issues with myGPhC.</a></p>
+          </div>
+        </app-faq>
+
+
+        <app-faq>
+          <h2>I'm a pre-registration trainee, how do I sign up?</h2>
+          <div>
+            <p>Here is the link to the <a target="_blank" href="https://www.pharmacyregulation.org/sites/default/files/document/applying_to_register_as_a_pharmacist_step_by_step_guide_july_2018.pdf">step by step guide.</a></p>
+          </div>
+        </app-faq>
+      </div>
+    </div>
+  </section>
+</div>

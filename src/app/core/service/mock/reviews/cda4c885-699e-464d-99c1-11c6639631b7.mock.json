@@ -1,0 +1,214 @@
+{
+  "success": true,
+  "error": null,
+  "data": {
+    "id": "cda4c885-699e-464d-99c1-11c6639631b7",
+    "submissionId": "df9ea8f6-2af2-4b2c-8c01-65e2003e7330",
+    "submissionDate": "2019-01-02T16:08:26.69",
+    "entries": [
+      {
+        "id": "c02348f5-2c66-46f1-87f5-acda3de65380",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "Chlamydia",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div>-Causes of chlamydia infection.<br></div><div>-Treatment (contraindications, adverse reactions or side effects)<br></div><div>-Antibiotic resistance.<br></div><div><br></div><div><br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div>Getting the information from NHS (Clinical knowledge summaries) and from CPPE e-learning<br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<div>People benefit from Sexually Transmitted Infections (STIs) tests.<br></div><div><br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "51a8be58-d5f7-43fc-aab8-8cce02001718",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "Lithium",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div>-Use of Lithium.<br></div><div>-Counseling patients about healthy lifestyle behaviors.<br></div><div>-Any signs of lithium toxicity that needs referrall.<br></div><div>- Common side effects of lithium.<br></div><div>-Potencial drug interactions.<br></div><div>-Lithium's Mechanism of Action.<br></div><div><br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div>Getting that information from the BNF, NICE webside ( NICE guidance on management of bipolar disorders), NPSA webside and others.<br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<div><p>I coud advise a woman on Lithium that came to the Pharmacy for some painkillers. So I recommended to avoid NSAIDs and advised her to drink \nplenty of water while doing exercise as dehydration can increase her blood lithium levels.<br></p><div><div><div><br></div></div></div><div><br></div><div><br></div></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "86b8ef38-cb52-49d1-951b-079be82f0e2c",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "NSAIDs",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div>I am planning to learn the following:<br></div><div>What are they used for?<br></div><div>How do they work?<br></div><div>Red flags that need referral.<br></div><div>Common side effects.<br></div><div>Potential drug interactions.<br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div>Reading about it in Cppe <br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<div><div>A 65 years old patient who was prescribed Naproxen (also taking Aspirin daily) was at <br></div><div>risk of GI side effects from NSAIDs so I referred him for assessment on whether co-prescribing of gastroprotection was required.<br></div><div><div><br></div></div><div><br></div><div><br></div><div><br></div></div><div><br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "c913e198-043a-4e45-adb4-17e9368fd541",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "Influenza",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div>I would like to learn the following: <br></div><div>Types of flu virus along with types of outbreaks and factors wich affect this.<br></div><div>Symptoms of flu, its transmission, incubation and epidemiology.<br></div><div>Types of flu vaccine available,methods of administration, contraindications and adverse reactions.<br></div><div>Indentify patient groups most at risk from the effects of flu.<br></div><div><br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div>By completing the CPPE e-learning programme.<br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<div>People benefits from getting the flu jab without booking an appointment with their GP  which is very convenient as they don´t need to wait long for it.<br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      }
+    ],
+    "isLeadReviewer": true,
+    "currentReviewerAssessment": 0,
+    "currentReviewerAssessmentAsString": "Unknown",
+    "otherReviewerAssessment": 0,
+    "otherReviewerAssessmentAsString": "Unknown",
+    "isFeedbackEditable": true,
+    "feedback": null,
+    "previousFeedback": null,
+    "discussionStatus": null,
+    "discussionStatusAsString": null,
+    "stage": 1,
+    "stageAsString": "Unknown",
+    "messages": [
+      {
+        "currentUsersMessage": true,
+        "dateTime": "21/1/2019 09:55:07",
+        "text": "Hello fellow reviewer, how are you ?",
+        "userRole": 1,
+        "userRoleAsString": "LeadReviewer"
+      },
+      {
+        "currentUsersMessage": false,
+        "dateTime": "21/1/2019 09:59:07",
+        "text": "Great thanks. Looks like a really interesting CPD entry doesn't it ?",
+        "userRole": 1,
+        "userRoleAsString": "PeerReviewer"
+      },
+      {
+        "currentUsersMessage": true,
+        "dateTime": "21/1/2019 10:05:10",
+        "text": "Yes indeed.",
+        "userRole": 1,
+        "userRoleAsString": "LeadReviewer"
+      }
+    ]
+  }
+}

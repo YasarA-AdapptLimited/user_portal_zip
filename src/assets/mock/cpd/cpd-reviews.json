@@ -1,0 +1,44 @@
+{
+  "reviewSummaries": [
+    {
+      "cpdSubmissionId": "63887fdf-dd30-4cc9-91f5-c7720c5566d3",
+      "title": "RANDOM2",
+      "reviewDeadline": "2017-08-01T00:00:00",
+      "leadReviewerId": "e4f87996-54af-477b-8b0c-81e1b85887ae",
+      "leadReviewerAssessment": 2,
+      "reviewerId": "45ad52f2-61a5-40e8-b418-591acbe43ca9",
+      "reviewerAssessment": 1,
+      "stage": 4,
+      "reviewerConfirmation": 2,
+      "reviewAnnotations": null,
+      "reviewMessages": null,
+      "cpdReviewFeedback": null,
+      "isLead": false,
+      "currentGPhCId": "45ad52f2-61a5-40e8-b418-591acbe43ca9",
+      "progressPercentage": 100,
+      "isBlocking": false,
+      "id": "63887fdf-dd30-4cc9-91f5-c7720c5566d3",
+      "createdDate": "2017-05-30T14:00:00"
+    },
+    {
+      "cpdSubmissionId": "b47924df-640d-49b6-aad2-75537d209048",
+      "title": "RANDOM1",
+      "reviewDeadline": "2017-07-01T00:00:00",
+      "leadReviewerId": "e4f87996-54af-477b-8b0c-81e1b85887ae",
+      "leadReviewerAssessment": 2,
+      "reviewerId": "45ad52f2-61a5-40e8-b418-591acbe43ca9",
+      "reviewerAssessment": 1,
+      "stage": 3,
+      "reviewerConfirmation": 1,
+      "reviewAnnotations": null,
+      "reviewMessages": null,
+      "cpdReviewFeedback": null,
+      "isLead": false,
+      "currentGPhCId": "45ad52f2-61a5-40e8-b418-591acbe43ca9",
+      "progressPercentage": 71,
+      "isBlocking": true,
+      "id": "b47924df-640d-49b6-aad2-75537d209048",
+      "createdDate": "2017-05-30T11:05:18.873"
+    }
+  ]
+}

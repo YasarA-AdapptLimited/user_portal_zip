@@ -1,0 +1,137 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>
+        {{ title }}
+      </div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]='true' class="headingIcon"></app-gphc-icon>
+    </h2>
+  </div>
+  <!-- Applicant -->
+  <div class="row spacing">
+    <div class="col-md-12">
+      <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+        <div class="help-text">
+          <p>
+            If you have been registered (in the last 5 years) or are currently registered with:
+          </p>
+          <ul class="tooltip-list">
+            <li>another health regulatory body in Great Britain</li>
+            <li>any health regulatory body outside of Great Britain</li>
+          </ul>
+          <p>
+            You must provide details of your registration and a valid 'letter of good standing' from this organisation.
+          </p>
+          <p>
+            This is so that we can verify that you are fit to practise as a pharmacy professional. We may contact the
+            regulatory
+            body for more information.
+          </p>
+          <p>
+            If you are an OSPAP or EEA applicant, submitting a letter of good standing is a mandatory part of your
+            application.
+          </p>
+          <p>
+            Letters of good standing are only valid for six months from the date they are issued.
+          </p>
+        </div>
+      </app-collapsible>
+    </div>
+  </div>
+
+
+  <p class="intro-text" [class.error]="(touched || model.hasRegistered.touched) && model.hasRegistered.invalid">Have you
+    been registered with any other regulatory bodies in the last 5 years?</p>
+  <section class="letter-of-good-standing">
+    <form>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group"
+            [class.invalid]="(touched || model.hasRegistered.touched) && model.hasRegistered.invalid">
+            <mat-radio-group aria-label="Yes or no selection" name="Yes or no selection"
+              [formControl]="model.hasRegistered">
+              <mat-radio-button [value]="true" name="Yes" type="radio">Yes</mat-radio-button>
+              <mat-radio-button [value]="false" name="No" type="radio">No</mat-radio-button>
+            </mat-radio-group>
+
+            <app-collapsible
+              [trigger]="(touched || model.hasRegistered.touched )&& model.hasRegistered.errors?.required">
+              <p class="form-error">
+                This is mandatory
+              </p>
+            </app-collapsible>
+          </div>
+        </div>
+      </div>
+
+      <app-collapsible [trigger]="model.hasRegistered.value === true">
+        <div class="wrapper">
+          <p class="intro-text">
+            Please provide details of the health regulatory body and your registration with them.
+          </p>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group"
+                [class.invalid]="(touched || model.regulatoryBody.touched) && model.regulatoryBody.invalid">
+                <label for="organisationName">Organisation name</label>
+                <input id="organisationName" class="form-control" name="regulatoryBody" placeholder="Please enter name of body..."
+                  [formControl]="model.regulatoryBody">
+                <app-collapsible
+                  [trigger]="(touched || model.regulatoryBody.touched) && model.regulatoryBody.errors?.required">
+                  <p class="form-error">
+                    This is mandatory
+                  </p>
+                </app-collapsible>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group"
+                [class.invalid]="(touched || model.registrationNumber.touched) && model.registrationNumber.invalid">
+                <label for="registrationNumber">Your registration number with this organisation</label>
+                <input id="registrationNumber" name="registrationNumber" class="form-control" type="text"
+                  [formControl]="model.registrationNumber" placeholder="Please enter registration number...">
+                <app-collapsible
+                  [trigger]="(touched || model.registrationNumber.touched )&& model.registrationNumber.errors?.required">
+                  <p class="form-error">
+                    This is mandatory
+                  </p>
+                </app-collapsible>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" [class.invalid]="(touched || model.requested.touched) && model.requested.invalid">
+                <label for="letterRequested">Have you requested a letter of good standing from this organisation be sent
+                  to the GPhC?</label>
+                <mat-radio-group id="letterRequested" [formControl]="model.requested" name="letterRequested" style="padding: .5em .5em">
+                  <mat-radio-button [value]="true">Yes</mat-radio-button>
+                  <mat-radio-button [value]="false">No</mat-radio-button>
+                </mat-radio-group>
+                <app-collapsible [trigger]="(touched || model.requested.touched) && model.requested.errors?.required">
+                  <p class="form-error">
+                    This is mandatory
+                  </p>
+                </app-collapsible>
+                <app-collapsible [trigger]="model.requested.value === false">
+                  <p class="important">
+                    If you are an OSPAP or EEA applicant, or if you have been registered with any other health
+                    regulatory bodies, your application
+                    will not be complete until we receive a letter of good standing.
+                  </p>
+                </app-collapsible>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-collapsible>
+    </form>
+
+  </section>
+
+</ng-template>

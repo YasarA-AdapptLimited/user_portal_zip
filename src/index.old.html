@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>myGPhC</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+  <!-- height 100% on body mucks up angular material modal -->
+  <!-- howver this may be need to the fullscreen componenets to work properly, esp on mobile -->
+  <style>
+    html,
+    body {
+      font-family: 'Open Sans', sans-serif;
+      width: 100%;
+ 
+      margin:0;
+    }
+
+    iframe:not(#wave_sidebar_container) {
+      top: 0;
+      display: none;
+    }
+
+    .splash-loader {
+      position: relative;
+      height: 100vh;
+    }
+
+    .splash-loader  .front-image {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      max-width: 40%;
+      z-index: -1;
+    }
+
+    .splash-loader  img.logo {
+      width: 254px;
+      height: 116px;
+      margin-left: 45px;
+      margin-top: 45px;
+      margin-bottom: 20px;
+    }
+
+    .splash-loader .loading-message {
+      padding: 40px;
+    }
+
+
+
+    @media (max-width: 767px) {
+      .splash-loader  img.logo {
+        margin-left: 30px;
+      }
+      .splash-loader  .loading-message {
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 530px) {
+      .splash-loader  img.logo {
+        width: 214px;
+        height: 96px;
+      }
+    }
+
+    @media(max-width:600px) and (min-height: 500px){
+      .splash-loader .front-image {
+        display: none;
+      }
+    }
+
+    @media(max-width:549px) {
+      .splash-loader .front-image {
+        display: none;
+      }
+    }
+
+  
+
+    /* for calendar */
+
+    .bg-primary {
+      background-color: #00759b !important
+    }
+
+    .btn-link,
+    .text-info {
+      color: #00759b !important;
+    }
+
+
+    .splash-loader p.intro-text {
+      font-size: 1.15em;
+      color: #553c73;
+      font-family: 'Open Sans', sans-serif !important;
+    }
+
+    .no-wrap {
+      white-space: nowrap;
+    }
+
+    .fadein {
+      -webkit-animation: fadein 800ms;
+      -ms-animation: fadein 800ms;
+      -o-animation: fadein 800ms;
+      animation: fadein 800ms;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @-moz-keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @-webkit-keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @-ms-keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @-o-keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+
+<!--
+<script src="http://cdn.rawgit.com/hammerjs/touchemulator/master/touch-emulator.js"></script>
+<script>
+TouchEmulator();
+</script>
+-->
+  <script src="https://use.fontawesome.com/87697a51aa.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js" class="pre"></script>
+  <!--<script src="https://secure.aadcdn.microsoftonline-p.com/lib/0.1.3/js/msal.min.js"></script>-->
+ <script type="text/javascript" src="/assets/msal.js"></script>
+  <script type="text/javascript" src="/assets/squire-raw.js"></script>
+</head>
+
+
+
+<body>
+  <div class="splash-loader fadein">
+    <img class="logo" alt="General Pharmaceutical Council logo" src="/assets/images/logo-GPhC-blue-cropped.png" />
+    <div class="loading-message">
+      <p class="intro-text no-wrap">
+        Loading - please wait...
+      </p>
+    </div>
+    <img src="/assets/images/gphc-front.jpg" alt="General Pharmaceutical Council welcome image" class="front-image fadein" />
+  </div>
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112004006-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag()
+  
+      {dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-112004006-1');
+    </script>
+
+</body>
+
+
+
+</html>

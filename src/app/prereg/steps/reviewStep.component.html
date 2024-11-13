@@ -1,0 +1,9 @@
+<ng-template #content>
+  <h2 class="spacer">Review your application</h2>
+  
+  <app-reg-application-review 
+    [application]="application"
+    (navigate)="goToStep($event)"
+  ></app-reg-application-review>
+
+</ng-template>

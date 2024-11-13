@@ -1,0 +1,53 @@
+@import "../../style/variables";
+
+.cpd-entry {
+  min-height:calc(100vh - 160px);
+
+  @media (min-width: 1024px) {
+    min-height:calc(100vh - 250px);
+  }
+
+  ::ng-deep {
+    .question {
+      color: $gphc-blue; font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .answer {
+      margin-bottom: 20px;
+    }
+
+    .annotation {
+      background: #d9e8e14d;
+      box-shadow: 0 0 3px #94c3ad4d inset;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
+}
+  margin-right: 30px;
+  @media (min-width: 768px) {
+    margin-left: 10px;
+  }
+
+}
+.header-container {
+
+    margin-bottom: 30px;
+
+    .entry-title {
+        font-family: 'Open sans', sans-serif !important;
+        border-bottom: 2px solid $gphc-blue;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+        font-size: 22px;
+        line-height: 1.3em;
+    }
+
+    .entry-type {
+        font-weight: bold;
+        color: #757575;
+    }
+}
+
+
+

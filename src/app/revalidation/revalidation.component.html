@@ -1,0 +1,261 @@
+<app-banner [loading]="loading && !validator.loaded">
+  <div class="banner-left">
+    <h1>Revalidation</h1>
+    <p class="intro-text">
+      Create, manage and submit revalidation records
+    </p>
+  </div>
+</app-banner>
+
+<div class="question-section">
+  <a aria-label="Click here for more information about revalidation"
+    href="https://www.pharmacyregulation.org/pharmacists/revalidation-renewal/revalidation-resources/revalidation-faqs" target="revalidation-info">
+    <section class="info">
+      <div class="section-header-container">
+        <h2>Questions about revalidation?</h2>
+      </div>
+      <p class="intro-text">
+        Click here for information on maternity leave and other questions you may have about the process
+      </p>
+
+    </section>
+  </a>
+</div>
+
+<div class="content spread">
+  <div class="row fadein" *ngIf="validator.loaded">
+    <div class="col-lg-7 left-col">
+
+      <section *ngIf="selected">
+        <div class="section-header-container">
+          <label>
+            Which record would you like to proceed with?
+          </label>
+          <p
+            style="color: white;padding:25px; font-weight: 400 !important; width: 100%;background: #026f92;text-align: center;font-size: 17px;">
+            Pending submissions are the one which needs your immediate attention. Please look out for deadline of each
+            submission and make sure the records are submitted within the deadline.
+          </p>
+        </div>
+        
+        <div class="section-body-container">
+          <mat-radio-group [(ngModel)]="isPendingSubmission" name="recordChoiceGroup">
+            <div style=" align-items:center" *ngFor="let item of deadlineItems; let i = index">
+              <mat-radio-button aria-label="confirm pending revalidation submission" [value]="i+1"
+                (click)="onItemChange(item, 'dynamic')" [checked]="item.id === id">
+                <div>
+                  <label>Pending submission ( last date to submit: <span style="text-decoration: underline;">{{
+                      item.expectations.submissionDeadline | date: 'd MMMM yyyy'}}</span> )
+                  </label>
+                </div>
+              </mat-radio-button>
+            </div>
+          </mat-radio-group>
+          <mat-radio-group [(ngModel)]="isNextSubmission" name="recordChoiceGroup">
+            <div style=" align-items:center">
+              <mat-radio-button aria-label="confirm next revalidation submission" [value]="0"
+                (click)="onItemChange('item', 'static')">
+                <div>
+                  <label>Next submission ( last date to submit: <span style="text-decoration: underline;">{{
+                      nextRenewalDate | date: 'd MMMM yyyy' }}</span> )</label>
+                </div>
+              </mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
+
+      </section>
+
+      <div *ngIf="(isPendingSubmission > 0 || (isNextSubmission === 0 || deadlineItems?.length === 0 ))  ">
+        <section [appTooltip]="currentSubmissionTooltip" appTooltipContext="currentSubmission">
+          <div>
+            <div class="section-header-container">
+              <h2 style="padding-bottom:5px">{{ title }}</h2>
+              <div class="sub-heading" *ngIf="isNextSubmission == 0">
+                <i class="fa fa-level-up"></i> Due by {{ nextRenewalDate | date: 'd MMMM yyyy' }}
+              </div>
+              <div class="sub-heading" *ngIf="isPendingSubmission > 0">
+                <i class="fa fa-level-up"></i> Due by {{ submissionDeadline | date: 'd MMMM yyyy' }}
+              </div>
+              <app-gphc-icon *ngIf="isCurrentSubmission ? true : false" [iconType]="'info'" [offset]="-12"
+                [offsetTop]="-20" [tooltip]="sectionHelpTooltip"
+                (click)="toggleTooltips('currentSubmission')"></app-gphc-icon>
+            </div>
+          </div>
+
+          <div class="section-body-container">
+            <div class="cpd-entries">
+              <app-included-items *ngFor="let itemType of revalidationItemTypes; let i = index" [index]="i"
+                [length]="revalidationItemTypes.length" [readonly]="validator.submission.submitted"
+                [type]="itemType.type"
+                [items]="validator.items | Submission: true | RevalidationItemType: itemType.type" [id]="id"
+                [isCurrentSubmission]="isCurrentSubmission" (itemChanged)="itemChanged($event)" [title]="itemType.title"
+                [requiredCount]="validator.requiredCount[itemType.type]"
+                [overMaxWarning]="validator.overMaxWarning[itemType.type]"
+                [countInfo]="validator.countInfo[itemType.type]">
+              </app-included-items>
+            </div>
+          </div>
+        </section>
+
+        <section [appTooltip]="excludedTooltip" appTooltipContext="excluded">
+          <div class="section-header-container">
+            <h2>Excluded</h2>
+            <app-gphc-icon [tooltip]="sectionHelpTooltip" [iconType]="'info'" [offset]="-12" [offsetTop]="-20"
+              (click)="toggleTooltips('excluded')"></app-gphc-icon>
+          </div>
+          <div class="section-body-container">
+            <p *ngIf="noExcludedItems" class="intro-text">
+              You have no excluded entries
+            </p>
+            <div class="cpd-entries">
+              <app-excluded-items *ngFor="let itemType of revalidationItemTypes"
+                [readonly]="validator.submission.submitted" [id]="id" [type]="itemType.type"
+                [items]="validator.items | Submission: false | RevalidationItemType: itemType.type"
+                (itemChanged)="itemChanged($event)" (itemDelete)="itemDelete($event)" [title]="itemType.title"
+                [isCurrentSubmission]="isCurrentSubmission">
+              </app-excluded-items>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="col-lg-5 right-col">
+      <div *ngIf="(isPendingSubmission > 0 || (isNextSubmission === 0 || deadlineItems?.length === 0 ))">
+        <section *ngIf="!validator.submission.submitted && !showAcknowledgement " appTooltipContext="progress">
+          <div class="section-header-container">
+            <h2>Progress</h2>
+            <app-gphc-icon [tooltip]="sectionHelpTooltip" [iconType]="'info'" [offset]="-12" [offsetTop]="-20"
+              (click)="toggleTooltips('progress')" [description]="'Submission progress help'"></app-gphc-icon>
+          </div>
+          <p *ngIf="!timeToSubmit" style="margin-top:30px" class="intro-text text-center">
+            <span *ngIf="earliestSubmissionDate"> You will be able to submit your records from
+              <span class="no-wrap">{{ earliestSubmissionDate | date: 'd MMMM yyyy'}}</span>
+              until
+              <span class="no-wrap">{{ validator.expectations.submissionDeadline | date: 'd MMMM yyyy' }}</span>.
+            </span>
+            <span *ngIf="deadline">As you have exceeded the latest submission date advised to you on the Notice of
+              intention to remove, you can no longer submit this revalidation.</span>
+            <span *ngIf="!earliestSubmissionDate && !deadline">You are not required to submit your revalidation
+              yet.</span>
+          </p>
+          <div class="row no-gutters" style="margin-top:30px">
+            <div class="col-6 text-center">
+              <app-progress-indicator
+                [description]="validator.submission.completed ? 'Your revalidation is ready for submission' : 'The number of entries marked completed'"
+                [tooltip]="getProgressTooltip()" [item]="validator.submission" [size]="3"></app-progress-indicator>
+              <div *ngIf="!validator.submission.completed" class="btn-text">Marked completed</div>
+              <div *ngIf="validator.submission.completed" class="btn-text">Ready to be submitted</div>
+            </div>
+            <div class="col-6 text-center">
+              <button name="Submit" aria-label="Submit your revalidation" [appTooltip]="submitTooltip"
+                class="btn btn-primary btn-lg btn-round" [disabled]="!timeToSubmit || validator.submission.error"
+                (click)="trySubmit()">
+                <i class="fa fa-upload"></i>
+              </button>
+              <div class="btn-text">Submit</div>
+
+            </div>
+          </div>
+
+          <div style="margin-top:20px" *ngIf="!hideExceptionalCircumstances">
+            <button name="Report exceptional circumstances" class="btn btn-primary btn-lg btn-block"
+              [appTooltip]="extCircTooltip" [routerLink]="'/revalidation/exceptional-circumstances'">Tell us why you
+              can't
+              submit</button>
+          </div>
+        </section>
+
+        <section *ngIf="showAcknowledgement " appTooltipContext="progress" class="foreground">
+          <app-submission-acknowledgement [remediation]="!isCurrentSubmission" [renewalDate]="renewalDate"
+            (acknowledged)="submit()" (cancel)="hideSubmissionAcknowledgement()" [submitting]='submitting'>
+          </app-submission-acknowledgement>
+        </section>
+
+        <section *ngIf="validator.submission.submitted ">
+          <div class="section-header-container">
+            <h2>Revalidation status</h2>
+          </div>
+          <div style="text-align:center">
+            <i class="fa fa-check-circle submitted success"></i>
+            <p class="intro-text">Submitted</p>
+          </div>
+          <div class="section-sub">
+            You will be notified if your submission is selected for review.
+          </div>
+        </section>
+
+        <section appTooltipContext="submittedExtCirc" [appTooltip]="submittedExtCircTooltip">
+          <div class="section-header-container">
+            <h2 style="margin-right: 10px;">Exceptional circumstances</h2>
+            <app-gphc-icon [tooltip]="sectionHelpTooltip" [iconType]="'info'" [offset]="-12" [offsetTop]="-20"
+              (click)="toggleTooltips('submittedExtCirc')"></app-gphc-icon>
+          </div>
+          <p *ngIf="!submittedExceptionalCircumstances?.length" class="intro-text">
+            You haven't reported any exceptional circumstances
+          </p>
+          <div class="row table-row child-row no-gutters" *ngFor="let item of submittedExceptionalCircumstances">
+            <div class="col-12" style="display:flex; align-items:center">
+              <i class="fa fa-level-up"></i>
+              <a style="flex-grow: 1; border: none !important"
+                [routerLink]="'/revalidation/exceptional-circumstances/' + item.id"
+                [appTooltip]="submittedExtCircItemTooltip">
+                {{item.submittedAt | date:'dd/MM/yyyy'}} - {{item.subject}}
+              </a>
+              <div class="ext-circ-status {{ExtCircDecision[item.decision]}}">{{ExtCircDecision[item.decision] |
+                caseSplit}}</div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <section *ngIf="pastSubmissions !== undefined " appTooltipContext="past" [appTooltip]="pastTooltip">
+        <div class="section-header-container">
+          <h2>Past submissions</h2>
+          <!--<app-gphc-icon [tooltip]="sectionHelpTooltip" [iconType]="'info'" [offset]="-12" [offsetTop]="-20"
+            (click)="toggleTooltips('past')"></app-gphc-icon>-->
+        </div>
+        <p *ngIf="!pastSubmissions.length" class="intro-text">
+          You have no past or overdue submissions
+        </p>
+        <div class="row table-row child-row no-gutters" *ngFor="let item of nonEditableItems">
+          <div class="col-12" style="display:flex; align-items:center">
+            <i class="fa fa-level-up"></i>
+
+            <ng-container *ngIf="id !== item.id">
+
+              <a style="flex-grow: 1; border: none !important" *ngIf="item.submitted && !isEditable(item)"
+                [routerLink]="['/revalidation/past/' + item.id]" [appTooltip]="pastItemTooltip">
+                Submission for renewal date {{ item.expectations.submissionDeadline | date:'dd/MM/yyyy'}}
+              </a>
+
+              <span style="flex-grow: 1; border: none !important" *ngIf="!item.submitted && !isEditable(item)">
+                Submission for renewal date {{ item.expectations.submissionDeadline | date:'dd/MM/yyyy'}}
+              </span>
+
+              <!--<a style="flex-grow: 1; border: none !important" *ngIf="isEditable(item)"
+              [routerLink]="['/revalidation/past/' + item.id]" [appTooltip]="pastItemTooltip">
+
+                Submission for renewal date {{ item.expectations.submissionDeadline | date:'dd/MM/yyyy'}}
+              </a>-->
+
+            </ng-container>
+
+            <span style="flex-grow: 1;" *ngIf="id === item.id">Submission for renewal date
+              {{item.expectations.submissionDeadline | date:'dd/MM/yyyy'}}</span>
+
+            <span class="status Submitted" *ngIf="item.submitted">Submitted</span>
+            <!--<span class="status Pending" *ngIf="isEditable(item)">In progress</span>-->
+            <span class="status Rejected" *ngIf="!item.submitted && !isEditable(item)">Not completed</span>
+          </div>
+        </div>
+        <div class="text-right" style="margin-top:15px"> <a *ngIf="!isCurrentSubmission"
+            routerLink="/revalidation">Return to current
+            submission</a></div>
+      </section>
+
+    </div>
+  </div>
+</div>

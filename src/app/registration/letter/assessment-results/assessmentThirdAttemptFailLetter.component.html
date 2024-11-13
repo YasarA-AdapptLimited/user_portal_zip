@@ -1,0 +1,134 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1">Assessment Results</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print fa-xs" style="font-size: 1.5em;"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left fa-xs" style="font-size: 1.5em;"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+  <section class="letter-header">
+
+    <app-letter-header [registrant]="auth?.user?.registrant" [registrantAddress]="auth?.user?.address">
+    </app-letter-header>
+
+    <section class="notice-of-entry section-to-print">
+      <section class="notice-of-entry-wrapper">
+        <div class="main-content" style="margin-top: 40px;">
+          Date of results: {{ DateOfResults }}
+          <p>
+            Your foundation trainee number : {{PreEntryID}}
+          </p>
+
+          <p>Dear {{ registrantName }}</p>
+          <h2 class="sub-heading">
+            Registration assessment results for the sitting held on {{ DateOfAssessment }}
+          </h2>
+          <p>
+            We are sorry to tell you that you have been unsuccessful in this attempt at the registration assessment.
+          </p>
+
+          <p>
+            Your results for the sitting are :
+          </p>
+
+          <div>
+            <table class="results-details">
+              <tr>
+                <th>Your assessment result :</th>
+                <th>Fail</th>
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <table class="results-details">
+              <tr>
+                <th>Part 1</th>
+                <th></th>
+
+              </tr>
+              <tr>
+                <td>Marks required to pass </td>
+                <td>{{Part1PassMark}}</td>
+
+              </tr>
+              <tr>
+                <td>Marks you achieved</td>
+                <td>{{Part1CandidateMark}}</td>
+
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <table class="results-details">
+              <tr>
+                <th>Part 2</th>
+                <th></th>
+
+              </tr>
+              <tr>
+                <td>Marks required to pass </td>
+                <td>{{Part2PassMark}}</td>
+
+              </tr>
+              <tr>
+                <td>Marks you achieved</td>
+                <td>{{Part2CandidateMark}}</td>
+
+              </tr>
+            </table>
+          </div>
+          <p>
+            To pass the assessment, you must pass part one and part two in the same sitting. For more information on how
+            we award
+            marks and set pass marks for the registration assessment please go to the
+            <a href="https://www.pharmacyregulation.org/students-and-trainees/pharmacist-education-and-training/registration-assessment"
+              target="_blank">Assuring the assessment</a> page on the main GPhC website.
+          </p>
+
+          <p>
+            Candidates are permitted three attempts at the registration assessment. 
+            As this is your third attempt, according to the assessment regulations, 
+            you are not eligible to sit the assessment again.
+          </p>
+          
+          <p>
+            You may wish to seek help from a specialist careers counsellor. They could advise you about career options
+            which make
+            use of your pharmacy degree, but do not need you to be registered as a pharmacist. A Citizens Advice Bureau
+            should be
+            able to give you the contact details of a careers counselling service in your area or you may also be able
+            to find help
+            from your university careers service. Unfortunately we are not able to help with this.
+          </p>
+
+          <p>
+            For information about your next steps, including resitting or considering an appeal see the <a
+              href="https://www.pharmacyregulation.org/students-and-trainees/pharmacist-education-and-training/foundation-training-scheme/key-information-trainees"
+              target="_blank">
+              Guidance for unsuccessful candidates in the registration assessment,</a> which we hope you will find
+            helpful.
+          </p>
+
+          <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+        </div>
+      </section>
+    </section>
+  </section>
+</div>

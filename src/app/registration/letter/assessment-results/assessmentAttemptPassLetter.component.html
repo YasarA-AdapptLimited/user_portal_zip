@@ -1,0 +1,125 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1">Assessment Results</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print fa-xs" style="font-size: 1.5em;"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left fa-xs" style="font-size: 1.5em;"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+  <section class="letter-header">
+
+    <app-letter-header [registrant]="auth?.user?.registrant" [registrantAddress]="auth?.user?.address">
+    </app-letter-header>
+
+    <section class="notice-of-entry section-to-print">
+      <section class="notice-of-entry-wrapper">
+        <div class="main-content">
+          <p> Date of results : {{DateOfResults}} </p>
+          <p>
+            Your foundation trainee number : {{PreEntryID}}
+          </p>
+
+          <p>Dear {{ registrantName }} </p>
+          <h2 class="sub-heading">
+            Registration assessment results for the sitting held on {{ DateOfAssessment }}
+          </h2>
+
+          <p>
+            We are pleased to tell you that you have passed the registration assessment at this attempt.
+          </p>
+
+          <p>
+            Your results for the sitting are :
+          </p>
+
+          <div>
+            <table class="results-details">
+              <tr>
+                <th>Your assessment result :</th>
+                <th>Pass</th>
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <table class="results-details">
+              <tr>
+                <th>Part 1</th>
+                <th></th>
+
+              </tr>
+              <tr>
+                <td>Marks required to pass </td>
+                <td>{{Part1PassMark}}</td>
+              </tr>
+              <tr>
+                <td>Marks you achieved</td>
+                <td>{{Part1CandidateMark}}</td>
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <table class="results-details">
+              <tr>
+                <th>Part 2</th>
+                <th></th>
+
+              </tr>
+              <tr>
+                <td>Marks required to pass </td>
+                <td>{{Part2PassMark}}</td>
+              </tr>
+              <tr>
+                <td>Marks you achieved</td>
+                <td>{{Part2CandidateMark}}</td>
+              </tr>
+            </table>
+          </div>
+          <p>
+            For more information on how we award marks and set pass marks for the registration assessment please go to
+            the
+            <a href="https://www.pharmacyregulation.org/students-and-trainees/pharmacist-education-and-training/registration-assessment"
+              target="_blank">Assuring the assessment</a> page on the main GPhC website.
+          </p>
+
+          <p>
+            Once you have finished your foundation training successfully and met all the other registration
+            requirements, you
+            will be eligible to apply for registration as a pharmacist.
+          </p>
+
+          <p>
+            Once you are registered you will receive a “Notice of entry” letter via myGPhC confirming this. The letter
+            will include
+            your GPhC registration number. From the day you are registered, you will also be able to see your
+            registration on the
+            live copy of the GPhC’s register of pharmacists at <a
+              href="https://www.pharmacyregulation.org/">pharmacyregulation.org.</a>
+          </p>
+          <p class="black-text">Until you have your registration number you must not work as a pharmacist or call yourself one.</p>
+          <p>
+            On behalf of the GPhC, we would like to wish you all the best for your future career.
+          </p>
+
+          <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+        </div>
+      </section>
+    </section>
+  </section>
+</div>

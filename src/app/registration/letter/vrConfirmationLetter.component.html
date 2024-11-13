@@ -1,0 +1,85 @@
+<app-banner [loading]="loading">
+    <div class="banner-left">
+      <div style="display:flex">
+        <h1 class="sm-show" style="flex-grow:1">Voluntary Removal</h1>
+        <div class="button-container">
+          <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+            <i class="fa fa-print fa-xs" style="font-size: 1.5em;"></i>
+          </button>
+          <div class="btn-text">Print</div>
+        </div>
+        <div class="button-container">
+          <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+            <i class="fa fa-arrow-left fa-xs" style="font-size: 1.5em;"></i>
+          </button>
+          <div class="btn-text">Back</div>
+        </div>
+      </div>
+    </div>
+  
+  </app-banner>
+  
+  <div class="content fadein" *ngIf="!loading && !failed">
+  
+    <section class="letter-header">
+  
+      <app-letter-header [registrant]="auth?.user?.registrant" [registrantAddress]="auth?.user?.address"></app-letter-header>
+  
+      <section class="section-to-print">
+        <section class="">
+          <div class="main-content" style="margin-top: 40px;">
+  
+            <p>Dear {{ registrantName }}, </p>
+
+            <p>
+                Thank you for your application to voluntarily remove your name from the 
+                General Pharmaceutical Council's register. I write to confirm that your name has been 
+                removed from the register.
+            </p>
+
+           <p>
+                If you want to re-join the register within 12 months of your removal date, 
+                you can apply to restore your entry to the register, the application can be 
+                accessed when you open your myGPhC account.
+            </p>
+
+            <p>
+                If in the future you want to re-join the register after 12 months has passed, 
+                you would need to apply to return to the register. You can find more information 
+                about <a href="https://www.pharmacyregulation.org/restoration" target="_blank">restoring your register entry </a>
+                and about <a href="https://www.pharmacyregulation.org/returning-register" target="_blank">returning to the register</a> on our website. 
+            </p>
+
+            <p>
+                Once you leave the register, you will still be able to access and update your myGPhC 
+                account for two years after your leaving date. After this time, your entire account 
+                (including any revalidation records) will be deleted. 
+            </p>
+
+            <p>
+              Should you have any queries please contact our 
+              customer services team on <b>0203 713 8000</b> or email <a href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a>.
+            </p>
+
+            <p>
+                Thank you for your contribution to pharmacy profession during your time as a registered pharmacy professional. 
+                We wish you good luck in the future.
+            </p>
+  
+            <app-letter-footer [signature]="'Head of Registration'"></app-letter-footer>
+          </div>
+        </section>
+      </section>
+    </section>
+  </div>
+
+
+
+
+
+
+
+
+
+
+

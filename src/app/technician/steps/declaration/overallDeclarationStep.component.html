@@ -1,0 +1,22 @@
+<ng-template #content>
+  <h2 class="spacer">
+    Declaration Confirmation
+  </h2>
+  <div>
+    <p class="important">
+       I confirm that I fully understand the declarations I have made.
+    </p>
+  </div>
+  <section class="declaration-step">
+ 
+
+<div style="padding: 20px">
+    <mat-checkbox name="overallDeclaration" #focus [(ngModel)] ="application.activeForm.isOverallDeclarationConfirmed"
+    (ngModelChange)="update()"
+    >
+        <h4>I have read and understand the declaration</h4>
+      </mat-checkbox>
+</div>
+ 
+</section>
+</ng-template>

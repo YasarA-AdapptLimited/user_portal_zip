@@ -1,0 +1,33 @@
+<div class="form-group">
+    <label for="registered">Have you been registered with any other regulatory bodies in the last 5 years?</label>
+    <div class="form-control" readonly>
+        <div>{{letterAnswers.hasRegistered ? 'Yes' : 'No'}}</div>
+    </div>
+</div>
+
+<div class="row" *ngIf="letterAnswers.hasRegistered">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label [for]="organisationName">Organisation name</label>
+            <div class="form-control" readonly>
+                <div>{{letterAnswers.regulatoryBody}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label [for]="registrationNumber">Registration number</label>
+            <div class="form-control" readonly>
+                <div>{{letterAnswers.registrationNumber}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label [for]="letterRequested">Letter requested</label>
+            <div class="form-control" readonly>
+                <div>{{letterAnswers.isRequested ? 'Yes' : 'No'}}</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1">Notice of entry</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print fa-xs" style="font-size: 1.5em;"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left fa-xs" style="font-size: 1.5em;"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+  <section class="letter-header">
+
+
+    <app-letter-header [registrant]="auth?.user?.registrant" 
+    [registrantAddress]="auth?.user?.address">
+
+    </app-letter-header>
+
+    <section class="notice-of-entry section-to-print">
+      <section class="notice-of-entry-wrapper">
+
+        <h2 class="notice">Notice of entry</h2>
+
+        <div class="main-content">
+
+            <table class="reg-details" >
+                <tr>
+                    <th>GPhC Registration Details</th>
+                </tr>
+                <tr>
+                    <td>Registration number:</td>
+                    <td>{{ registrant.registrationNumber }}</td>
+                </tr>
+                <tr>
+                    <td>Inital entry date: </td>
+                    <td>{{ registrant.joinedDate | date}}</td>
+                </tr>
+                <tr>
+                    <td>Expiry date:</td>
+                    <td>{{ registrant.expiryDate | date}}</td>
+                </tr>
+                <tr>
+                    <td>Renewal due date:</td>
+                    <td>{{ registrant.renewalDate | date}}</td>
+                </tr>
+            </table>
+
+          <p>
+            I am pleased to confirm that your application has been successful and your name has been entered in <span
+              *ngIf="isPharmacist;else part2">part 1</span>
+            <ng-template #part2>part 2</ng-template> of the
+            General Pharmaceutical Council register. Under the Pharmacy Order 2010 your entry in the register is valid
+            for one calendar
+            year from the date of entry, and you must renew your entry at least two months before it expires.
+          </p>
+
+          <p>
+            All pharmacy professionals on our register must keep to the GPhC registration rules and the standards for
+            pharmacy professionals,
+            which help to make sure people using pharmacy services receive safe and effective care. This includes
+            carrying regular professional
+            development as set out in the GPhC revalidation framework. You can find out more about these requirements on
+            our website,
+            <a href="www.pharmacyregulation.org" target="www.pharmacyregulation.org">www.pharmacyregulation.org.</a>
+          </p>
+          <p>
+            I would like to take this opportunity to welcome you to the register.
+          </p>
+
+          <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+        </div>
+      </section>
+    </section>
+  </section>
+</div>

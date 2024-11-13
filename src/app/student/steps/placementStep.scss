@@ -1,0 +1,22 @@
+section.placement {
+  padding-bottom: 35px !important;
+  &:not(:last-child):not(.first)  {
+    padding-bottom: 0 !important;
+    padding-top: 20px;
+  }
+
+}
+
+.weeks-progress {
+
+  .weeks-progress-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  background: rgb(247, 247, 247);
+
+  padding: 20px;
+
+  border-top: 5px solid #efefef;
+}

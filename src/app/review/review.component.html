@@ -1,0 +1,26 @@
+<div *ngIf="manager.review as review else loadingTemplate">
+
+  <ng-container *ngIf="manager.qa else reviewingTemplate">
+      <app-feedback></app-feedback>
+  </ng-container>
+
+
+  <ng-template #reviewingTemplate>
+
+    <ng-container [ngSwitch]="review.stage">
+      <app-annotate *ngSwitchCase="ReviewStage.Annotate"></app-annotate>
+      <app-discuss *ngSwitchCase="ReviewStage.Discuss"></app-discuss>
+      <app-feedback *ngSwitchCase="ReviewStage.WriteFeedback"></app-feedback>
+      <app-feedback *ngSwitchCase="ReviewStage.AwaitingFeedbackApprovalByPeer"></app-feedback>
+    </ng-container>
+
+  </ng-template>
+
+</div>
+
+
+<ng-template #loadingTemplate>
+
+  <mat-progress-bar aria-label="loading"  mode="indeterminate" color="primary"></mat-progress-bar>
+
+</ng-template>

@@ -1,0 +1,19 @@
+@import '../../../style/variables.scss';
+:host {
+  ::ng-deep .card {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none  !important;
+    margin-bottom: 20px !important;
+  }
+
+  ::ng-deep app-followup-question h2 {
+    background: transparent !important;
+    color: $gphc-blue !important;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 1.1em;
+  }
+}

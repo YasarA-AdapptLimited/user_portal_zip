@@ -1,0 +1,55 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>
+        {{ title }}
+      </div>
+      <!-- <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]='true' class="headingIcon"></app-gphc-icon>-->
+    </h2>
+    <app-collapsible [trigger]="true">
+      <div class="important">
+        <p>
+          Complete this application if you want to register provisionally as a pharmacist. We recommend that you read
+          the
+          application guidance before starting your application.
+        </p>
+        <p>
+          You will only be able to click ‘yes’ or ‘no’, once – the form will not appear again. If you change your mind
+          or click an answer in error, please email prereg@pharmacyregulation.org for assistance.
+        </p>
+      </div>
+    </app-collapsible>
+  </div>
+  <!-- Applicant -->
+
+  <section>
+    <p class="intro-text">
+      I want to apply for provisional registration as a pharmacist.
+    </p>
+
+
+    <div class="mb-3">
+      <mat-radio-group id="confirmTempRegistration" [(ngModel)]="application.activeForm.confirmTempRegistration"
+        (ngModelChange)="update()">
+        <mat-radio-button aria-label="confirm temporary registration as true" [value]="true">
+          <h4>Yes</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="confirm temporary registration as false" [value]="false">
+          <h4>No</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- <app-collapsible [trigger]="application.activeForm.confirmTempRegistration === false">
+      <p class="important">
+        By clicking on the "submit" button below your  performance rating will be recorded against your training
+        record
+        but you will not be able to apply to appear on the temporary register of pre-registration pharmacists.
+      </p>
+    </app-collapsible> -->
+
+  </section>
+
+
+</ng-template>

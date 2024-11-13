@@ -1,0 +1,63 @@
+@import '../style/variables';
+
+:host {
+  section {
+    max-width: 800px;
+  }
+
+  h3 {
+    font-size:1.4em;
+    margin-top: 1.8em;
+    margin-bottom: 1.05em;
+    color: $gphc-purple;
+  }
+
+  h2 {
+    margin-top: 1.5em;
+    &.flexible {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      a.takeMeToTheTop {
+        font-family: 'Open Sans', sans-serif;
+        font-size: .5em;
+      }
+    }
+  }
+
+  span {
+    &.italic {
+      font-style: italic;
+    }
+    &.bold-underline {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+
+  
+  ul {
+    &.regular {
+      list-style-type: disc;
+    }
+    &.nav {
+      display: block;
+      list-style-type: none;
+    }
+    &.no-padding {
+      padding: 0;
+    }
+    
+  }
+  
+  
+  p {
+    &.important {
+      font-weight: bold;
+      color: purple;
+      background: none;
+    }
+  }
+  
+  
+}

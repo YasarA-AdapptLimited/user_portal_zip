@@ -1,0 +1,90 @@
+<ng-template #content>
+    <div class="header">
+        <h2>
+            <div>
+                Application declarations
+            </div>
+        </h2>
+    </div>
+
+    <div>
+        <p>
+            <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ1Confirmed"
+                name="vrFromRegister" #isVrRegister="ngModel" required>
+                I am applying for registration in Part 1 or Part 2 of the register and that I intend to practise as a
+                pharmacist or pharmacy technician in Great Britain, the Channel Islands or the Isle of Man, as set out
+                in Article 20(3) of the Pharmacy Order 2010.
+            </mat-checkbox>
+            <app-collapsible [trigger]="
+                isVrRegister.touched &&
+                isVrRegister.invalid
+              ">
+                <div class="error">
+                    <p>
+                        Please select this checkbox
+                    </p>
+                </div>
+            </app-collapsible>
+        </p>
+    </div>
+
+    <div>
+        <p>
+            <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ2Confirmed"
+                name="NoToFtpDeclarartions" required #NoToFtpDeclarartions="ngModel">
+                Other than issues that I have declared in the fitness to practise section, I am not aware of any action
+                that I have taken, or not taken, which would be likely to result in an allegation that my fitness to
+                practise is impaired.
+            </mat-checkbox>
+            <app-collapsible [trigger]="
+                NoToFtpDeclarartions.touched && NoToFtpDeclarartions.invalid
+              ">
+                <div class="error">
+                    <p>
+                        Please select this checkbox
+                    </p>
+                </div>
+            </app-collapsible>
+        </p>
+    </div>
+
+    <div>
+        <p>
+            <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ3Confirmed"
+                name="ConfirmByGphcAndRps" required #isGphcAndRpsConfirmed="ngModel">
+                The information that I have provided in this application, is complete,
+                true and accurate. I understand that if I am found to have given false or misleading information in
+                connection with my application to return to the register, this may be treated as misconduct, and could
+                result in my removal from the register.
+            </mat-checkbox>
+            <app-collapsible [trigger]="
+                isGphcAndRpsConfirmed.touched && isGphcAndRpsConfirmed.invalid
+              ">
+                <div class="error">
+                    <p>
+                        Please select this checkbox
+                    </p>
+                </div>
+            </app-collapsible>
+        </p>
+    </div>
+
+
+    <div>
+        <p class="important">
+          I confirm that I fully understand the declarations I have made.
+        </p>
+      </div>
+      <section class="declaration-step">
+    
+    
+        <div style="padding: 20px">
+          <mat-checkbox name="overallDeclaration" #focus [(ngModel)]="application.activeForm.isOverallDeclarationAcknowledged"
+            (ngModelChange)="update()">
+            <h4>I have read and understood the declarations</h4>
+          </mat-checkbox>
+        </div>
+    
+      </section>
+
+</ng-template>

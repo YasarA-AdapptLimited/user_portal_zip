@@ -1,0 +1,15 @@
+<ng-template #content>
+  <h2 class="spacer">Review your application</h2>
+
+
+  <div *ngIf="ready$ | async  else loadingTemplate" class="fadein mt-4 mb-4">
+    <app-rtr-application-review [application]="application" (navigate)="goToStep($event)">
+    </app-rtr-application-review>
+  </div>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div class="step-loading">
+    <mat-progress-bar aria-label="loading step"  mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>

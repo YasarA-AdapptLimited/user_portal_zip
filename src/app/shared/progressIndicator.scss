@@ -1,0 +1,236 @@
+@import "../style/variables";
+@import "../style/mixins";
+
+i.completed {
+    color: $gphc-aqua;
+    font-size: 30px;
+}
+
+:host:focus {
+  outline: none !important;
+}
+
+.progress-wrapper {
+    position: relative;
+    margin: 0 auto;
+    margin-top: -5px;
+    text-align:center;
+    width: 25px;
+    height: 25px;
+
+    button:not(.completed) {
+      width: inherit;
+      height: inherit;
+    }
+
+    &.small {
+      button.foreground {
+        /*
+        outline: none !important;
+        box-shadow: none !important;
+        background: transparent;  
+        animation: none !important;
+  */
+        round-progress,i {
+          background: white;
+          border-radius: 50%;
+ 
+
+        }
+      }
+    }
+
+    &.medium {
+      button.foreground {
+        width: 100px;
+        height: 100px;
+        /*
+        background: transparent;
+        outline: none !important;
+        box-shadow: none !important;
+        animation: none !important;*/
+
+        round-progress,i {
+          background: white;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    &.large {
+      button.foreground {
+        width: 150px;
+        height: 150px;
+        /*
+        background: transparent;
+        outline: none !important;
+        box-shadow: none !important;
+        animation: none !important;*/
+
+        round-progress,i {
+          background: white;
+          border-radius: 50%;
+        }
+      }
+    }
+ 
+
+    button:focus {
+      /*
+      outline: none !important;
+      box-shadow: none !important;
+      animation: none !important;
+*/
+      round-progress {
+        border-radius: 50%;
+        @include focus;
+      }
+      i {
+
+      }
+    }
+
+    &.large {
+      button.completed:focus, button.completed.foreground {
+        margin-top:14px;
+        @media (max-width:767px) {
+          margin-top:7px;
+        }
+        i.fa-check-circle {             
+          height: 150px;
+          width: 150px;
+        }
+        i.fa-check-circle:before {
+          margin-top: -11px !important;
+          @media(max-width: 530px) {
+            margin-top: -10px !important;
+          }
+          display: block !important;
+        }
+      }
+    }
+
+    &.small {
+      button.completed:focus, button.completed.foreground {
+        margin-top:3px;
+        i.fa-check-circle {             
+          height: 25px;
+          width: 25px;
+        }
+        i.fa-check-circle:before {
+          margin-top: -3px !important;
+          display: block !important;
+        }
+      }
+    }
+
+    i {
+      margin-top: -2px;
+      margin-left: -1px;
+    }
+
+    &.medium {
+
+      i {
+        font-size: 42px;
+      }
+
+
+      height: 100px;
+      width: 100px;
+
+      .current {
+        display: block;
+        font-size: 24px !important;
+        &.extra-small {
+          font-size: 15px !important;
+          font-weight: bold;
+        }
+    }
+
+    .currentIndy {
+        display: block;
+        font-size: 20px !important;
+        &.exsmall {
+          font-size: 12px !important;
+          font-weight: bold;
+        }
+    }
+
+
+    }
+    
+    &.large {
+      margin-top: 0;
+      height: 150px;
+      width: 150px;
+     
+      .current {
+          display: block;
+      }
+
+      button {
+        min-width: 124px;
+        min-height: 120px;
+      }
+
+      i {
+        font-size: 173px;
+        margin-top: -14px;
+      }
+
+      @media(max-width: 767px) {
+        height: 120px !important;
+        width: 120px !important;
+        i {
+          font-size: 140px;
+          height: 120px !important;
+          width: 120px !important;
+        }
+      }
+    }
+}
+
+.current {
+    display: none;
+    position: absolute;
+  
+   
+    font-weight: 100;
+    line-height: 1;
+    top: 50%;
+    bottom: auto;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    &.normal {
+      font-weight: bold;
+    }
+    &:not(.normal) {
+      font-size: 35.7143px;
+    }
+
+    line-height: 1.2em;
+    color: $gphc-blue;
+    
+    font-family: 'Open sans', sans-serif;
+
+    &.warning {
+      color: $error;
+    }
+}
+
+.foreground .current {
+  z-index: 9999;
+}
+
+.small {
+  .current {
+    color: $grey;
+    font-size: 16px;
+  }
+}
+
+round-progress {
+    margin: auto;
+    height: inherit;
+}

@@ -1,0 +1,25 @@
+@import '../style/variables';
+
+.c-card {
+  float:left;
+  margin-right:10px;
+  margin-bottom: 10px;
+}
+
+i.notdue {
+  font-size: 143px;
+  margin-top: 15px;
+  color: $gphc-background;
+
+}
+.btn-text {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.linkOutline:focus, .linkOutline:active{
+  outline: 7px solid $gphc-accent-yellow;
+  display: block;
+  border-radius: 15px;
+  outline-offset: 0px;
+}

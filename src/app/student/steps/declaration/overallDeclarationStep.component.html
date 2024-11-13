@@ -1,0 +1,102 @@
+<ng-template #content>
+  <!-- <h2 class="spacer">
+    Declaration confirmation
+  </h2> -->
+  <div class="header">
+    <h2>
+      <div>
+        Declaration confirmation
+      </div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]="true"></app-gphc-icon>
+    </h2>
+  </div>
+
+  
+  <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+      <div class="row help-text">
+        <div class="col-md-12">
+          <p>
+          We will only be able to process your application if you make the following declarations about your application. It is important that you fully understand the declarations before you submit your application.
+          </p>
+        </div>
+      </div>
+    </app-collapsible>
+
+
+  <section class="declaration-step">
+
+    <div class="main-content mt-4">
+      <h3>I declare that</h3>
+      <ol type="A">
+        <li>The information I have given in this form and in any supporting documents is complete, true and
+          accurate. I am aware that I must tell the GPhC about any changes to my name, designated supervisor, training site
+          address or other contact details, within one month starting from the day on which the change
+          happened.
+        </li>
+        <li>
+          I will follow the requirements covering the foundation training scheme
+        </li>
+        <li>
+          I have told the GPhC about any fitness to practise issues. I understand that this information may be
+          provided to my foundation training employer in the public interest.
+        </li>
+        <li>
+          I have told my employer about any fitness to practise issues relevant to my placement
+        </li>
+        <li>
+          I will adhere to the standards for pharmacy professionals published by the General Pharmaceutical
+          Council.
+        </li>
+      </ol>
+      <h3>
+        I understand that
+      </h3>
+      <ol type="A" start="6">
+        <li>
+          I am applying to join the foundation training scheme, and the GPhC may use the information I have
+          given in this form to assess my application. The GPhC may make any enquiries it considers relevant
+          and appropriate to verify the details I have given on this application form.
+        </li>
+        <li>
+          If I am found to have given false or misleading information in connection with my application for
+          foundation training, the GPhC may reject my application and refer the matter to the relevant law
+          enforcement agencies and any other third party it considers should be notified.
+        </li>
+        <li>
+          I must tell the GPhC if there is any change that affects the fitness to practise declaration that I have
+          made in section 3, within seven days starting from the day on which the event happened. I
+          understand and accept that this information may also be used in future in relation to determining an
+          application for entry to the register or assessing my fitness to practise, and that updated information
+          may be requested at any such time for these purposes.
+        </li>
+        <li>
+          The GPhC may discuss or disclose any personal or sensitive data that it holds about a trainee pharmacist (or trainee) with or to referees, educational establishments, professional
+          regulatory and representative bodies, government departments, funding bodies, law enforcement or
+          immigration agencies and any other third party, if the GPhC considers it to be necessary and
+          proportionate in the public interest.
+
+        </li>
+        <li>
+          If I am allowed to join the foundation training scheme, this does not mean the GPhC is making
+          any assurances, undertakings or guarantees to me that I will be registered with the GPhC as a
+          pharmacist.
+        </li>
+        <li>
+          The requirements for the foundation training scheme are given in section 2 of the GPhC foundation training manual, 
+          and the procedures for the initial education and training of pharmacists
+          and pharmacy technicians are given in the GPhC’s standards for the initial education and training of
+          pharmacists.
+        </li>
+      </ol>
+    </div>
+
+    <div style="padding: 20px">
+      <mat-checkbox name="overallDeclaration" #focus [(ngModel)]="application.activeForm.isOverallDeclarationConfirmed"
+        (ngModelChange)="update()">
+        <h4>I have read and understand the declaration</h4>
+      </mat-checkbox>
+    </div>
+
+  </section>
+</ng-template>

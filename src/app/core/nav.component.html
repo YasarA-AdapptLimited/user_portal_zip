@@ -1,0 +1,151 @@
+<nav class="navbar-inner" [ngClass]="direction"
+  [class.banner-default]="layout.state.bannerState === BannerState.default"
+  [class.banner-info]="layout.state.bannerState === BannerState.info"
+  [class.banner-important]="layout.state.bannerState === BannerState.important"
+  [class.banner-application]="layout.state.bannerState === BannerState.application" [@openState]="openState"
+  [class.dropdown-open]="layout.state.navbarOpen">
+
+  <ul role="navigation" [attr.aria-label]="navLabel" role="menubar" id="navMenu">
+
+    <li *ngIf="!isLoggedIn$ | async" class="nav-item signin"
+      [class.isActive]="signinLink.isActive" [attr.aria-current]="signinLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Sign in" [tabindex]="signinLink.isActive ? -1 : 0" class="nav-link" routerLink="/signin" routerLinkActive [routerLinkActiveOptions]="{exact:
+          true}" #signinLink="routerLinkActive">
+          Sign in
+        <div class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user" class="nav-item"
+      [class.isActive]="homeLink.isActive" [attr.aria-current]="homeLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Home" [tabindex]="homeLink.isActive ? -1 : 0"  class="nav-link" routerLink="/home" routerLinkActive #homeLink="routerLinkActive"
+        [routerLinkActiveOptions]="{exact:true}">
+        Home
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user?.isPrereg && !showIneligibleToRegister"
+      class="nav-item" [class.isActive]="arosappLink.isActive" [attr.aria-current]="arosappLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Application" [tabindex]="arosappLink.isActive ? -1 : 0" class="nav-link" [routerLink]="[currentApplicationLink]" routerLinkActive #arosappLink="routerLinkActive"
+        [routerLinkActiveOptions]="{exact:true}">
+        Application
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user?.isStudent" class="nav-item"
+      [class.isActive]="preregApplicationLink.isActive" [attr.aria-current]="preregApplicationLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Application" [tabindex]="preregApplicationLink.isActive ? -1 : 0" class="nav-link" routerLink="/student/application" routerLinkActive #preregApplicationLink="routerLinkActive"
+        [routerLinkActiveOptions]="{exact:true}">
+        Application
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user?.isRegistrant"
+      class="nav-item" [class.isActive]="regLink.isActive" [attr.aria-current]="regLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Registration" [tabindex]="regLink.isActive ? -1 : 0" class="nav-link" routerLink="/registration" routerLinkActive #regLink="routerLinkActive">
+        Registration
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="showRevalidation" class="nav-item"
+      [class.isActive]="revalLink.isActive" [attr.aria-current]="revalLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Revalidation" [tabindex]="revalLink.isActive ? -1 : 0" class="nav-link" routerLink="/revalidation" routerLinkActive #revalLink="routerLinkActive">
+        Revalidation
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user?.isRegistrant" class="nav-item"
+      [class.isActive]="renewLink.isActive" [attr.aria-current]="renewLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Renewal" [tabindex]="renewLink.isActive ? -1 : 0" class="nav-link" [routerLink]="'/renewal'" routerLinkActive #renewLink="routerLinkActive">
+        Renewal
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user?.isRegistrant" class="nav-item"
+      [class.isActive]="applicationLink.isActive" [attr.aria-current]="applicationLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Applications" [tabindex]="applicationLink.isActive ? -1 : 0" class="nav-link" [routerLink]="[IPApplicationLink]" routerLinkActive #applicationLink="routerLinkActive"
+        [routerLinkActiveOptions]="{exact:true}">
+        Applications
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <!--<li *ngIf="showPrescriberApplication"  class="nav-item"><a class="nav-link disableWhenVertical">Application</a> 
+      <ul class="sub-menu">
+        <li class="sub-menu-item" [tabindex]="independentPrescriberLink.isActive ? -1 : 0" [class.isActive]="independentPrescriberLink.isActive" [attr.aria-current]="independentPrescriberLink.isActive ? 'page' : 'false'">
+          <a  role="menuitem" aria-label="Independent prescriber" class="nav-link" [routerLink]="'/independentPrescriber/application'" routerLinkActive
+          #independentPrescriberLink="routerLinkActive">
+          Independent prescriber
+          <div aria-hidden="true" class="indicator">►</div>
+        </a>
+      </li>
+    </ul>
+    </li>-->
+
+    <li *ngIf="authService.user?.isReviewer" class="nav-item"
+      [class.isActive]="reviewLink.isActive" [attr.aria-current]="reviewLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Review" [tabindex]="reviewLink.isActive ? -1 : 0" class="nav-link" [routerLink]="'/review'" routerLinkActive #reviewLink="routerLinkActive">
+        Review
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user?.showReceipts" class="nav-item"
+     [class.isActive]="receiptsLink.isActive" [attr.aria-current]="receiptsLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Receipts" [tabindex]="receiptsLink.isActive ? -1 : 0" class="nav-link" routerLink="/receipts" routerLinkActive #receiptsLink="routerLinkActive">
+        Receipts
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user" class="nav-item"
+      [class.isActive]="accountLink.isActive" [attr.aria-current]="accountLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Account" [tabindex]="accountLink.isActive ? -1 : 0" class="nav-link" routerLink="/account" routerLinkActive #accountLink="routerLinkActive"
+        [routerLinkActiveOptions]="{exact:true}">
+        Account
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li *ngIf="authService.user" class="nav-item"
+      [class.isActive]="notificationsLink.isActive" [attr.aria-current]="notificationsLink.isActive ? 'page' : 'false'">
+      <a role="menuitem" aria-label="Notifications" [tabindex]="notificationsLink.isActive ? -1 : 0" class="nav-link" routerLink="/account/notifications" [routerLinkActiveOptions]="{exact:true}" routerLinkActive
+        #notificationsLink="routerLinkActive">
+        Notifications
+        <div class="badge badge-danger badge-notification" *ngIf="notificationCount">{{notificationCount}}</div>
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li class="nav-item fill">
+    </li>
+
+    <li *ngIf="authService.userId && authService.token" class="nav-item sign signout">
+      <a role="menuitem" aria-label="Sign out - end of list" tabindex="0" class="nav-link clickable" (click)="signout()">
+        Sign out
+        <div aria-hidden="true" class="indicator">►</div>
+      </a>
+    </li>
+
+    <li class="nav-item burger" [class.open]="layout.state.navbarOpen">
+      <a class="nav-link clickable">
+        <ng-content></ng-content>
+      </a>
+    </li>
+  </ul>
+  <ul *ngIf="paymentLink">
+    <li class="nav-item" [class.isActive]="paymentLink.isActive">
+      <a class="nav-link" routerLink="/payment" routerLinkActive [routerLinkActiveOptions]="{exact:
+          true}" #paymentLink="routerLinkActive" [tabindex]="paymentLink.isActive ? -1 : 0">Payment of fees
+        <div class="indicator">►</div>
+      </a>
+    </li>
+  </ul>
+
+</nav>

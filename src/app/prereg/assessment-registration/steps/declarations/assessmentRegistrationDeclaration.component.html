@@ -1,0 +1,114 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>
+        Application to sit the registration assessment
+      </div>
+      <!-- <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]="true"></app-gphc-icon>-->
+    </h2>
+  </div>
+  <!--<app-collapsible [trigger]="showDetailsHelp" class="help-block">
+    <div class="help-text">
+      <p>
+        The information about your training shown here is taken from your
+        pre-registration application form and any approved changes to your
+        training. Please confirm if these details are correct so that we can
+        verify that you meet the criteria to be registered.
+      </p>
+    </div>
+  </app-collapsible>-->
+
+  <section>
+    <h3>Applicant declarations</h3>
+    <div class="readonly">
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ1Confirmed"
+          name="registrationRegulation" required #isRegistrationRegulation="ngModel">
+          The information that I have provided in this application is complete, true and accurate. I understand that if I
+          am found to have given
+          false or misleading information in connection with this application, it will affect my ability to join the
+          register
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+              isRegistrationRegulation.touched &&
+              isRegistrationRegulation.invalid
+            ">
+          <div class="error">
+            <p>
+              Please select this checkbox
+            </p>
+          </div>
+        </app-collapsible>
+      </p>
+    </div>
+  </section>
+  <section>
+    <div class="readonly">
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ2Confirmed"
+          name="privacyPolicyInformation" required #isPrivacyPolicyInformation="ngModel">
+          I understand and accept that the GPhC may use the information I have provided as part of this application to
+          assess:
+          <ul style="list-style-type:disc">
+            <li>any application to join the register I may make</li>
+            <li>any application to renew my registration I may make</li>
+            <li>my fitness to practise</li>
+          </ul>
+          and that the GPhC may ask me for updated information for these purposes, in line with the GPhC privacy policy
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+              isPrivacyPolicyInformation.touched &&
+              isPrivacyPolicyInformation.invalid
+            ">
+          <div class="error">
+            <p>
+              Please select this checkbox
+            </p>
+          </div>
+        </app-collapsible>
+      </p>
+    </div>
+  </section>
+  <section>
+    <div class="readonly">
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ3Confirmed"
+          name="correctInformation" required #isCorrectInformation="ngModel">
+          I have read and understood the registration assessment regulations relating to this sitting, and I agree to
+          follow them
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+              isCorrectInformation.touched && isCorrectInformation.invalid
+            ">
+          <div class="error">
+            <p>
+              Please select this checkbox
+            </p>
+          </div>
+        </app-collapsible>
+      </p>
+    </div>
+  </section>
+  <section>
+    <div class="readonly">
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ4Confirmed"
+          name="validIdentification" required #isPhotoIdentification="ngModel">
+          I understand that I must provide appropriate photo identification on the day of the assessment, as specified
+          by Surpass, and that
+          I will not be able to sit the assessment without it
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+              isPhotoIdentification.touched && isPhotoIdentification.invalid
+            ">
+          <div class="error">
+            <p>
+              Please select this checkbox
+            </p>
+          </div>
+        </app-collapsible>
+      </p>
+    </div>
+  </section>
+</ng-template>

@@ -1,0 +1,22 @@
+<div (keyup.escape)="exit()">
+  <app-toolbar (keyup.escape)="exit()" [loading]="loading"  [title]="title" [titleCentered]="false">
+
+    <div class="toolbar-right" *ngIf="revalidation">
+      <app-carousel-nav [items]="revalidation.entries" [selectedIndex]="selectedIndex" (selected)="selectedIndex = $event.index" >
+      </app-carousel-nav>
+      <app-gphc-icon [static]="true" routerLink="/revalidation" [iconType]="'close'"></app-gphc-icon>
+    </div>
+  </app-toolbar>
+  <div (keyup.escape)="exit()" *ngIf="revalidation" class="fadein">
+
+    <app-carousel [items]="revalidation.entries" [$item]="itemTemplate" [selectedIndex]="selectedIndex" >
+    </app-carousel>
+    <ng-template let-item let-i="index" #itemTemplate>
+      <div class="template-container">
+        <section style="margin-bottom: 40px;">
+          <app-cpd-entry [cpdEntry]="item" [typeVisible]="false" [annotationsVisible]="true"></app-cpd-entry>
+        </section>
+      </div>
+    </ng-template>
+  </div>
+</div>

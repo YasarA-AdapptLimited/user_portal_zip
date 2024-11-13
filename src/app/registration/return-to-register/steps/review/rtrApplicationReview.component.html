@@ -1,0 +1,441 @@
+<section style="position: relative;">
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Personal details</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.PersonalDetails)">
+      </app-gphc-icon>
+    </h3>
+    <!-- <app-applicant [(ngModel)]="applicant" [readonly]="true" ></app-applicant> -->
+    <div class="row">
+      <div class="col-md-9">
+        <div class="form-group">
+          <label>Full name</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="registrantFullName"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Registration number</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="registrationNumber"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Registration status</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="registrationStatus"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Contact details</div>
+          <app-gphc-icon size="24" top="-15" right="5" iconType="edit"
+            (click)="goToStep(rtrApplicationStep.PersonalDetails)">
+          </app-gphc-icon>
+        </h3>
+        <app-contact [contact]="applicant.contact"></app-contact>
+      </div>
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Home address</div>
+          <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+            (click)="goToStep(rtrApplicationStep.PersonalDetails)"></app-gphc-icon>
+        </h3>
+        <app-address [address]="applicant.address"></app-address>
+      </div>
+    </div>
+  </section>
+
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Changing your registered name</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.PersonalDetails)">
+      </app-gphc-icon>
+    </h3>
+    <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="changingName">Is this the name you wish to be registered under if your application is
+          successful?</label>
+        <div class="mt-2">
+          <div class="form-control readonly form-control-short col-md-4"
+            *ngIf="application?.activeForm?.returnToRegisterDetail?.confirmUserNameChange">Yes</div>
+          <div class="form-control readonly col-md-4"
+            *ngIf="!application?.activeForm?.returnToRegisterDetail?.confirmUserNameChange">No</div>
+        </div>
+      </div>
+      <ng-container *ngIf="!application?.activeForm?.returnToRegisterDetail?.confirmUserNameChange">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Title</label><br />
+              <div type="text" class="form-control readonly"
+                [innerHTML]="application?.activeForm?.returnToRegisterDetail?.title?.name"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>First Name</label><br />
+              <div type="text" class="form-control readonly"
+                [innerHTML]="application?.activeForm?.returnToRegisterDetail?.forenames"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Middle Name</label><br />
+              <div type="text" class="form-control readonly"
+                [innerHTML]="application?.activeForm?.returnToRegisterDetail?.middleName || '-'"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Last Name</label><br />
+              <div type="text" class="form-control readonly"
+                [innerHTML]="application?.activeForm?.returnToRegisterDetail?.surname"></div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+
+    </div>
+    </div>
+  </section>
+
+
+
+  <section [class.allow-edit]="!readonly" *ngIf="isRouteEEA">
+    <h3>
+      <div class="grow">Details of previous registration</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.RegistrationDetails)">
+      </app-gphc-icon>
+    </h3>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Registration route</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="registrationRoute"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>English language qualification</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="englishCertificateOption"></div>
+        </div>
+      </div>
+      <div class="col-md-6" *ngIf="englishCertificateOption=='OET'">
+        <div class="form-group">
+          <label>OET candidate no</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="application?.form?.returnToRegisterDetail?.oetCandidateNo || '-'"></div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+
+
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Equality and diversity</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(rtrApplicationStep.EDIDetails)">
+      </app-gphc-icon>
+    </h3>
+    <app-edi-summary [edi]="application.activeForm.equalityDiversity"></app-edi-summary>
+  </section>
+  <section [class.allow-edit]="!readonly" *ngIf="application.personalDetails.registration.isRequiredRevalidationSubmission">
+    <h3>
+      <div class="grow">Outstanding revalidation record</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.RevalidationRecordOutstanding)">
+      </app-gphc-icon>
+    </h3>
+    <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>
+          Our records show that you did not submit a full revalidation record for your last registration year. 
+          You will need to complete and submit your revalidation record within 28 days of the date that you submit 
+          this application for restoration, otherwise we will not process this application.
+        </label>        
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Letter of good standing</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.LetterOfGoodStanding)">
+      </app-gphc-icon>
+    </h3>
+    <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="goodStanding">Have you
+          been registered with any other regulatory bodies in the last 5 years?</label>
+        <div class="mt-2">
+          <div class="form-control readonly form-control-short col-md-4" *ngIf="!letterOfGoodStanding.hasRegistered">No
+          </div>
+          <div class="form-control readonly col-md-4" *ngIf="letterOfGoodStanding.hasRegistered">Yes</div>
+          <ng-container *ngIf="letterOfGoodStanding.hasRegistered">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Organisation name</label><br />
+                  <div type="text" class="form-control readonly" [innerHTML]="regulatoryBody"></div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Your registration number with this organisation</label><br />
+                  <div type="text" class="form-control readonly" [innerHTML]="registrationNumberwithTheOrganisation"></div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Have you requested a letter of good standing from this organisation be sent to the
+                    GPhC?</label><br />
+                  <div type="text" class="form-control readonly" [innerHTML]="isRequested ? 'Yes' : 'No'"></div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Fitness to practise declarations (1)</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.FtpDeclarationsOne)">
+      </app-gphc-icon>
+    </h3>
+    <app-declaration-summary [formId]="formId" [application]="application"></app-declaration-summary>
+  </section>
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Fitness to practise declarations (2)</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.FtpDeclarationsTwo)">
+      </app-gphc-icon>
+    </h3>
+    <div class="row">
+      <div class="card card-non no-pad margin-0" [class.valid]="true">
+        <label for="question" class="card-header" [innerHTML]="q8Title"></label>
+      </div>
+    <div class="col-md-12">
+      
+      <div class="form-group">
+        <label for="goodStanding">Have you worked as a pharmacist or pharmacy technician in Great Britain while not
+          registered with the GPhC?</label>
+        <div class="mt-2">
+          <div class="form-control readonly form-control-short col-md-3"
+            *ngIf="!application.activeForm.restorationDeclarations[0].isRegistered">No</div>
+          <div class="form-control readonly col-md-3"
+            *ngIf="application.activeForm.restorationDeclarations[0].isRegistered">Yes</div>
+        </div>
+      </div>
+      <ng-container *ngIf="application.activeForm.restorationDeclarations[0].isRegistered">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Has this already been investigated by the GPhC?</label><br />
+              <div type="text" class="form-control readonly"
+                [innerHTML]="application.activeForm.restorationDeclarations[0].isInvestigated?'Yes':'No'"></div>
+            </div>
+          </div>
+        </div>
+        <ng-container
+          *ngIf="application.activeForm.restorationDeclarations[0].isInvestigated; then investigated else notinvestigated">
+        </ng-container>
+        <ng-template #investigated>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Case reference number</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="application.activeForm.restorationDeclarations[0].caseReferenceNo || '-'"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Investigation date</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="(application.activeForm.restorationDeclarations[0].investigationDate | utcDate) ||'-'"></div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #notinvestigated>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Your job title</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="application.activeForm.restorationDeclarations[0].titleUsed ||'-'"></div>
+              </div>
+            </div>
+            <div class="col-md-12">            
+                <label>Dates of your unregistered practice</label><br />              
+            </div>
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label>Start Date</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="(application.activeForm.restorationDeclarations[0].titleUsedFrom | utcDate) || '-'"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>End Date</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="(application.activeForm.restorationDeclarations[0].titleUsedUntil | utcDate) || '-'"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Address</label><br />
+              <app-address [address]="application.activeForm.restorationDeclarations[0].employerAddress"></app-address>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+ 
+  <div class="row">
+    <div class="card card-non no-pad margin-0" [class.valid]="true">
+      <label for="question" class="card-header" [innerHTML]="q9Title"></label>
+    </div>
+    <div class="col-md-12">      
+      <div class="form-group">
+        <label for="goodStanding">Have you used the title ‘pharmacist’ or ‘pharmacy technician’ (or their Welsh
+          equivalents ‘fferyllydd’ or ‘echnegydd fferylliaeth’) while not registered with the GPhC?</label>
+        <div class="mt-2">
+          <div class="form-control readonly form-control-short col-md-3"
+            *ngIf="!application.activeForm.restorationDeclarations[1].isRegistered">No</div>
+          <div class="form-control readonly col-md-3"
+            *ngIf="application.activeForm.restorationDeclarations[1].isRegistered">Yes</div>
+        </div>
+      </div>
+      <ng-container *ngIf="application.activeForm.restorationDeclarations[1].isRegistered">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Has this already been investigated by the GPhC?</label><br />
+              <div type="text" class="form-control readonly"
+                [innerHTML]="application.activeForm.restorationDeclarations[1].isInvestigated?'Yes':'No'"></div>
+            </div>
+          </div>
+        </div>
+        <ng-container *ngIf="application.activeForm.restorationDeclarations[1].isInvestigated; then investigated10 else notinvestigated10"></ng-container>
+        <ng-template #investigated10>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Case reference number</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="application.activeForm.restorationDeclarations[1].caseReferenceNo || '-'"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Investigation date</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="(application.activeForm.restorationDeclarations[1].investigationDate | utcDate) ||'-'"></div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #notinvestigated10>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Title you used</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="application.activeForm.restorationDeclarations[1].titleUsed ||'-'"></div>
+              </div>
+            </div>
+            <div class="col-md-12">
+                <label>Dates of title use</label><br />              
+            </div>
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label>Start Date</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="(application.activeForm.restorationDeclarations[1].titleUsedFrom | utcDate) || '-'"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>End Date</label><br />
+                <div type="text" class="form-control readonly"
+                  [innerHTML]="(application.activeForm.restorationDeclarations[1].titleUsedUntil | utcDate) || '-'"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>How or where you used it?</label><br />
+              <textarea class="form-control readonly" name="usageDescription" readonly
+                            id="usageDescription" [innerHTML]="application.activeForm.restorationDeclarations[1].howWhereUsedIt || '-'">
+              </textarea>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+
+    </div>
+  </div>
+
+  </section>
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Declarations on joining the register </div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.RegistrationJoinDeclarations)">
+      </app-gphc-icon>
+    </h3>
+    <div class="form-group">
+      <div class="form-control" readonly>
+        I have read and understand the declarations on joining the register
+      </div>
+    </div>
+    <!-- <app-declaration-summary [formId]="formId" [application]="application"></app-declaration-summary> -->
+  </section>
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Application Declarations</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.ApplicationDeclarations)">
+      </app-gphc-icon>
+    </h3>
+    <div class="form-group">
+      <div class="form-control" readonly>
+        I have read and understand the application declaration
+      </div>
+    </div>
+
+  </section>
+  <section>
+    <h3>
+      <div class="grow">Supporting documents</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(rtrApplicationStep.ApplicationDeclarations)"></app-gphc-icon>
+    </h3>
+    <app-supporting-documents-summary [application]="application" [formId]="formId" [isRTR]="true">
+    </app-supporting-documents-summary>
+  </section>
+</section>

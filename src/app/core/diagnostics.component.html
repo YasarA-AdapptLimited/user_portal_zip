@@ -1,0 +1,101 @@
+<app-banner [loading]="loading" [info]="true">
+  <div class="banner-left">
+    <h1>Diagnostics</h1>
+    <p class="intro-text">
+      View and send diagnostics information
+    </p>
+  </div>
+</app-banner>
+
+<div class="content spread">
+  <div class="row" *ngIf="!loading">
+    <div class="col-lg-7 left-col">
+      <section>
+        <div style="display:flex">
+          <h2 style="flex-grow:1">Logs</h2>
+          <button [disabled]="sendingLogs" style="width:200px; font-size:1.2em" class="btn btn-primary " (click)="sendDiagnostics()">
+            <span *ngIf="!sendingLogs">Send to GPhC</span>
+            <span *ngIf="sendingLogs">Sending...</span>
+          </button>
+
+        </div>
+        <div *ngFor="let log of logs">
+          <div class="log row table-row" (click)="log.expanded = !log.expanded" [class.clickable]="!!log.data.length" [class.info]="log.level===0"
+            [class.error]="log.level>1">
+            <div class="col-" style="color:#999;min-width:110px">
+              {{ log.date | time }}
+            </div>
+            <div class="col-" style="flex-grow:1">
+              <i *ngIf="log.data.length" class="fa fa-plus pull-right" style="padding-top:5px;padding-right:5px"></i>
+              {{ log.text }}
+            </div>
+
+          </div>
+          <app-collapsible [trigger]="log.expanded" class="row table-row">
+            <pre *ngFor="let item of log.data" class="col-12">{{ item | json }}</pre>
+          </app-collapsible>
+        </div>
+      </section>
+    </div>
+    <div class="col-lg-5 right-col">
+      <section>
+        <h2>Environment</h2>
+        <div>Version: {{ environment.version }}</div>
+        <div>Target: {{ environment.target.toUpperCase() }}</div>
+      </section>
+
+      <!-- <app-form-section [saving]="updating" *ngIf="authService.user?.isPrereg">
+
+          <span class="section-header">Actions</span>
+          <div class="section-body">
+            <div *ngIf="!error">
+   
+              <div class="form-group">
+                <label>Application status</label>
+                <select class="form-control" [(ngModel)]="applicationStatus" >
+                  <option *ngFor="let item of ApplicationStatus | keys" [value]="item.key">{{item.value}}</option>
+                </select>
+                </div>
+                <div class="form-group">
+                <label>Paid within last 6 months ?</label>
+                <mat-radio-group name="applicationPaid" id="applicationPaid"  [(ngModel)]="applicationPaid">
+                    <mat-radio-button [value]="true" name="number" type="radio">Yes</mat-radio-button>
+                    <mat-radio-button [value]="false" name="name" type="radio">No</mat-radio-button>
+                  </mat-radio-group><br/>
+                  <pre>{{ applicationStatusJson | json }}</pre>
+              </div>
+           
+              <button class="btn btn-lg btn-block btn-primary" (click)="updateApplicationStatus()">Set application status</button>
+  
+            </div>
+            <div *ngIf="error">
+              <p class="form-error">An error occurred while loading actions.</p>
+            </div>
+  
+          </div>
+        </app-form-section> -->
+
+      <!-- <app-form-section [saving]="updating" *ngIf="authService.user?.isRegistrant">
+
+        <span class="section-header">Revalidation Actions</span>
+        <div class="section-body">
+          <div *ngIf="!error">
+
+            <div class="form-group">
+              <label>Set earliest submission date to today</label>
+
+              <pre *ngIf="updating"><b>Complete !</b></pre>
+            </div>
+
+            <button class="btn btn-lg btn-block btn-primary" (click)="enableSubmit()">Enable revalidation submission</button>
+
+          </div>
+          <div *ngIf="error">
+            <p class="form-error">An error occurred while loading actions.</p>
+          </div>
+
+        </div>
+      </app-form-section> -->
+    </div>
+  </div>
+</div>

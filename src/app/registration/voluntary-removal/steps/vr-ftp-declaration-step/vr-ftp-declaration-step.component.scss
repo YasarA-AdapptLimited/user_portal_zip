@@ -1,0 +1,12 @@
+@import '../../../../style/variables.scss';
+::ng-deep app-declaration {
+  app-followup-question h2 {
+    background: transparent !important;
+    color: $gphc-blue !important;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 1.1em;
+  }
+}

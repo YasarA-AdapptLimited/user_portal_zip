@@ -1,0 +1,49 @@
+
+<form #form="ngForm">
+  
+  
+  <section class="prescriber-details">
+    <div class="row mt-4 mb-4">
+      <div class="col-md-12">
+        <p class="important">
+         {{application.applicantName}} has advised the GPhC that you are willing to provide professional reassurance and act as their mentor for a period of one month after the 
+          independent prescriber annotation is added to their public record.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="decision-outcome">
+    <h2 class="sub-heading">Please respond to this mentor request by checking one of the options below</h2>
+    <mat-radio-group name="response" id="response" [(ngModel)]="response" required>
+      <mat-radio-button [value]="CountersignatureOutcome.Approved" type="radio">
+          I confirm that I am willing to act as a mentor
+      </mat-radio-button>
+      <mat-radio-button [value]="CountersignatureOutcome.Rejected" type="radio">
+          I will not be acting as a mentor
+      </mat-radio-button>
+      <mat-radio-button [value]="CountersignatureOutcome.Refused" name="name" type="radio">
+          This request has been sent to me in error</mat-radio-button>
+    </mat-radio-group>
+
+    <app-collapsible [trigger]="response===CountersignatureOutcome.Rejected">
+      <p class="important mt-3">
+        I confirm that I have discussed this outcome with the named applicant.
+      </p>
+    </app-collapsible>
+
+
+    <button class="btn btn-block btn-lg btn-primary mt-4" type="submit" (click)="submitOutcome(form.value)"
+      [disabled]="!response">
+      <span>Submit decision</span>
+      <span *ngIf="validInputs" class="d-inline-block ml-4">
+        <app-spinner [tiny]="true"></app-spinner>
+      </span>
+    </button>
+
+  </section>
+
+
+</form>

@@ -1,0 +1,191 @@
+
+<app-review-header>
+
+  <div class="buttons" *ngIf="!manager.qa">
+    <ng-container *ngIf="review.isLeadReviewer else peerReviewerButtonsTemplate">
+
+      <ng-container *ngIf="review.stage === ReviewStage.WriteFeedback">
+        <button class="btn no-focus" (click)="save()">
+          <ng-container *ngIf="!saving else savingButtonTemplate">
+            <i class="fa fa-save"></i>
+            <span>save & exit</span>
+          </ng-container>
+          <ng-template #savingButtonTemplate>
+            <i>
+              <app-spinner [light]="true" diameter="40"></app-spinner>
+            </i>
+            <span *ngIf="approving">saving...</span>
+          </ng-template>
+
+        </button>
+        <button class="btn no-focus" (click)="submit()" [disabled]="submitting || (!review?.feedback.performanceIndicator )">
+          <ng-container *ngIf="!submitting else savingButtonTemplate">
+            <i class="fa fa-upload"></i>
+            <span>submit</span>
+          </ng-container>
+          <ng-template #submittingButtonTemplate>
+            <i>
+              <app-spinner [light]="true" diameter="40"></app-spinner>
+            </i>
+            <span *ngIf="approving">submitting...</span>
+          </ng-template>
+        </button>
+      </ng-container>
+
+    </ng-container>
+    <ng-template #peerReviewerButtonsTemplate>
+      <ng-container *ngIf="review.stage === ReviewStage.AwaitingFeedbackApprovalByPeer">
+        <button class="btn no-focus" (click)="approve()">
+          <ng-container *ngIf="!approving else approvingButtonTemplate">
+            <i class="fa fa-thumbs-up"></i>
+            <span>approve</span>
+          </ng-container>
+          <ng-template #approvingButtonTemplate>
+            <i>
+              <app-spinner [light]="true" diameter="40"></app-spinner>
+            </i>
+            <span *ngIf="approving">approving...</span>
+          </ng-template>
+        </button>
+
+        <button class="btn no-focus" (click)="togglePanel('reject')">
+          <i class="fa fa-thumbs-down"></i>
+          query feedback
+        </button>
+      </ng-container>
+    </ng-template>
+  </div>
+
+</app-review-header>
+<app-collapsible [trigger]="manager.helpVisible$ | async">
+  <app-banner [important]="true">
+    <div class="banner-left" *ngIf="!manager.qa else qaHelpTemplate">
+      <ng-container *ngIf="review.isLeadReviewer else peerReviewerHelpTemplate">
+        <ng-container *ngIf="review.stage === ReviewStage.WriteFeedback else awaitingApprovalTemplate">
+
+            <span *ngIf="!rejected">
+                Write your feedback for each section. Entries for each section will appear next to the feedback pane. After
+                you have written your feedback, set your final assessment.
+              </span>
+              <span *ngIf="rejected">
+                Your feedback was rejected previously.
+              </span>
+
+        </ng-container>
+        <ng-template #awaitingApprovalTemplate>
+            Awaiting approval from the peer reviewer.
+          </ng-template>
+      
+      </ng-container>
+      <ng-template #peerReviewerHelpTemplate>
+        <ng-container *ngIf="review.stage !== ReviewStage.WriteFeedback else inProgressTemplate">
+          Read through the feedback that the lead reviewer has written and decide whether to approve it. If you reject
+          the feedback, you must provide your reasons.
+        </ng-container>
+        <ng-template #inProgressTemplate>
+          Lead reviewer is working on feedback.
+        </ng-template>
+      </ng-template>
+    </div>
+    <ng-template #qaHelpTemplate>
+      <div class="banner-left">
+        <ng-container *ngIf="review.stage === ReviewStage.QualityAssuranceCompleted else qaInProgressTemplate">
+            Quality assurance has been completed.
+        </ng-container>
+        <ng-template #qaInProgressTemplate>
+            This review is now undergoing quality assurance.
+        </ng-template>
+      
+      </div>
+    </ng-template>
+    <div class="banner-right">
+      <button (click)="manager.closeHelp()" style="font-weight:bold" class="btn btn-lg btn-default">OK</button>
+    </div>
+  </app-banner>
+</app-collapsible>
+
+<app-collapsible [trigger]="panel==='reject'">
+  <div class="dropdown-panel reject-feedback">
+
+    <h4>
+      <span>Query feedback</span>
+      <button (click)="panel=undefined" aria-label="Close" class="btn-default btn-close"><i class="fa fa-close"></i></button>
+    </h4>
+
+    <div class="form-group">
+      <label>Why are you querying this feedback?</label>
+      <textarea #rejectionReasonRef class="form-control" [(ngModel)]="rejectionReason"></textarea>
+    </div>
+
+    <button (click)="reject()" [disabled]="rejecting || !rejectionReason" class="mt-4 btn btn-lg btn-block btn-primary">
+      <span *ngIf="!rejecting">
+        Query feedback
+      </span>
+      <span *ngIf="rejecting" style="display:flex;align-items:center">
+        <div style="flex-grow:1"></div>
+        <app-spinner [tiny]="true" [light]="true"></app-spinner>&nbsp;&nbsp;Sending back to the reviewer...
+        <div style="flex-grow:1"></div>
+      </span>
+
+    </button>
+
+  </div>
+</app-collapsible>
+<div class="feedback review-content">
+
+
+  <div class="messaging-container" [@slideInOut]="(this.manager.chatVisible$ | async) ? 'open' : 'closed'">
+    <app-discussion></app-discussion>
+  </div>
+
+  <div class="row content spread spread-bottom" >
+
+    <div class="col-md-6 left-col fadein align-space" *ngIf="selected" >
+
+      <app-carousel [items]="manager.items" [$item]="itemTemplate" [$prev]="prevTemplate" [$next]="nextTemplate"
+        [selectedIndex]="manager.selectedEntryIndex$ | async">
+      </app-carousel>
+
+      <ng-template let-item let-i="index" #itemTemplate>
+        <div class="template-container">
+          <section style="margin-bottom: 40px;">
+            <app-cpd-entry [cpdEntry]="item" [typeVisible]="false" [annotationsVisible]="true"></app-cpd-entry>
+          </section>
+        </div>
+      </ng-template>
+    </div>
+    <div class="col-md-6 right-col align-space">
+
+      <section *ngIf="review.feedbacks && review.feedbacks.length > 1">
+        <label>Feedback version</label>
+          <mat-select name="feedbackSelection" class="form-control" placeholder="Select feedback version..."
+          [(ngModel)]="selectedFeedback" >
+          <mat-option [class.current-feedback]="item===review.feedback" *ngFor="let item of review.feedbacks; let i = index;" [value]="item">{{ review.feedbacks.length - i }}. {{ ReviewerRole[item.author.reviewerRole] | caseSplit }}
+          </mat-option>
+        </mat-select>
+      </section>
+
+      
+      <section class="feedback-sections-container">
+        <h4>Feedback</h4>
+        <ng-container *ngIf="selectedFeedback===review.feedback">
+
+          <div class="rejection-reason" *ngIf="manager.feedbackRejected">
+            <h5>Reason for rejection</h5>
+            <div>
+              {{manager.feedbackRejectionReason}}
+            </div>
+          </div>
+          <app-feedback-sections [review]="review" (onSelected)="onSelectedSection($event)"></app-feedback-sections>
+
+        </ng-container>
+
+        <app-feedback-sections-readonly *ngIf="selectedFeedback && selectedFeedback!==review.feedback" [review]="review" [feedback]="selectedFeedback" (onSelected)="onSelectedSection($event)"></app-feedback-sections-readonly>
+
+  
+      </section>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,46 @@
+@import '../style/variables';
+
+:host.padded .collapsible {
+  padding: 10px;
+  margin: -10px;
+}
+.collapsible.padded {
+    padding: 40px;
+    margin: -40px;
+}
+/*
+.collapsible.closed {
+  display: none;
+}
+*/
+:host-context.help-block {
+  .collapsible {
+    
+    padding-left: 20px;
+    padding-right: 20px;
+    background: $gphc-blue;
+    font-size: 1.2em;
+    color: white;
+    ::ng-deep .help-text {
+      padding:25px 15px 20px 10px;
+      color:white !important;
+      font-weight: normal !important;
+    }
+
+    @media (max-width: 530px) {
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-left: -20px;
+      border-radius: 0;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      margin-right: -20px !important;
+    }
+
+    
+    &.open {
+      margin-bottom: 20px;
+    }
+  }
+
+}

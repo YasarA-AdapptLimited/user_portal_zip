@@ -1,0 +1,47 @@
+<h3>Submit feedback approval</h3>
+<mat-dialog-content>
+  <div class="approval-container">
+    <div class="text-center">
+      <button  aria-label="Approved" class="btn btn-default btn-round btn-round-md" (click)="approval.approved=true" [class.btn-success]="approval.approved === true">
+
+        <i class="fa fa-thumbs-up"></i>
+      </button>
+      <div class="btn-text">Approved</div>
+    </div>
+
+    <div class="gap"></div>
+
+    <div class="text-center" style="align-self:flex-end">
+      <button  aria-label="Not approved" class="btn btn-default btn-round btn-round-md" [class.btn-reject]="approval.approved === false" (click)="approval.approved=false">
+          <i class="fa fa-thumbs-down"></i>
+        </button>
+      <div class="btn-text">Not approved</div>
+    </div>
+
+    <div>
+  
+    </div>
+  </div>
+  <app-collapsible [trigger]="approval.approved===false" (onTriggerOn)="approvalReason.focus()">
+    <div class="approval-reason">
+        <textarea class="form-control" #approvalReason [(ngModel)]="approval.reason" placeholder="Enter non-approval reason..."></textarea>
+    </div>
+</app-collapsible>
+</mat-dialog-content>
+<mat-dialog-actions>
+
+    <div class="text-center" >
+        <button class="btn btn-primary btn-lg " [disabled]="invalid()" [mat-dialog-close]="approval"><i class="fa fa-upload"></i>Submit</button>
+
+      </div>
+      <div class="gap"></div>
+  <div class="text-center"  >
+    <button class="btn btn-default btn-lg" [mat-dialog-close]="undefined">
+    <i class="fa fa-close"></i>Cancel
+  </button>
+
+  </div>
+
+ 
+
+</mat-dialog-actions>

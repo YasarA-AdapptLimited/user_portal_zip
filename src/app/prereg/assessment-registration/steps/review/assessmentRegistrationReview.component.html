@@ -1,0 +1,73 @@
+<section [class.allow-edit]="!readonly">
+  <h3>
+    <div class="grow">Personal details</div>
+  </h3>
+  <app-applicant [(ngModel)]="applicant" [readonly]="true" [isAssessmentRegistration]="true"></app-applicant>
+</section>
+
+<section [class.allow-edit]="!readonly" *ngIf="showContactDetails">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>
+        <div class="grow">Contact details</div>
+      </h3>
+      <app-contact [contact]="applicant.contact"></app-contact>
+    </div>
+    <div class="col-md-6">
+      <h3>
+        <div class="grow">Home address</div>
+      </h3>
+      <app-address [address]="applicant.address"></app-address>
+    </div>
+  </div>
+</section>
+<section class="mb-3">
+  <h3>Applicant declarations</h3>
+  <div [class.readonly]="readonly" class="p-3">
+    <div [class.readonly]="readonly" class="mb-3">
+      <p>
+        <mat-checkbox [disabled]="true" [checked]="application.activeForm.declaration.isQ1Confirmed"
+          name="registrationRegulation">
+          The information that I have provided in this application is complete, true and accurate I understand that if I
+          am found to have given
+          false or misleading information in connection with this application, it will affect my ability to join the
+          register
+        </mat-checkbox>
+      </p>
+    </div>
+    <div [class.readonly]="readonly" class="mb-3">
+      <p>
+        <mat-checkbox [disabled]="true" [checked]="application.activeForm.declaration.isQ2Confirmed"
+          name="privacyPolicyInformation">
+          I understand and accept that the GPhC may use the information I have provided as part of this application to
+          assess:
+          <ul style="list-style-type:disc">
+            <li>any application to join the register I may make</li>
+            <li>any application to renew my registration I may make</li>
+            <li>my fitness to practise</li>
+          </ul>
+          and that the GPhC may ask me for updated information for these purposes, in line with the GPhC privacy policy
+        </mat-checkbox>
+      </p>
+    </div>
+    <div [class.readonly]="readonly">
+      <p>
+        <mat-checkbox [disabled]="true" [checked]="application.activeForm.declaration.isQ3Confirmed"
+          name="correctInformation">
+          I have read and understood the registration assessment regulations relating to this sitting, and I agree to
+          follow them
+        </mat-checkbox>
+      </p>
+    </div>
+    <div [class.readonly]="readonly">
+      <p>
+        <mat-checkbox [disabled]="true" [checked]="application.activeForm.declaration.isQ4Confirmed"
+          name="validIdentification">
+          I understand that I must provide appropriate photo identification on the day of the assessment, as specified
+          by Surpass, and that
+          I will not be able to sit the assessment without it
+        </mat-checkbox>
+      </p>
+    </div>
+  </div>
+</section>

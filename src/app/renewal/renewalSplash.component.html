@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-md-7 left-col">
+    <section *ngIf="renewal.isDD">
+      <div class="section-header-container">
+        <h2>Direct Debit
+          <span *ngIf="renewal.paymentMethod === RenewalPaymentMethod.DirectDebitAnnual">single</span>
+          <span *ngIf="renewal.paymentMethod === RenewalPaymentMethod.DirectDebitQuarterly">quarterly</span> payment
+        </h2>
+      </div>
+      <div class="section-body-container">
+        <p class="intro-text">
+          You have a direct debit in place so you will not have to make a card payment to process your renewal.
+        </p>
+        <div class="sub-info">
+          Please see your renewal notice to find out when your Direct Debit payment will be taken. Your receipt will be available to
+          download after
+          <span *ngIf="renewal.paymentMethod === RenewalPaymentMethod.DirectDebitAnnual">your Direct Debit payment has been taken.</span>
+          <span *ngIf="renewal.paymentMethod === RenewalPaymentMethod.DirectDebitQuarterly">the first Direct Debit payment has been taken. The amount paid and amount still owing displayed on this receipt
+            will be updated after each payment is taken.</span>
+        </div>
+      </div>
+    </section>
+    <section *ngIf="renewal.isDue && renewal.isCash">
+      <div class="section-header-container">
+        <h2>Card payments</h2>
+      </div>
+      <div class="section-body-container">
+        <p class="intro-text">
+          We can only accept payments made in pounds sterling (GBP).
+        </p>
+
+        <!-- <p>
+          When making a card payment you may be redirected to your card issuer's site to enter another password before your card issuer
+          authorises payment.
+          <br/>
+          <a href="/common/FAQ.aspx#RenewalQ6" title="Link to ‘What is 3d-Secure’ FAQ">You can read more about 3-D Secure authentication here.</a>
+        </p> -->
+        <p>
+            When you make a card payment, you may be redirected to your card provider’s site to enter another password before they authorise
+            your payment. You can find out more about 3-D Secure authentication from your card provider.
+        </p>
+        <div class="clearfix">
+          <div class="c-card" *ngFor="let card of creditCards">
+            <img src="/assets/images/creditcards/{{card.id}}.gif" title="{{card.name}} Logo" />
+          </div>
+          <div class="c-card">
+            <img src="/assets/images/creditcards/poweredByWorldPay.gif " alt="Worldpay Logo" title="Payments Powered by WorldPay">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="section-header-container">
+        <h2>Receipts</h2>
+      </div>
+      <div class="section-body-container">
+        <p class="intro-text">
+          You can view and print receipts for your renewal payments by going to the
+          <a [routerLink]="'/receipts'" title='link to receipts page'>receipts page</a>.
+        </p>
+      </div>
+    </section>
+    <section>
+      <div class="section-header-container">
+        <h2>Refund Policy</h2>
+      </div>
+      <div class="section-body-container">
+        <p class="intro-text">
+          We do not give refunds of renewal fee payments unless we have made a mistake in processing your payment.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <div class="col-md-5 right-col">
+    <section>
+      <div class="section-header-container">
+        <h2>Renewal status</h2>
+      </div>
+      <div class="section-body-container">
+        <div *ngIf="renewal">
+          <div *ngIf="renewal.isComplete" class="text-center" >
+            <i class="fa fa-check-circle completed completed-lg" aria-hidden="true"></i>
+            <p class="intro-text" tabindex="0">Complete</p>
+          </div>
+          <div *ngIf="renewal?.notDue" class="text-center">
+            <i class="fa fa-hourglass-o notdue"></i>
+            <p class="intro-text" tabindex="0">
+              Not due
+            </p>
+          </div>
+          <app-renewal-message [renewal]="renewal"></app-renewal-message>
+          <div *ngIf="renewal?.isDue" class="text-center" style="margin-top:40px;margin-bottom:30px;">
+            <button type="button" aria-label="Start your renewal" class="btn btn-lg btn-round btn-primary" alt="Renew Your Registration"
+              title="Renew Your Registration" (click)="start()">
+              <i class="fa fa-arrow-right"></i>
+            </button>
+            <div class="btn-text">
+              Start
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <a class="linkOutline" routerLink="faq" aria-label="Click here for more information about renewal" >
+    <section class="info" >
+      <div class="section-header-container">
+        <h2>Questions about renewal?</h2>
+      </div>
+      <p class="intro-text">
+          Click here for supporting materials and more information about the process
+      </p>
+
+    </section>
+  </a>
+
+  </div>
+</div>

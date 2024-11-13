@@ -1,0 +1,132 @@
+<ng-template #content>
+    <div class="header">
+        <h2>
+            <div>
+                Application declarations
+            </div>
+            <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+                [static]="true"></app-gphc-icon>
+        </h2>
+    </div>
+    <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+        <div class="help-text">
+            <p>
+                We will use this information to assess if any concerns about your fitness to practise mean that it would
+                not be in the public interest to remove your entry from the public register. <a class="tooltip-link"
+                href="https://www.pharmacyregulation.org/registration/changes-your-registration/something-declare"
+                target="_blank">Further information can be found on our website</a>.
+            </p>
+        </div>
+    </app-collapsible>
+
+    <div>
+        <p>
+            <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ1Confirmed"
+                name="vrFromRegister" #isVrRegister="ngModel">
+                I declare that I am applying for voluntary removal from the register. The information I have
+                provided for this application is complete, true and accurate.
+            </mat-checkbox>
+            <app-collapsible [trigger]="
+                isVrRegister.touched &&
+                isVrRegister.invalid
+              ">
+                <div class="error">
+                    <p>
+                        Please select this checkbox
+                    </p>
+                </div>
+            </app-collapsible>
+        </p>
+    </div>
+
+    <!-- <section>
+        <div class="readonly">
+            <p>
+                <mat-checkbox (change)="update()"
+                    [(ngModel)]="application.activeForm.declaration.isVRAnnotationFromRegister"
+                    name="VrAnnotationFromRegister" required #isVRAnnotation="ngModel">
+                    I declare that I am applying for removal of my annotation from the register. The information I have
+                    provided for this application is complete, true and accurate.
+                </mat-checkbox>
+                <app-collapsible [trigger]="
+                isVRAnnotation.touched &&
+                isVRAnnotation.invalid
+              ">
+                    <div class="error">
+                        <p>
+                            Please select this checkbox
+                        </p>
+                    </div>
+                </app-collapsible>
+            </p>
+        </div>
+    </section>-->
+
+    <div *ngIf="isNoToAllFtpDeclarations===true ">
+        <p>
+            <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ2Confirmed"
+                name="NoToFtpDeclarartions" required #NoToFtpDeclarartions="ngModel">
+                I have answered 'no' to all of the declarations of fitness to practise and I am not aware of any
+                action that I taken, or have not taken, which would be likely to result in an allegation that my
+                fitness to practise is impaired.
+            </mat-checkbox>
+            <app-collapsible [trigger]="
+                NoToFtpDeclarartions.touched && NoToFtpDeclarartions.invalid
+              ">
+                <div class="error">
+                    <p>
+                        Please select this checkbox
+                    </p>
+                </div>
+            </app-collapsible>
+        </p>
+    </div>
+
+    <div *ngIf="noticedByGphc===true && isPartlyNotifiedYes===false">
+        <p>
+            <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ2Confirmed"
+                name="ConfirmByGphcAndRps" required #isGphcAndRpsConfirmed="ngModel">
+                I have answered 'yes' to one or more of the declarations of fitness to practise and have previously
+                notified the GPhC or RPS of this by filling in a something to declare form. I am not aware of any
+                action that I have taken, or have not taken, which would be likely to result in an allegation that
+                my fitness to practise is impaired. If it is relevant to my application, I request that the
+                registrar considers my application for voluntary removal from the register in accordance with Rule
+                14(6)(b) of the GPhC Registration Rules 2010.
+            </mat-checkbox>
+            <app-collapsible [trigger]="
+                isGphcAndRpsConfirmed.touched && isGphcAndRpsConfirmed.invalid
+              ">
+                <div class="error">
+                    <p>
+                        Please select this checkbox
+                    </p>
+                </div>
+            </app-collapsible>
+        </p>
+    </div>
+
+    <div *ngIf="isPartlyNotifiedYes===true && noticedByGphc===false">
+        <p>
+            <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ2Confirmed"
+                name="NotConfirmByGphcAndRps" required #isNotGphcAndRpsConfirmed="ngModel">
+                I have answered 'yes' to one or more of the declarations of fitness to practise and am aware that I
+                must provide more information about this to the GPhC, by submitting a something to declare form
+                within seven days of submitting this application. I am not aware of any action that I have taken, or
+                have not taken, which would be likely to result in an allegation that my fitness to practise is
+                impaired. If it is relevant to my application, I request that the registrar considers my application
+                for voluntary removal from the register in accordance with Rule 14(6)(b) of the GPhC Registration
+                Rules 2010.
+            </mat-checkbox>
+            <app-collapsible [trigger]="
+                isNotGphcAndRpsConfirmed.touched && isNotGphcAndRpsConfirmed.invalid
+              ">
+                <div class="error">
+                    <p>
+                        Please select this checkbox
+                    </p>
+                </div>
+            </app-collapsible>
+        </p>
+    </div>
+
+</ng-template>

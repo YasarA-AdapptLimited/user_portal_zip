@@ -1,0 +1,59 @@
+<app-collapsible [trigger]="showNoAssessmentMessage">
+
+    <p class="form-error-block">
+      You must set your final assessment before submitting your feedback.
+    </p>
+  
+  </app-collapsible>
+
+<p *ngIf="!readonly">
+  <strong>{{text}}</strong>
+</p>
+
+<div class="performance">
+  <div style="flex-grow:1" *ngFor="let item of performanceIndicators">
+    <div class="assessment-items">
+      <div *ngIf="review.stage > 1" class="assessment {{item.value}}">
+        <span *ngIf="review.feedback.performanceIndicator == item.key">
+          Final assessment<br />
+          <i class="fa fa-caret-down"></i>
+        </span>
+      </div>
+      <div class="performance-indicator {{item.value}}" [ngClass]="{'clickable': !readonly}"
+        (click)="setAssessment(item.key)">
+        {{item.displayName}}
+      </div>
+      <div class="assessment {{item.value}}" *ngIf="review.currentReviewerAssessment == item.key">
+        <i class="fa fa-caret-up"></i><br /> Initial assessment</div>
+      <div *ngIf="review.stage > 1">
+        <div class="assessment {{item.value}}" *ngIf="review.otherReviewerAssessment == item.key">
+          <i class="fa fa-caret-up"></i><br /> Peer's assessment</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-collapsible [trigger]="review.isCoreCriteriaFeedbackRequired()">
+  <div style="margin-top: 20px;" *ngIf="review.isCoreCriteriaFeedbackRequired()">
+
+    <div *ngIf="!review.isFeedbackEditable">
+      <label>
+        Core criteria feedback
+      </label>
+      <div [innerHTML]="review.feedback.coreCriteriaFeedback">
+      </div>
+    </div>
+
+
+    <div *ngIf="review.isFeedbackEditable">
+      <label>
+        Please provide additional feedback to be used for remediation periods.
+      </label>
+      <app-text-editor [readonly]="readonly" (contentChanged)="review.feedback.coreCriteriaFeedback = $event"
+        [content]="review.feedback.coreCriteriaFeedback" [hasFocus]="review.isCoreCriteriaFeedbackRequired()"
+        [placeholder]="'Remediation feedback...'"></app-text-editor>
+
+    </div>
+  </div>
+</app-collapsible>

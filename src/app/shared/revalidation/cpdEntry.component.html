@@ -1,0 +1,8 @@
+<div class="cpd-entry">
+  <div class="header-container">
+    <h4 class="entry-title">{{cpdEntry.title}}</h4>
+    <div class="entry-type">{{type?.title}}</div>
+  </div>
+  <app-cpd-entry-annotations *ngIf="annotationsVisible" [cpdEntry]="cpdEntry"></app-cpd-entry-annotations>
+  <app-cpd-entry-answers [cpdEntry]="cpdEntry"></app-cpd-entry-answers>
+</div>

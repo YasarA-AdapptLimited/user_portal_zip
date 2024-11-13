@@ -1,0 +1,17 @@
+<div class="toolbar-container">
+  <div class="toolbar fadein-quick" >
+    <div class="toolbar-inner " >
+     
+      <ng-content select=".toolbar-left"></ng-content>
+      <div class="toolbar-title" [class.centered]="titleCentered">
+        <div class="title">{{title}}</div>
+        
+      </div>
+     
+      <ng-content  *ngIf="!loading" select=".toolbar-right" class="fadein"></ng-content>
+      <div *ngIf="loading" class="toolbar-right" style="padding:10px">
+        <app-spinner [light]="true" [tiny]="true"></app-spinner>
+      </div>
+    </div>
+  </div>
+</div>

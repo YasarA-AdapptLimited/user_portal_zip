@@ -1,0 +1,48 @@
+<ng-template #content>
+
+  <div class="header">
+    <h2>
+      <div>
+        Equality and diversity
+      </div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]='true' class="headingIcon"></app-gphc-icon>
+    </h2>
+  </div>
+  <!-- Applicant -->
+  <div class="row spacing mb-4">
+    <div class="col-md-12">
+      <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+        <div class="help-text">
+          <p>
+            At the GPhC, we are committed to promoting equality, valuing diversity and being inclusive in all our work
+            as a health professions regulator, and to making sure we meet our equality duties.
+          </p>
+          <p>
+            This equality monitoring form will provide us with information to check that this happens, as defined under
+            the Equality Act 2010. We will use your answers to compile statistics and to facilitate research to support
+            this work. We sometimes share anonymised data with third parties to help us carry out research into
+            particular issues and will have a confidentiality agreement in place if this happens.
+          </p>
+          <p>
+            It does not form part of the application process and will not be used in assessing applications. It won’t be
+            submitted to your mentor if you require one. If you do not want to give us any information, click on ‘prefer
+            not to say’ in response to each section.
+          </p>
+        </div>
+      </app-collapsible>
+    </div>
+  </div>
+
+
+  <section *ngIf="ediService.options$ | async else loading" class="fadein">
+    <app-edi [(ngModel)]="equalityDiversity" [valid]="ediService.validity$ | async" [touched]="touched"
+      (ngModelChange)="update($event)"></app-edi>
+  </section>
+</ng-template>
+
+<ng-template #loading>
+  <div class="step-loading">
+    <mat-progress-bar aria-label="loading step"  mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>

@@ -1,0 +1,36 @@
+<div class="row table-row no-gutters feedback-section" *ngFor="let section of sections" [class.selected]="section===selected">
+  <div class="col-12  section-header" [class.clickable]="selected !== section" (click)="select(section)">
+    {{section.title}}
+    <app-gphc-icon *ngIf="section===selected" [iconType]="'info'" [offset]="-10" 
+    [offsetTop]="-5"
+    (click)="helpClick($event, section)"></app-gphc-icon>
+
+  </div>
+  <app-collapsible  [trigger]="section===selected" style="width: 100%">
+    <app-collapsible [trigger]="section.helpVisible"  class="help-block">
+      <app-feedback-help *ngIf="section.isFeedback" [type]="section.type"></app-feedback-help>
+      <app-assessment-help *ngIf="section.isAssessment" ></app-assessment-help>
+  
+    </app-collapsible>
+   
+    <div style="padding-bottom: 10px;">
+      <app-text-editor 
+        *ngIf="section.isFeedback && review.isFeedbackEditable" 
+        (contentChanged)="update($event)" 
+        [content]="review.feedback[section.feedbackType]"
+
+        [id]="feedback">
+      </app-text-editor>
+  <!--        [hasFocus]="section===selected"-->
+      <div *ngIf="section.isFeedback && !review.isFeedbackEditable">
+        <div *ngIf="review.feedback[section.feedbackType]" [innerHTML]="review.feedback[section.feedbackType]">
+        </div>
+        <div *ngIf="!review.isLeadReviewer && !review.feedback[section.feedbackType]">
+          Awaiting lead reviewer feedback.
+        </div>
+      </div>
+
+      <app-assessment *ngIf="section.isAssessment" [review]="review"></app-assessment>
+    </div>
+  </app-collapsible>
+</div>

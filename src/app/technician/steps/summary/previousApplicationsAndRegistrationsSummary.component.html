@@ -1,0 +1,273 @@
+
+  <section class="criteria-for-registration">
+    <form>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+  
+          <section class="other-bodies-section">
+            <h4>Other bodies</h4>
+            <div id="first-question">
+
+              <div class="form-group">
+                <label for="">
+                  Have you previously applied for registration with the Royal Pharmaceutical Society of Great Britain
+                  (RPSGB)
+                  or
+                  the General Pharmaceutical Council (GPhC),
+                  as either a pharmacy technician or a pharmacist ?
+                </label>
+
+                <div class="row">
+                  <div class="col-md-4">
+                     <div class="form-control form-control-sm readonly">
+                       {{ application.activeForm.
+                        previousApplicationsAndRegistrations.
+                        applications.registration.applied ? 'Yes' : 'No'}}
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+              
+              <app-collapsible [trigger]="application.activeForm.
+              previousApplicationsAndRegistrations.
+              applications.registration.applied">
+                  <div class="details ml-3">
+                    <div class="row mt-2">
+                      <div class="col-md-12">
+                        <h4>Details</h4>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Application type</label>
+                          <div class="form-control readonly">
+                            {{ PreviousRegistrationType[application.activeForm.previousApplicationsAndRegistrations.
+                              applications.registration.type]}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                          <div class="form-group">
+                            <label>Registration number</label>
+                            <div class="form-control readonly">
+                              {{ application.activeForm.
+                                previousApplicationsAndRegistrations.
+                                applications.registration.registrationNumber }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-4">
+                          <div class="form-group">
+                            <label>Date of application</label>
+                            <app-utc-date-picker
+                            [readonly]="true"
+                             [(ngModel)]="application.activeForm.
+                                previousApplicationsAndRegistrations.
+                                applications.registration.applicationDate"
+                              [whiteBackground]="true" [width]="'100%'" name="applicationDate">
+                            </app-utc-date-picker>
+                          </div>
+                        </div>
+                    </div>
+            
+                  </div>
+              </app-collapsible>
+            </div>
+
+             <div id="second-question">
+              <div class="mt-3" >
+                <label style="display: block;">
+                  Have you previously undertaken pre registration training as a pharmacist with the RPSGB or the GPhC ?
+                </label>
+
+                <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-control form-control-sm readonly">
+                        {{application.activeForm.
+                          previousApplicationsAndRegistrations.
+                          applications.preRegistrationTraining.undertaken ? 'Yes' : 'No'}}
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <app-collapsible [trigger]="application.activeForm.
+              previousApplicationsAndRegistrations.
+              applications.preRegistrationTraining.undertaken">
+                  <div class="ml-3 mt-3">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4>Details</h4>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="form-group">
+                          <label for="RegNumber">
+                            PreReg Number
+                          </label>
+                            <div class="form-control readonly">
+                              {{ application.activeForm.previousApplicationsAndRegistrations.applications.preRegistrationTraining.preRegistrationNumber }}
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="form-group">
+                          <label for="dateOfApplication">
+                            Date of application
+                          </label>
+                          <app-utc-date-picker name="someDate"
+                            [(ngModel)]="application.activeForm.previousApplicationsAndRegistrations.applications.preRegistrationTraining.startDate"
+                            [readonly]="true"
+                            [width]="'100%'">
+                          </app-utc-date-picker>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </app-collapsible>
+            </div> 
+          </section>
+
+          <section class="current-registration">
+            <h4>Current registration</h4>
+             <div id="third-question">
+              
+                <label style="font-weight: bold;">
+                  Are you currently or have you previously been registered with any UK statutory health regulatory body
+                  (any member
+                  body of the Professional Standards Authority) ?
+                </label>
+      
+                <div class="row mb-4">
+                  <div class="col-md-4">
+                    <div class="div form-control form-control-sm readonly">
+                      {{ application.activeForm.
+                        previousApplicationsAndRegistrations
+                        .ukRegistration.registered ? 'Yes' : 'No' }}
+                    </div>
+                  </div>
+                </div>
+                <app-collapsible [trigger]="application.activeForm.
+                 previousApplicationsAndRegistrations
+                 .ukRegistration.registered">
+                     <div class="ml-3 ">
+                       <div class="row ">
+                         <div class="col-md-12">
+                           <h4>Details</h4>
+                         </div>
+                       </div>
+                       <div class="row">
+                         <div class="col-xl-4">
+                           <div class="form-group">
+                             <label for="RegNumber">
+                               Registration number
+                             </label>
+                               <div class="form-control readonly">
+                                 {{ application.activeForm.previousApplicationsAndRegistrations.ukRegistration.registrationNumber }}
+                               </div>
+                           </div>
+                         </div>
+                         <div class="col-xl-4">
+                           <div class="form-group">
+                             <label for="dateOfApplication">
+                               Name of body
+                             </label>
+                               <div class="form-control readonly">
+                                 {{ application.activeForm.previousApplicationsAndRegistrations.ukRegistration.nameOfBody }}
+                               </div>
+                           </div>
+                         </div>
+                       </div>
+   
+   
+   
+                       <div class="row">
+                         <div class="col-xl-10 col-md-12 col-sm-12">
+                
+                             <div class="form-control readonly">
+                               {{ application.activeForm.previousApplicationsAndRegistrations.ukRegistration.wasCertificateRequested ? 
+                               ' I have requested a certificate of current professional status to be sent from this organisation to the GPhC' : 
+                               'I have not requested a certificate of current professional status to be sent from this organisation to the GPhC'
+                               }}
+                             </div>
+                         </div>
+                       </div>
+   
+   
+                     </div>
+                 </app-collapsible> 
+              </div>
+
+            
+
+            <div class="fourth-question mt-4">
+              
+                <label>
+                  Are you currently or have you previously been registered with a health regulatory body outside the UK
+                  ?
+                </label>
+   
+                <div class="row">
+                  <div class="col-md-4">
+                      <div class="form-control form-control-sm readonly">
+                        {{application.activeForm.
+                          previousApplicationsAndRegistrations
+                          .outsideUKRegistration.registered ? 'Yes' : 'No' }}
+                      </div>
+                  </div>
+                </div>
+              
+              <app-collapsible [trigger]="application.activeForm.
+              previousApplicationsAndRegistrations
+              .outsideUKRegistration.registered">
+                  <div class="ml-3 mt-3">
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4>Details</h4>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <div class="form-group" >
+                          <label for="RegNumber">
+                            Registration number
+                          </label>
+                            <div class="form-control readonly">
+                              {{ application.activeForm.previousApplicationsAndRegistrations.outsideUKRegistration.registrationNumber }}
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div class="form-group" >
+                          <label for="dateOfApplication">
+                            Name of body
+                          </label>
+                            <div class="form-control readonly">
+                              {{ application.activeForm.previousApplicationsAndRegistrations.outsideUKRegistration.nameOfBody }}
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-xl-10 col-md-12 col-sm-12">
+                        <div class="form-control readonly">
+                          {{ application.activeForm.previousApplicationsAndRegistrations.outsideUKRegistration.wasCertificateRequested ? 
+                            ' I have requested a certificate of current professional status to be sent from this organisation to the GPhC' : 
+                            'I have not requested a certificate of current professional status to be sent from this organisation to the GPhC'
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </app-collapsible>
+            </div> 
+          </section>
+
+        </div>
+      </div>
+    </form>
+  </section>
+

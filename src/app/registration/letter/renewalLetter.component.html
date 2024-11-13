@@ -1,0 +1,28 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1">Renewal reminder</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+<app-renewal-card-letter *ngIf="paymentMethod === PaymentMethod.Card" [letter]="letter"></app-renewal-card-letter>
+
+<app-renewal-dd-letter *ngIf="paymentMethod === PaymentMethod.DirectDebit" [letter]="letter"></app-renewal-dd-letter>
+
+</div>

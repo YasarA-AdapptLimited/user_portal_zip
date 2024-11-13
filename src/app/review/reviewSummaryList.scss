@@ -1,0 +1,53 @@
+@import '../style/variables';
+
+:host {
+  table {
+    margin-bottom: 0;
+    border-bottom: none;
+
+  }
+  tr.completed {
+    background: #f5f9f3 !important;
+  }
+  .fa-check {
+    color: $gphc-aqua;
+    font-size: 1.2em;
+  }
+  .summary {
+    display:flex;
+    .tab {
+      padding: 10px 15px;
+      &.selected {
+        background: white;
+      }
+
+      &:not(.selected):not(.clickable) {
+        color: grey;
+      }
+      &.clickable {
+        font-weight: bold;
+        color: $gphc-blue;
+      }
+    }
+
+  }
+  table.table tr td {
+    vertical-align: middle;
+  }
+ 
+
+  .top-nav {
+    display: flex;
+    background: #024e67;
+    align-items: center;
+    color: white;
+    button {
+      color: white;
+    }
+    padding-right: 20px;
+  }
+
+  th.selected, td.selected {
+    background: white;
+  }
+}

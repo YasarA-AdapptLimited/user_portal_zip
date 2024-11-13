@@ -1,0 +1,22 @@
+
+
+  <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <div mat-mdc-menu-item (click)="select(i)" *ngFor="let item of items; let i = index" [class.selected]="selectedIndex === i">
+        <span>{{ item.title }}</span>
+      </div>
+    </mat-menu>
+  
+  <div style="display:flex; height: 100%;">
+  
+  
+    <button class="btn no-focus" aria-label="Previous" [class.disabled]="items.length<=1"    (click)="prev()" [disabled]="selectedIndex === 0" >
+        <i class="fa fa-chevron-left"></i>  prev 
+    </button>
+    <button class="btn no-focus" aria-label="list"  [matMenuTriggerFor]="menu"  >
+       <i class="fa fa-list"></i> {{label}}
+    </button>
+    <button aria-label="Next" class="btn no-focus" [class.disabled]="items.length<=1"   (click)="next()" [disabled]="selectedIndex >= items.length-1" >
+       <i class="fa fa-chevron-right"></i> next
+    </button>
+  
+  </div>

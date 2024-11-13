@@ -1,0 +1,139 @@
+<div class="content row no-gutters">
+  <div class="col-lg-9 col-md-12 form-column">
+
+    <app-banner [loading]="loading" [error]="loadingError" [application]="true" [progressDark]="true">
+      <div class="banner-left">
+
+        <div style="display:flex;align-items:center">
+          <h1 style="flex-grow:1;">Application for registration as a pharmacy technician</h1>
+          <div class="d-md-none" style="flex-grow:1"></div>
+
+          <app-gphc-icon style="margin-bottom: 20px;" class="d-lg-none" [matMenuTriggerFor]="menu" [static]="true"
+            label="Steps" iconType="list"></app-gphc-icon>
+          <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <app-form-stepper-menu [summary]="formStepperService.summary$ | async" (navigate)="goToStep($event)">
+            </app-form-stepper-menu>
+          </mat-menu>
+        </div>
+
+        <p *ngIf="loadingError" class="intro-text">
+          <i class="fa fa-warning"></i> An error occurred while attempting to load your application
+        </p>
+
+      </div>
+    </app-banner>
+
+    <div *ngIf="!loading && !!application">
+
+      <div *ngIf="ineligible" class="form-control" style="font-size: 1.2em; padding: 40px;line-height: 1.2em">
+        <p>This application has been marked as ineligible.</p>
+        <app-technician-application-review [readonly]="true" [application]="application">
+
+        </app-technician-application-review>
+      </div>
+
+      <a href="https://www.pharmacyregulation.org/registration/registering-pharmacy-technician/uk-qualified-pharmacy-technicians"
+        target="_blank">View the application guidance on the GPhC website</a>
+      <app-technician-application-review *ngIf="application.activeForm.readonly" [readonly]="true"
+        [application]="application"></app-technician-application-review>
+
+      <app-form-stepper *ngIf="!application.activeForm.readonly" [ready]="ready" [stepChange]="stepChange()"
+        (stepChanged)="stepChanged($event)" [saving]="saving" [maxStep]="maxStep" [minStep]="minStep">
+
+        <app-guidance [application]="application"></app-guidance>
+        
+        <app-personal-details-step [application]="application">
+        </app-personal-details-step>
+
+
+        <app-education-details-step (dependentDocsStepsCleared)="clearDocsSteps($event)" [application]="application" (navigate)="goToStepId($event)">
+        </app-education-details-step>
+
+        <app-application-type-step (dependentStepsCleared)="clearSteps($event)" [application]="application">
+        </app-application-type-step>
+
+        <app-work-experience-step [application]="application"></app-work-experience-step>
+
+        <app-previous-applications-and-registrations-step [application]="application">
+        </app-previous-applications-and-registrations-step>
+
+        <app-supporting-documents-step [application]="application">
+        </app-supporting-documents-step>
+
+        <app-equality-diversity-step [application]="application">
+        </app-equality-diversity-step>
+
+        <app-ftp-declaration-step formIndex="0" [application]="application">
+        </app-ftp-declaration-step>
+
+        <app-ftp-declaration-step formIndex="1" [application]="application">
+        </app-ftp-declaration-step>
+
+        <app-overall-declaration-step [application]="application">
+        </app-overall-declaration-step>
+
+        <app-technician-review-step [stepId]="TechnicianApplicationStep.InitialReview" [application]="application"
+          (navigate)="goToStepId($event)"></app-technician-review-step>
+
+
+        <app-countersigning-step [application]="application">
+        </app-countersigning-step>
+
+
+        <app-technician-review-step [stepId]="TechnicianApplicationStep.Review" (navigate)="goToStepId($event)"
+          [application]="application"></app-technician-review-step>
+
+        <app-payment-step-old *ngIf="!useNewPaymentFlow" [application]="application"></app-payment-step-old>
+        <app-payment-step *ngIf="useNewPaymentFlow" [application]="application" (savingDetails)="savingDetails($event)" ></app-payment-step>
+
+      </app-form-stepper>
+
+
+    </div>
+
+  </div>
+
+  <div class="col-lg-3 d-none d-lg-block">
+
+    <div class="toolbar">
+
+      <button *ngIf="!layout.state.fullscreen" (click)="layout.setFullscreen(true)" aria-label="Maximise"
+        class="btn btn-back">
+        <i class="fa fa-window-maximize"></i>
+        &nbsp;<span>Maximise</span>
+      </button>
+      <button *ngIf="layout.state.fullscreen" (click)="layout.setFullscreen(false)" aria-label="Maximise"
+        class="btn btn-back">
+        <i class="fa fa-window-restore"></i>
+        <span>Restore</span>
+      </button>
+
+    </div>
+
+    <div *ngIf="application" class="menu">
+      <app-form-stepper-menu [summary]="formStepperService.summary$ | async" (navigate)="goToStep($event)">
+      </app-form-stepper-menu>
+    </div>
+  </div>
+
+</div>
+
+<!-- <ng-template #applicationClosed>
+
+  <div class="col-sm-6 text-center">
+    <app-form-section class="fadein">
+      <span class="section-header">Application</span>
+      <span class="section-body">
+        <div class="text-center">
+          <i class="fa fa-clock-o status-icon notdue " aria-hidden="true" style="font-size: 9em"></i>
+          <div class="btn-text">
+            <p style="font-size: 1.5em;">
+              {{ applicationClosedMessage }}
+            </p>
+          </div>
+        </div>
+      </span>
+    </app-form-section>
+  </div>
+
+</ng-template> -->

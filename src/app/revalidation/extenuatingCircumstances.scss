@@ -1,0 +1,208 @@
+@import "../style/variables";
+:host {
+
+  p.intro-text {
+    a.header-link:hover {
+      border-bottom:1px solid white;
+    }
+  }
+
+  ::ng-deep {
+    .mat-checkbox-inner-container {
+        margin-top: 4px;
+        margin-right: 15px;
+      }
+      .mat-checkbox-label {
+        line-height: 1.5em !important;
+      }
+    }
+      
+
+  .confirm-genuine {
+    margin-bottom: 40px;margin-top: 20px;
+    .mat-checkbox-label {
+    font-weight: normal;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    }
+
+  
+      .mat-checkbox-inner-container {
+        margin-right: 20px;
+      }
+    }
+
+  .year-selector-wrapper {
+    margin-bottom: 20px;
+
+    .year-selector {
+      display:flex;
+      .year {
+        display: flex; flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: darken($gphc-aqua, 5%);
+        transition: background-color 200ms linear;
+        padding: 20px;
+        flex-grow: 1;
+        position: relative;
+        &:not(:last-child) {
+          margin-right: 10px 
+        }
+       
+        color: white;
+        font-size:1.7em;
+        @media(max-width: 500px) {
+          font-size:1.5em;
+        }
+
+        cursor: pointer;
+
+        .indicator {
+          transform: rotateZ(-90deg) translate3d(-20px, 0px, 0px);
+          color: white;
+          transition: color 300ms linear;
+            opacity: 1;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            z-index: 999;
+            bottom: 18px;
+            left: calc(50% - 12px);
+            transition: all 300ms;
+            font-size: 24px;
+            display: none;
+        }
+
+        &.selected {
+          background-color: $gphc-purple;
+          cursor: default;
+          .indicator {
+            display: block;
+          }
+          &:focus {
+            .indicator {
+              color: $gphc-accent-yellow;
+            }
+          }
+        }
+
+        &.disabled {
+          background: $gphc-background;
+          cursor: default;
+        }
+        .tip {
+          font-size: 0.7em;
+          padding: 10px;
+        }
+      }
+    }
+  }
+
+
+  .btn-reset {
+    border: 5px solid lighten($gphc-background, 5%) !important;
+  }
+
+  ::ng-deep .important-block {
+    background: $gphc-purple;
+    color: white;
+    font-size: 1.2em;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+
+input.title {
+    border-color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: $gphc-purple;
+
+    &:focus {
+        border-color: $gphc-purple;
+    }
+}
+
+
+.form-container {
+  
+    transform:  translateY(0);
+  
+    @media (min-width: 768px) {
+      &.started {
+          transform: translateY(-40px);
+        }
+    }
+  
+  }
+
+  .form-group:not(.readonly) {
+    margin-bottom: 0;
+    border-left: 12px solid $gphc-blue;
+    transition: border-color 300ms linear;
+ 
+    margin-left: -15px;
+    padding-left:20px;
+
+    @media (min-width: 768px) {
+      margin-left: -20px;
+      padding-left: 20px;
+    }
+
+    &.invalid {
+        border-color: $error;
+
+        label {
+            color: $error;
+        }
+    }
+}
+
+.uploads {
+  margin-top:40px;
+  border-left: 12px solid #00759b;
+  margin-left: -20px;
+  @media (max-width: 767px) {
+    margin-left:-15px;
+  }
+  padding-left: 20px;
+}
+
+  /* move this to generic question css */
+  ::ng-deep {
+    .question {
+      margin-top: 20px;
+      border-left: 12px solid $gphc-blue;
+      margin-left: -20px;
+      @media (max-width: 767px) {
+        margin-left:-15px;
+      }
+      padding-left: 20px;
+    }
+    mat-spinner {
+      margin:0 auto;
+      margin-top:20px;
+    }
+    label , .label {
+      font-family: 'Open Sans', sans-serif !important;
+      color: $gphc-blue;
+      font-weight: bold;
+      font-size: 1.1em;
+      @media (min-width: 768px) {
+        font-size: 1.2em;
+      }
+
+   
+
+  }
+
+
+  }
+
+  button:not(.btn-primary):focus {
+    box-shadow: 0 0 0 7px $gphc-accent-yellow !important;
+  }
+}

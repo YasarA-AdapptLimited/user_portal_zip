@@ -1,0 +1,15 @@
+.declaration-step {
+
+  li { margin-bottom: 20px; }
+  ul {
+    padding-left: 20px;
+    padding-bottom: 10px;
+  }
+
+  ::ng-deep {
+    .mat-checkbox-inner-container {
+      margin-top: 1px !important;
+    }
+
+  }
+}

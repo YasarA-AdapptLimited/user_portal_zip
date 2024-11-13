@@ -1,0 +1,141 @@
+<!-- Error notification -->
+<app-collapsible [trigger]="!!log.newError">
+  <div class="error-handler notification-banner">
+    <div class="row" *ngIf="log.newError">
+      <div class="col-md-10">
+        <h3>Error</h3>
+        {{ log.newError.text }}
+        <p *ngIf="log.newError.exception"> {{ log.newError.exception.exceptionMessage }} </p>
+      </div>
+      <div class="col-md-2 buttons">
+        <button class="btn btn-lg btn-default" (click)="log.clearNew()">Close</button>
+      </div>
+    </div>
+  </div>
+</app-collapsible>
+
+<!-- custmom notification (service announcment) -->
+<app-collapsible [trigger]="maintenanceMessage.open === true && !maintenanceMessage.showHeavyLoad">
+  <div class="important notification-banner">
+    <div class="row">
+      <div class="col-md-10">
+        <h3 class="mb-4">{{ maintenanceMessage.header }}</h3>
+        <p>
+          {{ maintenanceMessage.body }}
+        </p>
+      </div>
+      <div class="col-md-2 buttons fadein" *ngIf="loggedIn">
+        <button class="btn btn-lg" (click)="maintenanceMessage.close()">Close</button>
+      </div>
+    </div>
+  </div>
+</app-collapsible>
+
+<!-- Offline notification -->
+<app-collapsible [trigger]="log.notifyIsOffline">
+  <div class="important notification-banner">
+    <div class="row">
+      <div class="col-md-8">
+        <h3 class="mb-4">You appear to be offline</h3>
+        <p>Please check your internet connection</p>
+      </div>
+      <div class="col-md-4 buttons">
+        <div class="fill"></div>
+        <button class="btn btn-lg" (click)="log.notifyIsOffline = false">OK</button>
+        <button class="btn btn-lg" (click)="reload()">Reload</button>
+      </div>
+    </div>
+  </div>
+</app-collapsible>
+
+<!-- Logged out notification -->
+<app-collapsible [trigger]="log.notifyLoggedOut">
+  <div class="important notification-banner">
+    <div class="row">
+      <div class="col-md-10">
+        <h3 class="mb-4">Sign out</h3>
+        <p>For security reasons you must now sign in again</p>
+      </div>
+      <div class="col-md-2 buttons">
+        <button class="btn btn-lg " (click)="logout()">OK</button>
+      </div>
+    </div>
+  </div>
+</app-collapsible>
+
+<!-- New version notification -->
+<app-collapsible [trigger]="updater.updateRequired">
+  <div class="important notification-banner">
+    <div class="row">
+      <div class="col-md-7">
+        <h3 class="mb-4">Update available</h3>
+        <p *ngIf="!updater.updating">A new version is available. Click 'Update now' to update to the latest version
+          immediately. If you are in the middle of something, choose 'Update later'.</p>
+        <p *ngIf="updater.updating">Updating - please wait...</p>
+      </div>
+      <div class="col-md-5 buttons">
+        <div class="fill"></div>
+        <ng-container *ngIf="!updater.updating">
+          <button class="btn btn-lg" (click)="updater.update()">Update now</button>
+          <button class="btn btn-lg" (click)="updater.postpone()">Update later</button>
+        </ng-container>
+        <ng-container *ngIf="updater.updating">
+          <app-spinner [light]="true"></app-spinner>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</app-collapsible>
+
+
+<a class="skip-link"  aria-live="assertive" #skipLink [ngClass]="!loggedIn ? ('visibility-hidden') : (skipLinkFocused ? 'skip-link-active' : 'skip-link-hidden')"
+href="#main-content" id="skipLink" 
+(keyup.Tab)="onLinkFocus($event)" 
+(keydown.Tab)="onLinkBlur($event)" 
+(focusout)="onLinkBlur($event)"
+(click)="onLinkClick($event)">
+ Skip to main content
+</a>
+
+<app-collapsible [trigger]="!layout.state.fullscreen">
+  <app-branding [appVersion]="updater.version.current"></app-branding>
+  <app-nav [ngClass]="pageClass">
+    <i (click)="layout.toggleNavbar()" class="fa fa-bars "></i>
+  </app-nav>
+  <app-nav *ngIf="layout.state.xs" [direction]="'vertical'" [isOpen]="layout.state.navbarOpen"></app-nav>
+</app-collapsible>
+
+<!-- Main page content -->
+<div role="main" #mainContent tabindex="-1" id="main-content" class="page" [ngClass]="pageClass" [class.in-app]="!layout.state.accountMode" aria-live="polite">
+  <router-outlet></router-outlet>
+
+  <!-- Displays when page is not authorised -->
+  <div *ngIf="log.newRouteBlock" class="fadein">
+    <div class="route-block">
+      <i class="fa fa-ban" aria-hidden="true"></i>
+      <h1>Unauthorised</h1>
+      <p class="intro-text">
+        {{ log.newRouteBlock.text }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="footer" role="contentinfo">
+  <div>© GPhC {{ currentYear }}</div>
+  <div style="flex-grow:1"></div>
+  <!-- <div  *ngIf="!loggedIn">
+      <a  routerLink="signin/faq">Having problems signing in?</a>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+  </div> -->
+
+  <!--<a routerLink="privacy">Privacy policy</a>-->
+  <a href="https://www.pharmacyregulation.org/about-us/contact-us" target="_blank">Contact us</a>
+  <div class="hr-space">|</div>
+  <a href="https://www.pharmacyregulation.org/privacy-policy" target="_blank">Privacy policy</a>
+
+</div>
+
+<app-tooltip-container></app-tooltip-container>
+<app-overlay></app-overlay>
+<app-fullscreen-spinner></app-fullscreen-spinner>

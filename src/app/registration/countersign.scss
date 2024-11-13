@@ -1,0 +1,89 @@
+@import "../style/variables";
+
+:host {
+
+  @import '../style/sectionHeaders';
+
+  ol {
+    li {
+      margin-bottom: 2em;
+    }
+  }
+
+  .sub-heading{
+    color: $gphc-blue;
+    margin-bottom: 30px;   
+    padding: 0px 0px 0px 15px;
+    border-left: 10px;
+    border-left-style:solid ;
+    background: transparent !important;
+    font-size: 1.8rem!important;
+}
+.display-none{
+  display: none;
+}
+
+  ::ng-deep {
+    // hide registrant messages - no need for the countersigner to see them
+    .registrant-message {
+      display: none !important;
+    }
+  }
+
+  .section-to-print, .outcome {
+    padding: 40px;
+    h1 {
+      margin: 20px 0 60px 0;
+    }
+  }
+
+  .outcome {
+    border-top: 12px $gphc-background;
+    mat-radio-button {
+      padding: 20px 20px 0 0;
+      font-size: 1.2em;
+    }
+    button {
+      margin-top: 20px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .content {
+      padding: 40px;
+    }
+    section { margin-top: 0;}
+  }
+
+  @media (max-width: 767px) {
+    .content {
+      padding-left: 0 !important; 
+      padding-right: 0 !important; 
+    }
+  }
+
+  ::ng-deep .banner-left {
+
+    .button-container {
+      margin-top:-20px;
+      margin-left: 20px;
+      text-align: center;
+      @media (max-width: 500px) {
+        height: 50px;
+        width: 50px;
+      button {
+          height: 50px;
+          width: 50px;
+          font-size:0.8em;
+          padding: 0;
+        }
+      }
+      .btn-text {
+        color: white !important;
+      }
+     
+    }
+
+  }
+  
+}

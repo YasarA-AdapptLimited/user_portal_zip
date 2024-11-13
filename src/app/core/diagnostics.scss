@@ -1,0 +1,14 @@
+@import "../style/variables";
+
+.log.error {
+  color: $error;
+  font-weight: bold;
+}
+
+.log.info {
+  color: $gphc-blue;
+}
+
+pre {
+  white-space: pre-wrap;
+}

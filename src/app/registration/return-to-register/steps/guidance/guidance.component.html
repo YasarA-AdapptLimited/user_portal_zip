@@ -1,0 +1,108 @@
+<ng-template #content>
+    <h2 class="step-header" class="spacer">  {{title}}</h2>
+
+    <div class="row">
+        <div class="col-md-12">            
+                <p>
+                  Use this application to apply to return to the register. 
+                  It will be available to submit for 12 months from the date you were last registered.
+                </p>
+
+                <p>
+                  After this time, you will need to complete a return to practise application, 
+                  which you can <a href="https://www.pharmacyregulation.org/pharmacists/changes-registration/leaving-register/returning-register" target="_blank">find on the main GPhC website</a>.
+                </p>
+                
+                <p>
+                  You must pay two fees as part of the application. The first is an application fee, 
+                  the amount depends on the way you left the register and if you are a pharmacist or 
+                  pharmacy technician. You can see the amounts in the tables below. 
+                </p>
+
+                <p>
+                  The application fee covers the processing of your application and is non-refundable, 
+                  even if your application is not successful.
+                </p>
+
+                <p>
+                  The second is the restoration fee which covers your registration until you reach the next 
+                  anniversary of your previous renewal deadline. Then you will need to pay for your next year's 
+                  registration as normal.
+                </p>
+
+                <p>
+                  If you are returning to the register in the two months before the anniversary of your previous 
+                  renewal deadline, you will also need to pay the renewal fee for the following year at the same 
+                  time as the restoration fee.
+                </p>
+
+                <br/><br/>
+                <h3>Fees for restoring your registration as a pharmacist</h3>                
+                <table class="details">
+                    <thead>
+                      <tr>
+                        <th>Restoring your register entry, following:</th>
+                        <th>Application fee (£)</th>
+                        <th>Total (including {{fee | currency: 'GBP': 'symbol' :'.0'}} re-entry fee)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Voluntary removal, within one month of the <br/> removal date</td>
+                        <td>{{ '429' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                        <td>{{ '543' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Voluntary removal one month or more after the <br/> removal date</td>
+                        <td>{{ '155' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                        <td>{{ '269' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Removal for failure to renew</td>
+                        <td>{{ '429' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                        <td>{{ '543' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Removal for failure to meet revalidation requirements</td>
+                        <td>{{ '616' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                        <td>{{ '730' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <br/><br/>
+                <h3>Fees for restoring your registration as a pharmacy technician</h3>                
+                <table class="details">
+                    <thead>
+                      <tr>
+                        <th>Restoring your register entry, following:</th>
+                        <th>Application fee (£)</th>
+                        <th>Total (including {{fee | currency: 'GBP': 'symbol' :'.0'}} re-entry fee)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Voluntary removal, within one month of the <br/> removal date</td>
+                        <td>{{ '217' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                        <td>{{ '331' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Voluntary removal one month or more after the <br/> removal date</td>
+                        <td>{{ '13' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                        <td>{{ '127' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Removal for failure to renew</td>
+                        <td>{{ '217' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                        <td>{{ '331' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                      </tr>
+                      <tr>
+                        <td>Removal for failure to meet revalidation requirements</td>
+                        <td>{{ '324' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                        <td>{{ '438' | currency: 'GBP': 'symbol' :'.0'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+        </div>
+    </div>
+</ng-template>

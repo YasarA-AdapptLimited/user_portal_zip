@@ -1,0 +1,122 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1">Registration assessment - Final entry notice</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print fa-xs" style="font-size: 1.5em;"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left fa-xs" style="font-size: 1.5em;"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+  <section class="letter-header">
+
+    <app-letter-header [registrant]="auth?.user?.registrant" [registrantAddress]="auth?.user?.address"
+      [isAssessmentApprove]="true">
+    </app-letter-header>
+
+
+    <section class="notice-of-entry section-to-print">
+      <section class="notice-of-entry-wrapper">
+        <div class="main-content" style="margin-top: 40px;">
+
+          <p>            
+            GPhC foundation training number: {{ PreEntryID }}
+          </p>
+
+          <p>Dear {{ registrantName }} </p>
+          <h2>Confirmation of approval to sit the registration assessment
+          </h2>
+
+          <p>
+            This letter confirms that you are approved to sit the upcoming assessment. It sets out the steps
+            you must take to arrange your assessment sitting, and key information about the assessment process. Please make sure you
+            read it carefully and follow the instructions.
+          </p>
+
+          <h3>What happens next?</h3>
+          <h4 class="headline">Your test centre place</h4>
+          <p>
+            You will be allocated a place to sit at the closest available centre to you, based on the post code of the address we hold for you in your myGPhC account.
+          </p>
+
+          <p>
+            You will be able to view details of your test centre place on the Scheduler system.
+          </p>
+
+          <p>
+            You will have the opportunity to change test centre if you want to for a short time, subject to availability.
+          </p>
+
+          <h4 class="headline">Managing your test centre place</h4>
+          <p>
+            You will receive a welcome email from Scheduler 48 hours before you will have access to Scheduler, 
+            the test centre portal. The email will confirm your account has been created and give you instructions 
+            on when you will be able to see your booking and how to change your test centre place, if you want to.
+          </p>
+
+          <p>
+            Once you have access to your account, you will be able to change your test centre place if you want to, 
+            subject to availability. 
+          </p>
+
+          <p>
+            For more information on test centre places and how to change your booking, see the 
+            <a href="https://www.pharmacyregulation.org/students-and-trainees/pharmacist-education-and-training/foundation-training-scheme/key-information-trainees"
+              target="_blank">foundation trainee page</a>
+            where you can find the dedicated web page for the upcoming sitting. More information on key dates and timelines 
+            can also be found through the trainee page.
+          </p>
+
+          <h3>More information about sitting the assessment</h3>
+
+          <p>
+            Make sure you have read, and are aware of, all the information on the assessment webpage and, 
+            including key dates. You will be able to find more information on:
+          </p>
+
+          <ul>
+            <li>
+              what to expect on the day of the assessment
+            </li>
+            <li>
+              making the decision that you are ‘fit to sit’
+            </li>
+            <li>
+              how you will receive your results
+            </li>
+          </ul>
+
+          <p>
+            We strongly recommend you read the guide to sitting the assessment in the ‘On the day’ section of the webpage, 
+            as this provides you with the necessary information for before, during and after the assessment. 
+          </p>
+          <p>
+            If you have any questions which are not answered in this letter, or on the assessment webpage, please email
+            <a href="mailto:regexam@pharmacyregulation.org">
+              regexam@pharmacyregulation.org.
+            </a>
+          </p>
+
+          <p>
+            We would like to take this opportunity to wish you success with your registration assessment sitting.
+          </p>
+
+          <app-letter-footer [signature]="'Registration Assessment Operations Team'"></app-letter-footer>
+        </div>
+      </section>
+    </section>
+  </section>
+</div>

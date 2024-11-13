@@ -1,0 +1,116 @@
+<section style="position: relative;">
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Personal details</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(PreregApplicationStep.PersonalDetails)">
+      </app-gphc-icon>
+    </h3>
+    <app-applicant [(ngModel)]="applicant" [readonly]="true" [isStudent]="true"></app-applicant>
+  </section>
+
+  <section [class.allow-edit]="!readonly">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Contact details</div>
+          <app-gphc-icon size="24" top="-15" right="5" iconType="edit"
+            (click)="goToStep(PreregApplicationStep.PersonalDetails)">
+          </app-gphc-icon>
+        </h3>
+        <app-contact [contact]="applicant.contact"></app-contact>
+      </div>
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Home address</div>
+          <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+            (click)="goToStep(PreregApplicationStep.PersonalDetails)"></app-gphc-icon>
+        </h3>
+        <app-address [address]="applicant.address"></app-address>
+      </div>
+    </div>
+  </section>
+
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Training scheme</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(PreregApplicationStep.Training)">
+      </app-gphc-icon>
+    </h3>
+
+
+    <div class="ml-4">
+      <div class="form-group">
+        <label for="nesOriel">Were you allocated your foundation training placement through the national
+          recruitment scheme (Oriel)?</label>
+        <div class="mt-2">
+          <div class="form-control readonly form-control-short"
+            *ngIf="application.activeForm.trainingScheme.type===TrainingSchemeType.None">No</div>
+          <div class="form-control readonly"
+            *ngIf="application.activeForm.trainingScheme.type===TrainingSchemeType.Oriel">Yes
+            - I am
+            registered with Oriel, my training scheme number is {{application.activeForm.trainingScheme.number}}</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="placement mt-4" *ngFor="let placement of placements; let i = index;" [class.first]="i===0"
+      [class.allow-edit]="!readonly">
+      <h3>
+        <div class="grow">Your {{nth(i)}} placement</div>
+        <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(PreregApplicationStep.Training)">
+        </app-gphc-icon>
+      </h3>
+
+      <div class="ml-4">
+        <app-placement [placement]="placement" [readonly]="true"></app-placement>
+      </div>
+    </section>
+
+  </section>
+
+  <section>
+    <h3>
+      <div class="grow">Equality and diversity</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(PreregApplicationStep.Edi)">
+      </app-gphc-icon>
+    </h3>
+    <app-edi-summary [edi]="application.trainee.equalityDiversity"></app-edi-summary>
+  </section>
+
+  <section>
+    <h3>
+      <div class="grow">Declaration of fitness to practise</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(PreregApplicationStep.FtpDeclaration)"></app-gphc-icon>
+    </h3>
+    <app-declaration-summary formIndex="0" [formId]="formId" [application]="application"></app-declaration-summary>
+  </section>
+
+  <section>
+    <h3>
+      <div class="grow">Overall declaration</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(PreregApplicationStep.OverallDeclaration)"></app-gphc-icon>
+    </h3>
+    <div class="form-group">
+      <div class="form-control" readonly>
+        I have read and understand the overall declaration
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <h3>
+      <div class="grow">Supporting documents</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(PreregApplicationStep.SupportingDocuments)"></app-gphc-icon>
+    </h3>
+    <app-supporting-documents-summary [application]="application" [formId]="formId" [isStudent]="true">
+    </app-supporting-documents-summary>
+  </section>
+
+
+
+</section>

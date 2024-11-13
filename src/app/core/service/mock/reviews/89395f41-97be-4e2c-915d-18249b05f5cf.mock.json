@@ -1,0 +1,192 @@
+{
+  "success": true,
+  "error": null,
+  "data": {
+    "id": "89395f41-97be-4e2c-915d-18249b05f5cf",
+    "submissionId": "38309e6e-ddff-40a2-9397-05115a7c204f",
+    "submissionDate": "2018-12-29T20:54:01.76",
+    "entries": [
+      {
+        "id": "97277b6f-cf69-4f3a-94ca-96c7dfd8ee4b",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "Minor Ailments Service via Patient Group Directions (PGD)",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div><p>I really wanted to be able to provide Minor Ailments Service\nvia Patient Group Direction to ensure patients can access the medication for\nthe treatment of specific ailments without the need to visit the GP practice. Thus, I&nbsp; booked the training in my area and currently I am able to provide advice support\nand where necessary the supply of a POM for the treatment of the minor ailment. <br></p><p>After completing the training I was trained to deliver this\nservice directly to the patients without having to refer them to the closest\nout of hours service. <br></p></div><div>The supply of specific POM will be made in line with the PGD\nfor the treatment of Bacterial Conjunctivitis, Nappy rash, Urinary tract\ninfections and Impetigo.<br></div><div><div><br></div></div><div><br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div>I am competent in the use of Patient Group Directions<br></div><div>I had completed the latest CPPE training package to ensure my knowledge is up to date.<br></div><div>I have discussed with the regular pharmacist the PGD services and asked any questions regarding providing specific POM for the treatment of specific Minor Ailments.<br></div><div>I have completed and signed the required documentation<br></div><div><br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<div>I was working on a Sunday at a busiest pharmacy in Lloyds. A mother of a&nbsp; 5 years old infant asked for clinical advise regarding blisters on her daughter's skin.&nbsp; The infant presented with a minor impetigo with a few  blisters around the nose. She was experiencing itchy and painful rash. She had brown/yellow crust.&nbsp;<br></div><div><br></div><div>We went through the clinical check list  to assess her suitability for the supply of Fusidic Acid 2% Cream in the management of impetigo.<br></div><div><br></div><div>As the patient is less than 16 gears of age, parenteral consent was obtained before offering the service.&nbsp;</div><div><br></div><div>She did not have any criteria for exclusion. So I did supply&nbsp; Fusidic Acid 2% Cream for the treatment of minor impetigo. <br></div><div><br></div><div>She was advised to apply topically to lesion three times daily on school days and four times daily at other times.<br></div><div>Advice and information to patient were provided during the consultation such as:&nbsp;<br></div><div><br></div><div>If after the 7 days treatment, the skin infection spreads or there is no improvement, she must seek medical advise.&nbsp;<br></div><div>Impetigo is a very infectious condition. So, it is important to prevent infection by using own towels and to inform school of the condition and stay away from home until the lesions are dry and scabbed over.&nbsp;<br></div><div><br></div><div>Finally, I made sure that the mother and the patient understood all the treatment and administration of the cream. Furthermore, I offered them to come to the pharmacy for a follow up and to contact us if they have any further questions.&nbsp;<br></div><div><br></div><div>Regarding the method of recording supply, the required paperwork for record keeping and audit trail were&nbsp; completed under the PGD guidelines and&nbsp;<br></div><div><br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "028034e2-600f-4b13-bb62-b1d914c561ca",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "Management of Diabetes",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div><p>I would\nlike to identify risk factors associated with developing diabetes. I have\nnoticed that some patients are diagnosed in late stages of Diabetes and some of\nthe risk factors can be prevented. <br></p><p>I want to\nrecognise the parameters that are used to judge metabolic control and I would\nlike to refresh my knowledge of guidelines to prevent the complications of\ndiabetes or manage them. Moreover, I want to review pharmaceutical options\ntreatments to control the diabetes<br></p><p>I hope\nthat the learning will benefit patients as it will be able to outline health\nlifestyle, provide guidelines on monitoring people with diabetes in special\ncases such as pregnancy or patients with cardiovascular diseases.<br></p><div><br></div></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div><p>Given that I am a locum pharmacist and I do not have a\nregular staff, I have told myself to provide reflective conversations to my patients at least three times a week, encouraging health lifestyle and recommending guidelines to prevent diabetes.<br></p></div><div><br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<h6>I have recently had a MUR assessment with a patient with Diabetes. The Antidiabetic drugs are giving him an optimal Glycemic control. However, he was seeking information about healthy lifestyle as he has been told by his GP to lose weight.<br></h6><div>We have set a structured programme which is tailored as his particular needs  in order to lose weight gradually.&nbsp; The plan is a combination of restriction of carbohydrate and fats intake and an increase in exercise.&nbsp;<br></div><div>Also,&nbsp; I have asked him to be monitored by myself every two weeks to see the positive outcome.&nbsp;<br></div><div><br></div><div>I told him to undertake regular physical activity at least 30 minutes a day five days per week.<br></div><div>Regarding healthy eating, he has been told to eat 3 regular meals spread over the day and two snacks over the day. Cut down on saturated and trans fats as a cheese, fat from meats and butter. Also, eat fruit and vegetables at least 5 portions a day, limit sugar and sugary foods, reduce salt intake to less than 6g a day and drink alcohol in moderation.&nbsp;<br></div><div>I also recommended not to buy special diabetic foods even they may be glucose free, generally they are high in calories.<br></div><div><br></div><div>He will be monitored by myself every two weeks as I am doing regular Wednesdays in the same pharmacy.</div><div><br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "cb09caa2-1471-4827-b442-ce418ed03519",
+        "type": 2,
+        "typeAsString": "Unplanned",
+        "title": "Hair loss",
+        "form": {
+          "dynamicFormId": "3e3066b3-ca8a-4d61-8685-4c95b4e47e93",
+          "type": 4,
+          "title": "Unplanned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Describe an unplanned event or activity that enabled you to learn something new or refresh your knowledge or skills",
+                  "answer": "<div><p>I attended an unexpected clinical training on hair loss. The meeting was held in the pharmacy where I was locum.<br></p><div>The speaker covered available treatment options for hair loss\ndepending of the diagnosis. J also refreshed the causes of hair loss and when\nto seek medical advice. This training was useful to up to date my confidence\nand understanding of this issue faced by many patients. <br></div></div><div><br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning benefited the people using your services",
+                  "answer": "<div><p>Since I attended this meeting, I have had an enquiry about hair\nloss. A 27 year old patient come to the pharmacy where I locum regularly asking\nfor some multivitamins as she has had noticed significantly hair loss. <br></p><p>I recalled that stress, weight loss and iron deficiency may\naffect the hair loss and may be temporary. On further questioning, I found out\nthat she is in a lot of stress since she has been busy at his work place. Also, she is barely eating due to the stress. In fact, stress and poor nutrition are factors which affect hair growth and the health of the hair.<br></p><div>After checking other health conditions, she does not have any illness and she is not on medication. Furthermore,&nbsp; she does not drink alcohol&nbsp; and she exercises three times per week.<br></div></div><div><br></div><div>I suggested to introduce a varied and balanced diet as well as healthy lifestyle. Moreover, I recommended to take a food supplement containing nutrients, Zinc and Biotin which help to maintain normal healthy hair growth.<br></div><div><br></div><div>if after a month she is still experiencing hair loss and the stress is not reduced, she should see her GP for further assessment.<br></div><div><br></div><div><div>After my consultation with this patient, I felt satisfied because I was able to give her a very professional advice that would provide a beneficial impact on her overall health.<br></div></div><div><br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "6f780c08-3f48-48c0-a340-c5b7af0799fd",
+        "type": 2,
+        "typeAsString": "Unplanned",
+        "title": "cannabis-based medicine",
+        "form": {
+          "dynamicFormId": "3e3066b3-ca8a-4d61-8685-4c95b4e47e93",
+          "type": 4,
+          "title": "Unplanned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Describe an unplanned event or activity that enabled you to learn something new or refresh your knowledge or skills",
+                  "answer": "<div><p>I like to read the pharmaceutical journey where a really interesting article was published.&nbsp;<br></p><div>I have read an article about clinical indications of medical\ncannabis as well as contraindications and most common side effects. I found it constructive to\nincrease my knowledge of cannabis-based medication. In fact, cannabis might be\na suitable option for patients with chronic pain as well as other therapeutic indications\nincluding epilepsy or symptoms related to chemotherapy. The article concluded that\nthe cannabis is only likely to benefit a very small number of patients and it\nwould only be an option when other conventional treatments weren’t helped or\nsuitable. I decided to do some research to find out the legislation and regulation in UK for medical cannabis.&nbsp; I found out that Nabilone and Sativex are licensed in the UK, after\npassed safety and quality tests and is proven to have medical benefits. <br></div></div><div><br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning benefited the people using your services",
+                  "answer": "<div><p>I have attend a patient form USA asking for medical cannabis\nfor long term pain due to a MVA. Apparently, he was using a THC/CBD oil product\nin USA and he would like to access the same product here. He stopped the oil\ntwo months ago when he moved to UK.<br></p><p>I warned him the evidence of medicinal cannabis for pain\nmanagement is not strong. I suggested to make an appointment with his GP to discuss\nhis symptomatology and for assessment of his condition. I recalled the doctor\nwill discuss with him other treatment options first before considering a cannabis-based\nproduct. The doctor will do an individual case based assessment.<br></p><div>On further questioning I found out the patient has never tried\nanalgesia aside from paracetamol or ibuprofen and he has not had any underlying\ncondition. From my learning I knew that CBD can also affect the liver, so I recommend\nthat his liver function should be checked as he was using cannabis without previous\nmonitoring. <br></div><p>This patient is currently under the care of his GP who\nmanages his pain and he was grateful for the recommendation I provided.<br></p></div><div><br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      }
+    ],
+    "isLeadReviewer": true,
+    "currentReviewerAssessment": 0,
+    "currentReviewerAssessmentAsString": "Unknown",
+    "otherReviewerAssessment": 0,
+    "otherReviewerAssessmentAsString": "Unknown",
+    "isFeedbackEditable": true,
+    "feedback": null,
+    "previousFeedback": null,
+    "discussionStatus": null,
+    "discussionStatusAsString": null,
+    "stage": 2,
+    "stageAsString": "Unknown",
+    "messages":  [
+      {
+        "currentUsersMessage": true,
+        "dateTime": "21/1/2019 09:55:07",
+        "text": "Hello fellow reviewer, how are you ?",
+        "userRole": 1,
+        "userRoleAsString": "LeadReviewer"
+      },
+      {
+        "currentUsersMessage": false,
+        "dateTime": "21/1/2019 09:59:07",
+        "text": "Great thanks. Looks like a really interesting CPD entry doesn't it ?",
+        "userRole": 1,
+        "userRoleAsString": "PeerReviewer"
+      },
+      {
+        "currentUsersMessage": true,
+        "dateTime": "21/1/2019 10:05:10",
+        "text": "Yes indeed.",
+        "userRole": 1,
+        "userRoleAsString": "LeadReviewer"
+      }
+    ]
+  }
+}

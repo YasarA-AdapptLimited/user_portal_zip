@@ -1,0 +1,94 @@
+<ng-template #content>
+  <div class="">
+    <h2 class="spacer">
+      Personal details
+    </h2>
+  </div>
+
+  <section>
+
+    <section>
+      <div class="important registrant-message">
+        <p>
+          Tell us your personal details so that we can identify you and verify that you meet the criteria for
+          registration as a
+          pharmacy technician.
+        </p>
+        <p>
+          If your name as shown below is different from your name as stated on your identity documents, make sure that
+          you
+          have read the guidance about the supporting documents you will need to provide.
+        </p>
+        <p>
+          Your first name, middle name and last name will appear on the public register as they are shown below, as well as the 
+          postal town you provide in your address. These are the only details about your identity which will appear on 
+          the public register.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <app-applicant [isTechnician]="true" [(ngModel)]="applicant" [touched]="touched" (ngModelChange)="update()">
+      </app-applicant>
+    </section>
+
+    <section>
+      <div class="header">
+        <h3 [class.error]="touched && contactValid === false">
+          <div>
+            Contact details
+          </div>
+          <!-- <div>
+            <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" [static]="true" (click)="showContactHelp = !showContactHelp"></app-gphc-icon>
+          </div> -->
+        </h3>
+      </div>
+
+      <div class="important">
+        <p>
+          We will use your email address and the phone number(s) you give to contact you about your application if
+          necessary.
+        </p>
+      </div>
+
+      <app-collapsible [trigger]="showContactHelp" class="help-block">
+        <div class="help-text">
+          <p>
+            Enter a mobile number 8 - 11 numbers long, which begins with 07. We may use this number to contact you by
+            SMS in future,
+            if you agree to this in your communication preferences. You can manage these in the 'account' tab.
+          </p>
+          <p>
+            We will use your email address and the phone number(s) you give to contact you about your application if
+            necessary.
+          </p>
+        </div>
+      </app-collapsible>
+
+
+      <div class="limit-width">
+        <app-contact-edit #contact [emailReadonly]="true" [(ngModel)]="applicant.contact" (ngModelChange)="update()">
+        </app-contact-edit>
+      </div>
+    </section>
+
+  </section>
+
+
+  <section>
+    <h3 [class.error]="touched && hasAddress === false">Home address</h3>
+    <div class="important">
+      <p>Please enter your home address below. We may use this address to contact you about your application</p>
+    </div>
+
+    <div class="limit-width">
+      <app-address-edit-technician #address [(ngModel)]="applicant.address" [touched]="touched"
+        (ngModelChange)="update()"></app-address-edit-technician>
+    </div>
+  </section>
+
+
+
+
+
+</ng-template>

@@ -1,0 +1,132 @@
+@import '../../style/variables';
+/*
+.app-tooltip {
+  background: $gphc-aqua;
+  color: white;
+  position: absolute;
+  padding: 20px;
+  border-radius: 5px;
+ 
+}
+*/
+$tooltipBackground: $gphc-purple;
+$tooltipBackgroundWalkthrough: $gphc-purple;
+
+input {
+ opacity:0;
+ position: absolute;
+ z-index: -1;
+}
+
+.tooltip-toolbar {
+  background: $tooltipBackgroundWalkthrough;
+  margin: -10px;
+  margin-top: 10px;
+  padding: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: white;
+  width: calc(100% + 20px);
+  display: block;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:host .app-tooltip {
+  margin-top: 15px;
+  z-index: 99999;
+  position: absolute;
+  background: $tooltipBackground;
+
+  color: white;
+  width: 150px;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+
+  .app-tooltip__arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: $tooltipBackground;
+    position: absolute;
+    margin: 5px;
+  }
+
+  &.walkthrough {
+    background: $tooltipBackgroundWalkthrough;
+    .app-tooltip__arrow {
+      border-color: $tooltipBackgroundWalkthrough;
+    }
+  }
+}
+
+
+
+:host .app-tooltip[x-placement^="top"] {
+  margin-bottom: 5px;
+  margin-top: -5px;
+}
+
+:host .app-tooltip[x-placement^="top"] .app-tooltip__arrow {
+  border-width: 10px 10px 0 10px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  bottom: -10px;
+  left: calc(50% - 10px);
+  margin-top: 0;
+  margin-bottom: 0;
+ 
+  
+}
+:host .app-tooltip:not(.solo)[x-placement^="top"] .app-tooltip__arrow {
+  border-top-color: $tooltipBackground !important;
+}
+
+
+:host .app-tooltip[x-placement^="bottom"] {
+  margin-top: 5px;
+}
+
+:host .app-tooltip[x-placement^="bottom"] .app-tooltip__arrow {
+  margin-top: -5px;
+  border-width: 0 10px 10px 10px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  top: -10px;
+  left: calc(50% - 10px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+:host .app-tooltip[x-placement^="right"] {
+  margin-left: 5px;
+}
+
+:host .app-tooltip[x-placement^="right"] .app-tooltip__arrow {
+  border-width: 10px 10px 10px 0;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  left: -10px;
+  top: calc(50% - 10px);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+:host .app-tooltip[x-placement^="left"] {
+  margin-right: 5px;
+}
+
+:host .app-tooltip[x-placement^="left"] .app-tooltip__arrow {
+  border-width: 10px 0 10px 10px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  right: -10px;
+  top: calc(50% - 10px);
+  margin-left: 0;
+  margin-right: 0;
+}

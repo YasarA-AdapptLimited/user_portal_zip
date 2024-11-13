@@ -1,0 +1,76 @@
+import { TestBed, async, } from '@angular/core/testing';
+import { } from 'jasmine';
+
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
+import { NgModule, ErrorHandler, Injectable } from '@angular/core';
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { CustomErrorHandler } from './core/service/CustomErrorHandler';
+import { AuthService } from './core/service/auth.service';
+import { MockAuthService } from './core/service/auth.service.mock';
+import { UpdaterService } from './core/service/updater.service';
+import { AccountModule } from './account/account.module';
+import { RenewalModule } from './renewal/renewal.module';
+import { RevalidationModule } from './revalidation/revalidation.module';
+import { SharedModule } from './shared/shared.module';
+
+class UpdaterServiceStub {
+  updateRequired: false;
+  updating: false;
+  version = { current: 1, deployed: 1 };
+  startChecking() { }
+}
+
+describe('AppComponent', () => {
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent
+      ],
+      imports: [
+
+        CommonModule,
+        CoreModule,
+        AccountModule,
+        RenewalModule,
+        RevalidationModule,
+        SharedModule
+      ],
+      providers: [
+        { provide: ErrorHandler, useClass: CustomErrorHandler },
+        { provide: APP_BASE_HREF, useValue: '/' },
+        { provide: AuthService, useClass: MockAuthService },
+        { provide: UpdaterService, useClass: UpdaterServiceStub }
+      ]
+    }).compileComponents();
+  }));
+
+  it('should create the app', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  }));
+
+
+  it('should get logged in user', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
+    const authService = fixture.debugElement.injector.get(AuthService);
+    expect(authService.user).toBeTruthy();
+  }));
+
+  it('should render page element', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      const compiled = fixture.debugElement.nativeElement;
+      const pageElement = compiled.querySelector('.page');
+      expect(pageElement).toBeTruthy();
+    });
+
+  }));
+});

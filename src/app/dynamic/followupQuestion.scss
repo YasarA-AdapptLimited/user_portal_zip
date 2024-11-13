@@ -1,0 +1,35 @@
+@import "../style/variables";
+
+
+.help-text {
+  padding: 20px;
+  
+  color: $gphc-aqua; font-weight:bold;
+}
+/*
+label.error, h2.error {
+  color: $error;
+}
+*/
+
+h2.label {
+  margin-top: .3em;
+  padding: 1em 0 1em 0;
+  font-size: 1em;
+}
+
+ .input-group-addon {
+    background-color: $light-grey;
+    color: white;
+    font-weight: bold;
+}
+
+::ng-deep {
+  .question.input-group {
+    input {
+      width: auto;
+      border: none;
+    }
+  }
+}
+

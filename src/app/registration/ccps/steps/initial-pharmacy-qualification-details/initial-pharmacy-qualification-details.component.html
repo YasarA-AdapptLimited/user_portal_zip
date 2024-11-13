@@ -1,0 +1,861 @@
+<ng-template #content>
+  <h2 class="step-header" class="spacer">{{ title }}</h2>
+
+  <p class="important">Please review the information we hold about your education and training. 
+    If any of the information is missing please add it, please include the name of the qualification and 
+    the institution that awarded the qualification. We may contact you to ask for verification of the information you provide.</p>
+
+  <form #form="ngForm" novalidate>
+    <ng-container *ngIf="!isPharmacist; else pharmacist">
+      <section *ngIf="route !== 'EEA'">
+        <!-- <div *ngFor="let qualification of PTQualifcationDetails; let i = index"> -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" [class.invalid]="!qualificationDetailsExists?.courseExists && !isPTDetailsEntered && ((techQual1.touched && techQual1.invalid) || (touched && techQual1.invalid)) || (initQualDetail.pharmacyTechnicianQualificationDetail?.degreeName1 && initQualDetail.pharmacyTechnicianQualificationDetail?.degreeName1.length > 200)">
+                <label for="title">Qualification</label>
+                <textarea type="text" class="form-control" [readonly]="true"
+                       name="degreeName1" *ngIf="qualificationDetailsExists.courseExists"
+                       [(ngModel)]="initQualDetail.pharmacyTechnicianQualificationDetail.degreeName1"></textarea>
+                <input type="text"
+                       [hidden]="qualificationDetailsExists?.courseExists"
+                       class="form-control"
+                       [readonly]="false" required
+                       name="degreeName1" #techQual1="ngModel"
+                       [(ngModel)]="initQualDetail.pharmacyTechnicianQualificationDetail.degreeName1" (ngModelChange)="validate()"
+                       maxlength="201" />
+                <p class="form-error"
+                      *ngIf="initQualDetail.pharmacyTechnicianQualificationDetail?.degreeName1 && initQualDetail.pharmacyTechnicianQualificationDetail?.degreeName1.length > 200 ">
+                      You can only enter a maximum of 200 characters in this field
+                </p>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" [class.invalid]="!qualificationDetailsExists.qualifiedExists && !isPTDetailsEntered && ((techQualYear1.touched && techQualYear1.invalid) || (touched && techQualYear1.invalid))">
+                <label for="title">Date obtained</label><br />
+                <input type="text" class="form-control"
+                       [readonly]="true"
+                       *ngIf="qualificationDetailsExists.qualifiedExists"
+                       name="date1"
+                       [value]="initQualDetail.pharmacyTechnicianQualificationDetail.qualifiedDate1 | utcDate" />
+                <app-utc-date-picker [hidden]="qualificationDetailsExists.qualifiedExists"
+                                     required #techQualYear1="ngModel"
+                                     name="ptStartDate1" [max]="currentDate" (ngModelChange)="onDateSelection('qualifiedDate1',$event)"
+                                     [(ngModel)]="initQualDetail.pharmacyTechnicianQualificationDetail.qualifiedDate1"
+                                     >
+                </app-utc-date-picker>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" [class.invalid]="!qualificationDetailsExists?.courseExists && !isPTDetailsEntered && ((techQual2.touched && techQual2.invalid) || (touched && techQual2.invalid)) || (initQualDetail.pharmacyTechnicianQualificationDetail?.degreeName2 && initQualDetail.pharmacyTechnicianQualificationDetail?.degreeName2.length > 200)">
+                <label for="title">Qualification</label>
+                <textarea type="text" class="form-control" [readonly]="true"
+                       name="degreeName2" *ngIf="qualificationDetailsExists.courseExists"
+                       [(ngModel)]="initQualDetail.pharmacyTechnicianQualificationDetail.degreeName2"></textarea>
+                <input type="text"
+                       [hidden]="qualificationDetailsExists?.courseExists"
+                       class="form-control"
+                       [readonly]="false" required
+                       name="degreeName2" #techQual2="ngModel"
+                       [(ngModel)]="initQualDetail.pharmacyTechnicianQualificationDetail.degreeName2" (ngModelChange)="validate()"
+                       maxlength="201" />
+                <p class="form-error"
+                      *ngIf="initQualDetail.pharmacyTechnicianQualificationDetail?.degreeName2 && initQualDetail.pharmacyTechnicianQualificationDetail?.degreeName2.length > 200 ">
+                      You can only enter a maximum of 200 characters in this field
+                </p>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" [class.invalid]="!qualificationDetailsExists.qualifiedExists && !isPTDetailsEntered && ((techQualYear2.touched && techQualYear2.invalid) || (touched && techQualYear2.invalid))">
+                <label for="title">Date obtained</label><br />
+                <input type="text" class="form-control"
+                       [readonly]="true"
+                       *ngIf="qualificationDetailsExists.qualifiedExists"
+                       name="date2"
+                       [value]="initQualDetail.pharmacyTechnicianQualificationDetail.qualifiedDate2 | utcDate" />
+                <app-utc-date-picker [hidden]="qualificationDetailsExists.qualifiedExists"
+                                     required #techQualYear2="ngModel"
+                                     name="ptStartDate2" [max]="currentDate" (ngModelChange)="onDateSelection('qualifiedDate2',$event)"
+                                     [(ngModel)]="initQualDetail.pharmacyTechnicianQualificationDetail.qualifiedDate2"
+                                     >
+                </app-utc-date-picker>
+              </div>
+            </div>
+          </div>
+          </section>
+
+          <section *ngIf="route === 'EEA'">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" [class.invalid]="(ptQualCountry.touched && ptQualCountry.invalid) || (touched && ptQualCountry.invalid)">
+                <label for="title">Country of initial qualification</label><br />
+                  <select class="form-control"
+                          style="margin-bottom: 10px"
+                          name="ptQualCountry"
+                          #ptQualCountry="ngModel"
+                          [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.countryQualified"
+                          (ngModelChange)="validate()"
+                          required>
+                    <option value="null" disabled selected default>Select country ...</option>
+                    <option *ngFor="let country of countryFirstRecognised"
+                            [ngValue]="country">
+                      {{country}}
+                    </option>
+                  </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" [class.invalid]="((ptQualification.touched && ptQualification.invalid) || (touched && ptQualification.invalid)) || (initQualDetail.eeaPharmacistQualificationDetail?.courseName && initQualDetail.eeaPharmacistQualificationDetail.courseName.length > 200)">
+                <label for="title">Name of qualification</label>
+                <input class="form-control"
+                       name="ptQualification" #ptQualification="ngModel"
+                       required
+                       [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.courseName"
+                       maxlength="201"/>
+                <p class="form-error" *ngIf="initQualDetail.eeaPharmacistQualificationDetail?.courseName && initQualDetail.eeaPharmacistQualificationDetail.courseName.length > 200 ">
+                    You can only enter a maximum of 200 characters in this field
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" [class.invalid]="initQualDetail.eeaPharmacistQualificationDetail?.datePassed && ((ptQualificationAwarded.touched && (isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed,'datePassed') || ptQualificationAwarded.invalid))) || (touched && (isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed,'datePassed') || ptQualificationAwarded.invalid))">
+                <label for="title">Year qualification awarded</label><br />                 
+                  <input type="number"
+                       class="form-control" required
+                       name="ptQualificationAwarded" #ptQualificationAwarded="ngModel" min="0" max="9999"
+                       [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.datePassed"
+                       (change)="enforceMax($event, registrationRouteSwitchValue, 'datePassed')"
+                       (keyup)="enforceMax($event, registrationRouteSwitchValue, 'datePassed')" />     
+                    <p class="form-error" *ngIf="(touched || ptQualificationAwarded.touched) && !assessmentDetailsExists && initQualDetail.eeaPharmacistQualificationDetail?.datePassed && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed,'datePassed')">
+                       {{isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed,'datePassed')}}
+                    </p>            
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" [class.invalid]="((ptAwardingInstitution.touched && ptAwardingInstitution.invalid) || (touched && ptAwardingInstitution.invalid))">
+                <label for="title">Awarding institution</label>
+                <input class="form-control"
+                       name="ptAwardingInstitution" #ptAwardingInstitution="ngModel"
+                       [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity"/>
+              </div>
+            </div>
+          </div>
+
+        <!-- </div> -->
+      </section>
+    </ng-container>
+
+    <ng-template #pharmacist>
+
+      <ng-container [ngSwitch]="registrationRouteSwitchValue">
+
+        <ng-container *ngSwitchCase="'EEA'">
+          <ng-container *ngTemplateOutlet="eea"></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'UK'">
+          <ng-container *ngTemplateOutlet="uk"></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'OSPAP'">
+          <ng-container *ngTemplateOutlet="ospap"></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'Reciprocity'">
+          <ng-container *ngTemplateOutlet="ospap"></ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'Northern Ireland'">
+          <ng-container *ngTemplateOutlet="northernIreland"></ng-container>
+        </ng-container>
+
+        <ng-template #eea>
+          <section *ngIf="isEEARegulatorSelected; else nonEEARegulator">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists.countryExists && ((eeaPharmQualCountry.touched && eeaPharmQualCountry.invalid) || (touched && eeaPharmQualCountry.invalid))">
+                  <label for="title">EEA country in which pharmacy qualification was obtained/EEA country in which qualification was first recognised</label>
+
+                  <input [readonly]="true"
+                         class="form-control"
+                         name="eeaCountry"
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.countryQualified"
+                         *ngIf="qualificationDetailsExists.countryExists" />
+
+                  <select class="form-control"
+                          style="margin-bottom: 10px"
+                          name="eeaCountrySelect"
+                          #eeaPharmQualCountry="ngModel"
+                          [hidden]="qualificationDetailsExists.countryExists"
+                          [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.countryQualified"
+                          (ngModelChange)="validate()"
+                          required>
+                    <option value="null" disabled selected default>Select country ...</option>
+                    <option *ngFor="let country of countryFirstRecognised"
+                            [ngValue]="country">
+                      {{country}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((eeaCourseName.touched && eeaCourseName.invalid) || (touched && eeaCourseName.invalid)) || (initQualDetail.eeaPharmacistQualificationDetail.courseName && initQualDetail.eeaPharmacistQualificationDetail.courseName.length > 200)">
+                  <label for="title">Course name</label>
+                  <input class="form-control"
+                         name="eeaCountry" #eeaCourseName="ngModel"
+                         required
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.courseName"  (ngModelChange)="validate()"
+                         maxlength="201"/>
+                  <p class="form-error" *ngIf="initQualDetail.eeaPharmacistQualificationDetail.courseName && initQualDetail.eeaPharmacistQualificationDetail.courseName.length > 200 ">
+                    You can only enter a maximum of 200 characters in this field
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((eeaUniversityName.touched && eeaUniversityName.invalid) || (touched && eeaUniversityName.invalid)) || (initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity && initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity.length > 2000)">
+                  <label for="title">Name of university or awarding body</label>
+                  <input class="form-control"
+                         name="eeaUniversityName" #eeaUniversityName="ngModel"
+                         required maxlength="2001"
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity"  (ngModelChange)="validate()"/>
+                  <p class="form-error" *ngIf="initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity && initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity.length > 2000 ">
+                    You can only enter a maximum of 2000 characters in this field
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group" [class.invalid]="((eeaYearStarted.touched && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.dateStarted, 'dateStarted')) || (touched && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.dateStarted, 'dateStarted')))">
+                  <label for="title">Year degree started</label>                         
+                  <input type="number"
+                         class="form-control"
+                         required 
+                         name="eeaYearStarted" #eeaYearStarted="ngModel" min="0" max="9999"
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.dateStarted"
+                         (change)="enforceMax($event, registrationRouteSwitchValue, 'dateStarted')"
+                         (keyup)="enforceMax($event, registrationRouteSwitchValue, 'dateStarted')"/>                         
+                  <p class="form-error" *ngIf="(touched || eeaYearStarted.touched) && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.dateStarted, 'dateStarted') ">
+                        {{isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.dateStarted, 'dateStarted')}}
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group" [class.invalid]="((eeaYearAwarded.touched && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed, 'datePassed')) || (touched && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed, 'datePassed')))">
+                 <label for="title">Year degree awarded</label>                       
+                  <input type="number"
+                         class="form-control"
+                         required
+                         name="eeaYearAwarded" #eeaYearAwarded="ngModel" min="0" max="9999"
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.datePassed"
+                         (change)="enforceMax($event, registrationRouteSwitchValue, 'datePassed')"
+                         (keyup)="enforceMax($event, registrationRouteSwitchValue, 'datePassed')"/>                         
+                  <p class="form-error" *ngIf="(touched || eeaYearAwarded.touched) && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed, 'datePassed') ">
+                        {{isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed, 'datePassed')}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="isEEARegulatorSelected">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((eeaRouteSelect.touched && eeaRouteSelect.invalid) || (touched && eeaRouteSelect.invalid))">
+                  <label for="title">EEA directive route</label>
+                  <select class="form-control"
+                          style="margin-bottom: 10px"
+                          name="eeaDirectiveRouteSelect"
+                          #eeaRouteSelect="ngModel"
+                          [(ngModel)]="eeaDirectiveRouteSelected"
+                          required (ngModelChange)="onEEADirectiveRouteSelect();validate()">
+                    <option value="null" disabled selected default>Select route ...</option>
+                    <option *ngFor="let route of eeaDirectiveRoute"
+                            [ngValue]="route">
+                      {{route}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <section *ngIf="isCVUploadRequired()">
+
+            <div class="row">
+              <div class="header col-md-12">
+                <h3 [class.error]="touched && contactValid === false">
+                  <div>CV upload</div>
+                  <app-gphc-icon [tooltip]="tooltipInfo"
+                                 [iconType]="'info'"
+                                 (click)="showDegreeMsg = !showDegreeMsg"
+                                 [static]="true"
+                                 class="headingIcon"></app-gphc-icon>
+                </h3>
+
+                <app-collapsible [trigger]="showDegreeMsg" class="help-block">
+                  <div class="help-text">
+                    <p>
+                      Please provide a summary of your career, qualifications and
+                      education
+                    </p>
+                  </div>
+                </app-collapsible>
+              </div>
+
+              <div class="col-md-9">
+                <div class="form-group" [class.invalid]="false">
+                  <app-file-upload #files [existing]="attachments" [type]="uploadType" [sessionId]="sessionId" [min]="1" [max]="1" [deleteUrl]="deleteUrl"
+                                   [attachmentType]="attachmentType" [maxMb]="8" (uploaded)="onDocUpload($event)" (deleted)="onDocDelete($event)"
+                                   [disableDeleteButton]="false"></app-file-upload>
+                </div>
+              </div>
+            </div>
+          </section>
+        </ng-template>
+        <ng-template #nonEEARegulator>
+          <section>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists.countryExists && ((nonEEAPharmacyCountry.touched && nonEEAPharmacyCountry.invalid) || (touched && nonEEAPharmacyCountry.invalid))">
+                  <label for="title">EEA country in which pharmacy qualification was obtained/EEA country in which qualification was first recognised</label>
+                  <input [readonly]="true"
+                         class="form-control"
+                         name="nonEEACountryQualified"
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.countryQualified"
+                         *ngIf="qualificationDetailsExists.countryExists" />
+                  <select class="form-control"
+                          [hidden]="qualificationDetailsExists.countryExists"
+                          style="margin-bottom: 10px"
+                          name="nonEEACountrySelect" required
+                          #nonEEAPharmacyCountry="ngModel"
+                          [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.countryQualified"
+                          (ngModelChange)="validate()">
+                    <option value="null" disabled selected default>Select Country ...</option>
+                    <option *ngFor="let country of countryFirstRecognised" [ngValue]="country">{{country}}</option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((nonEEAFirstRecognisedCountry.touched && nonEEAFirstRecognisedCountry.invalid) || (touched && nonEEAFirstRecognisedCountry.invalid))">
+                  <label for="title">Country of first recognition within the EEA</label>
+                  <select class="form-control"
+                          style="margin-bottom: 10px"
+                          name="country" required
+                          #nonEEAFirstRecognisedCountry="ngModel"
+                          [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.countryFirstRecognized"
+                          (ngModelChange)="validate()">
+                    <option value="null" disabled selected default>Select Country ...</option>
+                    <option *ngFor="let country of countryFirstRecognised" [ngValue]="country">{{country}}</option>
+                  </select>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((eeaCourseName.touched && eeaCourseName.invalid) || (touched && eeaCourseName.invalid)) || (initQualDetail.eeaPharmacistQualificationDetail.courseName && initQualDetail.eeaPharmacistQualificationDetail.courseName.length > 200 )">
+                  <label for="title">Course name</label>
+                  <input class="form-control"
+                         name="eeaCountry" #eeaCourseName="ngModel"
+                         required maxlength="201"
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.courseName"  (ngModelChange)="validate()"/>
+                  <p class="form-error"
+                      *ngIf="initQualDetail.eeaPharmacistQualificationDetail.courseName && initQualDetail.eeaPharmacistQualificationDetail.courseName.length > 200 ">
+                        You can only enter a maximum of 200 characters in this field
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((eeaUniversityName.touched && eeaUniversityName.invalid) || (touched && eeaUniversityName.invalid)) || (initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity && initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity.length > 2000)">
+                  <label for="title">Name of university or awarding body</label>
+                  <input class="form-control"
+                         name="eeaUniversityName" #eeaUniversityName="ngModel"
+                         required maxlength="2001"
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity"  (ngModelChange)="validate()"/>
+                  <p class="form-error" *ngIf="initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity && initQualDetail.eeaPharmacistQualificationDetail.nameOfUniversity.length > 2000 ">
+                      You can only enter a maximum of 2000 characters in this field
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group" [class.invalid]="((eeaYearAwarded.touched && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed, 'datePassed')) || (touched && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed, 'datePassed')))">
+                 <label for="title">Year degree awarded</label>                       
+                  <input type="number"
+                         class="form-control"
+                         required
+                         name="eeaYearAwarded" #eeaYearAwarded="ngModel" min="0" max="9999"
+                         [(ngModel)]="initQualDetail.eeaPharmacistQualificationDetail.datePassed"
+                         (change)="enforceMax($event, registrationRouteSwitchValue, 'datePassed')"
+                         (keyup)="enforceMax($event, registrationRouteSwitchValue, 'datePassed')"/>                         
+                  <p class="form-error" *ngIf="(touched || eeaYearAwarded.touched) && isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed, 'datePassed') ">
+                        {{isYearInvalid(initQualDetail.eeaPharmacistQualificationDetail.datePassed, 'datePassed')}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </ng-template>
+        <ng-template #uk>
+          <section>
+            <div class="header">
+              <h3 [class.error]="touched && ((!qualificationDetailsExists?.courseExists && !initQualDetail.ukPharmacistQualificationDetail.courseId) || (!qualificationDetailsExists?.qualifiedExists && !initQualDetail.ukPharmacistQualificationDetail.yearQualified))">
+                <div>Education</div>
+                <app-gphc-icon [tooltip]="tooltipInfo"
+                               [iconType]="'info'"
+                               (click)="showDegreeMsgUK = !showDegreeMsgUK"
+                               [static]="true"
+                               class="headingIcon"></app-gphc-icon>
+              </h3>
+            </div>
+            <app-collapsible [trigger]="showDegreeMsgUK" class="help-block">
+              <div class="help-text">
+                <p>
+                  If the details of your degree are not shown then please provide
+                  the title of your degree and the year that you passed.
+                </p>
+              </div>
+            </app-collapsible>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists?.courseExists && ((ukDegree.touched && ukDegree.invalid) || (touched && ukDegree.invalid))">
+                  <label for="title">Degree</label>
+                  <input [readonly]="true"
+                         type="text"
+                         class="form-control"
+                         name="degreeQualified"
+                         *ngIf="qualificationDetailsExists?.courseExists"
+                         [(ngModel)]="initQualDetail.ukPharmacistQualificationDetail.courseName" />
+
+                  <select class="form-control"
+                          [hidden]="qualificationDetailsExists?.courseExists"
+                          style="margin-bottom: 10px"
+                          name="country" required
+                          #ukDegree="ngModel"
+                          [(ngModel)]="initQualDetail.ukPharmacistQualificationDetail.courseId"
+                          (ngModelChange)="setCourseName($event);validate()">
+                    <option value="null" selected disabled default>Select degree ...</option>
+                    <option *ngFor="let qual of otherThanOSPAPQualifications" [ngValue]="qual.id">{{qual.courseName}}</option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists?.qualifiedExists && ((ukYear.touched && (isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.yearQualified,'yearQualified') || ukYear.invalid)) || (touched && (isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.yearQualified,'yearQualified') || ukYear.invalid)))">
+                  <label for="title">Year awarded</label>
+                  <input type="text"
+                         class="form-control"
+                         name="yearQualified"
+                         [readOnly]="true"
+                         *ngIf="qualificationDetailsExists?.qualifiedExists"
+                         [(ngModel)]="initQualDetail.ukPharmacistQualificationDetail.yearQualified" />
+                  <input type="number"
+                         class="form-control"
+                         required 
+                         [hidden]="qualificationDetailsExists?.qualifiedExists"
+                         name="yearQualified" #ukYear="ngModel" min="0" max="9999"
+                         [(ngModel)]="initQualDetail.ukPharmacistQualificationDetail.yearQualified"
+                         (change)="enforceMax($event, registrationRouteSwitchValue, 'yearQualified')"
+                         (keyup)="enforceMax($event, registrationRouteSwitchValue, 'yearQualified')"/>                         
+                  <p class="form-error" *ngIf="(touched || ukYear.touched) && !qualificationDetailsExists?.qualifiedExists && isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.yearQualified, 'yearQualified') ">
+                        {{isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.yearQualified, 'yearQualified')}}
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="header">
+              <h3 [class.error]="touched && (this.trainingDetailsComp?.getTrainingRowEditable === 0 || this.trainingDetailsComp?.getTrainingRowEditable >0)">
+                Pre-registration training/foundation training
+              </h3>
+            </div>
+            <app-training-details #trainingDetailsComp [invalid]="!checkIfTrainingDetailsExists && touched" [touched]="touched"
+                                  [existingTrainingDetails]="initQualDetail.trainingDetails"
+                                  (saveTrainingDetails)="updateTrainingDetails($event)"
+                                  [trainingDetailsExists]="application.activeForm?.trainingDetailsExists"></app-training-details>
+          </section>
+          <section>
+            <div class="header">
+              <h3 [class.error]="touched && (initQualDetail.ukPharmacistQualificationDetail.assessmentYear && isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.assessmentYear,'assessmentYear'))">
+                <div>Registration assessment</div>
+              </h3>
+            </div>
+
+            <p class="important">If you joined the register since 1993 please check the registration assessment details below, and add the year you passed the exam if no information is shown. If you joined the register before 1993 and did not sit the registration assessment please leave this question blank. </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="(!assessmentDetailsExists && initQualDetail.ukPharmacistQualificationDetail?.assessmentYear && ((ukAssessment.touched && (isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.assessmentYear,'assessmentYear') || ukAssessment.invalid)) || (touched && (isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.assessmentYear,'assessmentYear') || ukAssessment.invalid))))">
+                  <label for="title">Year registration assessment passed</label><br />                 
+                    <input type="text" class="form-control"
+                           [readOnly]="assessmentDetailsExists"
+                           name="assessmentPassYear"
+                           *ngIf="assessmentDetailsExists"
+                           [(ngModel)]="initQualDetail.ukPharmacistQualificationDetail.assessmentYear" />
+                    <input type="number"
+                         class="form-control"
+                         [hidden]="assessmentDetailsExists"
+                         name="assessmentPassYear" #ukAssessment="ngModel" min="0" max="9999"
+                         [(ngModel)]="initQualDetail.ukPharmacistQualificationDetail.assessmentYear"
+                         (change)="enforceMax($event, registrationRouteSwitchValue, 'assessmentYear')"
+                         (keyup)="enforceMax($event, registrationRouteSwitchValue, 'assessmentYear')" />     
+                      <p class="form-error" *ngIf="(touched || ukAssessment.touched) && !assessmentDetailsExists && initQualDetail.ukPharmacistQualificationDetail?.assessmentYear && isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.assessmentYear,'assessmentYear')">
+                         {{isYearInvalid(initQualDetail.ukPharmacistQualificationDetail.assessmentYear,'assessmentYear')}}
+                      </p>            
+                </div>
+              </div>
+            </div>
+          </section>
+        </ng-template>
+        <ng-template #ospap>
+          <section>
+
+            <div class="header">
+              <h3 [class.error]="touched && registrationRouteSwitchValue === 'Reciprocity' && ((registrationRouteSwitchValue === 'Reciprocity' && ((!otherQualificationDetailsExists?.countryExists && !initQualDetail.ospapPharmacistQualificationDetail.ospapCountryQualified)
+                                          || (!otherQualificationDetailsExists?.courseExists && !initQualDetail.ospapPharmacistQualificationDetail.degreeName)
+                                          || (!otherQualificationDetailsExists?.courseExists && !initQualDetail.ospapPharmacistQualificationDetail.universityName))) 
+                                          || (!otherQualificationDetailsExists?.qualifiedExists && !initQualDetail.ospapPharmacistQualificationDetail.yearObtained))
+                                          || (touched && registrationRouteSwitchValue === 'OSPAP' && !qualificationDetailsExists?.countryExists && !initQualDetail.ospapPharmacistQualificationDetail.ospapCountryQualified)">
+                <div>Initial pharmacy qualification details outside the UK</div>
+                <app-gphc-icon [tooltip]="tooltipInfo"
+                               [iconType]="'info'"
+                               (click)="showDegreeMsgOSPAP = !showDegreeMsgOSPAP"
+                               [static]="true"
+                               class="headingIcon"></app-gphc-icon>
+              </h3>
+            </div>
+
+            <app-collapsible [trigger]="showDegreeMsgOSPAP" class="help-block">
+              <div class="help-text">
+                <p>
+                  If the details of your degree are not shown then please provide
+                  the title of your degree, the name of the university at which you
+                  obtained it and the year you passed.
+                </p>
+              </div>
+            </app-collapsible>
+
+            <div class="row" *ngIf="registrationRouteSwitchValue === 'Reciprocity'">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!otherQualificationDetailsExists?.countryExists && ((ospapCountryOfDegree.touched && ospapCountryOfDegree.invalid) || (touched && ospapCountryOfDegree.invalid))">
+                  <label for="title">Country in which degree obtained</label>
+                  <select [hidden]="otherQualificationDetailsExists?.countryExists"
+                          class="form-control"
+                          #ospapCountryOfDegree="ngModel"
+                          name="ospapCountry" required
+                          [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.ospapCountryQualified"
+                          (ngModelChange)="validate()">
+                    <option [ngValue]="null" disabled selected default>Select country ...</option>
+                    <option *ngFor="let country of reciprocityCountries"
+                            [ngValue]="country">
+                      {{country}}
+                    </option>
+                  </select>
+                  <input type="text" class="form-control"
+                         [readonly]="true"
+                         name="ospapCountryReadOnly"
+                         *ngIf="otherQualificationDetailsExists?.countryExists"
+                         [value]="initQualDetail.ospapPharmacistQualificationDetail.ospapCountryQualified" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6"  *ngIf="registrationRouteSwitchValue === 'OSPAP'">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists?.countryExists && ((ospapCountryOfDegree.touched && ospapCountryOfDegree.invalid) || (touched && ospapCountryOfDegree.invalid))">
+                  <label for="title">Country in which degree obtained</label>
+                  <select [hidden]="qualificationDetailsExists?.countryExists"
+                          class="form-control"
+                          #ospapCountryOfDegree="ngModel"
+                          name="ospapCountry" required
+                          [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.ospapCountryQualified"
+                          (ngModelChange)="validate()">
+                    <option [ngValue]="null" disabled selected default>Select country ...</option>
+                    <option *ngFor="let country of countriesList"
+                            [ngValue]="country.value">
+                      {{country.value}}
+                    </option>
+                  </select>
+                  <input type="text" class="form-control"
+                         [readonly]="true"
+                         name="ospapCountryReadOnly"
+                         *ngIf="qualificationDetailsExists?.countryExists"
+                         [value]="initQualDetail.ospapPharmacistQualificationDetail.ospapCountryQualified" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="(registrationRouteSwitchValue === 'Reciprocity' && ((ospapDegree.touched && ospapDegree.invalid) || (touched && ospapDegree.invalid))) || (initQualDetail.ospapPharmacistQualificationDetail.degreeName && initQualDetail.ospapPharmacistQualificationDetail.degreeName.length > 200)">
+                  <label for="title">Degree</label>
+                  <!-- <input type="text"
+                         class="form-control"
+                         [readOnly]="true"
+                         *ngIf="otherQualificationDetailsExists?.courseExists"
+                         name="ospapDegreeName"
+                         [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.degreeName"
+                         /> -->
+                  <input type="text"
+                         class="form-control"
+                         name="ospapDegreeName" #ospapDegree="ngModel" required
+                         [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.degreeName"
+                         (ngModelChange)="validate()" 
+                         maxlength="201"/>
+                  <p class="form-error"
+                        *ngIf="initQualDetail.ospapPharmacistQualificationDetail.degreeName && initQualDetail.ospapPharmacistQualificationDetail.degreeName.length > 200 ">
+                        You can only enter a maximum of 200 characters in this field
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="(registrationRouteSwitchValue === 'Reciprocity' && ((ospapUniversity.touched && ospapUniversity.invalid) || (touched && ospapUniversity.invalid))) || (initQualDetail.ospapPharmacistQualificationDetail.universityName && initQualDetail.ospapPharmacistQualificationDetail.universityName.length > 1000)">
+                  <label for="title">University</label>
+                  <input type="text"
+                         class="form-control" required
+                         name="ospapUniversityName" #ospapUniversity="ngModel" 
+                         [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.universityName" 
+                         (ngModelChange)="validate()"
+                         maxlength="1001"/>
+                  <p class="form-error" *ngIf="initQualDetail.ospapPharmacistQualificationDetail.universityName && initQualDetail.ospapPharmacistQualificationDetail.universityName.length > 1000 ">
+                         You can only enter a maximum of 1000 characters in this field
+                   </p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((registrationRouteSwitchValue === 'OSPAP' && initQualDetail.ospapPharmacistQualificationDetail.yearObtained) || registrationRouteSwitchValue === 'Reciprocity') && (((ospapYear.touched && (isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.yearObtained,'yearQualified') || ospapYear.invalid)) || (touched && (isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.yearObtained,'yearQualified') || ospapYear.invalid))))">
+                  <label for="title">Year awarded</label>
+
+                  <!-- <input type="text"
+                         class="form-control" [readOnly]="true"
+                         *ngIf="otherQualificationDetailsExists?.qualifiedExists"
+                         name="ospapYearObtained" #ospapYear
+                         [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.yearObtained" /> -->
+                  <input type="number"
+                         class="form-control" [required]="registrationRouteSwitchValue === 'Reciprocity'"
+                         name="ospapYearObtained" #ospapYear="ngModel" min="0" max="9999"
+                         [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.yearObtained"
+                         (change)="enforceMax($event, registrationRouteSwitchValue, 'yearQualified')"
+                         (keyup)="enforceMax($event, registrationRouteSwitchValue, 'yearQualified')"/> 
+                  <p class="form-error" *ngIf="(touched || ospapYear.touched) && initQualDetail.ospapPharmacistQualificationDetail.yearObtained && isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.yearObtained,'yearQualified') ">
+                          {{isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.yearObtained,'yearQualified')}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <section  *ngIf="registrationRouteSwitchValue !== 'Reciprocity'">
+            <div class="header">
+              <h3 [class.error]="touched && (!initQualDetail.ospapPharmacistQualificationDetail.ospapCourseId || !initQualDetail.ospapPharmacistQualificationDetail.ospapDateQualified)">
+                <div>OSPAP qualification details</div>
+              </h3>
+            </div>
+
+            <div class="row" *ngIf="registrationRouteSwitchValue !== 'Reciprocity'">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists?.courseExists && ((ospapQualification.touched && ospapQualification.invalid) || (touched && ospapQualification.invalid))">
+                  <label for="title">OSPAP qualification</label>
+                  <select class="form-control" name="ospapQualification"
+                          style="margin-bottom: 10px" #ospapQualification="ngModel" required
+                          [hidden]="qualificationDetailsExists?.courseExists"
+                          [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.ospapCourseId"
+                          (ngModelChange)="setCourseName($event);validate()">
+                    <option value="null" disabled selected default>Select qualification ...</option>
+                    <option *ngFor="let qualification of ospapQualifications"
+                            [ngValue]="qualification.id">
+                      {{qualification.courseName}}
+                    </option>
+                  </select>
+                  <input [readOnly]="true"
+                         class="form-control"
+                         name="ospapDegree"
+                         *ngIf="qualificationDetailsExists?.courseExists"
+                         [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.ospapCourseName" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="registrationRouteSwitchValue !== 'Reciprocity'">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists?.qualifiedExists && ((ospapDateQualified.touched && ospapDateQualified.invalid) || (touched && ospapDateQualified.invalid))">
+                  <label for="title">Date OSPAP qualification obtained</label><br />
+                  <input type="text"
+                         class="form-control"
+                         *ngIf="qualificationDetailsExists?.qualifiedExists"
+                         [readOnly]="qualificationDetailsExists?.qualifiedExists"
+                         [value]="initQualDetail.ospapPharmacistQualificationDetail.ospapDateQualified | utcDate" />
+                  <app-utc-date-picker [hidden]="qualificationDetailsExists?.qualifiedExists"
+                                       required #ospapDateQualified="ngModel"
+                                       name="ospapDateQualified" [max]="currentDate"
+                                       [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.ospapDateQualified"
+                                       (ngModelChange)="validate()">
+                  </app-utc-date-picker>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="header">
+              <h3 [class.error]="touched && (this.trainingDetailsComp?.getTrainingRowEditable === 0 || this.trainingDetailsComp?.getTrainingRowEditable >0)">
+                <div>Pre-registration training/foundation training</div>
+              </h3>
+            </div>
+            
+            <app-training-details #trainingDetailsComp [invalid]="!checkIfTrainingDetailsExists && touched" [touched]="touched"
+                                  [existingTrainingDetails]="initQualDetail.trainingDetails"
+                                  (saveTrainingDetails)="updateTrainingDetails($event)"
+                                  [trainingDetailsExists]="application.activeForm?.trainingDetailsExists"></app-training-details>
+
+          </section>
+          <section *ngIf="registrationRouteSwitchValue !== 'Reciprocity'">
+            <div class="header">
+              <h3 [class.error]="touched && initQualDetail.ospapPharmacistQualificationDetail.assessmentYear && isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.assessmentYear,'assessmentYear')">
+                <div>Registration assessment</div>
+              </h3>
+            </div>
+
+            <p class="important">If you joined the register since 1993 please check the registration assessment details below, and add the year you passed the exam if no information is shown. If you joined the register before 1993 and did not sit the registration assessment please leave this question blank. </p>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!assessmentDetailsExists && initQualDetail.ospapPharmacistQualificationDetail.assessmentYear && ((ospapAssessment.touched && (isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.assessmentYear,'assessmentYear') || ospapAssessment.invalid)) || (touched && (isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.assessmentYear,'assessmentYear') || ospapAssessment.invalid)))">
+                  <label for="title">Year registration assessment passed</label><br />
+                  <input type="text"
+                         class="form-control"
+                         [readOnly]="assessmentDetailsExists"
+                         *ngIf="assessmentDetailsExists"
+                         name="assessmentYear"
+                         [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.assessmentYear" />
+                  <input type="number"
+                         class="form-control"
+                         [hidden]="assessmentDetailsExists"
+                         name="yearQualified" #ospapAssessment="ngModel" min="0" max="9999"
+                         [(ngModel)]="initQualDetail.ospapPharmacistQualificationDetail.assessmentYear"
+                         (change)="enforceMax($event, registrationRouteSwitchValue ,'assessmentYear')"
+                         (keyup)="enforceMax($event, registrationRouteSwitchValue ,'assessmentYear')" />
+                  <p class="form-error" *ngIf="(touched || ospapAssessment.touched) && !assessmentDetailsExists && initQualDetail.ospapPharmacistQualificationDetail.assessmentYear && isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.assessmentYear,'assessmentYear')">
+                          {{isYearInvalid(initQualDetail.ospapPharmacistQualificationDetail.assessmentYear,'assessmentYear')}}
+                  </p> 
+                </div>
+              </div>
+            </div>
+          </section>
+        </ng-template>
+        <ng-template #northernIreland>
+          <section>
+            <div class="header">
+              <h3 [class.error]="touched && ((!qualificationDetailsExists?.courseExists && !initQualDetail.irelandPharmacistQualificationDetail.courseId) || 
+              (!qualificationDetailsExists?.qualifiedExists && (!initQualDetail.irelandPharmacistQualificationDetail.yearObtained || isYearInvalid(initQualDetail.irelandPharmacistQualificationDetail.yearObtained,'yearQualified'))))">
+                <div>Education</div>
+                <app-gphc-icon [tooltip]="tooltipInfo"
+                               [iconType]="'info'"
+                               (click)="showDegreeMsgNI = !showDegreeMsgNI"
+                               [static]="true"
+                               class="headingIcon"></app-gphc-icon>
+              </h3>
+            </div>
+            <app-collapsible [trigger]="showDegreeMsgNI" class="help-block">
+              <div class="help-text">
+                <p>
+                  If the details of your degree are not shown then please provide
+                  the title of your degree and the name of the university at which
+                  you obtained it.
+                </p>
+              </div>
+            </app-collapsible>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists?.courseExists && ((NIDegree.touched && NIDegree.invalid) || (touched && NIDegree.invalid))">
+                  <label for="title">Degree</label>
+                  <input class="form-control"
+                         name="NIDegree"
+                         [readonly]="true"
+                         [(ngModel)]="initQualDetail.irelandPharmacistQualificationDetail.courseName"
+                         style="margin-bottom: 10px"
+                         #NIDegree="ngModel"
+                         *ngIf="qualificationDetailsExists?.courseExists">
+                  <select class="form-control"
+                         [hidden]="qualificationDetailsExists?.courseExists"
+                         style="margin-bottom: 10px"
+                         name="NIcountry" required
+                         #NIDegree="ngModel"
+                         [(ngModel)]="initQualDetail.irelandPharmacistQualificationDetail.courseId"
+                         (ngModelChange)="setCourseName($event);validate()">
+                   <option value="null" disabled selected default>Select degree ...</option>
+                   <option *ngFor="let qual of otherThanOSPAPQualifications" [ngValue]="qual.id">{{qual.courseName}}</option>
+                   </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group" [class.invalid]="!qualificationDetailsExists?.qualifiedExists && ((NIYearPassed.touched && (isYearInvalid(initQualDetail.irelandPharmacistQualificationDetail.yearObtained,'yearQualified') || NIYearPassed.invalid)) || (touched && (isYearInvalid(initQualDetail.irelandPharmacistQualificationDetail.yearObtained,'yearQualified') || NIYearPassed.invalid)))">
+                  <label for="title">Year awarded</label>
+                  <input type="number"
+                         class="form-control"
+                         required
+                         [readOnly]="qualificationDetailsExists?.qualifiedExists"
+                         name="NIYearObtained" #NIYearPassed="ngModel" min="0" max="9999"
+                         [(ngModel)]="initQualDetail.irelandPharmacistQualificationDetail.yearObtained"
+                         (change)="enforceMax($event,registrationRouteSwitchValue ,'yearQualified')"
+                         (keyup)="enforceMax($event, registrationRouteSwitchValue ,'yearQualified')"
+                         (ngModelChange)="validate()" />
+
+                    <p class="form-error" *ngIf="(touched || NIYearPassed.touched) && !qualificationDetailsExists?.qualifiedExists && isYearInvalid(initQualDetail.irelandPharmacistQualificationDetail.yearObtained,'yearQualified')">
+                          {{isYearInvalid(initQualDetail.irelandPharmacistQualificationDetail.yearObtained,'yearQualified')}}
+                    </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </ng-template>
+      </ng-container>
+    </ng-template>
+  </form>
+</ng-template>

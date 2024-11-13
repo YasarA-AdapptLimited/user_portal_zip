@@ -1,0 +1,113 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>
+        Personal details
+      </div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]="true"></app-gphc-icon>
+    </h2>
+  </div>
+
+  <section>
+
+    <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+      <div class="row help-text">
+        <div class="col-md-2">
+          <p>
+            <b>Title</b>
+          </p>
+        </div>
+        <div class="col-md-10">
+          <p>
+            Select a title from the dropdown. If your title is not in the list, you can type it in.
+          </p>
+        </div>
+        <div class="col-md-2">
+          <p>
+            <b>DOB</b>
+          </p>
+        </div>
+        <div class="col-md-10">
+          <p>
+            Your date of birth must match the one given on the documents you use as proof of your identity, so that we
+            can verify your
+            identity. If the date of birth shown here is incorrect,
+            <a href="http://pharmacyregulation.org/about-us/contact-us" target="_gphc_main_site"
+              class="tooltip-link">contact
+              us</a>.
+          </p>
+        </div>
+        <div class="col-md-2">
+          <p>
+            <b>Qualification</b>
+          </p>
+        </div>
+        <div class="col-md-10">
+          <p>
+            Your qualification must match the one given in your supporting documents so that we can verify that you
+            meet the registration
+            criteria. If the qualification shown is incorrect,
+            <a href="http://pharmacyregulation.org/about-us/contact-us" target="_gphc_main_site"
+              class="tooltip-link">contact
+              us</a>.
+          </p>
+        </div>
+      </div>
+    </app-collapsible>
+
+    <section>
+      <app-applicant [isStudent]="false" [(ngModel)]="applicant" [touched]="touched" (ngModelChange)="update()">
+      </app-applicant>
+    </section>
+
+
+
+    <section>
+      <div class="header">
+        <h3 [class.error]="touched && contactValid === false">
+          <div>
+            Contact details
+          </div>
+          <!-- <div>
+            <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'"  (click)="showContactHelp = !showContactHelp"></app-gphc-icon>
+          </div> -->
+        </h3>
+      </div>
+
+      <!-- <app-collapsible [trigger]="showContactHelp" class="help-block">
+        <div class="help-text">
+          <p>
+            Enter a mobile number 8 - 11 numbers long, which begins with 07. We may use this number to contact you by
+            SMS in future,
+            if you agree to this in your communication preferences. You can manage these in the 'account' tab.
+          </p>
+        </div>
+      </app-collapsible> -->
+
+
+      <div class="limit-width">
+        <app-contact-edit #contact [emailReadonly]="true" [(ngModel)]="applicant.contact" (ngModelChange)="update()">
+        </app-contact-edit>
+      </div>
+    </section>
+
+  </section>
+
+
+  <section>
+    <h3 [class.error]="touched && hasAddress === false">Home address</h3>
+    <p class="important">
+      Please check that your home address is shown correctly. We will use this address for correspondence - only the
+      town will
+      be shown on the public register.
+    </p>
+    <div class="limit-width">
+      <app-address-edit #address [(ngModel)]="applicant.address" [touched]="touched" (ngModelChange)="update()">
+      </app-address-edit>
+    </div>
+  </section>
+
+
+
+</ng-template>

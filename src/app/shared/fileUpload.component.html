@@ -1,0 +1,370 @@
+<div *ngIf="!files.length" style="height:1em"></div>
+<app-collapsible [trigger]="!!files.length">
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width:80px">Status</th>
+        <th>Filename</th>
+        <th style="width:80px">Size</th>
+
+        <th style="width:80px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let upload of files; let i = index">
+        <tr style="vertical-align:middle; padding:0.5rem">
+
+          <td class="upload-status">
+            <i *ngIf="upload.status===UploadStatus.Pending" class="fa fa-circle-o-notch fa-spin fa-fw loading"></i>
+            <i *ngIf="upload.status===UploadStatus.Uploaded" class="fa fa-check-circle completed"></i>
+            <i *ngIf="upload.status===UploadStatus.Error" class="fa fa-warning error"></i>
+          </td>
+          <td>{{ upload.filename }}</td>
+          <td [class.error]="upload.tooBig">{{ upload.filesize / 1000000 | number: '1.2-2' }}MB</td>
+          <td *ngIf="upload.status===UploadStatus.Uploaded">
+            <button [disabled]="disableDeleteButton" (click)="delete(upload)" class="btn btn-primary">Delete</button>
+          </td>
+          <td *ngIf="upload.status===UploadStatus.Error">
+            <button (click)="remove(upload)" class="btn btn-primary">Remove</button>
+          </td>
+          <td *ngIf="upload.status===UploadStatus.Pending">
+          </td>
+        </tr>
+        <tr *ngIf="!!upload.error">
+          <td class="upload-status">
+            <i class="fa fa-level-up"></i>
+          </td>
+          <td colspan="5" class="form-error-block">
+            {{upload.error}}
+          </td>
+        </tr>
+
+        <tr *ngIf="(requireTitle || requireExpiryDate || requireCertifier) && upload.status===UploadStatus.Uploaded">
+          <td class="upload-status">
+            <i class="fa fa-level-up"></i>
+          </td>
+          <td colspan="5">
+            <div class="row">
+              <div class="col-md-7">
+                <div *ngIf="requireTitle" class="form-group ml-2 mr-4"
+                  [class.invalid]="(touched || type.touched) && type.invalid">
+                  <label [for]="'documentTitle'+i">Type</label>
+                  <app-autocomplete required [(ngModel)]="upload.title" #type="ngModel" [id]="'documentTitle'+i"
+                    (ngModelChange)="propagate()" [options]="titleOptions" placeholder="Document type...">
+                  </app-autocomplete>
+
+                  <app-collapsible [trigger]="(touched || type.touched) && type.errors?.required">
+                    <p class="form-error">
+                      You must enter a type
+                    </p>
+                  </app-collapsible>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div *ngIf="requireExpiryDate" class="form-group  ml-2 mr-2"
+                  [class.invalid]="(touched || expiry.touched) && expiry.invalid">
+                  <label [for]="'expiryDate'+i">Expiry date</label>
+                  <app-utc-date-picker [(ngModel)]="upload.expiryDate" #expiry="ngModel" (ngModelChange)="propagate()">
+                  </app-utc-date-picker>
+
+                  <app-collapsible [trigger]="(touched || expiry.touched) && expiry.invalid">
+                    <p class="form-error" *ngIf="expiry.errors?.required">
+                      You must enter an expiry date
+                    </p>
+                    <p class="form-error" *ngIf="expiry.errors?.matDatepickerMin">
+                      Must be in the future
+                    </p>
+                  </app-collapsible>
+
+                </div>
+              </div>
+            </div>
+
+            <ng-container *ngIf="requireCertifier">
+              <ng-container *ngTemplateOutlet="certifierTemplate; context:{$implicit:upload}">
+              </ng-container>
+            </ng-container>
+
+          </td>
+        </tr>
+      </ng-container>
+
+    </tbody>
+
+  </table>
+</app-collapsible>
+
+<div *ngIf="!(max && uploadedFileCount === +max) && !uploading">
+
+  <label for="upload" *ngIf="uploadedFileCount >= 1">Add another document</label>
+
+  <input id="upload" type="file" #fileInput multiple (change)="fileChange($event)" placeholder="Upload file"
+    class="form-control-file" [accept]="allowedFileTypesString" />
+
+</div>
+<ng-template #defaultCertifierTemplate let-upload>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group ml-2 mr-4" [class.invalid]="(touched || certifierType.touched) && certifierType.invalid">
+        <label [for]="'certifierType'+i">Certifier type</label>
+        <app-autocomplete required [(ngModel)]="upload.certifier.type" #certifierType="ngModel"
+          (ngModelChange)="propagate()" [options]="certifierTypes" [id]="'certifierType'+i"
+          placeholder="Select certifier type..." [value]="certifierType"></app-autocomplete>
+
+        <app-collapsible [trigger]="(touched || certifierType.touched) && certifierType.errors?.required">
+          <p class="form-error">
+            You must enter a certifier type
+          </p>
+        </app-collapsible>
+      </div>
+<ng-container *ngIf="certifierType.value !== 'Post Office'">
+  <ng-container *ngTemplateOutlet="notPostOfficeCertifierTypeTemplate; context:{$implicit:upload}">
+  </ng-container>
+</ng-container>
+       
+    </div>
+    <div class="col-md-5">
+      <div class="form-group  ml-2 mr-2" [class.invalid]="(touched || certifiedDate.touched) && certifiedDate.invalid">
+        <label [for]="'certifiedDate'+i">Certified date</label>
+        <app-utc-date-picker #certifiedDate="ngModel" [(ngModel)]="upload.certifier.date"
+          (ngModelChange)="propagate()" required></app-utc-date-picker>
+        <app-collapsible [trigger]="(touched || certifiedDate.touched) && certifiedDate.errors?.required">
+          <p class="form-error">
+            You must enter a certified date
+          </p>
+        </app-collapsible>
+
+      </div>
+    </div>
+
+  </div>
+
+</ng-template>
+
+<ng-template #birthCertificateSecondOptionCertifierTemplate let-upload>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group ml-2 mr-4" [class.invalid]="(touched || certifierType.touched) && certifierType.invalid">
+        <label [for]="'certifierType'+i">Certifier type</label>
+        <app-autocomplete required [(ngModel)]="upload.certifier.type" #certifierType="ngModel"
+          (ngModelChange)="propagate()" [options]="birthCertificateCertifierTypes" [id]="'certifierType'+i"
+          placeholder="Select certifier type..." [value]="certifierType"></app-autocomplete>
+
+        <app-collapsible [trigger]="(touched || certifierType.touched) && certifierType.errors?.required">
+          <p class="form-error">
+            You must enter a certifier type
+          </p>
+        </app-collapsible>
+      </div>
+  <ng-container *ngTemplateOutlet="notPostOfficeCertifierTypeTemplate; context:{$implicit:upload}">
+  </ng-container>
+</div>
+    <div class="col-md-5">
+      <div class="form-group  ml-2 mr-2" [class.invalid]="(touched || certifiedDate.touched) && certifiedDate.invalid">
+        <label [for]="'certifiedDate'+i">Certified date</label>
+        <app-utc-date-picker #certifiedDate="ngModel" [(ngModel)]="upload.certifier.date"
+          (ngModelChange)="propagate()" required></app-utc-date-picker>
+        <app-collapsible [trigger]="(touched || certifiedDate.touched) && certifiedDate.errors?.required">
+          <p class="form-error">
+            You must enter a certified date
+          </p>
+        </app-collapsible>
+
+      </div>
+    </div>
+
+  </div>
+
+</ng-template>
+
+<ng-template #birthCertificateCertifierTemplate let-upload>
+  <form>
+    <div class="col-md-12">
+      <div class="form-group"
+        [class.invalid]="(duplicateOrSolicitor.value !== null && (touched || duplicateOrSolicitor.touched) && duplicateOrSolicitor.invalid)">
+        <label for="isDuplicateCopy">I have provided:</label>
+        <mat-radio-group #fileInput aria-label="Is your birth certificate a duplicate or solicitor certified?"
+          [(ngModel)]="upload.isDuplicateCopy" name="duplicateOrSolicitor" required (ngModelChange)="propagate()"
+          #duplicateOrSolicitor="ngModel" class="multi-line">
+          <mat-radio-button [value]="null">birth certificate issued by the General Register Office (GRO) as I
+            was born in England, Scotland or Wales</mat-radio-button>
+          <mat-radio-button [value]="false">certified copy of my birth certificate as i was born outside Great Britain</mat-radio-button>
+            <mat-radio-button [value]="true">statutory declaration A</mat-radio-button>
+        </mat-radio-group>
+
+        <app-collapsible [trigger]="(duplicateOrSolicitor.value !== null && (touched || duplicateOrSolicitor.touched) && duplicateOrSolicitor.errors?.required)">
+          <p class="form-error">
+            This is mandatory
+          </p>
+        </app-collapsible>
+      </div>
+    </div>
+  </form>
+  <app-collapsible [trigger]="duplicateOrSolicitor.value === false">
+    <ng-container *ngTemplateOutlet="birthCertificateSecondOptionCertifierTemplate; context:{$implicit:upload}">
+    </ng-container>
+  </app-collapsible>
+  <app-collapsible [trigger]="duplicateOrSolicitor.value === true">
+    <ng-container *ngTemplateOutlet="birthCertificatethirdOptionTemplate; context:{$implicit:upload}">
+    </ng-container>
+  </app-collapsible>
+</ng-template>
+
+<ng-template #photoCertifierTemplate let-upload>
+  <div class="row">
+    <div class="col-md-7">
+
+      <div class="form-group ml-2 mr-4" [class.invalid]="(touched || certifierType.touched) && certifierType.invalid">
+        <label [for]="'certifierType'+i">Certifier occupation</label>
+        <app-autocomplete required [(ngModel)]="upload.certifier.type" #certifierType="ngModel"
+          (ngModelChange)="propagate()" [options]="certifierTypes" [id]="'certifierType'+i"
+          placeholder="Select certifier type..."></app-autocomplete>
+
+        <app-collapsible [trigger]="(touched || certifierNumber.touched) && certifierNumber.errors?.required">
+          <p class="form-error">
+            You must enter a certifier occupation
+          </p>
+        </app-collapsible>
+      </div>
+
+      <div class="form-group ml-2 mr-4"
+        [class.invalid]="(touched || photoCertifierName.touched) && photoCertifierName.invalid">
+        <label [for]="'certifierName'+i">Certifier name</label>
+        <input type="text" class="form-control" required [(ngModel)]="upload.certifier.photoCertifierName"
+          (ngModelChange)="propagate()" #photoCertifierName="ngModel" [id]="'certiferName'+i"
+          placeholder="Enter certifier name..." />
+
+        <app-collapsible [trigger]="(touched || photoCertifierName.touched) && photoCertifierName.errors?.required">
+          <p class="form-error">
+            You must enter a certifier name
+          </p>
+        </app-collapsible>
+      </div>
+
+      <div class="form-group ml-2 mr-4" [class.invalid]="(touched || companyName.touched) && companyName.invalid">
+        <label [for]="'companyName'+i">Certifier Address</label>
+        <input type="text" class="form-control" required [(ngModel)]="upload.certifier.companyName"
+          #companyName="ngModel" [id]="'companyName'+i" (ngModelChange)="propagate()"
+          placeholder="Enter company name..." />
+
+        <app-collapsible [trigger]="(touched || companyName.touched) && companyName.errors?.required">
+          <p class="form-error">
+            You must enter a certifier address
+          </p>
+        </app-collapsible>
+      </div>
+      <div class="form-group ml-2 mr-4"
+        [class.invalid]="(touched || certifierNumber.touched) && certifierNumber.invalid">
+        <label [for]="'certifierNumber'+i">Certifier email</label>
+        <input type="text" class="form-control" required [(ngModel)]="upload.certifier.number"
+          #certifierNumber="ngModel" [id]="'certifierNumber'+i" (ngModelChange)="propagate()"
+          placeholder="Enter certifier registration number..." />
+
+        <app-collapsible [trigger]="(touched || certifierNumber.touched) && certifierNumber.errors?.required">
+          <p class="form-error">
+            You must enter a certifier email
+          </p>
+        </app-collapsible>
+      </div>
+
+     
+      <div class="form-group ml-2 mr-4" [class.invalid]="(touched || certifierType.touched) && certifierType.invalid">
+        <label [for]="'certifierType'+i">Certifier phone number</label>
+        <app-autocomplete required [(ngModel)]="upload.certifier.type" #certifierType="ngModel"
+          (ngModelChange)="propagate()" [options]="certifierTypes" [id]="'certifierType'+i"
+          placeholder="Select certifier type..."></app-autocomplete>
+
+        <app-collapsible [trigger]="(touched || certifierNumber.touched) && certifierNumber.errors?.required">
+          <p class="form-error">
+            You must enter a certifier phone number
+          </p>
+        </app-collapsible>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group  ml-2 mr-2" [class.invalid]="(touched || certifiedDate.touched) && certifiedDate.invalid">
+        <label [for]="'certifiedDate'+i">Certified date</label>
+        <app-utc-date-picker [(ngModel)]="upload.certifier.date" #certifiedDate="ngModel" (ngModelChange)="propagate()"
+          required></app-utc-date-picker>
+        <app-collapsible [trigger]="(touched || certifiedDate.touched) && certifiedDate.errors?.required">
+          <p class="form-error">
+            You must enter a certified date
+          </p>
+        </app-collapsible>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #notPostOfficeCertifierTypeTemplate let-upload>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group ml-2 mr-4" [class.invalid]="(touched || certifierName.touched) && certifierName.invalid">
+        <label [for]="'certifierName'+i">Certifier name</label>
+        <input type="text" class="form-control" required [(ngModel)]="upload.certifier.name"
+          (ngModelChange)="propagate()" #certifierName="ngModel" [id]="'certiferName'+i"
+          placeholder="Enter certifier name..." />
+    
+        <app-collapsible [trigger]="(touched || certifierName.touched) && certifierName.errors?.required">
+          <p class="form-error">
+            You must enter a certifier name
+          </p>
+        </app-collapsible>
+      </div>
+    
+      <div class="form-group ml-2 mr-4" [class.invalid]="(touched || companyName.touched) && companyName.invalid">
+        <label [for]="'companyName'+i">Company name</label>
+        <input type="text" class="form-control" required [(ngModel)]="upload.certifier.companyName"
+          #companyName="ngModel" [id]="'companyName'+i" (ngModelChange)="propagate()"
+          placeholder="Enter company name..." />
+    
+        <app-collapsible [trigger]="(touched || companyName.touched) && companyName.errors?.required">
+          <p class="form-error">
+            You must enter a company name
+          </p>
+        </app-collapsible>
+      </div>
+      <div class="form-group ml-2 mr-4"
+        [class.invalid]="(touched || certifierNumber.touched) && certifierNumber.invalid">
+        <label [for]="'certifierNumber'+i">Certifier registration number</label>
+        <input type="text" class="form-control" required [(ngModel)]="upload.certifier.number"
+          #certifierNumber="ngModel" [id]="'certifierNumber'+i" (ngModelChange)="propagate()"
+          placeholder="Enter certifier registration number..." />
+    
+        <app-collapsible [trigger]="(touched || certifierNumber.touched) && certifierNumber.errors?.required">
+          <p class="form-error">
+            You must enter a certifier number
+          </p>
+        </app-collapsible>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #birthCertificatethirdOptionTemplate let-upload>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group ml-2 mr-4">
+        <label [for]="'certifierType'">Certifier type</label>
+            <div type="text" class="form-control readonly" [innerHTML]="isBirthCertificateIsSolicitor">
+            </div>
+         </div>
+         <ng-container *ngTemplateOutlet="notPostOfficeCertifierTypeTemplate; context:{$implicit:upload}">
+        </ng-container>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group  ml-2 mr-2" [class.invalid]="(touched || certifiedDate.touched) && certifiedDate.invalid">
+        <label [for]="'certifiedDate'+i">Certified date</label>
+        <app-utc-date-picker #certifiedDate="ngModel" [(ngModel)]="upload.certifier.date"
+          (ngModelChange)="propagate()" required></app-utc-date-picker>
+        <app-collapsible [trigger]="(touched || certifiedDate.touched) && certifiedDate.errors?.required">
+          <p class="form-error">
+            You must enter a certified date
+          </p>
+        </app-collapsible>
+
+      </div>
+    </div>
+
+  </div>
+</ng-template>

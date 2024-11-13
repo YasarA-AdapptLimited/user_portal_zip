@@ -1,0 +1,75 @@
+<ng-template #content>
+  <h2 class="spacer">
+    Application fee
+    <img src="/assets/images/creditcards/poweredByWorldPay.gif" alt="Worldpay Logo" style="float:right" title="Payments Powered by WorldPay"
+    /></h2>
+
+  <section *ngIf="worldpayConfig else loading" class="fadein card-selection">
+    <h3>Fees to be paid</h3>
+
+
+    <h4  style="margin-bottom:40px">
+      Registration application fee: {{fee | currency: 'GBP': 'symbol' :'.2'}}
+    </h4>
+
+    <div class="intro-text" style="margin-bottom:2em;">
+      <p>
+        This fee covers the processing of your application for registration as a pharmacist, and is non-refundable.
+      </p>
+      <p>
+        If your application is successful, you will need to make a separate payment to cover your first year of registration. 
+        You will receive a notification via myGPhC to ask you to do this, once your application has been assessed and approved.
+      </p>
+      <p>
+         If your application is unsuccessful, you can reapply for up to six months from the date you submitted it without paying
+        another fee. If you want to reapply after six months, you will need to start a new application and pay the application fee
+        again.
+      </p>
+    </div>
+
+
+    <h3>Please select your card type</h3>
+
+      <div class="intro-text" style="margin-bottom:1em;">
+        <p>
+          We can only accept payments made in pounds sterling (GBP). Payments are processed using worldpay, for more information please
+          review their
+          <a href="https://www.worldpay.com/uk/worldpay-privacy-notice" target="_blank">privacy policy</a>.
+        </p>
+        <p>
+        When you make a card payment, you may be redirected to your card provider’s site to enter another password before they authorise
+        your payment. You can find out more about 3-D Secure authentication from your card provider.
+        </p>
+      </div>
+
+    <mat-radio-group [(ngModel)]="selectedCard" >
+      <mat-radio-button *ngFor="let card of creditCards" value="{{card.id}}" [aria-label]="card.id">
+        <img src="/assets/images/creditcards/{{card.id}}.gif" alt="{{card.name}} Logo" title="{{card.name}} Logo" />
+        <br/> {{card.name}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <form [action]="worldpayConfig.paymentUrl" name="worldayForm" method="post" #worldpayForm>
+        <input type="hidden" name="paymentType" [value]="selectedCard" />
+        <input type="hidden" name="testMode" [value]="worldpayConfig.testMode" />
+        <input type="hidden" name="instId" [value]="worldpayConfig.instId" />
+        <input type="hidden" name="M_Callback" [value]="worldpayConfig.worldPayCallbackUrl" />
+        <input type="hidden" name="desc" [value]="'GPhC registration application fee'" />
+        <input type="hidden" name="currency" [value]="'GBP'" />
+        <input type="hidden" name="hideCurrency" [value]="true" />
+        <input type="hidden" name="amount" [value]="fee" />
+        <input type="hidden" name="cartId" [value]="cartId" />
+      </form>
+    
+
+  </section>
+
+
+
+</ng-template>
+
+<ng-template #loading>
+    <div class="step-loading">
+      <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+    </div>
+  </ng-template>

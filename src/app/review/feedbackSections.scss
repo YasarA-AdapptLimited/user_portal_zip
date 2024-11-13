@@ -1,0 +1,42 @@
+@import "../style/variables";
+
+:host {
+
+
+  .feedback-section {
+    padding-left: 15px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-right: 10px;
+    padding-top: 5px;
+    border-left: 6px solid transparent;
+    background: white !important;
+      &.selected {
+          border-left: 6px solid $gphc-blue;
+          &:hover {
+            cursor: default;
+          }
+      }
+
+    .section-header {
+      color: $gphc-blue;
+      font-weight: bold;
+      font-size: 1.3em;
+      min-height: 50px;
+    }
+  }
+
+  ::ng-deep
+  .root-collapsible {
+    > .collapsible {
+      margin-left: -15px;
+      padding-left: 15px;
+    }
+  }
+
+  ::ng-deep button.gphc-icon .circle.fa-stack {
+    font-size: 0.8em;
+    margin: 5px;
+  }
+
+}

@@ -1,0 +1,49 @@
+<ng-container *ngIf="trainingSites">
+  <div class="row">
+    <div class="col-md-4">
+      <label for="trainedAt">Trained at</label>
+    </div>
+    <div class="col-md-4">
+      <label for="startDate">Start date</label>
+    </div>
+    <div class="col-md-4">
+      <label for="endDate">End date</label>
+    </div>
+  </div>
+  <div class="row" *ngFor="let site of trainingSites; let i = index;">
+    <div class="form-group col-md-4">
+
+      <div id="trainedAt" class="form-control" tabindex="-1" readonly style="line-height: 1.7em;">
+        <b>{{site.trainingSite}}</b>
+        <br />
+        <span [innerHTML]="itemAddresses[i]"></span>
+      </div>
+    </div>
+    <div class="form-group col-md-4 col-6">
+
+      <input id="startDate" class="form-control" tabindex="-1" readonly [value]="site.startDate | utcDate" />
+    </div>
+    <div class="form-group col-md-4 col-6">
+
+      <input id="endDate" class="form-control" tabindex="-1" readonly [value]="site.endDate | utcDate" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="supervisor">Designated supervisor</label>
+    </div>
+  </div>
+  <div class="row" *ngFor="let tutor of tutors">
+    <div class="form-group col-md-4">
+      <div id="supervisor" class="form-control" tabindex="-1" readonly>
+        {{ tutor.name}}
+      </div>
+    </div>
+    <div class="form-group col-md-4 col-6">
+      <input class="form-control" tabindex="-1" readonly [value]="tutor.startDate | utcDate" />
+    </div>
+    <div class="form-group col-md-4 col-6">
+      <input class="form-control" tabindex="-1" readonly [value]="tutor.endDate | utcDate" />
+    </div>
+  </div>
+</ng-container>

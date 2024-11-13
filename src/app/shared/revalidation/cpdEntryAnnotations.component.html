@@ -1,0 +1,15 @@
+<div *ngIf="cpdEntry">
+  <div class="annotation my-annotation" *ngIf="cpdEntry.currentReviewerAnnotation">
+    <h5>Your annotation</h5>
+    <div  [innerHTML]="cpdEntry.currentReviewerAnnotation">
+     
+    </div>
+  </div>
+
+  <div  class="annotation peer-annotation" *ngIf="cpdEntry.otherReviewerAnnotation">
+    <h5>Peer's annotation</h5>
+    <div  [innerHTML]="cpdEntry.otherReviewerAnnotation">
+      
+    </div>
+  </div>
+</div>

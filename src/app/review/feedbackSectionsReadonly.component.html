@@ -1,0 +1,22 @@
+<div class="row table-row no-gutters feedback-section" *ngFor="let section of sections"
+  [class.selected]="section===selected">
+  <div class="col-12 clickable section-header" style="display:flex">
+    <span (click)="select(section)" style="flex-grow: 1">{{section.title}} </span>
+
+  </div>
+  <app-collapsible class="col-12 root-collapsible" [trigger]="section===selected">
+    <app-collapsible [trigger]="section.helpVisible" class="help-block">
+
+    </app-collapsible>
+
+    <div style="padding-bottom: 10px;">
+
+      <div *ngIf="feedback[section.feedbackType]" [innerHTML]="feedback[section.feedbackType]">
+      </div>
+      <div *ngIf=" !feedback[section.feedbackType]">
+        No feedback yet.
+      </div>
+
+    </div>
+  </app-collapsible>
+</div>

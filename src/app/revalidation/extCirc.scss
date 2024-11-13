@@ -1,0 +1,25 @@
+@import '../style/variables';
+
+.ext-circ-status, .status {
+  white-space:nowrap;
+  background-color: $gphc-blue;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+
+  font-weight: bold;
+
+
+  &.Received, &.Pending {
+    background-color: $error;
+  }
+  &.Approved, &.Submitted {
+    background-color: $gphc-aqua;
+  }
+  &.PartiallyApproved {
+    background-color: $gphc-aqua;
+  }
+  &.Rejected {
+    background-color: $error;
+  }
+}

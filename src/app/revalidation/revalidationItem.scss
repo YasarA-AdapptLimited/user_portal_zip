@@ -1,0 +1,173 @@
+@import "../style/variables";
+
+app-banner {
+
+  ::ng-deep .btn-back {
+    
+    width: 60px;
+    height: 60px;
+    @media(max-width:530px) {
+      width: 45px;
+      height: 45px;
+    }
+    border-radius: 50% !important;
+    margin-top: -25px;
+    margin-right: 10px;
+    @media(max-width:530px) {
+      margin-right:0;
+    }
+    /*color: #4fb490 !important;*/
+    background: white !important;
+    i {
+      font-size: 2em;
+      padding:0 !important;
+      margin-left: -3px;
+      color: $gphc-aqua !important;
+      @media(max-width:530px) {
+        margin-left: -6px;
+        margin-top: -2px;
+        font-size:1.5em;
+      }
+    }
+
+  }
+
+}
+
+.total-word-count {
+    width: 158px;
+    height: 158px;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 15px solid #eee;
+
+    .count {
+        position: absolute;
+        color: #00759b;
+        font-weight: 100;
+        line-height: 1;
+        top: 52%;
+        bottom: auto;
+        left: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
+        font-size: 35.7143px;
+    }
+}
+
+.header-container:not(.loading) {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  h1 { flex-grow: 1 }
+}
+
+.item-container {
+
+  transform:  translateY(0);
+
+  @media (min-width: 768px) {
+    &.started {
+        transform: translateY(-40px);
+      }
+  }
+
+}
+
+
+.heading {
+    color: $gphc-purple;
+    font-weight: 900;
+    font-size: 1.2em;
+}
+
+input.invalid {
+    border-color: $gphc-accent-orange !important;
+}
+
+
+
+::ng-deep {
+
+    .cpd-item {
+        section {
+          /*
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.12);
+*/
+            @media (min-width: 768px) {
+                &.title {
+                    margin-top: -40px;
+                }
+            }
+
+            @media (max-width: 767px) {
+              padding-bottom: 0;
+            }
+
+            h3 {
+                font-size: 2em !important;
+            }
+        }
+
+        .intro-text {
+            font-size: 1em;
+        }
+
+        .form-group:not(.readonly) {
+            margin-bottom: 0;
+            border-left: 12px solid $gphc-blue;
+            transition: border-color 300ms linear;
+         
+            margin-left: -15px;
+            padding-left:20px;
+
+            @media (min-width: 768px) {
+              margin-left: -20px;
+              padding-left: 20px;
+            }
+
+            &.invalid {
+                border-color: $error;
+
+                label {
+                    color: $error;
+                }
+            }
+        }
+
+        mat-spinner {
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 767px) {
+            .form-control {
+                padding: 10px !important;
+            }
+        }
+
+        .freetext {
+          label , h2.label {
+            padding-bottom: 10px;
+          }
+        }
+
+        label , h2.label {
+            font-family: 'Open Sans', sans-serif !important;
+            font-size: 1.2em;
+            color: $gphc-blue;
+            font-weight: bold;
+            line-height: 1.2em;
+
+        
+
+        }
+
+        @media (max-width: 767px) {
+            label, .label {
+                font-size: 1.1em;
+            }
+        }
+    }
+}

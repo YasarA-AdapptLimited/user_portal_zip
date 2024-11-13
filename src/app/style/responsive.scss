@@ -1,0 +1,129 @@
+@media (max-width: 1100px) {
+  .h3, h3 {
+      font-size: 1.8rem;
+  }
+
+  .content {
+      /*  padding-right: 20px;*/
+      padding-left: 40px;
+  }
+}
+
+@media (max-width: 991px) {
+  .left-col {
+      padding-top: 0;
+  }
+}
+
+@media (min-width: 992px) {
+
+  [class^="col-lg"] {
+    &.right-col {
+        padding-left: 8px !important;
+    }
+
+    &.mid-col {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    &.left-col {
+        padding-right: 8px !important;
+    }
+}
+}
+@media (min-width: 768px) {
+  .content.spread {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+
+      [class^="col-md"],  [class^="col-sm"] {
+          &.right-col {
+              padding-left: 8px !important;
+          }
+
+          &.mid-col {
+              padding-left: 10px;
+              padding-right: 10px;
+          }
+
+          &.left-col {
+              padding-right: 8px !important;
+          }
+      }
+  }
+}
+
+@media (max-width: 767px) {
+
+  .content {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      &.spread, &.sm-no-margin {
+        [class^="col-"] {
+          padding-right: 0;
+          padding-left: 0;
+        }
+      }
+  }
+
+  .rings {
+      width: 222px !important;
+  }
+
+  a.logo {
+      padding-top: 40px !important;
+      padding-left: 40px;
+
+      img {
+          width: 214px !important;
+          height: 98px !important;
+      }
+  }
+
+  .btn-round {
+      width: 120px;
+      height: 120px;
+  }
+
+  .button-section {
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 630px) {
+  .intro-text {
+      font-size: 1.15em;
+      margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 530px) {
+  .page {
+      padding-right: 0;
+  }
+
+  label {
+      font-size: 1em;
+  }
+
+  .card {
+      .col-sm-12 {
+          padding: 0;
+      }
+  }
+
+  h2.content-header {
+      padding-left: 10px !important;
+      font-size: 2.1em;
+      padding-top: 10px;
+      border-left-width: 7px;
+  }
+}
+
+@media (max-width: 400px) {
+  .content {
+      margin-bottom: 0;
+  }
+}

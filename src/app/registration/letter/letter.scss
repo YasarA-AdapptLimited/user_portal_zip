@@ -1,0 +1,265 @@
+@import "../../style/variables";
+
+:host {
+
+
+  ul {
+    list-style-type: disc;
+    li {
+      
+    }
+  }
+
+  .sub-heading{
+    color: $gphc-blue;
+    background: transparent !important;
+    font-size: 1.2rem!important;
+} 
+
+#heading-label {
+  display: none;
+}
+
+  .gphc-blue {
+    color: $gphc-blue !important;
+  }
+
+  .black-text {
+    color: black;
+    font-weight: 900;
+  }
+  
+  h2 {
+    font-family: 'Open sans', sans-serif !important;
+  
+    font-weight: bold;
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 18px;
+    margin-top: 30px;
+  }
+  .headline {
+    font-size: 16px;
+  }
+
+  .table-border {
+    border: 4px solid $gphc-blue;
+    border-radius: 20px;
+    padding: 20px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+  }
+  table.table.renewal-details {
+   padding: 0;border: 0;
+    tr td:first-child, th {
+      font-weight: bold;
+    }
+  
+  }
+
+  @media (min-width: 768px) {
+    .content {
+      padding: 40px;
+    }
+    section { margin-top: 0;}
+  }
+
+  @media (max-width: 1024px) {
+    .content {
+      padding-left: 0 !important; 
+      padding-right: 0 !important; 
+    }
+    section.notice-of-entry {
+      table.regDetails {
+        position: relative!important;
+        top: 0!important;
+        right: 0!important;
+        width: 98%!important;
+      }
+    }
+
+  }
+  .signature img {
+    width: 180px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
+  ::ng-deep .banner-left {
+
+    .button-container {
+      margin-top:-20px;
+      margin-left: 20px;
+      text-align: center;
+
+      .btn-round:focus {
+        box-shadow: 0 0 0 7px $gphc-accent-yellow !important;
+      }
+      @media (max-width: 500px) {
+        height: 50px;
+        width: 50px;
+      button {
+          height: 50px;
+          width: 50px;
+          // font-size:0.8em;
+          padding: 0;
+        }
+      }
+      .btn-text {
+        color: white !important;
+      }
+     
+    }
+
+  }
+
+  section.section-to-print, 
+  section.no-print {
+    padding: 2em !important;
+  }
+
+  section {
+    &.notice-of-entry,
+    &.notice-of-advice,
+    &.letter-header,
+    &.no-print {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0;
+      i {
+        font-size: 1em !important;
+      }
+  
+      .notice {
+        margin-bottom: 20px;
+        text-align: left;
+        color: black;
+        margin-left: 1em;
+      }
+  
+      .longer-notice {
+        @extend .notice;
+        font-size:1em !important;
+        margin-top:20px;
+
+      }
+    
+  
+      div.main-content {
+        width: 95%;
+        margin: 0 auto;
+        p {
+          padding: 0;
+        }
+        ul li {
+            margin-bottom: 1em;
+          } 
+          .note{
+            color:$gphc-accent-pink;
+          }
+      }
+      
+    }
+
+    &.notice-of-entry-wrapper {
+      position: relative;      
+    }
+  } // end of section
+
+
+  ul.bullet-point {
+        list-style-type: disc;
+  }
+
+  .logo {
+      width: 180px;
+      margin-top: 20px;
+      margin-bottom: 60px;
+  }
+
+  table.reg-details {
+    background-color: $light-grey!important;
+    th , td + td {
+      color: $gphc-blue;
+    }
+    th, td {
+      padding: 2px;
+    }
+    th {
+      font-size: 1.2em;
+    }
+    margin-bottom: 20px;
+
+}
+
+ table.results-details {
+   border: 1px solid black;
+ 
+    th, td {
+      padding: 15px;
+       border: 1px solid black;
+       width: auto;
+    }
+    th {
+      font-size: 1.2em;
+      font-weight: bold;
+      border: none;
+    }
+    tr td:first-child {
+      color:black;
+    }
+   margin-bottom:20px;
+}
+
+
+@media print {
+  table.regDetails {
+
+  -webkit-print-color-adjust: exact;
+
+  }
+
+  .main-content > p{
+    padding-bottom: 5px!important;
+  }
+} 
+
+
+  @media print {
+   ::ng-deep app-banner {
+      display: none;
+    }
+  
+    app-collapsible ::ng-deep {
+    display: none;
+   }
+
+  section.letter-header {
+      max-width: 100%;
+   }
+
+  section.section-to-print {
+      max-height: 99%;
+      font-size: 10pt;
+
+      h1 {
+        font-size: 15pt;
+      }
+
+      p, ul li {
+        font-weight: 400;
+      }
+
+      div.main-content {
+        margin: 0 auto;
+        ul li {
+          margin-bottom: 16pt;
+        }
+      }
+
+    }
+  } // end of print styles
+
+
+}

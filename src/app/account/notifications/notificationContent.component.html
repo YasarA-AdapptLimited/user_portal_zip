@@ -1,0 +1,1590 @@
+<ng-container [ngSwitch]="type">
+
+  <ng-container *ngSwitchCase="NotificationType.RegistrationFormCountersignatureRequested">
+    <h2> {{ item.title }}</h2>
+    <p>
+      You have been nominated by an applicant to countersign their application to register as a pharmacist.
+    </p>
+    <p>
+      <a routerLink="/registration">Click here to review the application.</a>
+    </p>
+    <p>
+      If you think that this application was sent you in error, you can indicate this on the application and it will be
+      returned
+      to the applicant.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ApplicationApprovedPendingAssessmentNotification">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application for pharmacist registration has been approved pending the results of the Registration assessment.
+    </p>
+    <p>
+      Following the registration assessment results, you will receive a notification to update you of the status of your
+      application.
+    </p>
+    <p>
+      No action is currently required.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IneligibleBasedOnAssessmentNotification">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your application for Pharmacist registration has been marked as ineligible following your assessment results. For
+      further guidance on progressing your application please refer to your assessment results letter or the
+      foundation manual - <a href="https://www.pharmacyregulation.org/preregmanual"
+        target="_blank">https://www.pharmacyregulation.org/preregmanual</a>
+    </p>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RegistrationPaymentRequiredNotification">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application for registration as a Pharmacist has now been approved.
+    </p>
+    <p>
+      Once you have passed your final training date and your 52 week training is complete then you will be able to make
+      your first
+      year fee payment of £276 from the homepage.
+    </p>
+    <p>
+      <b>
+        Please note you will not be able to make the first year fee payment until the final date of your
+        pre-registration training
+        has passed
+      </b>
+    </p>
+    <p class="important">
+      Important: do not practise as a pharmacist until you have received your GPhC registration number and your name
+      appears on
+      the online register. Your first-year entry fee payment receipt is not proof of your registration. Practising as a
+      pharmacist
+      while not on the register is breaking the law and you can be prosecuted.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RegistrationFormCountersignatureApproved">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application to register as a pharmacist has been countersigned by your selected pharmacist.
+    </p>
+    <p>
+      You can now review your application – if you make any changes, you will need to send it to be countersigned again.
+    </p>
+    <p>
+      If you are satisfied with your application, you can now make your application payment to complete and submit it.
+    </p>
+    <p>
+      <a routerLink="/prereg/application">Complete your application</a>
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RegistrationFormCountersignatureRejected">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application for registration has not been countersigned and has been returned to you with comments. Please
+      <a routerLink="/prereg/application">review the comments from your selected pharmacist.</a>
+    </p>
+    <p>
+      You must have your application successfully countersigned to be able to apply for pharmacist registration.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RegistrationFormCountersignatureRefused">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application to register as a pharmacist has been returned by your selected countersigning pharmacist. They
+      have indicated
+      that it was sent to them in error.
+    </p>
+    <p>
+      You will need to assign your application to another pharmacist to complete the countersigning section.
+    </p>
+    <p>
+      You must make sure your application is countersigned to proceed.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RegistrationFormCountersignatureRecalled">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      The Pharmacist registration application which was previously submitted to you has been recalled by the
+      pre-registration trainee.
+    </p>
+    <p>
+      No further action required.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RevalidationReminder">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your revalidation is due to be submitted soon.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.RegistryEntryNotification">
+    <h2>
+      Welcome to the register
+    </h2>
+    <p>
+      Your application is now complete. This notification is to confirm that you will now join the GPhC register as a
+      pharmacy professional
+      on the date set out in your notice of entry letter (which is available on the ‘Registration’ page). This letter
+      confirms
+      your registration details, as well as the date your registration starts.
+    </p>
+
+    <p class="important">
+      <b>Important</b>: do not practise as a pharmacy professional until you have received your GPhC registration number
+      and your name
+      appears on the online register. Your first-year entry fee payment receipt is not proof of your registration.
+      Practising
+      as a pharmacy professional while not on the register is breaking the law and you can be prosecuted.
+    </p>
+
+    <p>
+      While you are registered, please remember that you must:
+    </p>
+
+    <ul>
+      <li>keep to the
+        <a href="https://www.pharmacyregulation.org/standards-for-pharmacy-professionals" target="_blank">standards for
+          pharmacy professionals</a>
+      </li>
+      <li>
+        <a href="https://www.pharmacyregulation.org/pharmacists/revalidation-renewal/renew-your-registration" target="_blank">carry out and record revalidation
+          activity</a>
+      </li>
+      <li>
+        <a href="https://www.pharmacyregulation.org/registration/changes-your-registration/changing-your-details"
+          target="_blank">notify us of any changes to your name, home address or other contact details</a> within one
+        month of the date of
+        the change
+      </li>
+      <li>
+        <a href="https://www.pharmacyregulation.org/registration/changes-your-registration/something-declare"
+          target="_blank">
+          notify us if anything happens which could affect your fitness to practise</a>, and would change your answers
+        to
+        the fitness to practise declarations you made in your application, within seven days of the event happening
+      </li>
+      <li>
+        <a href="https://www.pharmacyregulation.org/pharmacists/registering-pharmacist/indemnity-requirements" target="_blank">
+          Notify us if you no longer have appropriate indemnity arrangements in place
+        </a>
+      </li>
+    </ul>
+    <p>
+      You will need to renew your registration and submit your revalidation records at least two months before it
+      expires, using
+      myGPhC. We will let you know what you need to do renew nearer the time.
+    </p>
+  </ng-container>
+
+
+  <ng-container *ngSwitchCase="NotificationType.RegistrationFormFirstYearFeeSuccessful">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Thank you for paying your first-year registration fee.
+    </p>
+    <p>
+      We will confirm the date you will join the register as soon as possible by myGPhC notification. This will be on
+      the first
+      or the fifteenth of the month. If you have given us permission to contact you by email, we will send you an email
+      once
+      you have joined the register. Please note, this may take up to 14 days.
+    </p>
+    <p>
+      <b>Important</b>: do not practise as a pharmacist until you have received your GPhC registration number and your
+      name
+      appears on the online register. It is your responsibility to check this before you practice. Your registration
+      payment
+      receipt is not proof of your registration. Practising as a pharmacist while not on the register is breaking the
+      law
+      and you can be prosecuted.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RegistrationFormApplicationSubmitted">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Thank you for submitting your online application and paying the application fee.
+    </p>
+    <p class="important">
+      <b>Important:</b> to complete your application, you must send us hard copies of all the documents you have scanned
+      and
+      uploaded in the Supporting documents section. You must include an application cover sheet (available as part of
+      the
+      application guidance). We recommend sending your documents using a trackable method such as Royal Mail ‘Signed
+      For’.
+      You are responsible for making sure your documents arrive with us in good time.
+    </p>
+    <p>
+      Once we have received your paper supporting documents our applications team will assess the information you have
+      given us
+      and make a decision about your application.
+    </p>
+    <p>
+      If you have submitted this application before you know your assessment result, you will not be able to join the
+      register
+      until your result is confirmed as a pass.
+    </p>
+    <p>
+      If you have not fully completed your foundation training, you will not be able to join the register until
+      this is confirmed
+      as complete.
+    </p>
+    <p>
+      If we do not need any additional information, we will confirm the decision on your application by myGPhC
+      notification.
+    </p>
+    <p>
+      If you have given us permission to contact you by email, we will send you an email once the decision is available
+      for you
+      to view.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.RevalidationSubmissionPartialSubmit">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      View your remediation notice <a [routerLink]="['/registration']">here</a>.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.RenewalRevalidationReminderSameDate">
+    <h2>
+      {{ item.title }}
+    </h2>
+
+    <p>
+      Your registration renewal is now due. Please complete any of the following steps that are still outstanding:
+    </p>
+    <ul class="bullet-point">
+      <li>complete your renewal declarations</li>
+      <li>pay your registration renewal fee</li>
+      <li>submit your revalidation records covering your previous 12-month period of registration</li>
+    </ul>
+    <p>
+      If you do not do so before your renewal due date, your registration will be at risk and we may take action that
+      could lead
+      to your removal from the register.
+    </p>
+    <p>
+      If you do not want to renew your registration and have already completed a voluntary removal form, please ignore
+      this reminder.
+    </p>
+    <p>
+      Your sincerely
+    </p>
+    <p>
+      {{ item.sender}}
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.RenewalRevalidationReminderPendingExtenuatingCircumstances">
+    <h2>{{ item.title }}</h2>
+    <p>
+      Your registration renewal is now due. Please complete any of the following steps that are still outstanding:
+    </p>
+    <ul class="bullet-point">
+      <li>complete your renewal declarations</li>
+      <li>pay your registration renewal fee</li>
+      <li>submit your revalidation records covering your previous 12-month period of registration</li>
+    </ul>
+    <p>
+      We are currently reviewing your Extenuating circumstances request. If you do not receive confirmation that your
+      request has
+      been accepted by the renewal due date above, and you do not submit the full revalidation requirement, you will be
+      placed
+      in remediation until you receive a decision about your request.
+    </p>
+    <p>
+      You must complete your renewal declarations and pay your renewal fee as usual. If you do not do so before your
+      renewal due
+      date, your registration will be at risk and we may take action that could lead to your removal from the register.
+    </p>
+    <p>
+      Your sincerely
+    </p>
+    <p>
+      {{ item.sender}}
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.RenewalRevalidationReminderExtensionGrantedRenewalDue">
+    <h2>{{ item.title }}</h2>
+
+    <p>
+      Your registration renewal is now due. Please complete any of the following steps that are still outstanding:
+    </p>
+
+    <ul class="bullet-point">
+      <li>complete your renewal declarations</li>
+      <li>pay your registration renewal fee</li>
+    </ul>
+
+    <p>
+      As you have been granted an extension to your revalidation due date, you must now submit a full revalidation
+      record by a
+      new deadline of {{ item.data.RenewalDate }}.
+    </p>
+    <p>
+      If you do not complete your renewal declarations and pay your renewal fee before your renewal due date, your
+      registration
+      will be at risk and we may take action that could lead to your removal from the register.
+    </p>
+    <p>
+      Your sincerely
+    </p>
+    <p>
+      {{ item.sender}}
+    </p>
+
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.RenewalRevalidationReminderExtensionGrantedRevalidationSubmissionDue">
+    <h2>{{ item.title }}</h2>
+
+    <p>
+      Your revalidation submission is now due.
+    </p>
+    <p>
+      Please review your
+      <a [routerLink]="'/revalidation'">revalidation records</a>
+    </p>
+    <p>
+      If you do not do so before your due date, you will be placed in remediation and your registration could be at
+      risk.
+    </p>
+    <p>
+      Your sincerely
+    </p>
+    <p>
+      {{ item.sender}}
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.RevalidationSubmissionSubmit">
+    <h2>{{ item.title }}</h2>
+    <p>
+      Thank you for submitting your revalidation records covering the 12-month period ending
+      {{ item.data.RenewalDate }}.
+    </p>
+    <p>
+      If your records are selected for review then we will contact you at the appropriate time to advise you.
+    </p>
+    <p>
+      Your sincerely
+    </p>
+    <p>
+      {{ item.sender}}
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.RemediationEntered">
+    <p>View your letter <a [routerLink]="['/registration/letter/2']">here</a></p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.NoIREntered">
+    <p>View your letter <a [routerLink]="['/registration/letter/3']">here</a></p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.NoRIssued">
+    <p>View your letter <a [routerLink]="['/registration/letter/4']">here</a></p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RenewalWindowOpening">
+    <b>Renewal window now open</b>
+    <p> View your renewal letter <a [routerLink]="['/registration']">here</a></p>
+  </ng-container>
+
+
+  <ng-container *ngSwitchCase="NotificationType.RevalidationReviewFeedbackSent">
+    <h2>Feedback report</h2>
+    <p>A revalidation record feedback report is now available to read <a
+        routerLink="/revalidation/past/{{item.data?.SubmissionId}}">here</a>.</p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RevalidationReviewAvailable">
+    <h2>Review(s) available</h2>
+    <p>You have one or more reviews available, with deadline
+      {{item.data?.ReviewDeadline | date: 'dd/MM/yyyy'}}.
+    </p>
+    <p>
+      <a routerLink="/review">View them here</a>.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RevalidationSelectedForReview">
+
+    <h2>Your revalidation record has been selected for review</h2>
+    <p>
+      The revalidation record that you submitted to us has been selected for review. If you would like more information
+      on what will happen please read the <a href="https://www.pharmacyregulation.org/pharmacists/revalidation-renewal/renew-your-registration"
+        target="_gphc_main_site">revalidation framework</a>. If we do not contact you to request further
+      information we will provide you with a feedback report by {{item.data?.FeedbackDate | date: 'dd/MM/yyyy'}}.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.RevalidationReviewFeedbackRejected">
+    <h2>Review {{ item.data?.ReviewTitle }}</h2>
+    <p>Your feedback for <a [routerLink]="['/review', item.data?.ReviewId]">Review {{ item.data?.ReviewTitle }}</a> was
+      rejected.
+    </p>
+    <p>Please look at the comments made by the GPhC quality assurance team on this review and carry out the required
+      actions.</p>
+
+    <p>Thank you for your co-operation.</p>
+
+
+  </ng-container>
+
+
+  <ng-container *ngSwitchCase="NotificationType.RevalidationReviewReminder">
+
+    <h2>Urgent Review Batch deadline approaching - {{ item.data?.ReviewDeadline | date: 'dd/MM/yyyy' }}</h2>
+    <p>
+      You currently have reviews that have been allocated to you for this deadline date which are not yet complete.
+      Please ensure that all reviews for the stated deadline date are completed within a week of the date of this
+      notification.
+    </p>
+
+    <p>
+      Thank you for your co-operation.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ExtenuatingCircumstancesSent">
+    <h2>{{ item.title }}
+    </h2>
+
+    <p>
+      Thank you for telling us about issues affecting your revalidation submission and requesting changes to the
+      requirements.
+      We have received your request.
+    </p>
+    <p>
+      We will consider your request and the supporting information you have provided. If we do not need to discuss the
+      matter
+      further with you, we will upload our decision into your myGPhC account within
+      {{ item.data?.EstimatedDaysToProcess}} days.
+    </p>
+    <p>
+      If you have given us permission to contact you by email , we will send you an email once the decision is available
+      for you to view.
+    </p>
+    <p>
+      You can check whether you have opted to receive electronic communication on the ‘Account’ page of myGPhC and
+      change your
+      preferences if you want to.
+    </p>
+    <p>
+      Your sincerely
+    </p>
+    <p>
+      {{ item.sender}}
+    </p>
+
+  </ng-container>
+
+
+  <ng-container *ngSwitchCase="NotificationType.ExtenuatingCircumstancesApproved">
+    <ng-container *ngTemplateOutlet="extCircDecision"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ExtenuatingCircumstancesPartiallyApproved">
+    <ng-container *ngTemplateOutlet="extCircDecision"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ExtenuatingCircumstancesRejected">
+    <ng-container *ngTemplateOutlet="extCircDecision"></ng-container>
+  </ng-container>
+
+  <!--MAE-18: new notification for EC Resubmission-->
+  <ng-container *ngSwitchCase="NotificationType.ExtenuatingCircumstancesRequestResubmit">
+    <ng-container *ngTemplateOutlet="extCircDecision"></ng-container>
+  </ng-container>
+
+  <!--student notifications starts-->
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormLearningContractSignatureRequested">
+    <h2>{{ item.title }}</h2>
+
+    <p>
+      You have been nominated as a foundation designated supervisor by an applicant to the foundation training scheme.
+      You can access their nomination request from the <a [routerLink]="['/registration/']"
+        target="_blank">Registration</a> tab, in the new ‘Learning contracts’ section
+    </p>
+    <p>
+      Please review their training details and check that they are correct.
+    </p>
+    <p>
+      If any of the details (for example the training dates) are incorrect,
+      or if you think that this application was sent to you in error,
+      indicate this on the application and it will be returned to the applicant.
+    </p>
+    <p>
+      If you are content that all the application details are correct,
+      and you are happy to accept the applicant as your trainee, please read the Learning Contract section. Your trainee
+      should send you a copy of the Training Record when they have received confirmation that their application has been
+      successful
+    </p>
+    <p>
+      If you have
+      <a href="https://www.pharmacyregulation.org/education/pharmacist-pre-registration-training/tutors"
+        target="_blank">
+        any questions about your obligations as a designated supervisor,
+        see our guidance on the main GPhC website.
+      </a>
+    </p>
+
+    <!-- <p>
+      You have been nominated as a pre-registration tutor by an applicant wishing to commence training.
+    </p>
+    <p>
+      <a [routerLink]="['/registration/']">Click here</a> to review the application details and electronically sign a learning contract agreement between you and the trainee.
+    </p>
+    <p>
+      If any of the details (for example the training dates) are incorrect, or if you think that this application was sent to you in error, you can indicate this on the application and it will be returned to the applicant.
+    </p>    -->
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormLearningContractRecalled">
+    <h2>{{ item.title }}</h2>
+    <p>
+      A request to countersign a learning contract from a new foundation trainee has been withdrawn by the sender.
+    </p>
+    <p>
+      Please speak to the applicant directly for further information.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormLearningContractApproved">
+    <h2>{{ item.title }}</h2>
+    <p>
+      Your learning contract has been signed by your prospective designated supervisor(s).
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormLearningContractRefused">
+    <h2>{{ item.title }}</h2>
+    <p>
+      Your learning contract has been returned to you by one of your prospective designated supervisors.
+    </p>
+    <p>
+      Please read their comments and either make the necessary changes to your application, or nominate a new
+      foundation designated supervisor.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormLearningContractRejected">
+    <h2>{{ item.title }}</h2>
+    <p>
+      Your learning contract has been returned to you by one of your prospective designated supervisors. They have indicated that it was
+      sent to them in error.
+    </p>
+    <p>
+      You will need to speak to your training provider and nominate a new designated supervisor.
+    </p>
+    <p>
+      Your application will not proceed until you have a nominated designated supervisor, and they have signed your learning contract.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormPaymentRequired">
+    <h2>{{ item.title }}</h2><!--title wording change required at backend-->
+    <p>
+      Your application appears complete, you can now review your application and pay the application fee. Please note,
+      your application will not be submitted for processing until payment is made.
+    </p>
+    <p>
+      <b>Important:</b> you can’t start the foundation training year until your university has confirmed to us that you
+      have been awarded a GPhC approved qualification, and that you have received confirmation from us that you can
+      start training.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormApproved">
+    <h2>{{ item.title }}</h2><!--title need to change from backend-->
+    <p>
+      Your application for foundation training has been provisionally approved subject to confirmation from your
+      university that you have been awarded your MPharm/OSPAP.
+    </p>
+    <p>
+      Once we receive this confirmation from your university, we will send you another notification confirming that your
+      foundation training has been approved, and stating when you can start training.
+    </p>
+    <p>If you become aware that you will not be awarded your qualification, or that it will be delayed, please contact
+      us by email. </p>
+    <p>If you will not be awarded your qualification, you will not be able to start training. You should request to
+      withdraw your application in your email.</p>
+    <p>If your qualification award will be delayed, you will not be able to start training until you have received it.
+      Please let us know your updated planned training start date in your email, or if you want to withdraw from this
+      training year.</p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormTerminated">
+    <h2>{{ item.title }}</h2><!--title need to change from backend-->
+    <p>
+      This notification is to confirm that your application to join the foundation training scheme has been terminated. You
+      are not currently eligible to commence foundation training.
+    </p>
+    <p>
+      If your situation changes you will need to submit a new application to join the scheme.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormWaitingForApplicant">
+    <h2>{{ item.title }}</h2>
+    <p>
+      We have reviewed your application for foundation training and found it incomplete.
+    </p>
+    <p>
+      We will send you an email shortly with more information about the issue(s) delaying your application.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormPaymentReceivedAndSubmitted">
+    <h2>{{ item.title }}</h2><!--title wording need to change from backend-->
+    <p>
+      Your application to join the foundation training scheme has been submitted to the GPhC, you will receive an update
+      once it has been processed.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormApprovedWelcomeLetter">
+    <h2>{{ item.title }}</h2><!--title need to change from backend-->
+    <p>
+      <a [routerLink]="['/registration/letter/6']">Click here</a> to access your Welcome Letter and Training Record
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.PreRegistrationFormLearningContractSignatureRequestedReminder">
+    <h2>{{ item.title }}</h2>
+    <p>
+      You were recently nominated as a foundation designated supervisor by an applicant wishing to commence training, and we
+      notice that you have not yet responded to this request.
+    </p>
+    <p>
+      <a [routerLink]="['/registration/']">Click here</a> to review the application details and electronically sign a
+      learning contract agreement between you and the trainee.
+    </p>
+    <p>
+      If any of the details (for example the training dates) are incorrect, or if you think that this application was
+      sent to you in error, you can indicate this on the application and it will be returned to the applicant.
+    </p>
+  </ng-container>
+  <!--student notifications ends-->
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantCountersignatureRequested">
+    <div class="row">
+      <div class="col-10">
+        <h2> {{ item.title }}</h2>
+        <p>
+          You have been nominated by an applicant to countersign their application to register as a pharmacy technician.
+        </p>
+        <p>
+          <a routerLink="/registration">Click here to review the application.</a>
+        </p>
+        <p>
+          If you think that this application was sent you in error, you can indicate this on the application and it will
+          be
+          returned
+          to the applicant.
+        </p>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantCountersignatureApproved">
+
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application to register as a pharmacy technician has been countersigned by your selected pharmacist or
+      pharmacy technician.
+    </p>
+    <p>
+      You can now review your application – if you make any changes, you will need to send it to be countersigned again.
+    </p>
+    <p>
+      If you are satisfied with your application, you can now make your application payment to complete and submit it.
+    </p>
+    <p>
+      <a routerLink="/technician/application">Complete your application</a>
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantCountersignatureRejected">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application for registration has not been countersigned and has been returned to you with comments. Please
+      <a routerLink="/technician/application">review the comments from your selected pharmacist or pharmacy
+        technician.</a>
+    </p>
+    <p>
+      You must have your application successfully countersigned to be able to apply for pharmacist or pharmacy
+      technician registration.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantCountersignatureRefused">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application to register as a pharmacy technician has been returned by your selected countersigning pharmacist
+      or pharmacy technician. They
+      have indicated
+      that it was sent to them in error.
+    </p>
+    <p>
+      You will need to assign your application to another pharmacist or pharmacy technicain to complete the
+      countersigning section.
+    </p>
+    <p>
+      You must make sure your application is countersigned to proceed.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantCountersignatureRecalled">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      The pharmacy technician registration application which was previously submitted to you has been recalled by the
+      applicant.
+    </p>
+    <p>
+      No further action required.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantApplicationSubmitted">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Thank you for submitting your online application and paying the application fee.
+    </p>
+    <p>
+      Your application number is {{ item.data?.ApplicationNumber }}
+    </p>
+    <p>
+      You should also quote this number if you need to contact us about your application.
+    </p>
+    <p class="important">
+      <b>Important:</b> to complete your application, you must send us hard copies of all the documents you have scanned
+      and uploaded in the Supporting documents section. You must include an application cover sheet (available as part
+      of the application guidance) and write your application number on the cover sheet.
+    </p>
+    <p>
+      We recommend sending your documents using a trackable method such as Royal Mail ‘Signed For’. Use your tracking
+      number to find out when your application has been delivered. You are responsible for making sure your documents
+      arrive with us in good time.
+    </p>
+    <p>
+      We will assess your application within 28 days of receiving both your online application and complete paper
+      supporting documents.
+    </p>
+    <p>
+      We will contact you by email if there are any issues with your application. If it is approved, you will receive a
+      notification via myGPhC advising you that you can pay your registration fee in order to enter the register.
+      You will not be able to pay the registration fee and join the register until after you have completed the work
+      experience.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantFirstYearFeeAvailable">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application for pharmacy technician registration has been approved. To complete your registration please make
+      your first-year registration fee payment by clicking <a routerLink="/home">here</a>.
+    </p>
+    <p class="important">
+      <b>Important:</b> Do not practise as a pharmacy technician until you have received your GPhC registration number
+      and your name appears on the online register. Your first year entry fee receipt is not proof of your registration.
+      Practising as a pharmacy technician while not on the register is breaking the law and you can be prosecuted.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantFirstYearFeePaymentSuccessful">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Thank you for paying your first-year registration fee.
+    </p>
+    <p>
+      You will receive a myGPhC notification when you have been added to the register. This will be on the first or the
+      fifteenth of the month.
+    </p>
+    <p class="important">
+      <b>Important:</b> Do not practise as a pharmacy technician until you have received your GPhC registration number
+      and your name appears on the online register. It is your responsibility to check this before you practice. Your
+      registration payment receipt is not proof of your registration. Practising as a pharmacy technician while not on
+      the register is breaking the law and you can be prosecuted.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantApplicationTerminated">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application to join the register as a pharmacy technician has been terminated. We will send you an email
+      shortly with more information about why your application was terminated.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantApplicationWaitingForApplicant">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      We have reviewed your application to register as a pharmacy technician and found it to be incomplete.
+    </p>
+    <p>
+      We will send you an email shortly with more information about the issue(s) delaying your application.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.TechnicianApplicantNoticeOfEntry">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application is now complete and you have successfully joined the GPhC register as a pharmacy technician. Your
+      notice of entry letter (which is available on the ‘Registration’ page) confirms your registration details,
+      including the date you entered the register.
+    </p>
+    <p>
+      While you are registered, please remember that you must:
+    </p>
+    <li>
+      keep to the <a href="https://www.pharmacyregulation.org/standards-for-pharmacy-professionals"
+        target="_blank"><b>standards for pharmacy professionals</b></a>
+    </li>
+    <li>
+      <a href="https://www.pharmacyregulation.org/pharmacists/revalidation-renewal/renew-your-registration" target="_blank"> <b>carry out and record revalidation
+          activity </b> </a>
+    </li>
+    <li>
+      <a href="https://www.pharmacyregulation.org/registration/changes-your-registration" target="_blank"> <b>notify us
+          of any changes to your name, home address or other contact details</b></a> within one month of the date of the
+      change
+    </li>
+    <li>
+      <a href="https://www.pharmacyregulation.org/pharmacy-professionals-telling-us-about-issue-affecting-your-fitness-practise"
+        target="_blank"><b>notify us if anything happens which could call into question your fitness to
+          practise</b></a> , and would change your answers to the fitness to practise declarations you made in your
+      application, within seven days of the event happening
+    </li>
+    <li>
+      <a href="https://www.pharmacyregulation.org/pharmacists/registering-pharmacist/indemnity-requirements" target="_blank"><b>notify us if
+          you no longer have appropriate indemnity arrangements in place</b></a>
+    </li>
+    <p>
+      You will need to renew your registration and submit your revalidation records at least two months before it
+      expires, using myGPhC. We will let you know what you need to do renew nearer the time.
+    </p>
+  </ng-container>
+
+  <!----AROS NOTIFICATIONS----->
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportThirtNineWeekResultCleared">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Please send your designated supervisor a request to sign-off the final stage of your training record.
+    </p>
+    <p>
+      You can do this by clicking <a routerLink="/prereg/assessment-report">here</a>
+    </p>
+  </ng-container>
+
+  <!--AROS-82: changed notification text as per comments from Janelle-->
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportFormOpenNotification">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      According to our records, you are nearing the time where you and your designated supervisor should discuss and complete your 39
+      week
+      progress report. If there have been any gaps in your training, or you have changed your training sites, you may
+      not have
+      reached this stage of your training yet.
+    </p>
+    <p>
+
+    </p>To be eligible to apply to sit the next registration assessment, you need to have received a satisfactory 39
+    week
+    progress report, via your myGPhC account.
+    <p>
+      Once you have reached week 39 of your training and have discussed your progress with your designated supervisor, <a
+        routerLink="/prereg/assessment-report">start completing your online progress report.</a>
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportFormCountersignatureRequest">
+    <div class="row">
+      <div class="col-10">
+        <h2> {{ item.title }}</h2>
+
+        <p>
+          You have been nominated by a pharmacist foundation trainee to complete their 39 week progress report.
+        </p>
+        <p>
+          You will be asked to confirm whether the trainee has met the interim learning outcomes necessary to be signed off
+          as satisfactory at 39 weeks.
+          If they receive a ‘satisfactory’ outcome, the trainee will be eligible to sit the registration assessment as a
+          result.
+        </p>
+        <p>
+          <a routerLink="/registration">Click here to review and complete the progress report.</a>
+        </p>
+        <p>
+          If you think this progress report was sent to you in error, you can indicate this on the report, and it will
+          be returned to the trainee.
+        </p>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportFormCountersignatureRecalled">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      The Progress report application which was previously submitted to you has been recalled by the
+      foundation trainee.
+    </p>
+    <p>
+      No further action required.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportFormCountersignatureApproved">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your selected designated supervisor has completed your 39 week progress report and marked it as satisfactory. Please review any
+      comments your designated supervisor has entered <a routerLink="/prereg/assessment-report">here</a>.
+    </p>
+    <p>
+      If you are eligible, you will be able to apply for the registration assessment once the application has opened.
+      Please <a href="https://www.pharmacyregulation.org/about-us/contact-us" target="_blank">contact us</a> if you wish to
+      discuss your assessment eligibility.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportFormCountersignatureRejected">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your selected designated supervisor has completed your 39 week progress report and marked it as unsatisfactory.
+      Please review any comments your designated supervisor has entered <a routerLink="/prereg/assessment-report">here</a>.
+    </p>
+    <p>
+      At this stage you are not eligible to apply for the current registration assessment.
+    </p>
+    <p>
+      It is important that you meet with your designated supervisor and agree a clear action plan to address the interim learning outcomes
+      that are not being demonstrated at this stage.
+    </p>
+    <p>
+      Your designated supervisor may decide to re-assess your competence at a later date, and re-complete the 39 week progress report.
+      You may be eligible for the current
+      registration assessment if you re-submit before the deadline.email <a
+        href="mailto:prereg@pharmacyregulation.org">prereg@pharmacyregulation.org.</a> if you would like your online
+      progress report
+      unlocked to allow it to be re-completed.
+    </p>
+    <p>
+      Further information can be found within the foundation training manual.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportFormCountersignatureRefused">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your selected designated supervisor has indicated that your 39 week progress report was sent to them in error,
+      it has therefore been returned to you. Please <a href="https://www.pharmacyregulation.org/about-us/contact-us"
+        target="_blank">contact us</a> if you
+      are unable to select your current designated supervisor to complete your progress report.
+    </p>
+    <p>
+      Your 39 week progress report must be signed as satisfactory by your current foundation designated supervisor before you
+      can be eligible to apply to sit the registration assessment.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportTempRegistrationRejected">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your final progress report has been completed by your designated supervisor, who has marked it as satisfactory.
+    </p>
+    <p>
+      Please view the progress report <a routerLink="/prereg/assessment-report">here</a>.
+    </p>
+    <p>
+      You have indicated that you do not wish to apply for provisional registration at this time.
+    </p>
+    <p>
+      You will be able to apply for the next sitting of the registration assessment. Please continue to refer to our
+      website
+      for details of what you will need to do and when you need to apply.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.ProgressReportTempRegistrationAccepted">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your final progress report has been completed by your designated supervisor, who has marked it as satisfactory.
+    </p>
+    <p>
+      Please view the progress report <a routerLink="/prereg/assessment-report">here</a>.
+    </p>
+    <p>
+      Your application for provisional registration has been submitted, you will receive
+      an update on your application once it has been processed.
+
+      Please note, you cannot join the provisional register until you have completed a
+      full year of foundation training.
+
+    </p>
+  </ng-container>
+
+  <!----AROS NOTIFICATION ENDS---->
+  <!----Assessment Registration Notification START---->
+  <ng-container *ngSwitchCase="NotificationType.AssessmentRegistrationApplicationAvailable">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      According to our records, you are eligible to apply to sit the next scheduled assessment sitting.
+      Click <a routerLink="/prereg/assessment-registration">here</a> to start completing your online application.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.AssessmentRegistrationApplicationPaymentSuccessful">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Thank you for applying to sit the upcoming registration assessment. Your application has been processed. 
+    </p>
+    <p>
+      One week after the application deadline, you will receive a further notification confirming that you have been approved to sit the assessment. 
+    </p>
+    <p>
+      If you do not receive this notification within 10 days of the assessment application deadline, please contact us at 
+      <b>regexam@pharmacyregulation.org</b>.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.AssessmentAttemptApplicationApproved">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      You can now view your final entry notice for the registration assessment. This confirms that your are registered to sit.      
+    </p>
+    <p>
+      <a [routerLink]="['/registration/letter/8']">See your final entry notice.</a>
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.AssessmentAttemptResultPublished">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your registration assessment result is now available. Please click
+      <!--Added below condition to redirect user to access their result based on role-->
+      <a *ngIf="this.authService.user.isPrereg" [routerLink]="['/prereg/home']"><b>here</b></a>
+      <a *ngIf="this.authService.user.isRegistrant" [routerLink]="['/registration']"><b>here</b></a> to view the result
+      letter.
+    </p>
+  </ng-container>
+
+
+  <!----Assessment Registration Notification END---->
+
+  <!-- 52 Week Final Declaration Notification Starts-->
+
+  <ng-container *ngSwitchCase="NotificationType.FiftyTwoWeekFinalDeclarationFormOpenNotification">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      In order to be eligible to apply for registration as a pharmacist you are required to meet the GPhC’s requirement
+      for a
+      satisfactory final declaration. Please ask your designated supervisor to complete the online report that you can send to them by
+      clicking
+      <a routerLink="/prereg/final-declaration">here</a>.
+      <a></a>
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.FinalDeclarationFormCountersignatureRequest">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      You have been nominated by your foundation trainee pharmacist to complete their final declaration.
+    </p>
+    <p>You will be asked to confirm whether or not the trainee has met all interim learning outcomes and registration assessment framework, and in your
+      opinion, is a
+      fit and proper person to be registered, if they choose to apply.</p>
+    <p>You will also be asked to declare if:</p>
+    <ul class="bullet-point">
+      <li>you believe the trainee is safe to be registered</li>
+      <li>that the trainee has demonstrated behaviours which indicate they could meet the standards for pharmacy
+        professionals
+        once registered, including using their professional judgement and speaking up when they have concerns or when
+        things go
+        wrong (standards 5 and 8 of the standards for pharmacy professionals)</li>
+    </ul>
+    <p>
+      Before confirming that the trainee is safe to be registered, you must discuss this with another registered
+      pharmacy or
+      healthcare professional who has:
+    </p>
+    <ul class="bullet-point">
+      <li>overseen their training as a Superintendent Pharmacist or Chief Pharmacist, or</li>
+      <li>been involved in the quality assurance of their training as a member of an education and training
+        organisation, or</li>
+      <li>worked with the trainee as a member of the pharmacy or hospital team</li>
+    </ul>
+    <p>They must confirm to you that they have not seen any behaviours or practice which would prevent the trainee
+      meeting the
+      standards for pharmacy professionals.</p>
+    <p>Please make sure you have made a note of their name and registration number, and their registration body if they
+      are not
+      registered with the GPhC, as you will need to include it in your declaration. Please make them aware that we will
+      keep
+      this information and may contact them in relation to this declaration.</p>
+    <p>For more information about your accountability in making this declaration, please see the <a
+        href="https://www.pharmacyregulation.org/education/pharmacist-pre-registration-training/tutors" target="_blank">
+        Pharmacist foundation supervisors </a> page of the main GPhC website</p>
+    <a routerLink="/registration">Click here to review the application.</a>
+    <p>If you think the final declaration report was sent to you in error, you can indicate this on the report and it
+      will be
+      returned to the trainee.</p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.FinalDeclarationFormCountersignatureRecalled">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      A request to complete a Final declaration for your foundation trainee has been withdrawn.
+    </p>
+    <p>
+      Please speak to the trainee directly for further information.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.FinalDeclarationFormCountersignatureApproved">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your final declaration has been completed by your designated supervisor, who has marked it as satisfactory. See your final
+      declaration <a routerLink="/prereg/final-declaration">here</a>.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.FinalDeclarationFormCountersignatureRejected">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your final declaration has been completed by your designated supervisor, who has marked it as unsatisfactory. See your final
+      declaration
+      and your designated supervisor’s comments <a routerLink="/prereg/final-declaration">here</a>.
+    </p>
+    <p>
+      You are not eligible to apply for registration as a pharmacist until you receive a satisfactory final progress
+      report.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.FinalDeclarationFormCountersignatureRefused">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      The designated supervisor selected by you to sign the final declaration states that it has been sent to them in error. Click <a
+        routerLink="/prereg/final-declaration">here</a> to go
+      into the progress report and select a different designated supervisor.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.FinalDeclarationFormProvisionalAccepted">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your final declaration has been completed by your designated supervisor, who has marked it as satisfactory.
+    </p>
+    <p>
+      Please view your progress report <a routerLink="/prereg/final-declaration">here</a>.
+    </p>
+    <p>
+      Your application for provisional registration has been submitted and is subject to satisfactory completion of a
+      full
+      year of foundation training.
+
+
+    </p>
+
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.FinalDeclarationFormProvisionalRejected">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your final declaration has been completed by your designated supervisor, who has marked it as satisfactory.
+    </p>
+    <p>
+      Please view your progress report <a routerLink="/prereg/final-declaration">here</a>.
+    </p>
+    <p>
+      You have indicated that you do not wish to apply for provisional registration at this time.
+    </p>
+    <p>
+      Please continue to refer to our website as well as checking your myGPhC account for actions that you may be
+      eligible to
+      take.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.FinalDeclarationFiftyTwoWeekResultCleared">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Please send your designated supervisor a request to sign-off the final stage of your training record.
+    </p>
+    <p>
+      You can do this by clicking <a routerLink="/prereg/final-declaration">here</a>
+    </p>
+  </ng-container>
+
+  <!-- 52 Week Final Declaration Notification Ends-->
+
+  <!-- RTR Notification start-->
+
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterApplicationPendingRestorationFee">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your application has been approved. You must now pay the restoration fee to be returned to the register.
+    </p>
+    <p>
+      If you are returning to the register in the two months before the anniversary of your previous renewal deadline, you will also need to pay the renewal fee for the following year at the same time as the restoration fee. 
+    </p>
+    <p>If you do not pay the relevant fee(s) within 28 days, your application will be terminated. If you want to re-join the register after your application is terminated, you will need to re-apply and pay a new application fee.  </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterApplicationReceivedRevalidationRequired ">
+    <h2> {{ item.title }}</h2>
+      <p>Thank you for applying to re-join the register. You now need to submit your outstanding revalidation record within 28 days, by selecting the Revalidation heading at the top of the screen.</p>
+      <p>After you have submitted your revalidation record your application will be reviewed, we will contact you if further information is required.</p>
+      <p>Once your application has been approved you will be sent a notification asking you to pay the relevant fee(s) so that your restoration can be completed.</p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterApplicationReceivedRevalidationNotRequired ">
+    <h2> {{ item.title }}</h2>
+    <p>Thank you for applying to re-join the register.</p>
+    <p> Your application will now be reviewed by the GPhC, who may contact you if further information is required.</p>
+    <p>Once your application has been approved you will be sent a notification asking you to pay the relevant fee(s) so that your restoration can be completed.</p>   
+  </ng-container>
+ 
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterApplicationTerminated">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your application to restore your entry to the register has been terminated. 
+      We will send you an email shortly with more information about why your application was terminated.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterApplicationTerminatedNonPayment">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your application to restore your registration has been terminated as you have not paid the restoration fee. 
+      If you want to re-join the register you need to submit a new application and application fee.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterApplicationFeePaymentReminder">
+    <h2> {{ item.title }}</h2>
+    <p>
+      This is a reminder that your application for restoration has been approved, 
+      please make payment of your re-entry fee to re-join the register.
+    </p>
+    <p>
+      You must make payment within 7 days, 
+      failure to do so will result in the application being terminated.
+    </p>
+    <p>
+      Please note that you must not practise until your name appears on the register. 
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterRevalidationSubmitReminder">
+    <h2> {{ item.title }}</h2>
+    <p>
+      This is a reminder that you need to submit your outstanding revalidation record 
+      in order to complete your restoration to the register.
+    </p>
+    <p>
+      You have seven days to submit your outstanding revalidation, 
+      after this time your restoration application will be terminated and you will forfeit the fee you have paid.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterApplicationApproved">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Thank you for paying your re-entry fee.
+    </p>
+    <p>
+      You will receive a myGPhC notification when you have been added to the register.
+    </p>
+    <p class="important">
+      <b>Important:</b> Do not practise as a pharmacy professional until your name appears on the online register. It is your responsibility to check this before you practice. Your
+      re-entry payment receipt is not proof of your registration. Practising as a pharmacy professional while not on
+      the register is breaking the law and you can be prosecuted.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.ReturnToRegisterRegistrationStatusUpdated">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      Your application for restoration is now complete and you have successfully re-joined the GPhC register.
+    </p>
+    <p>
+      While you are registered, please remember that you must:
+    </p>
+    <ul>
+      <li>keep to the
+        <a href="https://www.pharmacyregulation.org/pharmacists/standards-and-guidance-pharmacy-professionals" target="_blank">standards for
+          pharmacy professionals</a>
+      </li>
+      <li>
+        <a href="https://www.pharmacyregulation.org/pharmacists/revalidation-renewal" target="_blank">carry out and record revalidation
+          activity</a>
+      </li>
+      <li>
+        <a href="https://www.pharmacyregulation.org/pharmacists/changes-registration"
+          target="_blank">notify us of any changes to your name, home address or other contact details</a> within one
+        month of the date of
+        the change
+      </li>
+      <li>
+        <a href="https://www.pharmacyregulation.org/patients-and-public/reporting-concerns/how-we-deal-concerns/declarations-pharmacy-professionals"
+          target="_blank">
+          notify us if anything happens which could call into question your fitness to practise</a>, and would change your answers
+        to the fitness to practise declarations you made in your application, within seven days of the event happening
+      </li>
+      <li>
+        <a href="https://www.pharmacyregulation.org/pharmacists/registering-pharmacist/indemnity-requirements" target="_blank">
+          notify us if you no longer have appropriate indemnity arrangements in place
+        </a>
+      </li>
+    </ul>
+    <p>
+      Make time now to check when your registration expires as you will need to renew and submit 
+      your revalidation records at least two months before it expires. We will send you a myGPhC 
+      notification when your registration is next due to be renewed.
+    </p>
+  </ng-container>
+
+  <!-- RTR Application Notification ends-->
+
+  <!-- CPSC Application Notification starts-->
+  <ng-container *ngSwitchCase="NotificationType.CertificateProfessionalStandingApplicationSubmitted">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your request for a certificate of current professional status and fitness to practise history has been submitted. 
+      We may contact you directly to discuss your request. 
+      You will receive confirmation through your myGPhC account when your request has been completed. 
+      If you don't receive confirmation within 28 days of this notification, please <a href="https://www.pharmacyregulation.org/about-us/contact-us" target="_blank" alt="Contact us link"> contact us</a>.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.CertificateProfessionalStandingWaitingForApplicant">
+    <h2> {{ item.title }}</h2>
+    <p>
+      The GPhC needs to discuss your application. You will receive a request by email requesting additional information. Your application can't be 
+      progressed until you have responded to us.
+    </p>
+  </ng-container>
+  <ng-container *ngSwitchCase="NotificationType.CertificateProfessionalStandingApplicationCompleted">
+    <h2> {{ item.title }}</h2>
+    <p>
+      The certificate of current professional status and fitness to practise history you requested has been sent to {{ item.data?.RegulatoryBodyName || "your selected regulatory body" }}.
+    </p>
+  </ng-container>
+  <!-- CPSC Application Notification ends-->  
+
+  <!-- Independent Prescriber Notification Starts-->
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberEligibleForApplication">
+    <h2> {{ item.title }}</h2>
+    <p>
+      We have received confirmation that you have successfully completed an independent prescriber course.
+      If you would like this annotation to be recorded on the public register then please click
+      <a routerLink="/independentPrescriber/application">here</a> to complete the relevant application.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberMentorRequestApproved">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      The prescribing pharmacist you nominated has confirmed that they are willing to act as your prescriber
+      mentor for a period of one month after your annotation is added to your registration.
+      Please click <a routerLink="/independentPrescriber/application">here</a> to submit
+      your application and pay the fee for the addition of your annotation.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberCountersignatureRecalled">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      The independent prescriber application that was previously submitted to you has been recalled by
+      the registrant. No further action is required.
+    </p>
+    <p>
+      No further action required.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberMentorRequestDeclined">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      The prescribing pharmacist you nominated has rejected your request to act as your prescriber mentor. Please click
+       <a routerLink="/independentPrescriber/application">here</a>
+       to nominate another prescribing pharmacist who is willing to act as your mentor.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberMentorRequestRefused">
+    <h2>
+      {{ item.title }}
+    </h2>
+    <p>
+      The prescribing pharmacist you nominated has advised that this request has been sent to them in error.
+      Please click <a routerLink="/independentPrescriber/application">here</a> to select another prescribing
+      pharmacist who is willing to act as your mentor.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberCountersignatureRequested">
+    <h2> {{ item.title }}</h2>
+    <p>
+      You have been nominated as a ‘prescriber mentor’ by a pharmacist who has completed an independent prescribing
+      course. Please confirm if you are willing to act as a mentor by reading the information and responding to the
+      request by clicking <a routerLink="/registration">here</a>.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberApplicationNonAutoApproved">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Thank you for your application to add an independent prescriber annotation to your registration.
+      We are reviewing the information that you have provided and will advise you once your application has been approved.
+      This can take up to 28 days.  If we require further information we will contact you directly.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberApplicationAutoApproved">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your application for an independent prescriber annotation has been approved and we will update your
+      registration details to reflect this. Please contact us if your annotation is not showing on your
+      online register entry within three working days of this notification
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.IndependentPrescriberApplicationApproved">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your application for an independent prescriber annotation has been approved and we
+      will update your registration details to reflect this. Please contact us if your annotation
+      is not showing on your online register entry within three working days of this notification
+    </p>
+  </ng-container>
+  <!-- Independent Prescriber Notification Ends-->
+
+  <!-- Virtual Removal Application Notification Starts-->
+  <ng-container *ngSwitchCase="NotificationType.VoluntaryRemovalApplicationReceived">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Thank you for your application to remove your entry from the register.  
+      We will review the information that you have provided and will advise you once a 
+      decision has been made.  This can take up to 28 days.
+    </p>
+    <p>
+      If we need any more information to process your application, we will contact you directly.
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.VoluntaryRemovalApplicationApproved">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your application to remove your entry from the register on {{item.data?.VoluntaryRemovalDate | date: 'dd/MM/yyyy'}} has been approved. 
+      We will send you a confirmation through your myGPhC account on the day that your entry is removed from the public facing register. 
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.VoluntaryRemovalApplicationAutoApproved">
+    <h2> {{ item.title }}</h2>
+    <p>
+      Your application to remove your entry from the register on {{item.data?.VoluntaryRemovalDate | date: 'dd/MM/yyyy'}} has been approved. 
+      We will send you a confirmation through your myGPhC account on the day that your entry is removed from the public facing register. 
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="NotificationType.VoluntaryRemovalRegistrationStatusUpdated">
+    <h2>{{ item.title }}</h2>
+    <p>
+      Thank you for your application to voluntarily remove your name from the General Pharmaceutical Council’s register.  
+      To view the letter confirming this and what you will need to do if you wish to rejoin the register in the future please 
+      click <a [routerLink]="['/registration/letter/12']">here</a>
+    </p>
+  </ng-container>
+
+  <!-- Virtual Removal Application Notification Ends-->
+</ng-container>
+
+<ng-template #extCircDecision>
+
+  <p>
+    Request reference: {{ item.data?.ReferenceNumber }}
+    <br /> Date submitted: {{ item.data?.SubmittedAt }}
+  </p>
+
+  <p>We have reviewed your request and the decision is now available for you to view.</p>
+
+  <p>
+    <a [routerLink]="['/revalidation/exceptional-circumstances', item.data?.ExtenuatingCircumstanceId]">Click here to
+      view your request and the decision.</a>
+  </p>
+
+
+
+</ng-template>

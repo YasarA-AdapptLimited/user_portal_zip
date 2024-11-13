@@ -1,0 +1,104 @@
+
+mat-radio-group {
+    &.multi-line {
+        display: inline-flex;
+        flex-direction: column;
+
+        mat-radio-button {
+            margin: 15px;
+        }
+    }
+}
+
+
+
+
+.mat-calendar-body-disabled {
+  opacity: 0.2;
+}
+    .mat-sidenav-container {
+      background: $gphc-background;
+  }
+  .mat-option {
+    font-family: 'Open sans', sans-serif !important;
+  }
+  [mat-mdc-menu-item], .list-item {
+    font-family: 'Open sans', sans-serif !important;
+      line-height: 38px !important;
+      height: auto !important;
+
+      color: $gphc-blue;
+      border-left: 10px solid transparent !important;
+      transition: border-color 100ms linear;
+
+      &:not(.selected) {
+        cursor:pointer;
+      }
+      &.selected {
+        border-left: 10px solid $gphc-blue !important;
+      }
+      &.disabled {
+        opacity: 0.3;
+      }
+      .danger {
+        color: $error;
+      }
+      .success {
+        color: $gphc-aqua;
+      }
+      
+  }
+
+  .mat-mdc-menu-item {
+    white-space: normal !important;
+  }
+
+  .mat-radio-label, .mat-checkbox-layout {
+    white-space: normal !important;
+  } 
+
+  .mdc-form-field label h4 {
+    margin-bottom: 0 !important;
+  }
+
+  .danger {
+    .mat-radio-outer-circle {
+      border-color: $error !important;
+    }
+    .mat-radio-inner-circle {
+      background-color: $error !important;
+    }
+    .mdc-form-field label {
+      color: $error !important;
+      h4 {
+        color: $error !important;
+      }
+    }
+  }
+
+  .mat-dialog-content {
+    max-height: 50vh !important;
+  }
+
+  mat-sidenav {
+      background: #ececec;
+      width: 300px;
+      z-index: 999;
+
+      .inner {
+          height: 100vh;
+          overflow: auto;
+      }
+  }
+
+  .mat-sidenav-container, .mat-sidenav-content {
+      overflow: inherit !important;
+  }
+  
+  .mat-datepicker-content {
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.1), 0 8px 10px 1px rgba(0,0,0,.1), 0 3px 14px 2px rgba(0,0,0,.05) !important;
+ 
+    button:focus {
+      outline: none !important;
+    }
+  }

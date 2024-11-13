@@ -1,0 +1,97 @@
+<div class="content row no-gutters">
+    <div class="col-lg-9 col-md-12 form-column">
+  
+      <app-banner [loading]="loading" [error]="loadingError" [application]="true" [progressDark]="true">
+        <div class="banner-left">
+  
+          <div style="display:flex;align-items:center">
+            <h1 style="flex-grow:1">Application for restoration to the register</h1>
+            <div class="d-md-none" style="flex-grow:1"></div>
+  
+            <app-gphc-icon style="margin-bottom: 20px;" class="d-lg-none" [matMenuTriggerFor]="menu" [static]="true"
+              label="Steps" iconType="list"></app-gphc-icon>
+            <mat-menu #menu="matMenu" [overlapTrigger]="false">
+              <app-form-stepper-menu [summary]="formStepperService.summary$ | async" (navigate)="goToStep($event)">
+              </app-form-stepper-menu>
+            </mat-menu>
+          </div>
+  
+          <p *ngIf="loadingError" class="intro-text">
+            <i class="fa fa-warning"></i> An error occurred while attempting to load your application
+          </p>
+  
+        </div>
+      </app-banner>
+  
+      <div *ngIf="!loading && !!application">
+  
+        <ng-container *ngIf="isApplicationOpen else applicationClosed">
+          <app-rtr-application-review *ngIf="application.activeForm.readonly" [readonly]="true" 
+          [application]="application"></app-rtr-application-review>
+          <app-form-stepper *ngIf="!application.activeForm.readonly"  [ready]="ready" [stepChange]="stepChange()"
+            (stepChanged)="stepChanged($event)" [saving]="saving" [maxStep]="maxStep" [minStep]="minStep">
+           <app-guidance [application]="application"></app-guidance>
+           <app-personal-details [application]="application"></app-personal-details>
+           <app-registration-details [application]="application"></app-registration-details>           
+           <app-letter-of-good-standing [application]="application"></app-letter-of-good-standing>
+           <app-revalidation-record-outstanding *ngIf="revalidationRecordOutstanding" [application]="application"></app-revalidation-record-outstanding>           
+           <app-equality-diversity [application]="application"></app-equality-diversity>
+           <app-ftp-declarations-one formIndex="0" [application]="application"></app-ftp-declarations-one>
+           <app-ftp-declarations-two  [application]="application"></app-ftp-declarations-two>
+           <app-ftp-declarations-one formIndex="1" [application]="application"></app-ftp-declarations-one>           
+           <app-application-declarations [application]="application"></app-application-declarations>
+           <app-rtr-review-step  [application]="application" (navigate)="goToStepId($event)"></app-rtr-review-step>
+           <app-rtr-payment-step-old *ngIf="!useNewPaymentFlow" [application]="application"></app-rtr-payment-step-old>
+           <app-rtr-payment-step *ngIf="useNewPaymentFlow" [application]="application" (savingDetails)="savingDetails($event)"></app-rtr-payment-step>
+          </app-form-stepper>
+        </ng-container>
+  
+  
+      </div>
+  
+    </div>
+  
+    <div class="col-lg-3 d-none d-lg-block" *ngIf="isApplicationOpen">
+  
+      <div class="toolbar">
+  
+        <button *ngIf="!layout.state.fullscreen" (click)="layout.setFullscreen(true)" aria-label="Maximise"
+          class="btn btn-back">
+          <i class="fa fa-window-maximize"></i>
+          <span>Maximise</span>
+        </button>
+        <button *ngIf="layout.state.fullscreen" (click)="layout.setFullscreen(false)" aria-label="Maximise"
+          class="btn btn-back">
+          <i class="fa fa-window-restore"></i>
+          <span>Restore</span>
+        </button>
+  
+      </div>
+  
+      <div *ngIf="application" class="menu">
+        <app-form-stepper-menu [summary]="formStepperService.summary$ | async" (navigate)="goToStep($event)">
+        </app-form-stepper-menu>
+      </div>
+    </div>
+  
+  </div>
+  
+  <ng-template #applicationClosed>
+  
+    <div class="col-sm-6 text-center">
+      <app-form-section class="fadein">
+        <span class="section-header">Application</span>
+        <span class="section-body">
+          <div class="text-center">
+            <i class="fa fa-clock-o status-icon notdue " aria-hidden="true" style="font-size: 9em"></i>
+            <div class="btn-text">
+              <p style="font-size: 1.5em;">
+                {{ applicationClosedMessage }}
+              </p>
+            </div>
+          </div>
+        </span>
+      </app-form-section>
+    </div>
+  
+  </ng-template>

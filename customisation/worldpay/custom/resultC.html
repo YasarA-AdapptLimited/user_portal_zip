@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- resultC.html $Revision$ -->
+<html lang="<wpdisplay msg=lang.code.name>">
+<head>
+<title><wpdisplay msg=result.cancel></title>
+<style type="text/css">
+body {background-color: <wpdisplay disp=body.bg>; <wpdisplay disp=body.bg.image pre=" background-image: url('" post="');"> margin: 0;}
+table.header { background-color: <wpdisplay disp=header.bg>; width: 760px; border: 0;}
+td.headerlogo1 {background-color: <wpdisplay disp=header.bg>; vertical-align: <wpdisplay disp=header.logo1.valign>; width: 383px; text-align: <wpdisplay disp=header.logo1.halign>;}
+td.headerlogo2 {background-color: <wpdisplay disp=body.bg>; vertical-align: <wpdisplay disp=header.logo2.valign>; width: 272px; text-align: <wpdisplay disp=header.logo2.halign>;}
+table.nav { background-image:url('/images/wp/navbar.gif'); width: 760px; border: 0;}
+table.container { background-color: <wpdisplay disp=wp.container.border.bg>; width: <wpdisplay disp=wp.container.width>; border: 0;}
+td.title { background-color: <wpdisplay disp=title.bg>; width: 100%; border: 0;}
+table.containercell { background-color: <wpdisplay disp=1.bg>; width: 100%; border: <wpdisplay disp=wp.container.cellBorder>;}
+td.bannercontainer { background-color: <wpdisplay disp=banner.border.bg>; width: <wpdisplay disp=banner.width empty=95%>; border: <wpdisplay disp=banner.cellBorder>; margin-right: auto; margin-left: auto;}
+table.banner { background-color: <wpdisplay disp=banner.bg>; width: <wpdisplay disp=banner.width>; vertical-align: <wpdisplay disp=header.logo2.valign>; text-align: <wpdisplay disp=header.logo2.halign>; border: <wpdisplay disp=banner.cellBorder>; border-color: <wpdisplay disp=banner.border.bg>;}
+td.banner { background-color: <wpdisplay disp=banner.bg>; vertical-align: top; text-align: left; border: <wpdisplay disp=banner.cellBorder>;}
+td.bannererror { background-color: <wpdisplay disp=banner.bg>; vertical-align: top; text-align: center;}
+h1 {font-size: <wpdisplay fontsize=|disp=title.font.size empty=|disp=title.font.size>; font-family: <wpdisplay disp=title.font>; color: <wpdisplay disp=title.fg>;}
+A.header:Link {text-decoration: none; color: <wpdisplay disp=header.font.fg>; font-family: <wpdisplay disp=header.font>; font-size: <wpdisplay fontsize=|disp=header.font.size empty=|disp=header.font.size>; font-weight: bold;}
+A.header:Visited {text-decoration: none; color: <wpdisplay disp=header.font.fg>; font-family: <wpdisplay disp=header.font>; font-size: <wpdisplay fontsize=|disp=header.font.size empty=|disp=header.font.size>; font-weight: bold;}
+A.header:Active {text-decoration: none; color: <wpdisplay disp=header.font.fg>; font-family: <wpdisplay disp=header.font>; font-size: <wpdisplay fontsize=|disp=header.font.size empty=|disp=header.font.size>; font-weight: bold;}
+A.header:Hover {text-decoration: underlined; color: <wpdisplay disp=header.font.ahover.fg>; font-family: <wpdisplay disp=header.font>; font-size: <wpdisplay fontsize=|disp=header.font.size empty=|disp=header.font.size>; font-weight: bold;}
+td.footerdivider {<wpdisplay disp=footer.divider.bg.image pre=" background-image: url('" post="');">; vertical-align: <wpdisplay disp=footer.valign>; text-align: <wpdisplay disp=footer.halign>;}
+td.footer {background-color: <wpdisplay disp=body.bg>; vertical-align: <wpdisplay disp=footer.valign>; text-align: <wpdisplay disp=footer.halign>;}
+
+
+  body {
+  background-color: #fff;
+  margin: 0;
+  font-family: sans-serif;
+}
+.page {
+  padding-top:30px;
+  padding-bottom:40px;
+  background-color: #aac7bd;
+}
+@media (max-width: 600px) {
+  .page {
+    padding-top:0;
+    padding-bottom: 0;
+  }
+}
+
+.branding {
+  height: 208px;
+  overflow: hidden;
+  position: relative;
+  background: white;
+}
+
+.rings {
+  position: absolute;
+  right: 70px;
+  z-index: 0;
+  width: 260px;
+  -webkit-transform: rotateZ(13deg);
+  transform: rotateZ(0deg);
+}
+
+.mygphc {
+  position: absolute;
+  right: 20px;
+  top: 30px;
+}
+
+
+.mygphc-logo.large {
+  display: block;
+}
+.mygphc-logo.small {
+  display: none;
+}
+.mygphc-logo.medium {
+  display: none;
+}
+
+.logo {
+  display: block;
+  border: none;
+  text-decoration: none !important;
+  padding-left: 45px;
+  padding-top: 45px;
+  padding-bottom: 20px;
+}
+
+.logo img {
+  width: 254px;
+}
+
+@media (max-width: 767px) {
+  .branding {
+      height: 180px;
+  }
+  .mygphc-logo.large {
+    display: none;
+  }
+  .mygphc-logo.small {
+    display: none;
+  }
+  .mygphc-logo.medium {
+    display: block;
+  }
+
+  .rings {
+      width: 210px !important;
+      right: 80px !important;
+  }
+
+
+  .mygphc-logo {
+      font-size: 35px !important;
+  }
+
+  .logo {
+      padding-top: 40px !important;
+      padding-left: 30px;
+ 
+  }
+  .logo img {
+    width: 214px !important;
+    height: 98px !important;
+}
+}
+
+@media (max-width: 530px) {
+  .mygphc {
+      position: absolute;
+      right: 20px;
+      top: 23px !important;
+
+  }
+  .mygphc-logo {
+    font-size: 25px !important;
+  }
+
+  .mygphc-logo.large {
+    display: none;
+  }
+  .mygphc-logo.small {
+    display: block;
+  }
+  .mygphc-logo.medium {
+    display: none;
+  }
+
+  .branding {
+      height: 125px;
+  }
+
+  .logo {
+      margin-left: 5px;
+      padding-left: 20px;
+      padding-top: 30px !important;
+
+   
+  }
+  .logo  img {
+    width: 150px !important;
+    height: 69px !important;
+}
+
+  .rings {
+      display: none;
+  }
+}
+
+@media (max-height: 530px) {
+  .branding {
+      height: 125px;
+  }
+
+  .mygphc-logo.large {
+    display: none;
+  }
+  .mygphc-logo.small {
+    display: block;
+  }
+  .mygphc-logo.medium {
+    display: none;
+  }
+
+  .logo {
+      padding-top: 30px !important;
+  }
+  .logo img {
+    width: 150px !important;
+    height: 69px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .mygphc {
+      top: 23px !important;
+  }
+    
+      .mygphc-logo {
+        font-size: 23px !important;
+    }
+
+  
+  
+}
+
+
+
+/* ------- nav ----------- */
+
+.navbar-inner {
+  height: 58px;
+  position: relative;
+  padding-top: 0;
+  margin-bottom: 0;
+  z-index: 5;
+  background: #00759b;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+td.one ul {
+  display: block;
+  padding: 20px;
+  background: #553c73;
+  margin: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+td.one ul li {
+  font-weight: bold;
+  color:#fff;
+}
+
+li.nav-item {
+  flex-grow: 1;
+}
+
+li.nav-item a {
+  margin: 0;
+  display: block;
+  font-size: 22px;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 17px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  white-space: nowrap;
+  background-color: #00759b;
+  color: white;
+}
+
+
+
+li.active .indicator {
+  opacity: 1;
+  transform: rotateZ(-90deg) translate3d(-2px, 0px, 0px);
+}
+
+li.active a {
+  background-color: #00759b !important;
+  color: white !important;
+  cursor: default !important;
+}
+
+.indicator {
+  transform: rotateZ(-90deg) translate3d(-20px, 0px, 0px);
+  color: #aac7bd;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 999;
+  bottom: -2px;
+  left: calc(50% - 12px);
+  transition: all 300ms;
+  font-size: 18px;
+}
+@media (max-width:600px) {
+  .indicator {
+    color:#fff;
+  }
+}
+
+/* --------- banner ----------- */
+
+.banner {
+  display: none;
+  text-align: center;
+  background: #4fb490;
+  position: relative;
+  z-index: 1;
+  padding: 10px 20px;
+}
+.banner h1 {
+  display: none;
+    color: white;
+
+    font-size: 2.8em;
+    margin-bottom: 15px;
+}
+
+.banner p , .banner .intro-text {
+  color:#00759b;
+  font-weight: bold;
+  margin-bottom: 0;
+  line-height: 1.6em;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+@media (min-width:1024px) {
+  .banner p , .banner .intro-text {
+    font-size:1.4em;
+  }
+}
+
+
+.panel {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  margin-bottom: 40px;
+}
+@media (max-width:600px) {
+  .panel {
+    margin-top:0;
+  }
+}
+
+h2 {
+  font-size:28px;
+}
+@media(max-width:767px) {
+  h2 {
+    margin-top:20px;
+    font-size:24px;
+  }
+
+}
+@media(max-width:530px) {
+  h2 {
+    font-size:20px;
+  }
+}
+
+table.container {
+  margin:0 !important;
+}
+
+.containercell tbody tr td.one > table {
+  border-left: 10px solid #00759b;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+h2 {
+  color: #00759b !important;
+}
+
+td.one, td.two, td.three {
+  background-color: transparent !important;
+  padding:0;
+}
+
+td.one table tr {
+  vertical-align: middle;
+  height: 35px;
+}
+
+td.two table tr {
+  vertical-align: middle;
+  height: 40px;
+}
+
+td.one span, td.one label span, td.two span, td.two label span {
+  font-size:16px !important;
+  color: #292b2c !important;
+}
+
+td.error {
+  padding-bottom: 20px;
+}
+td.error span {
+  font-size: 16px !important;
+  color: #c52e2e !important;
+}
+td.width190 {
+  width: auto !important;
+  padding-right: 10px;
+}
+@media (max-width: 767px) {
+  td.one span, td.one label span, td.two span, td.two label span {
+    font-size:14px !important;
+  }
+  .containercell tbody tr td.one > table {
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  input[type=text], select {
+    max-width: 230px;
+  }
+ 
+}
+
+input[type=text], select {
+  border-width: 5px;
+  border-style:solid;
+  border-color: #d9e8e1;
+  font-size: 16px;
+  padding: 2px;
+  transition: border-color 200ms linear;
+  background: #fff;
+}
+select {
+  height: 2em;
+  max-width: 265px;
+}
+select[name=Lang] {
+  width: 265px;
+}
+
+input[type=text]:not([maxlength]) {
+  width: 100%;
+}
+input[type=text]:focus, select:focus {
+  outline: none;
+  border-color:#fcc340;
+}
+
+td.one[align=right] a {
+  margin-top: -20px;
+  display: block;
+}
+
+img[alt="CANCEL PURCHASE"],img[alt="START AGAIN"], #op-PMMakePayment, #op-DPCancel{
+  width: 240px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+img[alt="CANCEL PURCHASE"] {
+  margin-top: 2px !important;
+  margin-bottom: 20px !important;
+}
+
+nobr span b {
+  display: none;
+}
+
+label[for="op-PMMakePayment"] nobr span b  {
+  display: none;
+}
+
+</style>
+<wpdisplay file=head.html>
+</head>
+<wpdisplay file=header.html default="<body><table><tr><td><table><tr><td><table><tr><td>">
+
+  <div style="padding: 100px">
+      <h1>Your payment was cancelled.</h1>
+  </div>
+ 
+
+<wpdisplay file=footer.html default="</td></tr></table></td></tr></table></td></tr></table></body>">
+</html>

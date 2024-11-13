@@ -1,0 +1,84 @@
+@import '../style/mixins';
+
+body.fullscreen .page {
+  min-height: 100vh;
+}
+.page {
+
+  
+
+  min-height: calc(100vh - 326px);
+  @media (max-width:767px) {
+    min-height: calc(100vh - 296px);
+  }
+  @media (max-width:530px) {
+    min-height: calc(100vh - 241px);
+  }
+
+  background: $gphc-aqua;
+  &.in-app {
+    background: $gphc-background;
+  }
+
+  &.soft-background {
+    background: lighten($gphc-background, 5%);
+  }
+
+  &.application {
+    background: white;
+    .banner, .button-section { 
+      background: white;
+      h1, button { color: $gphc-blue;  }
+    }
+    .banner {
+      padding-left: 0;
+      padding-right:10px;
+    }
+    .button-section {
+      box-shadow: none;
+    }
+    .banner-info li .indicator {
+      color: white !important;
+    }
+    section:not(.page), .section {
+      padding-left: 0; padding-right: 0;
+    }
+  }
+
+
+  ::ng-deep {
+
+    .no-wrap {
+      white-space: nowrap;
+    }
+
+
+      .content {
+          a, a:link, a:visited, .btn-link, .link {
+              color: $gphc-blue;
+              text-decoration: none;
+              &:not(.form-control) { border-bottom: 1px solid $gphc-blue; }
+              cursor: pointer;
+          }
+
+          &:not(.no-padding) {
+            padding: 0 40px 0 40px;
+          }
+          &.no-padding {
+            padding: 0 !important;
+          }
+         
+          @media (min-width: 768px) {
+              &.spread {
+                  padding-bottom: 30px;
+              }
+          }
+
+          &.no-boxes {
+              padding-top: 20px;
+              background: white;
+              @include fadein;
+          }
+      }
+  }
+}

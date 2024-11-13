@@ -1,0 +1,52 @@
+<p style="margin-top: 40px;">
+  Yours sincerely,
+</p>
+<div class="signature" *ngIf="signature && signature.length > 0">
+  <!-- signature = 'Terry' : start-->
+  <img *ngIf="signature === 'Terry'" src="../../assets/images/Terry_Orford_signature.jpg" alt="Terry signature">
+  <p *ngIf="signature === 'Terry'">
+      Terry Orford
+  </p>
+  <p *ngIf="signature === 'Terry'" style="margin-top: 10px">
+      Head of Customer Services
+  </p>
+  <!-- signature = 'Terry' : ends-->
+
+  <!-- signature = 'Duncan' : start-->
+  <img *ngIf="signature === 'Duncan'" src="../../assets/images/Duncan_rudkin-sign.png" alt="Duncan Signature">
+  <p *ngIf="signature === 'Duncan'">
+      Duncan Rudkin
+  </p>
+  <p *ngIf="signature === 'Duncan'" style="font-weight:bold;margin-top: 0">
+      Chief Executive and Registrar
+  </p>
+  <!-- signature = 'Duncan' : ends-->
+
+  <!-- signature = 'Customer Service Team' : start--> 
+  <p *ngIf="signature === 'Customer Service Team'" style="font-weight:bold;margin-top: 0">
+    Customer Services Team
+  </p>
+  <!-- signature = 'Customer Service Team' : ends--> 
+  
+  <!-- signature = 'Head of Registration' : start--> 
+  <p *ngIf="signature === 'Head of Registration'" style="font-weight:bold;margin-bottom: 0">
+    Sarah Stein
+  </p>
+  <p *ngIf="signature === 'Head of Registration'" style="font-weight:bold;margin-top: 0">
+    Head of Registration
+  </p>
+  <!-- signature = 'Head of Registration' : end--> 
+
+  <!-- signature = 'Registration Assessment Operations Team' : start--> 
+  <p *ngIf="signature === 'Registration Assessment Operations Team'" style="font-weight:bold;margin-top: 0">
+    {{signature}}
+  </p>
+  <!-- signature = 'Registration Assessment Operations Team' : end--> 
+</div>
+
+
+<div class="page-footer">
+  <a href="https://www.pharmacyregulation.org" target="_blank">pharmacyregulation.org</a>&nbsp;| &nbsp;
+  <a href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a>&nbsp;| &nbsp;
+  <span>020 3713 8000</span>
+</div>

@@ -1,0 +1,42 @@
+<div class="top-nav">
+
+  <button (click)="exit()" aria-label="Back" class="btn btn-back">
+    <i class="fa fa-arrow-left"></i>
+    Review list
+  </button>
+  <div style="flex-grow: 1">
+
+  </div>
+  <div>{{ manager.title }} | {{ RegistrantType[review?.registrantType] | caseSplit }} | <span  *ngIf="review?.isLeadReviewer">Lead reviewer</span>
+    <span  *ngIf="!review?.isLeadReviewer">Secondary reviewer</span>
+  </div>
+</div>
+
+<app-banner2  [info]="true" heading="Review"
+  [subHeading]="manager.title">
+
+  <div class="toolbar-content">
+
+      <button  class="btn no-focus"  (click)="manager.toggleHelp()" [class.active]="manager.helpVisible$ | async">
+          <i class="fa fa-info"></i>
+          help
+        </button>
+
+     
+  <button *ngIf="manager.chatAvailable" class="btn no-focus"  (click)="manager.toggleChat()" [class.active]="manager.chatVisible$ | async">
+    <i class="fa fa-comments"></i>
+    discussion
+  </button>
+
+  <app-carousel-nav [items]="manager.items" label="entries"
+   [selectedIndex]="manager.selectedEntryIndex$ | async" 
+   (onIndexSelected)="manager.selectedEntryIndex$.next($event.index)">
+  </app-carousel-nav>
+
+  <ng-content select=".buttons"></ng-content>
+
+
+
+</div>
+
+</app-banner2>

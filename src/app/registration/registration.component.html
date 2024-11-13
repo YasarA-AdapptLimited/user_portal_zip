@@ -1,0 +1,140 @@
+<app-banner>
+  <div class="banner-left">
+    <h1>Registration</h1>
+    <p class="intro-text">Your registration details as they are shown on the public register
+    </p>
+  </div>
+</app-banner>
+<div class="content spread">
+  <div class="row fadein" *ngIf="registrant">
+
+    <div class="col-md-7 left-col">
+      <app-form-section>
+        <span class="section-header">Registration details</span>
+        <div class="section-body">
+          <div class="form-group">
+            <label for="surname">Surname</label>
+            <input id="surname" class="form-control" tabindex="-1" readonly [value]="registrant.surname" />
+          </div>
+          <div class="form-group">
+            <label for="forenames">Forenames</label>
+            <input id="forenames" class="form-control" tabindex="-1" readonly [value]="registrant.forenames" />
+          </div>
+          <div class="form-group">
+            <label for="postalTown">Postal town</label>
+            <input id="postalTown" class="form-control" tabindex="-1" readonly [value]="registrant.postalTown" />
+          </div>
+          <div class="form-group">
+            <label for="annotations">Annotations</label>
+            <input id="annotations" class="form-control" tabindex="-1" readonly [value]="annotation" />
+          </div>
+
+          <div class="form-group">
+            <label for="superintendent">Superintendent</label>
+            <input id="superintendent" class="form-control" tabindex="-1" readonly [value]="registrant.superintendent" />
+          </div>
+          <div class="form-group">
+            <label for="registrantType">Registrant type</label>
+            <input id="registrantType" class="form-control" tabindex="-1" readonly [value]="registrantType" />
+          </div>
+
+          <div class="form-group">
+            <label for="registrationNumber">Registration number</label>
+            <input id="registrationNumber" class="form-control" tabindex="-1" readonly [value]="registrant.registrationNumber" />
+          </div>
+          <!-- FTU-4: https://mygphc.atlassian.net/jira/software/projects/FTU/boards/68/backlog?selectedIssue=FTU-4-->
+          <div class="form-group">
+            <label for="registrantdate">Initial registration date</label>
+            <input id="registrantdate" class="form-control" tabindex="-1" readonly [value]="registrant.joinedDate | utcDate" />
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <input id="status" class="form-control" tabindex="-1" readonly [value]="RegistrantStatus[registrant.status]" />
+          </div>
+
+          <div class="form-group">
+            <label for="renewalDate">Renewal date</label>
+            <input id="renewalDate" class="form-control" tabindex="-1" readonly [value]="renewalDate | utcDate" />
+          </div>
+          <div class="form-group">
+            <label for="expiryDate">Expiry date</label>
+            <input id="expiryDate" class="form-control" tabindex="-1" readonly [value]="expiryDate | utcDate" />
+          </div>
+
+        </div>
+      </app-form-section>
+    </div>
+
+    <div class="col-md-5 right-col">
+      <app-registrant-badge title="Registration status"></app-registrant-badge>
+
+      <app-form-section [loading]="loadingLetters">
+        <span class="section-header">Letters</span>
+        <div class="section-body">
+          <div *ngIf="letters.length else noLetters">
+            <a [routerLink]="['/registration/letter', letter.letterType, letter.id]"
+              style="border-bottom:1px solid #efefef;display:flex;flex-direction:row;align-items:center;height: 40px;"
+              *ngFor="let letter of letters">
+              <i class="fa fa-envelope letter"></i>
+              <div style="flex-grow: 1">{{LetterType[letter.letterType] | caseSplit}}</div>
+              <div>{{ letter.letterDate | utcDate }}</div>
+            </a>
+
+
+          </div>
+          <!---  <a 
+          [routerLink]="['/registration/letter', 5]"
+          style="border-bottom:1px solid #efefef;display:flex;flex-direction:row;align-items:center;height: 40px;" >
+              <i class="fa fa-envelope letter"></i>
+              <div style="flex-grow: 1"
+             
+              >Training record</div>
+             
+          </a>-->
+
+          <ng-template #noLetters>
+            You don't have any letters
+          </ng-template>
+
+          <button (click)="createLetters()" *ngIf="isDev">Create letters</button>
+
+        </div>
+      </app-form-section>
+
+      <app-form-section [loading]="loadingCountersigs">
+        <span class="section-header">Countersignature requests</span>
+        <div class="section-body ">
+          <ul class="documents" style="padding:0" *ngIf="countersigs && countersigs.length else noData">
+            <li *ngFor="let sig of countersigs">
+              <a routerLink="/registration/countersign/{{sig.id}}/{{sig.scope}}">
+                {{ ( sig.title? sig.title : '') + ' ' + sig.forenames + ' ' + sig.surname }} -
+                {{ sig.createdAt | utcDate }}
+              </a>
+            </li>
+          </ul>
+          <ng-template #noData>You have no applications to countersign</ng-template>
+        </div>
+      </app-form-section>
+
+      <app-form-section [loading]="loadingLearningContracts">
+        <span class="section-header">Learning contracts</span>
+        <div class="section-body ">
+          <ul class="documents" style="padding:0"
+            *ngIf="learningContracts && learningContracts.length else noLearningContracts">
+            <li *ngFor="let contract of learningContracts">
+              <a routerLink="/registration/learning-contract/sign/{{contract.formId}}">
+
+                <span>
+
+                  {{ (contract.title ? contract.title : ' ')  + ' ' + contract.forenames + ' ' + contract.surname }}</span>
+              </a>
+            </li>
+          </ul>
+          <ng-template #noLearningContracts>You have no learning contracts to sign</ng-template>
+        </div>
+      </app-form-section>
+
+    </div>
+
+  </div>
+</div>

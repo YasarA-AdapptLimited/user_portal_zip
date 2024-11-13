@@ -1,0 +1,37 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div class="pt-2 pb-2">
+        ID document upload
+      </div>
+    </h2>
+  </div>
+  <section class="supporting-documents">
+
+    <app-supporting-documents-item [isAssessmentRegistration]="true" #doc (registered)="onRegistered($event)"
+      [sessionId]="sessionId" [touched]="touched" (uploaded)="onUploaded($event)" [attachments]="attachments"
+      [attachmentType]="AttachmentType.ProofOfIdentity" [mandatory]="true" [requireCertifier]="false"
+      title="ID document">
+      <div class="help-text">
+        <p>
+          Upload a copy of the ID that you will use during the registration assessment to verify your identity.
+          The primary ID must be current, valid and contain your photograph and signature.
+        </p>
+        <p>
+          You must upload either:
+        </p>
+        <ul>
+          <li>A currently valid and signed passport, of any country</li>
+        </ul>
+        <p>
+          OR:
+        </p>
+        <ul>
+          <li>A currently valid full or provisional UK photo driving license</li>
+        </ul>
+      </div>
+    </app-supporting-documents-item>
+
+
+  </section>
+</ng-template>

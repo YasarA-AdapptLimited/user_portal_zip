@@ -1,0 +1,103 @@
+<section style="padding-bottom: 0px!important;">
+  <div class="important" *ngIf="!readonly">
+    <p>
+      Tell us about the work experience you have completed to meet the registration criteria.
+    </p>
+    <p>
+       If you had more than one placement you should enter the earliest placement first.
+    </p>
+    <p>
+      If you completed work experience in a GPhC registered pharmacy, please search for it using the pharmacy’s postcode
+      or GPhC registration number.
+    </p>
+    <p>
+      If you completed work experience in an organisation which is not a registered pharmacy, for example in a GP practice,
+      please select the option ‘Not on register’, and search for the placement address by postcode.
+    </p>
+  </div>
+  <h4>Work experience placement details</h4>
+  <app-select-premises title="premise" [item]="workExperience.premise"
+    (selected)="workExperience.updatePremises($event)" [touched]="touched" [readonly]="readonly">
+  </app-select-premises>
+  <div class="pt-4" *ngIf="!!workExperience.premise">
+    <div class="form-group" [class.invalid]="(touched || jobTitle.touched) && !workExperience.jobTitleValid">
+      <h4>Job description</h4>
+      <div class="col-md-4 mb-4" style="margin-left:0;padding-left:0;">
+        <label for="jobTitle">Job Title</label>
+        <input  class="form-control" required type="text"  placeholder="Job title"
+        [disabled]="readonly"
+        #jobTitle="ngModel"
+        [(ngModel)]="workExperience.jobTitle"
+        (ngModelChange)="workExperience.updateJobTitle($event)"
+        id="jobTitle"
+        >
+        <app-collapsible [trigger]="jobTitle.touched && jobTitle.invalid">
+            <p style="color:#c52e2e; font-weight: bold">
+              Please provide a job title
+            </p>
+        </app-collapsible>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4" style="margin-left:0;padding-left:0;">
+      <div class="form-group" [class.invalid]="(touched || workedHours.touched) && !workExperience.workingHoursValid">
+        <label for="workingHours">Hours per week</label>
+        <input matInput min="0"
+        [disabled]="readonly"
+        class="form-control" type="number" placeholder="Hours per week"
+          #workedHours="ngModel"
+          [(ngModel)]="workExperience.workedHoursPerWeek"
+          (ngModelChange)="workExperience.updateWorkingHours($event)"
+          id="workingHours">
+      </div>
+      <app-collapsible [trigger]="workedHours.touched && !workExperience.workingHoursValid">
+        <p style="color:#c52e2e; font-weight: bold" *ngIf="!workExperience.workingHoursValid">
+          To meet the work experience requirement you must work at least 14 hours a week
+        </p>
+      </app-collapsible>
+    </div>
+  </div>
+</section>
+
+<app-collapsible [trigger]="workExperience.jobTitleValid && 
+workExperience.workingHoursValid && workExperience.premiseValid">
+  <section class="form-group" [class.invalid]="touched && !workExperience.datesValid">
+    <h4>Training dates</h4>
+
+    <!-- 
+    [fromMax]="index === 0 ? workExperience.trainingWindow?.start.to : undefined" -->
+    <app-daterange 
+      [fromMax]="today"
+      [fromMin]="index === 0 ? workExperience.trainingWindow?.start.from : undefined"
+      [fromDate]="workExperience.startDate" 
+      [toMax]="today"
+      [toDate]="workExperience.endDate" 
+      (changed)="workExperience.setDaterange($event)" 
+      [readonly]="readonly"
+      [overlapError]="workExperience.overlap$ | async"
+      overlapErrorMessage="Invalid start date - placement dates must not overlap"
+      fromDateTooEarlyMessage="Start date is before the permitted application opening"
+      fromDateTooLateMessage="Start date is after the permitted application close"
+      toDateTooLateMessage="End date is after the current registration date limit">
+    </app-daterange>
+
+    <div *ngIf="index === 0">
+      <p class="important col-sm-6">
+        The start date of your training must be no earlier than three months before the earliest start date of the
+        qualifications shown on the education details section.
+      </p>
+    </div>
+
+  </section>
+</app-collapsible>
+
+<app-collapsible [trigger]="workExperience.datesValid && workExperience.premiseValid">
+  <section>
+    <h4>Supervising pharmacist or pharmacy technician</h4>
+    <div *ngFor="let supervisor of workExperience.supervisingPharmacists; let i = index" class="form-group">
+      <app-select-registrant style="display:block;flex-grow:1" title="pharmacist or pharmacy technician" [item]="supervisor"
+        (selected)="workExperience.updateSupervisor($event, i)" [touched]="touched" [readonly]="readonly"
+        [trainingPlacementStartDate]="workExperience.startDate">
+      </app-select-registrant>
+    </div>
+  </section>
+</app-collapsible>

@@ -1,0 +1,57 @@
+<article *ngIf="receipt" class="receipt section-to-print">
+  <img class="logo" alt="General Pharmaceutical Council logo" src="/assets/images/logo-GPhC-blue-cropped.png" />
+
+  <h1>Receipt</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Amount
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          {{receipt.paymentNumber}}
+        </td>
+        <td>
+          {{receipt.description}}
+        </td>
+        <td>
+          {{ receipt.paymentDate | utcDate }}
+        </td>
+        <td>
+          {{ receipt.amount | currency: 'GBP' : 'symbol' : '.2' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+
+<div class="receipt-buttons">
+  <div class="text-center" style="flex-grow: 1">
+    <button class="btn btn-primary btn-round btn-round-sm"  aria-label="Print" (click)="print()">
+      <i class="fa fa-print"></i>
+    </button>
+    <div class="btn-text">Print</div>
+  </div>
+
+  <div class="text-center" style="flex-grow: 1">
+    <button class="btn btn-primary btn-round btn-round-sm"  aria-label="Close" [mat-dialog-close]>
+      <i class="fa fa-close"></i>
+    </button>
+    <div class="btn-text">Close</div>
+  </div>
+</div>

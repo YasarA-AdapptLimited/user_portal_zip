@@ -1,0 +1,109 @@
+<app-banner2 class="main" [loading]="loading" heading="Your reviews"
+  subHeading="Reviews currently allocated to you are listed below grouped by deadline.<br/> Click on a row to view the reviews in each group.">
+
+  <div class="toolbar-content">
+
+    <button class="btn no-focus btn-back" (click)="toggleSearch()" [class.active]="searchOpen">
+      <i class="fa fa-search"></i>
+      search
+    </button>
+  </div>
+</app-banner2>
+<app-collapsible [trigger]="searchOpen">
+
+  <div class="content no-boxes search-bar">
+
+    <div class="form-inline">
+
+      <div class="form-group" style="flex-grow: 1">
+        <input #reviewTitleRef (keydown.enter)="search()"  placeholder="Review title starts with..."
+          [(ngModel)]="searchCriteria.reviewTitle" (ngModelChange)="showNoResults = false" type="text"
+          name="reviewTitle" class="form-control review-title" />
+
+        <button class="btn btn-lg btn-primary ml-2" [disabled]="!searchCriteria.reviewTitle"
+          (click)="search()">Search</button>
+        <button class="btn btn-lg btn-default ml-2" [disabled]="!searchCriteria.reviewTitle"
+          (click)="clearSearch()">Clear</button>
+
+
+      </div>
+      <button class="btn-close-search" aria-label="Close" (click)="searchOpen = false"><i class="fa fa-close"></i></button>
+    </div>
+
+
+
+    <div class="search-results" *ngIf="searchResults.length || showNoResults" [@slideIn]>
+
+      <div class="no-results" *ngIf="showNoResults">No reviews found with title starting with
+        '{{searchCriteria.reviewTitle}}'</div>
+
+      <table class="table table-hover" *ngIf="searchResults.length">
+        <thead>
+          <tr>
+            <th style="width: 200px">Title</th>
+            <th style="width: 100px">Deadline</th>
+            <th style="width: 150px">Lead reviewer?</th>
+            <th>Stage</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of searchResults" class="clickable" routerLink="/review/{{item.id}}">
+
+            <td>{{item.title}}</td>
+            <td>{{item.reviewDeadline | utcDate}}</td>
+            <td>{{ item.isLead ? 'Yes' : 'No' }}</td>
+
+            <td>{{ ReviewStage[item.stage] | caseSplit }}</td>
+
+
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+</app-collapsible>
+
+<div class="content no-boxes fadein" *ngIf="!loading">
+  <!--- <div *ngIf="!items?.length">
+    <p class="no-data">
+      You don't have any reviews at the moment
+    </p>
+  </div>-->
+
+  <div *ngIf="summary">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Deadline</th>
+          <th style="text-align: right" *ngFor="let header of summary.headers">{{header | caseSplit}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr class="clickable" (click)="open(grouping)" *ngFor="let grouping of summary.deadlineGroupings" [class.completed]="grouping.completed">
+
+          <td>{{ grouping.deadline | date: 'dd/MM/yyyy' }}</td>
+          <td *ngFor="let count of grouping.counts" style="text-align: right">
+            <div *ngIf="count.count" class="clickable count" (click)="open(grouping, count)">
+              {{ count.count }}
+            </div>
+            <span *ngIf="!count.count">-</span>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+
+
+</div>

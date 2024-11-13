@@ -1,0 +1,177 @@
+<section>
+  <h4>Training site</h4>
+  <app-select-premises title="training site" [item]="placement.trainingSite.premise"
+    (selected)="placement.updatePremises($event)" [touched]="touched" [readonly]="readonly">
+  </app-select-premises>
+  <div class="pt-4" *ngIf="!!placement.trainingSite.premise">
+    <app-collapsible [trigger]="placement.trainingSite.premise.isAwaitingAccreditation">
+      <div class="important">
+        The training site that you have selected is currently awaiting accreditation. You must not start your training
+        there until it is shown on the register of training premises that can be found at
+        <a href="https://www.pharmacyregulation.org/" target="_gphc_main_site">https://www.pharmacyregulation.org/</a>.
+      </div>
+    </app-collapsible>
+    <div class="metadata-item mb-4 form-group"
+      [class.invalid]="touched && placement.trainingSite.isOwner === undefined">
+      <div>
+        <label [for]="'rdoPlacementIsOwner-' + index">Are you an owner or director of, or a majority shareholder in,
+          this pharmacy?</label><br />
+        <mat-radio-group *ngIf="!readonly" [id]="'rdoPlacementIsOwner-' + index" [name]="'rdoPlacementIsOwner-' + index"
+          [(ngModel)]="placement.trainingSite.isOwner" (ngModelChange)="placement.updated$.next()">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="readonly" class="form-control readonly form-control-short">
+          {{ placement.trainingSite.isOwner | friendlyBoolean }}
+        </div>
+      </div>
+    </div>
+    <div class="metadata-item form-group" [class.invalid]="touched && placement.trainingSite.isRelated === undefined">
+
+      <div>
+        <div style="display: flex;">
+          <label for="'rdoPlacementIsRelated-' + index">Are you related to a director of this pharmacy, or do you have a
+            ‘significant relationship’ with a director or employee of this pharmacy?</label><br />
+          <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+            [static]='true' class="headingIcon"></app-gphc-icon>
+        </div>
+        <mat-radio-group *ngIf="!readonly" [id]="'rdoPlacementIsRelated-' + index"
+          [name]="'rdoPlacementIsRelated-' + index" [(ngModel)]="placement.trainingSite.isRelated"
+          (ngModelChange)="placement.updated$.next()">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="readonly" class="form-control readonly form-control-short">
+          {{ placement.trainingSite.isRelated | friendlyBoolean }}
+        </div>
+        <app-collapsible [trigger]="showDetailsHelp" class="help-block" style="display:block; margin-top: 20px">
+          <div class="row help-text">
+            <div class="col-md-12">
+              <p>
+                To make sure there is an objective relationship between trainees and designated supervisors, you must not train anywhere
+                that you :
+              </p>
+              <ul>
+                <li>have a significant financial interest in, or</li>
+                <li>have a significant relationship with a director, owner or employee</li>
+              </ul>
+              <p>
+                ‘Significant’ relationships include:
+              </p>
+              <ul>
+                <li>any family relationships, such as father, mother, aunt, uncle, cousin and so on</li>
+                <li>family relationships through marriage or civil partnership</li>
+                <li>girlfriend-boyfriend-partner relationships</li>
+                <li>people you depend on financially or to whom you have a financial commitment</li>
+                <li>
+                  people who depend on you financially or who have a financial commitment to you
+                  In a public sector placement (for example an NHS hospital trust) where there is clearly no commercial
+                  interest, we will consider applications from trainees wanting to train at a site where a family member
+                  or partner works. However, the training provider is responsible for making sure that training and
+                  assessment is managed by someone else, to avoid any conflict of interest. Any operational issues that
+                  may arise through this must be managed by the training provider.
+                  Important: The designated supervisor is responsible for approving the competence of their trainee. Any abuse of this
+                  responsibility resulting from any family relationship will be a fitness to practise issue for the
+                  pharmacist and we may terminate the trainee's training placement.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </app-collapsible>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-collapsible [trigger]="placement.trainingSiteValid">
+  <section class="form-group" [class.invalid]="touched && !placement.datesValid">
+    <h4>Training dates</h4>
+
+    <app-daterange [isPastDateAllowed]="false" [fromDate]="placement.startDate"
+      [fromMin]="placement.trainingWindow?.start.from"
+      [fromMax]="index === 0 ? placement.trainingWindow?.start.to : undefined"
+      [toMax]="placement.trainingWindow?.end.to" [toDate]="placement.endDate" (changed)="placement.setDaterange($event)"
+      [readonly]="readonly" [overlapError]="placement.overlap$ | async"
+      overlapErrorMessage="Invalid start date - placement dates must not overlap"
+      fromDateTooEarlyMessage="Start date is before the permitted application opening"
+      fromDateTooLateMessage="Start date is after the permitted application close"
+      toDateTooLateMessage="End date is after the current registration date limit">
+    </app-daterange>
+
+    <div *ngIf="index === 0">
+      <p class="important col-sm-6">
+        Your first placement start date must be within the date range specified to meet the training scheme
+        requirements.
+      </p>
+    </div>
+
+  </section>
+</app-collapsible>
+
+<app-collapsible [trigger]="placement.trainingSiteValid && placement.datesValid">
+  <section>
+    <h4 [class.error]="duplicateTutor">Designated supervisor(s)</h4>
+    <div *ngFor="let tutor of placement.tutors; let i = index" class="form-group">
+      <app-select-registrant style="display:block;flex-grow:1" title="tutor" [item]="tutor"
+        (selected)="validateTutor($event, i)" [touched]="touched" [readonly]="readonly"
+        [trainingPlacementStartDate]="placement.startDate">
+      </app-select-registrant>
+      <app-collapsible [trigger]="duplicateTutor && i === 1">
+        <p class="error">
+          Cannot have the same designated supervisor, please change your second designated supervisor
+        </p>
+      </app-collapsible>
+      <app-collapsible [trigger]="duplicateTutor && i === 2">
+        <p class="error">
+          Cannot have the same designated supervisor, please change your third designated supervisor
+        </p>
+      </app-collapsible>
+      <button class="btn btn-default" style="height: 40px" *ngIf="!readonly && i === 1"
+        (click)="placement.removeTutor(i)">Remove
+        second designated supervisor</button>
+      <button class="btn btn-default" style="height: 40px" *ngIf="!readonly && i === 2"
+        (click)="placement.removeTutor(i)">Remove
+        third designated supervisor</button>
+        <button class="btn btn-default" style="height: 40px" *ngIf="!readonly && i === 3"
+        (click)="placement.removeTutor(i)">Remove
+        fourth designated supervisor</button>
+
+    </div>
+
+    <button class="btn btn-default btn-lg" *ngIf="!readonly && !!placement.tutors[0] &&placement.tutors.length < 4"
+      (click)="placement.addTutor()">Add additional designated supervisor for this placement</button>
+  </section>
+</app-collapsible>
+<!---
+<app-collapsible [trigger]="placement.trainingSiteValid && placement.datesValid && placement.tutorValid">
+  <section class="limit-width">
+
+    <h4>Allocation</h4>
+    <div class="form-group" [class.invalid]="touched && placement.isAllocated === undefined">
+      <label for="placementAllocated">Was this placement allocated to you?</label>
+      <div class="mt-2">
+        <mat-radio-group id="placementAllocated" name="placementAllocated" [(ngModel)]="placement.isAllocated"
+          (ngModelChange)="placement.updated$.next()">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <app-collapsible [trigger]="placement.isAllocated">
+
+      <div class="form-group" [class.invalid]="placement.isAllocated && (touched || placementAllocation.touched ) && placementAllocation.errors?.required">
+        <label for="placementAllocationRef">Allocation reference</label>
+        <input class="form-control" type="text" id="placementAllocationRef" required name="placementAllocationRef" [(ngModel)]="placement.allocationReference"
+          (ngModelChange)="placement.updated$.next()" #placementAllocation="ngModel">
+        <app-collapsible [trigger]="placement.isAllocated && (touched || placementAllocation.touched ) && placementAllocation.errors?.required">
+          <p class="form-error">
+            You must enter your allocation reference number
+          </p>
+        </app-collapsible>
+      </div>
+
+    </app-collapsible>
+
+  </section>
+</app-collapsible>
+-->

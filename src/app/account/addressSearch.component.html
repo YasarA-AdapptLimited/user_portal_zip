@@ -1,0 +1,48 @@
+<form [formGroup]="addressForm">
+
+  <div class="form-group">
+    <label id="countryLabel">Select your country</label>
+    <select aria-labelledby="countryLabel" class="form-control" formControlName="countryCode">
+      <option *ngFor="let x of countries" [value]="x.key">{{x.value}}</option>
+    </select>
+  </div>
+  <div class="form-group" [class.invalid]="postcode.touched && postcode.invalid">
+    <label id="postcodeLabel">Enter your postcode</label>
+    <input #focus name="postcode" id="postcode" aria-labelledby="postcodeLabel" formControlName="postcode" class="form-control"
+    />
+
+    <app-collapsible [trigger]="postcode.touched && postcode.errors?.pattern">
+        <p class="form-error">
+          Please check that you have entered your full postcode correctly
+        </p>
+      </app-collapsible>
+    <app-collapsible [trigger]="postcode.touched && postcode.errors?.required && !postcode.errors?.pattern">
+      <p class="form-error">
+        You must provide your postcode
+      </p>
+    </app-collapsible>
+  </div>
+
+  <app-collapsible [trigger]="searching">
+    <div style="display:flex;align-items:center;padding-bottom:10px;">
+        <app-spinner [tiny]="true"></app-spinner><div style="padding-left:10px">Searching for addresses...</div>
+    </div>
+  </app-collapsible>
+  <app-collapsible [trigger]="!!search.results">
+    <label id="addressListLabel">Select your address</label>
+    <ul aria-labelledby="addressListLabel" class="address-selector form-control">
+      <li *ngFor="let result of search.results">
+        <button style="text-align:left;width: 100%;padding:5px;" (click)="select(result.id)">
+          {{ result.text }}, {{ result.description }}
+        </button>
+      </li>
+    </ul>
+
+    <p class="text-center">
+        <button class="btn btn-default btn-lg " (click)="enableManualInput()">My address is not listed</button>
+      </p>
+
+  </app-collapsible>
+
+
+</form>

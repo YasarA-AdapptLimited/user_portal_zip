@@ -1,0 +1,20 @@
+<app-banner  >
+  <div class="banner-left" style="text-align:center">
+    <h1 class="sm-show">Change of email address</h1>
+    <div *ngIf="loading">
+      <app-spinner [light]="true"></app-spinner>
+    </div>
+    <div *ngIf="!loading && !!error" class="fadein" style="margin-top:40px">
+      <p class="intro-text" >
+       <i class="fa fa-warning"></i> Your email address could not be changed 
+      </p>
+      <p class="intro-text" >
+          {{error}}
+      </p>
+    </div>
+    <div *ngIf="!loading && !success" style="margin-top:50px">
+      <button class="btn btn-primary btn-lg" style="border: 3px solid white !important;" routerLink="/account">View your account details</button>
+    </div>
+
+  </div>
+</app-banner>

@@ -1,0 +1,16 @@
+<app-form-section [editable]="true" [invalid]="!contactForm?.valid" (onEdit)="onEdit()" (onCancel)="cancel()" (onSave)="save()"
+  [saving]="saving" [editing]="editing">
+  <span class="section-header">Contact</span>
+  <div class="section-body">
+    <app-contact [contact]="contact"></app-contact>
+  </div>
+
+  <div class="section-edit">
+    <form #contactForm="ngForm">
+      <app-contact-edit [editing]="editing" [contact]="editableContact"
+      [serverEmailErrors]="emailErrors"
+      ></app-contact-edit>
+    </form>
+  </div>
+
+</app-form-section>

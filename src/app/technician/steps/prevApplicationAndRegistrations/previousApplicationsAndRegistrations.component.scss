@@ -1,0 +1,15 @@
+
+@import '../../../style/variables';
+
+mat-radio-group {
+    mat-radio-button:first-child {
+        margin-bottom: 1em;
+    }
+}
+
+h4 {
+    margin-bottom: 15px;
+    max-width: 650px;
+    padding-bottom: 10px;
+    border-bottom: 5px solid #f5f5f5;
+  }

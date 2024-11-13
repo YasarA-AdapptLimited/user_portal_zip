@@ -1,0 +1,184 @@
+<ng-template #content>
+
+    <h2 class="spacer">Select your mentor</h2>
+
+    <section class="countersigning">
+      <app-collapsible [trigger]="selectedPharmacist === undefined">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="important" *ngIf="!awaitingCountersigning && !countersigned && !sending">
+                  As it has been more than six months since the date you successfully completed your 
+                  prescribing qualification you need to provide details of a prescribing pharmacist who 
+                  you you could refer in cases of doubt or for professional reassurance.
+              </div>
+  
+              <form>
+                <div class="form-group" style="padding-top: 15px">
+                  <p style="font-weight: bold;">Please search for a mentor to countersign your application using the search box below.</p>
+                  <label for="searchBy" style="margin-right: 15px">Search by</label>
+                  <mat-radio-group name="searchBy" id="searchBy" (ngModelChange)="setFocus()" [(ngModel)]="searchParams.searchBy">
+                    <mat-radio-button [value]="RegisterSearchBy.Number" name="number" type="radio">Registration number</mat-radio-button>
+                    <mat-radio-button [value]="RegisterSearchBy.Name" name="name" type="radio">Name</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+        
+                <div class="row">
+                  <div class="col-md-8" *ngIf="searchByNumber">
+                    <div class="form-group" [class.invalid]="searchParams.searchBy === RegisterSearchBy.Number && ((touched || regNumber.touched ) && regNumber.errors?.required)">
+                      <label for="regNumber">Registration number</label>
+                      <input type="search" #focus class="form-control" placeholder="Enter a registration number" name="regNumber" id="regNumber"
+                        (ngModelChange)="clearNoResults()" #regNumber="ngModel" [(ngModel)]="searchParams.regNumber" required>        
+                      <app-collapsible [trigger]="(touched || regNumber.touched ) && regNumber.errors?.required">
+                        <p class="form-error">
+                          Please enter a registration number
+                        </p>
+                      </app-collapsible>
+                    </div>
+        
+                  </div>
+        
+                  <div class="col-md-4" *ngIf="searchByName">
+                    <div class="form-group" [class.invalid]="searchParams.searchBy === RegisterSearchBy.Name && lastName.touched && !searchParams.lastName && !searchParams.firstName">
+                      <label for="lastName">Last name</label>
+                      <input type="text" #focus class="form-control" placeholder="Enter last name" id="lastName" [(ngModel)]="searchParams.lastName"
+                        (ngModelChange)="clearNoResults()" #lastName="ngModel" name="lastName">
+                      <app-collapsible [trigger]="(searchParams.searchBy === RegisterSearchBy.Name && lastName.touched && !searchParams.lastName && !searchParams.firstName)">
+                        <p class="form-error">
+                          You must provide either last name or first name, or both.
+                        </p>
+                      </app-collapsible>
+                    </div>
+                  </div>
+        
+                  <div class="col-md-4" *ngIf="searchByName">
+                    <div class="form-group" [class.invalid]="searchParams.searchBy === RegisterSearchBy.Name && firstName.touched && !searchParams.lastName && !searchParams.firstName">
+                      <label for="firstName">First name / initial</label>
+                      <input type="text" class="form-control" (ngModelChange)="clearNoResults()" placeholder="Enter first name" id="firstName"
+                        name="firstName" #firstName="ngModel" [(ngModel)]="searchParams.firstName">
+                    </div>
+                  </div>
+        
+                  <div class="col-md-4 btn-col">
+                    <button class="btn btn-primary btn-block btn-lg" type="submit" [disabled]="(searchParams.searchBy === RegisterSearchBy.Name && !searchParams.firstName && !searchParams.lastName)
+                    || (searchParams.searchBy === RegisterSearchBy.Number && !searchParams.regNumber)" (click)="search()">Search</button>
+                  </div>
+                </div>
+        
+              </form>
+  
+              <app-collapsible [trigger]="searching">
+                <div style="display:flex;align-items:center;padding-bottom:10px;">
+                  <app-spinner [tiny]="true"></app-spinner>
+                  <div style="padding-left:10px">Searching for pharmacists...</div>
+                </div>
+              </app-collapsible>
+  
+              <app-collapsible [trigger]="!searching && pharmacists !== undefined && pharmacists.length > 0 && !searchedSelf">
+                <div style="margin-top: 20px">
+                  <label id="resultsLabel">Select a pharmacist</label>
+                  <ul aria-labelledby="resultsLabel" class="form-control" #resultsList>
+                    <li *ngFor="let pharmacist of pharmacists">
+                      <button style="text-align:left;width: 100%;padding:5px;" (click)="setSelectedPharmacist(pharmacist)">
+                        {{ pharmacist.registrationNumber}} - {{ pharmacist.forenames + ' ' + pharmacist.surname }} - {{ pharmacist.town }}
+                      </button>
+                    </li>
+                    <li class="text-center load-more" *ngIf="showLoadMore">
+                      <button class="btn btn-default btn-lg btn-block " (click)="loadMore()" [disabled]="loadingMore">
+                        <span *ngIf="!loadingMore">More results...</span>
+                        <span *ngIf="loadingMore">Loading....</span>
+                      </button>
+                      <div *ngIf="loadingMore">
+                        <mat-progress-bar aria-label="loading"  mode="indeterminate" color="primary"></mat-progress-bar>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </app-collapsible>
+  
+              <div *ngIf="noResultsVisible">
+                <p class="intro-text" *ngIf="searchedSelf">
+                  Please select any other pharmacist.
+                </p>
+                <p class="intro-text" *ngIf="!searchedSelf && searchParams.searchBy === RegisterSearchBy.Number">
+                  Couldn't find any prescribing pharmacists with registration number '{{searchParams.regNumber}}'.
+                </p>
+                <p class="intro-text" *ngIf="!searchedSelf && searchParams.searchBy === RegisterSearchBy.Name">
+                  Couldn't find any pharmacists called '{{ (searchParams.firstName ? searchParams.firstName + ' ' : '') + searchParams.lastName
+                  }}'.
+                </p>
+              </div>
+          </div>        
+      </div>
+      </app-collapsible>
+
+      <app-collapsible [trigger]="selectedPharmacist !== undefined">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>Selected countersigning pharmacist</label>
+              <div class="form-control" readonly>
+                {{ selectedPharmacist?.registrationNumber}} - {{ selectedPharmacist?.forenames + ' ' + selectedPharmacist?.surname }}
+              </div>
+            </div>
+  
+          </div>
+          <div class="col-md-4 btn-col" *ngIf="!awaitingCountersigning && !countersigned && !sending">
+            <button type="button" (click)="cancelSelection()" class="btn btn-primary btn-block btn-lg">Change</button>
+          </div>
+        </div>
+  
+        <div style="padding: 20px" *ngIf="!awaitingCountersigning && !countersigned && !sending">
+          <button class="btn-lg btn-block btn-primary" (click)="sendForCountersigning()">Send your mentor request</button>
+        </div>
+  
+        <div class="important">
+          Select a registered prescribing pharmacist to whom you will refer in cases of doubt or for professional reassurance. 
+          They will be sent a request containing your name and registration number to confirm that they are happy to act as your 
+          mentor for one month. Make sure the person you chose is aware that we will keep their information as part of this application 
+          and may contact them to verify it.
+        </div>
+      </app-collapsible>
+
+      <app-collapsible [trigger]="countersigned || awaitingCountersigning || sending">
+        <div class="countersign-status form-control">
+  
+          <ng-container *ngIf="(sending || recalling) else countersignTemplate">
+            <i class="fa fa-circle-o-notch fa-spin fa-fw loading" style="font-size:4em"></i>
+            <div class="message">
+              <span *ngIf="recalling">Recalling application...</span>
+              <span *ngIf="sending"> Sending to selected pharmacist...</span>
+            </div>
+          </ng-container>
+  
+          <ng-template #countersignTemplate>
+            <ng-container *ngIf="countersigned else awaitingTemplate">
+              <i class="fa fa-check-circle success"></i>
+              <div class="message">
+                Your application has now been countersigned
+              </div>
+            </ng-container>
+          </ng-template>
+  
+          <ng-template #awaitingTemplate>
+    
+              <i class="fa fa-clock-o"></i>
+              <div class="message">
+                Your application is now waiting to be countersigned
+              </div>
+              <button (click)="recall()" class="btn btn-lg btn-block btn-primary">
+                Recall from countersigning pharmacist
+              </button>
+   
+          </ng-template>
+        </div>
+      </app-collapsible>
+
+    <app-collapsible [trigger]="serverErrors && !!serverErrors.length">
+        <p class="form-error-block" *ngFor="let error of serverErrors">
+          {{ 'Server validation error: ' + error.errors.join(',') }}
+        </p>
+    </app-collapsible>
+    
+    </section>
+
+</ng-template>

@@ -1,0 +1,163 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1" *ngIf="!isPrescriber">Countersign application</h1>
+      <h1 class="sm-show" style="flex-grow:1" *ngIf="isPrescriber">Respond to mentor request</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print" style="font-size: 1.5em"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left" style="font-size: 1.5em"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading">
+
+  <div [ngSwitch]="role">
+
+
+    <section class="section-to-print" *ngSwitchCase="FormScope.Trainee">
+      <h1>Application for registration</h1>
+      <app-reg-application-review [showContactDetails]="false" [readonly]="true" [application]="application"
+        [showEdi]="false">
+      </app-reg-application-review>
+      <h3 [class.error]="isCertified.touched && isCertified.invalid">Certify photo</h3>
+      <app-supporting-documents-summary [removeAllButPhotos]="true" [application]="application">
+      </app-supporting-documents-summary>
+      <mat-checkbox [(ngModel)]="certified" name="certifyPhoto" required #isCertified="ngModel">
+        I have viewed the photograph provided and I confirm that it is a true likeness of the applicant {{ name }}.
+      </mat-checkbox>
+      <app-collapsible [trigger]="isCertified.touched && isCertified.invalid">
+        <div class="error">
+          <p>
+            Please certify photo
+          </p>
+        </div>
+      </app-collapsible>
+    </section>
+
+
+
+    <section class="section-to-print" *ngSwitchCase="FormScope.TechnicianApplicant">
+      <h1>Application for registration</h1>
+      <app-technician-application-review [showContactDetails]="false" [readonly]="true" [application]="application"
+        [showEdi]="false" [showOverallDeclaration]="false" [isCountersignerView]="true">
+      </app-technician-application-review>
+      <h3 [class.error]="(isCertified.invalid && submitting) || (isCertified.invalid && submitting)">Certify photo</h3>
+      <app-supporting-documents-summary [removeAllButPhotos]="true" [isTechnician]="true" [application]="application">
+      </app-supporting-documents-summary>
+      <mat-checkbox [(ngModel)]="certified" name="certifyPhoto" [required]="!certified && submitting"
+        #isCertified="ngModel">
+        I have viewed the photograph provided and I confirm that it is a true likeness of the applicant {{ name }}.
+      </mat-checkbox>
+      <app-collapsible [trigger]="isCertified.touched && isCertified.invalid">
+        <div class="error">
+          <p>
+            Please certify photo
+          </p>
+        </div>
+      </app-collapsible>
+    </section>
+
+
+
+    <section class="section-to-print" *ngSwitchCase="FormScope.ProgressReport">
+      <h2 class="mb-4">39 week progress report</h2>
+      <app-assessment-countersign-response [application]="application"></app-assessment-countersign-response>
+    </section>
+
+    <section class="section-to-print" *ngSwitchCase="FormScope.FinalDeclaration">
+      <h2 class="mb-4">Final declaration</h2>
+      <app-final-declaration-countersign-response [application]="application">
+      </app-final-declaration-countersign-response>
+    </section>
+
+    <section class="section-to-print" *ngSwitchCase="FormScope.IndependentPrescriber">
+      <h2 class="mb-4">Independent prescriber</h2>
+      <app-independent-prescriber-countersign-response [application]="application">
+      </app-independent-prescriber-countersign-response>
+    </section>
+
+  </div>
+
+  <section class="outcome" *ngIf="!isAssessmentReport && !isFinalDeclaration && !isPrescriber">
+
+    <section>
+      <form #form="ngForm">
+        <h3>Your decision</h3>
+        <div style="font-weight: bold;" *ngIf="isTechnician ">
+          <p>
+            I declare that:
+          </p>
+          <ul style="list-style-type: disc;">
+            <li>
+              I have reviewed the information in the application including all supporting documents.
+            </li>
+            <li>
+              To the best of my knowledge, the information given in this application, including supporting documents,
+              is true, complete and accurate, and relates to the applicant.
+            </li>
+            <li>
+              I know of no reason why this applicant should not be registered as a pharmacy technician.
+            </li>
+          </ul>
+        </div>
+
+        <p style="font-weight: bold;">
+          As part of the registration application process, we will record your outcome and any supporting text. This
+          will be shown to the applicant and used by the GPhC when processing the application.
+        </p>
+
+        <mat-radio-group name="response" id="response" [(ngModel)]="response" (ngModelChange)="setFocus($event)">
+          <mat-radio-button [value]="CountersignatureOutcome.Approved" type="radio">I support this application
+          </mat-radio-button>
+          <mat-radio-button [value]="CountersignatureOutcome.Rejected" type="radio">I DO NOT support this application
+          </mat-radio-button>
+          <mat-radio-button [value]="CountersignatureOutcome.Refused" name="name" type="radio">This application has
+            been
+            sent to me in error</mat-radio-button>
+        </mat-radio-group>
+
+        <app-collapsible [trigger]="response===CountersignatureOutcome.Rejected">
+          <div class="form-group" style="padding-top: 20px;"
+            [class.invalid]="!reason.valid && (reason.touched || submitClicked === true)">
+            <label for="supportingText">Supporting text</label>
+            <textarea id="supportingText" class="form-control" #responseReasonInput [required]="response===CountersignatureOutcome.Rejected"
+              name="responseReason" id="responseReason"
+              placeholder="Please explain why you don’t support this application" [(ngModel)]="responseReason"
+              #reason="ngModel">
+          </textarea>
+            <app-collapsible [trigger]="!reason.valid && (reason.touched || submitClicked === true)">
+              <p class="form-error">
+                Please explain why you don’t support this application
+              </p>
+            </app-collapsible>
+          </div>
+        </app-collapsible>
+        <app-collapsible [trigger]="technicianAndROSApplicationValidationFailed || !isCertified">
+          <div class="form-error" style="text-align:left;font-size:18px;padding:10px;">
+            <app-validation-errors [errors]="validationErrors"></app-validation-errors>
+          </div>
+        </app-collapsible>
+
+        <button class="btn btn-block btn-lg btn-primary" type="submit" (click)="submitOutcome()"
+          [disabled]="submitting || !response">
+          <span *ngIf="!submitting">Submit decision</span>
+          <span *ngIf="submitting">Submitting...</span>
+        </button>
+      </form>
+    </section>
+  </section>
+
+
+
+</div>

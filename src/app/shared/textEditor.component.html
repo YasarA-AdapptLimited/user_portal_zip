@@ -1,0 +1,39 @@
+
+<div class="menu" *ngIf="!readonly">
+  
+  <div class="group font-group">
+    <div (click)="bold()" class="item"><i class="fa fa-bold"></i></div>
+    <div (click)="italic()" class="item"><i class="fa fa-italic"></i></div>
+    <div (click)="underline()" class="item"><i class="fa fa-underline"></i></div>
+   <!-- <div (click)="makeHeading()" class="item"><i class="fa fa-header"></i></div>-->
+  </div>
+  <div class="group list-group">
+    <div (click)="orderedList()" class="item"><i class="fa fa-list-ol"></i></div>
+    <div (click)="unorderedList()" class="item"><i class="fa fa-list-ul"></i></div>
+    <div (click)="action('decreaseListLevel')" class="item"><i class="fa fa-outdent"></i></div>
+    <div (click)="action('increaseListLevel')" class="item"><i class="fa fa-indent"></i></div>
+  </div>
+  <!---
+  <div class="group align-group">
+    <div (click)="align('left')" class="item"><i class="fa fa-align-left"></i></div>
+    <div (click)="align('center')" class="item"><i class="fa fa-align-center"></i></div>
+    <div (click)="align('right')" class="item"><i class="fa fa-align-right"></i></div>
+  </div>
+-->
+  <!--
+  <div class="group undo-group" style="float:right">
+    <div (click)="action('undo')" class="item"><i class="fa fa-undo"></i></div>
+    <div (click)="action('redo')" class="item"><i class="fa fa-undo flip"></i></div>
+  </div>
+  -->
+</div>
+
+<div *ngIf="!readonly" class="form-control text-editor"  [class.error]="error"
+[id]="inputId"
+[attr.aria-label]="description"
+[attr.aria-labelledby]="'labelFor-'+ inputId"
+[title]="placeholder"  #editor></div>
+
+<div *ngIf="readonly" class="form-control readonly" [innerHTML]="content"></div>
+<!--
+<div class="word-count" *ngIf="wordCount">Word count: {{wordCount}}</div>-->

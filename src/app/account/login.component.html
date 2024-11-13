@@ -1,0 +1,42 @@
+<div class="login-container">
+
+
+  <div class="login" style="position: relative;">
+    <button class="maintenance-signin-btn"
+    aria-hidden=true
+    tabindex=-1
+    (click)="signin()"
+    *ngIf="!(maintenance.stateOfLogin$ | async)"
+    ></button>
+    <div class="fadein text-center" *ngIf="loggedOut && !loading && !redirecting && !forgotPassword">
+      <div style="padding-top: 15px"></div>
+
+      <ng-container *ngIf="(maintenance.stateOfLogin$ | async) else hiddenLogin">
+        <button class="btn btn-lg btn-round btn-primary" aria-label="Sign in" (click)="signin()">
+          <i class="fa fa-sign-in" role="presentation"></i>
+        </button>
+        <div class="btn-text mb-4" tabindex="0">Sign in</div>
+        <a class="link-white" (click)="goToSignInFaq()" tabindex="0">Having problems signing in?</a>
+      </ng-container>
+
+    </div>
+
+    <div style="text-align:center" *ngIf="loading || redirecting || forgotPassword">
+      <h2>{{ loginMessage }}</h2>
+    </div>
+  </div>
+
+</div>
+
+<div class="progress-bar-container">
+  <mat-progress-bar aria-label="loading" *ngIf="redirecting || forgotPassword" mode="query" color="primary"></mat-progress-bar>
+  <mat-progress-bar aria-label="loading" *ngIf="loading" mode="indeterminate" color="primary"></mat-progress-bar>
+</div>
+
+<ng-template #hiddenLogin>
+  <div class="hidden-login">
+    <i class="fa fa-cogs"></i>
+    <p *ngIf="!showHeavyLoadMessage" class="intro-text">myGPhC is not currently available</p>
+    <p *ngIf="showHeavyLoadMessage" class="intro-text"> {{ heavyLoadMessage }}</p>
+  </div>
+</ng-template>

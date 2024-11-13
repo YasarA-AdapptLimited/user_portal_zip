@@ -1,0 +1,107 @@
+<div class="confirm-container">
+
+
+  <app-banner [noButtons]="true">
+    <div class="banner-left" style="text-align:center">
+      <h1 class="sm-show">Account activation</h1>
+      <p class="intro-text">
+        Follow the steps below to activate your account
+      </p>
+    </div>
+  </app-banner>
+  <div class="activation content ">
+
+    <section>
+      <app-collapsible [trigger]="loading" class="spinner-container">
+        <app-spinner [small]="true"></app-spinner>
+      </app-collapsible>
+
+      <app-carousel *ngIf="!loading" [items]="steps" [selectedIndex]="currentStep" [$item]="itemTemplate">
+        <ng-template let-item let-step="index" #itemTemplate>
+          <div class="template-container">
+            <div *ngIf="step === 0">
+              <h2>Please confirm your details</h2>
+              <ul>
+                <li>
+                  <div class="card">
+                    <div class="form-group">
+                      <label for="firstName">
+                        First name
+                      </label>
+                      <div id="firstName" class="form-control readonly" type="text" [innerHTML]="activation.forenames"></div>
+                    </div>
+                    <div class="form-group">
+                      <label for="middleName">
+                        Middle name
+                      </label>
+                      <div id="middleName" class="form-control readonly" type="text" [innerHTML]="activation.middleName"> </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="lastName">
+                        Last name
+                      </label>
+                      <div id="lastName" class="form-control readonly" type="text" [innerHTML]="activation.surname"></div>
+                    </div>
+                    <div class="form-group">
+                      <label for="dob">
+                        Date of birth
+                      </label>
+                      <div id="dob" class="form-control readonly" placeholder="Enter your dob name here..." type="text"
+                        [innerHTML]="activation.dob | dobDate"></div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col">
+                      <button class="btn btn-default" aria-label="Yes these are my details"
+                        (click)="selectWhetherConfirmed(true)" [class.selected]="selectedAnswer===true">
+                        Yes
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button class="btn btn-default" aria-label="No these are not my details"
+                        (click)="selectWhetherConfirmed(false)" [class.selected]="selectedAnswer===false">
+                        No
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <app-collapsible [trigger]="confirmationFailed">
+                <div class="form-error" style="text-align:center;font-size:18px;padding:10px;">
+                  <app-validation-errors [errors]="serverErrors"></app-validation-errors>
+                </div>
+              </app-collapsible>
+
+            </div>
+
+            <div *ngIf="step>0">
+              <div [ngSwitch]="selectedAnswer">
+
+                <section *ngSwitchCase="true">
+                  <p>
+                    Your account is being confirmed, you will be logged out automatically
+                    when you have been confirmed.
+                  </p>
+                </section>
+
+                <section *ngSwitchCase="false">
+                  <p>
+                    Please <a href="https://www.pharmacyregulation.org/about-us/contact-us" target="_blank">contact the GPhC</a>
+                    to update your details if they are incorrect.
+                  </p>
+
+                </section>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+      </app-carousel>
+
+    </section>
+
+  </div>
+</div>

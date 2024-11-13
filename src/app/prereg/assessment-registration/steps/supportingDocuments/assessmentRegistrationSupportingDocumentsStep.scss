@@ -1,0 +1,17 @@
+::ng-deep  .supporting-documents {
+    h3 {
+     margin-bottom: 20px !important;
+     display: flex;
+     align-items: center;
+     .title {
+       flex-grow: 1;
+     }
+     .badge {
+       margin-right: 20px;
+     }
+   }
+ 
+ 
+ 
+ }
+ 

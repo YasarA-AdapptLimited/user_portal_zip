@@ -1,0 +1,39 @@
+@import "../../style/variables";
+
+  .signature img {
+    width: 180px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .page-footer {
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #84bdcf;
+    width: 100%;
+    max-width: inherit;
+    padding-top: 5px;
+    color: $gphc-blue;
+    opacity: 0.9;
+    margin-top: 25px;
+
+    a {
+      color: $gphc-blue;
+      border-bottom: 0px !important;
+    }
+  }
+
+@media print {
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: block;
+    max-width: inherit;
+    opacity: 0.8;
+    a {
+      border-bottom: 0px !important;
+    }
+  }
+}
+  

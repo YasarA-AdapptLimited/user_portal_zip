@@ -1,0 +1,38 @@
+<header style="width: 100%;">
+    <div class="logo-container">
+        <img class="logo" src="/assets/images/gphc-header-2019-stripes.jpg" alt="banner with gphc logo" />
+    </div>
+    <div class="initial-details">
+        <div class="address" *ngIf="!isAssessmentApprove">
+            <p>
+                {{registrantName}}
+            </p>
+            <p>
+                {{ registrantAddress.line1 }}
+            </p>
+            <p>
+                {{ registrantAddress.line2 }}
+            </p>
+            <p>
+                {{ registrantAddress.line3 }}
+            </p>
+            <p>
+                {{ registrantAddress.town }}
+            </p>
+            <p>
+                {{ registrantAddress.county }}
+            </p>
+            <p>
+                {{ registrantAddress.postcode }}
+            </p>
+            <p>
+                {{ registrantAddress.country }}
+            </p>
+            <p>
+                {{ letterDate | date: 'd MMMM yyyy' }}
+            </p>
+        </div>
+    </div>
+
+
+</header>

@@ -1,0 +1,113 @@
+<ng-template #content>
+  <div class="header mb-4">
+    <h2 style="margin:0 !important">
+      <div>{{title}}</div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showHelp = !showHelp" [static]='true'>
+      </app-gphc-icon>
+    </h2>
+  </div>
+
+
+  <app-collapsible [trigger]="showHelp" class="help-block">
+    <div class="row help-text">
+      <div class="col-md-12">
+        <p>
+          Please enter the details of two years’ work experience you completed while studying for the UK qualification(s).
+          You can include work experience completed during your pharmacy technician courses, and up to three months 
+          before the start of your pharmacy technician course, if you were:
+        </p>
+        <ul>
+          <li>
+            working and carrying out the role of a pre-registration trainee pharmacy technician in the United Kingdom, 
+            Isle of Man or Channel Islands
+          </li>
+          <li>
+            under the supervision, direction or guidance of a pharmacist or pharmacy technician to whom you were 
+            directly accountable
+          </li>
+        </ul>
+        <p>
+          This is because you must register for, or start, the qualification required to register as a 
+          pharmacy technician within three months of starting to work as a pre-registration trainee pharmacy technician.
+        </p>
+        <p>
+          Within this two-year period, you must complete at least 1,260 hours of work experience in total. You must 
+          complete at least 315 hours in each of the two years.
+        </p>
+        <p><b>International qualifications and practice, and the relevant work experience requirement</b></p>
+        <p>
+          If you have evidence that you have a pharmacist or pharmacy technician qualification from a country from outside the UK,
+          and are eligible to practise as a pharmacist or pharmacy technician in the country where you qualified, you do
+          not need to complete a full two-year period of relevant work experience.
+        </p>
+        <p><b>Recent UK pharmacist pre-registration training and the relevant work experience requirement</b></p>
+        <p>
+          If you completed work experience in an organisation which is not a registered pharmacy, 
+          for example a GP practice, please select the option ‘Not on register’ and search for the placement address by postcode.
+        </p>
+      </div>
+    </div>
+  </app-collapsible>
+
+
+  <div *ngIf="ready$ | async else loadingTemplate" class="fadein mt-4">
+
+
+    <div class="fadein">
+
+      <section class="placement mt-4" *ngFor="let workExperience of workExperiences; let i = index;"
+        [class.first]="i===0">
+
+        <div style="display:flex">
+          <!-- <h3 style="flex-grow: 1">Your {{nth(i)}} placement</h3> -->
+          <h3 style="flex-grow: 1">Your {{nth(i)}} work experience</h3>
+          <button class="btn btn-primary btn-lg" style="height: 45px;" *ngIf="i > 0"
+            (click)="removePlacement(i)">Remove</button>
+        </div>
+
+        <div class="ml-4">
+          <app-work-experience [workExperience]="workExperience" [index]="i" (changed)="changed($event)"
+            [touched]="touched"></app-work-experience>
+        </div>
+
+      </section>
+
+      <div class="weeks-progress fadein"
+*ngIf="workExperiencesValid && applicationTypeValue === ApplicationProcessType.TwoYears">
+        <div class="weeks-progress-wrapper">
+          <h5 style="flex-grow:1" [class.error]="weeksProgress.error">
+            Total number of training weeks entered
+          </h5>
+          <div>
+            <app-progress-indicator description="Total number of training weeks entered" [extraSmall]="true"
+              [tooltip]="getProgressTooltip()" [item]="weeksProgress" size="2"></app-progress-indicator>
+          </div>
+        </div>
+        <div class="weeks-progress-wrapper mt-4">
+          <h5 style="flex-grow:1" [class.error]="weeksProgress.error">
+            Total number of hours worked
+          </h5>
+          <div>
+            <app-progress-indicator [extraSmall]="true" description="Total number of hours entered"
+              [tooltip]="getHourProgressTooltip()" [item]="hoursProgress" size="2"></app-progress-indicator>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block"
+      *ngIf="workExperiencesValid && workExperiences.length < 4 && weeksProgress.progress < 104"
+      (click)="addWorkExperience()">Add more experience...</button>
+
+  </div>
+
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div class="step-loading">
+    <mat-progress-bar aria-label="loading step" mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>

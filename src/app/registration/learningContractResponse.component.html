@@ -1,0 +1,162 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1">Learning contract</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading">
+
+  <section class="section-to-print">
+    <div class="main-content">
+      <div class="important">
+        This is an agreement between the designated supervisor(s) and trainee. It covers the key aspects of
+        working together. It clarifies what is expected in preparation for, and during, the foundation training year. It
+        should be discussed and signed by both parties.
+      </div>
+      <p>
+        I, {{user}}, will act in line with the GPhC’s standards for pharmacy professionals. We make the
+        following
+        commitments
+        to each other. We:
+      </p>
+      <ol type="A">
+        <li>
+          will follow the GPhC foundation training requirements, as explained in the GPhC's
+          foundation training
+          manual, and understand the GPhC's expectations of a designated supervisor as explained in their guidance
+        </li>
+        <li>
+          understand the interim learning outcomes required by the GPhC to complete the foundation training year
+          and meet the criteria for
+          registration as a pharmacist.
+          <!--The learning outcomes, set out in section 10 of
+          the
+          education standards, are: skills, attitudes and knowledge as defined by 76 performance standards,
+          described in the foundation training manual, the GPhC standards for pharmacy professionals, and the
+          registration assessment framework-->
+
+        </li>
+        <li>
+          will carry out GPhC formal progress reviews at weeks 13, 26 and 39, and at the end of training, and
+          submit these to the GPhC when progress is assessed to be unsatisfactory
+        </li>
+        <li>
+          will carry out regular progress reviews that are conducted in a professional manner, and are open
+          and
+          honest, to provide meaningful feedback to both trainee and designated supervisor. These reviews will be
+          supportive
+          and encourage learning
+        </li>
+        <li>
+          will discuss and resolve any concerns at an early stage. If we cannot resolve a concern, or if the
+          problem is outside the scope of our learning relationship, we will escalate as appropriate
+
+        </li>
+        <li>
+          expect the training to be self-directed, with mutually agreed time dedicated to study and
+          reflection on
+          learning that will be documented in a portfolio for joint review
+        </li>
+        <li>
+          will ensure that all practice is supervised appropriately, and is respectful of the skills and
+          knowledge of
+          all team members, whose feedback should also be considered
+        </li>
+        <li>
+          will encourage a proactive approach to seeking answers and solving problems, with clearly defined
+          boundaries related to the stage of learning to make sure patient safety is maintained
+        </li>
+        <li>
+          understand the designated supervisor suitability policy and be aware that supervising can be revoked if this
+          is not
+          met
+        </li>
+        <li>
+          will work to a training plan that is provided by the designated supervisor and agreed before training starts
+        </li>
+      </ol>
+    </div>
+
+    <table class="table" *ngIf="studentData" style="margin-top: 4em;">
+      <tr>
+        <p class="ml-2">
+          Name of Trainee: {{ (studentData.student.title ? studentData.student.title : ' ') + ' ' +
+          studentData.student.forenames + ' ' + studentData.student.surname}}
+        </p>
+      </tr>
+      <tr>
+        <th>Training site(s)</th>
+        <th>Starts</th>
+        <th>Ends</th>
+        <th>Associated designated supervisor</th>
+      </tr>
+      <tr *ngFor="let training of studentData.trainingSites">
+        <td>{{ training.pharmacyName}}</td>
+        <td>{{ training.startDate | utcDate }}</td>
+        <td>{{ training.endDate | utcDate}}</td>
+        <td>
+          <ul *ngFor="let tutors of training.tutors" style="padding: 0">
+            <li>{{ tutors.firstname + ' ' + tutors.lastname }}</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+  </section>
+
+  <section class="outcome">
+    <section>
+      <form #form="ngForm">
+        <!-- <h3>Your outcome</h3> -->
+        <div class="important">
+          As part of the application for the foundation training year we will record your response. Your response and
+          any comments you make will be shared with the student.
+        </div>
+        <mat-radio-group name="response" id="response" [(ngModel)]="response" (ngModelChange)="setFocus($event)">
+          <mat-radio-button [value]="LearningContractResponse.Approved" type="radio">I agree</mat-radio-button>
+          <mat-radio-button [value]="LearningContractResponse.Refused" type="radio">I DO NOT agree</mat-radio-button>
+          <mat-radio-button [value]="LearningContractResponse.Rejected" name="name" type="radio">This application has
+            been sent to me in error</mat-radio-button>
+        </mat-radio-group>
+
+        <app-collapsible [trigger]="response===LearningContractResponse.Refused">
+          <div class="form-group" style="padding-top: 20px;"
+            [class.invalid]="!reason.valid && (reason.touched || submitClicked === true)">
+            <label for="supportingText">Supporting text</label>
+            <textarea id="supportingText" class="form-control" #responseReasonInput [required]="response===LearningContractResponse.Refused"
+              name="responseReason" id="responseReason"
+              placeholder="Please explain why you don’t support this application" [(ngModel)]="responseReason"
+              #reason="ngModel">
+            </textarea>
+            <app-collapsible [trigger]="!reason.valid && (reason.touched || submitClicked === true)">
+              <p class="form-error">
+                Please explain why you don’t support this application
+              </p>
+            </app-collapsible>
+          </div>
+        </app-collapsible>
+
+        <button class="btn btn-block btn-lg btn-primary" type="submit" (click)="submitOutcome()"
+          [disabled]="submitting">
+          <span *ngIf="!submitting">Submit</span>
+          <span *ngIf="submitting">Submitting...</span>
+        </button>
+      </form>
+    </section>
+  </section>
+</div>

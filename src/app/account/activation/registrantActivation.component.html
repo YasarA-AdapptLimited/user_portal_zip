@@ -1,0 +1,102 @@
+<section *ngIf="step === 1" >
+  <div class="card">
+    <h2>Verify your identity</h2>
+    <div class="form-group" [class.invalid]="activation.registrationNumber && invalidRegistrationNumber">
+      <label for="registrationNumber">
+        Registration number
+      </label>
+      <input id="registrationNumber" #focus class="form-control" placeholder="Enter your registration number here..." type="text" [(ngModel)]="activation.registrationNumber"
+        (ngModelChange)="clearErrors()" (keydown.enter)="verifyRegistrationNumber()" />
+      <app-collapsible [trigger]="invalidRegistrationNumber">
+        <p class="form-error">
+          The registration number you entered was not recognised.
+        </p>
+      </app-collapsible>
+      <app-collapsible [trigger]="validationErrors?.length > 0">
+          <app-validation-errors [errors]="validationErrors"></app-validation-errors>
+       </app-collapsible>
+     
+    </div>
+  </div>
+  <app-collapsible [trigger]="!loading" class="padded">
+    <button [disabled]="!activation.registrationNumber" class="btn btn-primary btn-block" 
+    (click)="verifyRegistrationNumber()">Verify</button>
+    <button  class="btn btn-default btn-block" 
+    (click)="prev()">Cancel</button>
+  </app-collapsible>
+
+  <app-collapsible [trigger]="loading" class="spinner-container">
+    <app-spinner [small]="true"></app-spinner>
+    <label>Verifying...</label>
+  </app-collapsible>
+</section>
+
+<section *ngIf="step === 2" >
+  <div class="card">
+    <h2>Confirm your identity</h2>
+    <div class="form-group">
+      <p>Your name is {{activation.name}}</p>
+      <p>Is this correct ?</p>
+    </div>
+  </div>
+  <button #focus class="btn btn-primary btn-block" (click)="confirm()">Yes - this is correct</button>
+  <button class="btn btn-default btn-block" (click)="incorrect()">No - this is incorrect</button>
+</section>
+
+<section *ngIf="step === 3">
+
+  <div class="card">
+    <h2>Registration details</h2>
+
+    <div class="form-group">
+        <label for="postcode">
+          Postcode
+        </label>
+        <input id="postcode" #focus class="form-control" placeholder="Enter your postcode here..." type="text" [(ngModel)]="activation.postcode" />
+      </div>
+    
+      <app-dob (selected)="dobSelected($event)"></app-dob>
+
+
+    <div class="form-group">
+      <label for="activationCode">
+        Activation code
+      </label>
+      <input id="activationCode" (keydown.enter)="activate()" class="form-control" 
+      placeholder="Enter your activation code here..." 
+      type="text" [(ngModel)]="activation.activationCode"
+      />
+    </div>
+
+    <app-collapsible [trigger]="activationFailed">
+      <div class="form-error" style="text-align:center;font-size:18px;padding:10px;">
+        Activation failed.
+        <p>Please check that you have entered the correct details.</p>
+        <app-validation-errors [errors]="validationErrors"></app-validation-errors>
+      </div>
+    </app-collapsible>
+
+
+    <app-collapsible [trigger]="!loading"  class="padded">
+      <button [disabled]="!activation.dob || !activation.postcode || !activation.activationCode" class="btn btn-primary btn-block"
+        (click)="activate()">Activate</button>
+    </app-collapsible>
+
+    <app-collapsible [trigger]="loading" class="spinner-container">
+      <app-spinner [small]="true"></app-spinner>
+      <label>Attempting activation...</label>
+    </app-collapsible>
+
+  </div>
+</section>
+
+<section *ngIf="step === 4" >
+  <div class="card">
+    <h2>Account activated</h2>
+    <p>Congratulations! You have successfully activated your account.</p>
+    <p>To complete the process you must now sign out and back in again. </p>
+
+    <button class="btn btn-primary btn-block" (click)="logout()">Sign out</button>
+  </div>
+
+</section>

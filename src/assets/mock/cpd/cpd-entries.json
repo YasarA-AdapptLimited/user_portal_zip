@@ -1,0 +1,43 @@
+{
+  "currentSubmission": {
+    "expectations": {
+      "submissionDeadline": null,
+      "expectedCpds": 4,
+      "maxUnplanned": 2,
+      "expectedPeerDiscussions": 1,
+      "expectedReflectiveAccounts": 1,
+      "expectedTotalCount": 6
+    },
+    "submissionDate": null,
+    "submitted": false
+  },
+  "cpdEntries": [
+    {
+      "id": "6471f838-09f0-475c-a2e9-5c1115d929a8",
+      "title": "Untitled",
+      "type": 3,
+      "progressPercentage": 0,
+      "isCompleted": false,
+      "included": true,
+      "submitted": false
+    },
+    {
+      "id": "1d29f8d6-2c4f-4900-9902-e6b5a2d87298",
+      "title": "Untitled",
+      "type": 1,
+      "progressPercentage": 25,
+      "isCompleted": true,
+      "included": true,
+      "submitted": false
+    },
+    {
+      "id": "6842d7f3-7061-4cb0-98fa-c5dd38527cad",
+      "title": "planned",
+      "type": 1,
+      "progressPercentage": 100,
+      "isCompleted": true,
+      "included": false,
+      "submitted": false
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+body {
+  background-color: #fff;
+  margin: 0;
+  font-family: sans-serif;
+}
+.page {
+  padding-top:30px;
+  padding-bottom:40px;
+  background-color: #4fb490;
+}
+@media (max-width: 600px) {
+  .page {
+    padding-top:0;
+    padding-bottom: 0;
+  }
+}
+
+
+
+/* ------- nav ----------- */
+
+/* --------- banner ----------- */
+
+.banner {
+  text-align: center;
+  background: #4fb490;
+  position: relative;
+  z-index: 1;
+  padding: 10px 20px;
+}
+.banner h1 {
+  color: white;
+  font-size: 2.8em;
+  margin-bottom: 15px;
+}
+
+.banner p , .banner .intro-text {
+  color:#00759b;
+  font-weight: bold;
+  margin-bottom: 0;
+  line-height: 1.6em;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+@media (min-width:1024px) {
+  .banner p , .banner .intro-text {
+    font-size:1.4em;
+  }
+}
+
+
+.panel {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  margin-bottom: 40px;
+}
+@media (max-width:600px) {
+  .panel {
+    margin-top:0;
+  }
+}
+
+h2 {
+  font-size:28px;
+}
+@media(max-width:767px) {
+  h2 {
+    margin-top:20px;
+    font-size:24px;
+  }
+
+}
+@media(max-width:530px) {
+  h2 {
+    font-size:20px;
+  }
+}
+
+
+h2 {
+  color: #00759b !important;
+}
+
+
+@media (max-width: 400px) {
+  input[type=text], select {
+    max-width: 230px;
+  }
+ 
+}
+
+input[type=text],input[type=email],input[type=password], select {
+  border-width: 5px;
+  border-style:solid;
+  border-color: #d9e8e1;
+  font-size: 16px;
+  padding: 4px;
+  transition: border-color 200ms linear;
+  background: #fff;
+  width: 100%;
+  margin-bottom: 10px;
+}
+select {
+  height: 2em;
+  max-width: 265px;
+}
+select[name=Lang] {
+  width: 265px;
+}
+
+
+input[type=text]:focus,input[type=email]:focus,input[type=password]:focus, select:focus {
+  outline: none;
+  border-color:#fcc340;
+
+}
+
+input.highlightError {
+  border-color: #c52e2e;
+}
+p {
+  margin-bottom: 2px;
+}
+
+.attrEntry .error.itemLevel {
+  display: none;
+}
+
+.error {
+  color:  #c52e2e;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+button, a {
+  font-family: 'Open sans' !important;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+button, a#createAccount {
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  white-space: normal;
+  padding:5px;
+  display:block;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+  transition: 200ms linear background-color;
+  margin-bottom: 10px;
+} 
+
+button:not(:disabled), a#createAccount {
+  background-color: #00759b;
+  cursor: pointer;
+}
+button.verifyButton {
+  background: #4fb490;
+}
+
+
+
+button:disabled {
+  background: #cacaca;
+}
+
+button:not(:disabled):hover, 
+button:not(:disabled):focus, 
+a#createAccount:hover, 
+a#createAccount:focus {
+  background-color: #553c73;
+}
+.entry-item {
+  margin-top: 20px;
+}
+label, .create {
+  color:  #00759b;
+  font-size: 1.2em;
+  margin-bottom: 2px;
+}
+
+.verificationInfoText, .verificationSuccessText {
+  font-size: 1.2em;
+  margin-bottom: 2px;
+  color: white;
+}
+.verificationInfoText:not([style='display:none']):not([style='display: none;']),
+.verificationSuccessText:not([style='display:none']):not([style='display: none;']) {
+  /*display: block !important;*/
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+.verificationInfoText {
+  color: #553c73;
+}
+.verificationSuccessText {
+  color: #00759b;
+}
+
+.password-label a {
+  float:right;
+  font-size: 1.2em;
+}
+a.helpLink.tiny {
+  display: none;
+}
+button#next {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+button#cancel {
+  background-color: #ffffff;
+  border: 4px solid #ccc !important;
+  color: #999;
+}
+.divider {
+  text-transform: lowercase;
+}
+.divider, .create {
+  text-align: center;
+}
+
+#attributeList ul li {
+  margin-top: 7px;
+  margin-bottom: 20px;
+}

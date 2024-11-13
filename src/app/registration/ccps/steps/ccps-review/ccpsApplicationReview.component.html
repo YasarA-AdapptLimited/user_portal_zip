@@ -1,0 +1,696 @@
+<section style="position: relative">
+  <section [class.allow-edit]="!readonly">
+
+    <h3>
+      <div class="grow">Personal Details</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(ccpsApplicationStep.PersonalDetails)">
+      </app-gphc-icon>
+    </h3>
+
+    <div class="row">
+      <div class="col-md-9">
+        <div class="form-group">
+          <label>Full name</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="registrantFullName"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Registration number</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="registration.registrationNumber"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Registration status</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="registrationStatus"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Contact details</div>
+          <app-gphc-icon size="24" top="-15" right="5" iconType="edit"
+            (click)="goToStep(ccpsApplicationStep.PersonalDetails)">
+          </app-gphc-icon>
+        </h3>
+        <app-contact [contact]="personalDetails.contact"></app-contact>
+      </div>
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Home address</div>
+          <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+            (click)="goToStep(ccpsApplicationStep.PersonalDetails)"></app-gphc-icon>
+        </h3>
+        <app-address [address]="personalDetails.address"></app-address>
+      </div>
+    </div>
+  </section>
+
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Changing your registered name</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(ccpsApplicationStep.PersonalDetails)">
+      </app-gphc-icon>
+    </h3>
+    <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="form-group">
+            <label for="changingName">Is this the name you want to be registered with and displayed on the
+              certificate issued?</label>
+            <div class="mt-2">
+              <div type="text" class="form-control readonly" [innerHTML]="continueExistingName"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="continueExistingName === 'No'">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Title</label><br />
+                  <div type="text" class="form-control readonly" [innerHTML]="nameChangeTitle"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>First Name</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="nameChangeForename"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Middle Name</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="nameChangeMiddleNames || '-'"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Last Name</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="nameChangeSurname"></div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="supportingDocuments">Document confirming name change</label>
+              <div *ngFor="let file of attachments" class="form-group">
+                <div (click)="download(file)" class="form-control readonly link" *ngIf="file.type === attachmentType.OfficialDocummentConfirmingNameChange">
+                  <div style="display:flex" id="'file-'+i">
+                    <div class="icon">
+                      <i class="fa fa-download"></i>
+                    </div>
+                    <div class="ml-2">{{file.filename}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </ng-container>
+
+
+    </div>
+    </div>
+  </section>
+
+</section>
+
+<section style="position: relative">
+  <section [class.allow-edit]="!readonly">
+
+    <h3>
+      <div class="grow">Requesting regulator details</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(ccpsApplicationStep.OverseasRegularDetails)">
+      </app-gphc-icon>
+    </h3>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Regulator details</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Country</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="professionalStandingDetail.country"></div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="form-group">
+          <label>Regulatory body</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="regulatoryBodyName"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Regulatory Body Email Address</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="regBodyEmailAddress || '-'">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br/>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Other contact details</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Phone</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="professionalStandingDetail.telephone || '-'">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Contact Name</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="professionalStandingDetail.contactName || '-'">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Email Address</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="professionalStandingDetail.emailAddress || '-'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section style="position: relative">
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Initial pharmacy qualification details</div>
+      <app-gphc-icon size="24" top="-15" right="5" iconType="edit"
+        (click)="goToStep(ccpsApplicationStep.InitialPharmacyQualificationDetails)">
+      </app-gphc-icon>
+    </h3>
+
+    <div *ngIf="!isPharmacist">
+      <div class="row" *ngIf="route !== 'EEA' && initQualDetails.pharmacyTechnicianQualificationDetail?.degreeName1">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Qualification</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.pharmacyTechnicianQualificationDetail.degreeName1 ||'-'"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Date obtained</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="(initQualDetails.pharmacyTechnicianQualificationDetail.qualifiedDate1 | utcDate) ||'-'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="route !== 'EEA' && initQualDetails.pharmacyTechnicianQualificationDetail?.degreeName2">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Qualification</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.pharmacyTechnicianQualificationDetail.degreeName2 ||'-'"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Date obtained</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="(initQualDetails.pharmacyTechnicianQualificationDetail.qualifiedDate2 | utcDate) ||'-'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="route === 'EEA'">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Country of initial qualification</label><br />
+            <div type="text" class="form-control readonly" [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.countryQualified ||'-'">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Name of qualification</label><br />
+            <div type="text" class="form-control readonly" [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.courseName ||'-'">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Year qualification awarded</label><br />
+            <div type="text" class="form-control readonly" [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.datePassed ||'-'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="route === 'EEA'">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Awarding institution</label><br />
+            <div type="text" class="form-control readonly" [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.nameOfUniversity ||'-'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userRoute === 'OSPAP' || userRoute === 'Reciprocity'">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            Education
+          </h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Country in which degree obtained</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.ospapPharmacistQualificationDetail.ospapCountryQualified ||'-'"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Degree</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="(initQualDetails.ospapPharmacistQualificationDetail.degreeName) ||'-'"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>University</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.ospapPharmacistQualificationDetail.universityName ||'-'"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Year awarded</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="(initQualDetails.ospapPharmacistQualificationDetail.yearObtained) ||'-'"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="userRoute === 'OSPAP'">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>OSPAP qualification</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.ospapPharmacistQualificationDetail.ospapCourseName ||'-'"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Date OSPAP qualification obtained</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="(initQualDetails.ospapPharmacistQualificationDetail.ospapDateQualified | utcDate) ||'-'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            Pre-registration training/foundation training
+          </h4>
+        </div>
+      </div>
+
+      <div class="mrg-btm-15" *ngFor="let training of initQualDetails.trainingDetails">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Training site name</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="training.trainingSiteName ||'-'"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Training site address</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="training.trainingSiteAddress ||'-'"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" [ngClass]="{'mrg-btm-15' : initQualDetails.trainingDetails.length > 1}">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Start date</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="(training.trainingStartDate| utcDate) ||'-'">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>End date</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="(training.trainingEndDate | utcDate ) ||'-'">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <div class="row" *ngIf="userRoute === 'OSPAP'">
+        <div class="col-md-12">
+          <h4>
+            Registration assessment
+          </h4>
+        </div>
+      </div>
+      <div class="row" *ngIf="userRoute === 'OSPAP'">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Year registration assessment passed</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.ospapPharmacistQualificationDetail.assessmentYear ||'-'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userRoute === 'UK'">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            Education
+          </h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Degree</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.ukPharmacistQualificationDetail.courseName ||'-'"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Year awarded</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="(initQualDetails.ukPharmacistQualificationDetail.yearQualified) ||'-'"></div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            Pre-registration training/foundation training
+          </h4>
+        </div>
+      </div>
+
+      <div *ngFor="let training of initQualDetails.trainingDetails">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Training site name</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="training.trainingSiteName ||'-'"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Training site address</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="training.trainingSiteAddress ||'-'"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Start date</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="(training.trainingStartDate | utcDate) ||'-'">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>End date</label><br />
+              <div type="text" class="form-control readonly" [innerHTML]="(training.trainingEndDate | utcDate) ||'-'">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            Registration assessment
+          </h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Year registration assessment passed</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.ukPharmacistQualificationDetail.assessmentYear ||'-'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userRoute === 'EEA' && isEEARegulatorSelected">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            Education
+          </h4>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>EEA country in which pharmacy qualification was obtained/EEA country in which qualification was first recognised</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.countryQualified ||'-'"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Course name</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.courseName ||'-'"></div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Name of university or awarding body</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.nameOfUniversity ||'-'"></div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Year degree started</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.dateStarted ||'-'"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Year degree awarded</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.datePassed ||'-'"></div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>EEA directive route</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="directiveRouteEEA"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row" *ngIf="isCVUploadRequired()">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="supportingDocuments">CV upload</label>
+            <div *ngFor="let file of attachments" class="form-group">
+              
+              <div (click)="download(file)" class="form-control readonly link" *ngIf="file.type === attachmentType.PharmcistCVForProfessionalStanding">
+                <div style="display:flex" id="'file-'+i">
+                  <div class="icon">
+                    <i class="fa fa-download"></i>
+                  </div>
+                  <div class="ml-2">{{file.filename}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userRoute === 'EEA' && !isEEARegulatorSelected">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            Education
+          </h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>EEA country in which pharmacy qualification was obtained/EEA country in which qualification was first recognised</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.countryQualified ||'-'"></div>
+          </div>
+        </div>
+        <!-- <div class="col-md-6">
+          <div class="form-group">
+            <label>Country of first recognition within the EEA</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="(initQualDetails.eeaPharmacistQualificationDetail.countryFirstRecognized) ||'-'"></div>
+          </div>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Course name</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.courseName ||'-'"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Name of university or awarding body</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.nameOfUniversity ||'-'"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Year degree awarded</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.eeaPharmacistQualificationDetail.datePassed ||'-'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userRoute === 'Northern Ireland'">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>
+            Education
+          </h4>
+        </div>
+      </div>
+      <div class="row">
+        <!-- <div class="col-md-6">
+          <div class="form-group">
+            <label>Country in which degree obtained</label><br />
+            <div type="text"
+                 class="form-control readonly"
+                 [innerHTML]="initQualDetails.irelandPharmacistQualificationDetail.countryQualified ||'-'"></div>
+          </div>
+        </div> -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Degree</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="(initQualDetails.irelandPharmacistQualificationDetail.courseName) ||'-'"></div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Year awarded</label><br />
+            <div type="text" class="form-control readonly"
+              [innerHTML]="initQualDetails.irelandPharmacistQualificationDetail.yearObtained ||'-'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+<section style="position: relative" *ngIf="displayFtPStep">
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Fitness to practise declarations</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(ccpsApplicationStep.FtPDeclarations)">
+      </app-gphc-icon>
+    </h3>
+    <app-ccps-declaration-summary [formId]="formId" [application]="application"></app-ccps-declaration-summary>
+  </section>
+</section>
+<section style="position: relative">
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">CCPS Declarations</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(ccpsApplicationStep.CCPSDeclarations)">
+      </app-gphc-icon>
+    </h3>
+    <div class="form-group">
+      <div class="form-control" readonly>
+        I have read and understand the application declaration
+      </div>
+    </div>
+  </section>
+</section>
+<section style="position: relative">
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">ED&I Details</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(ccpsApplicationStep.EDIDetails)">
+      </app-gphc-icon>
+    </h3>
+    <app-edi-summary [edi]="application.activeForm.equalityDiversity"></app-edi-summary>
+  </section>
+</section>

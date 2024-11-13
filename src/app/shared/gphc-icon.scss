@@ -1,0 +1,232 @@
+@import "../style/variables";
+@import "../style/mixins";
+.gphc-icon-wrapper {
+    position: absolute;
+    top: -15px;
+    &.info {
+      @media (max-width:767px) {
+        top: 6px !important;
+      }
+    }
+}
+
+button.gphc-icon {
+
+    position: relative;
+    padding:0;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: color 200ms linear;
+    font-size: 28px;
+    @media (max-width:767px) {
+      font-size: 22px;
+    }
+
+    .circle.fa-stack {
+        width: 1.9em;
+        height: 1.9em;
+        line-height: 1.8em;
+    //    transition: box-shadow 200ms ease-in-out;
+    
+    }
+
+    &:focus, &.foreground {
+      outline: none !important;
+      box-shadow: none !important;
+      .circle.fa-stack {
+        @include focus;
+      }
+    }
+
+
+    &.small {
+      font-size: 20px;
+      .fa-stack {
+        width: 1.65em;
+        height: 1.67em;
+        line-height: 1.6em;
+      }
+    }
+
+  
+
+    .icon-label {
+        font-family: 'Open sans', sans-serif;
+        font-size: 14px;
+        line-height: 1.5em;
+        position: absolute;
+        white-space: nowrap;
+        transform: translateX(-55%);
+        left: 50%;
+    }
+
+    .circle {
+        border-radius: 50%;
+        transition: 200ms linear background-color;
+      }
+
+    &.info, &.edit, &.save, &.create, &.annotate, &.submit, &.primary, &.delete {
+        .circle {
+            background-color: $gphc-blue;
+        }
+
+        &:not(.disabled):not(.info) {
+          &:hover, &:focus {
+            .circle {
+              background-color: $gphc-purple;
+          }
+          }
+           
+        }
+    }
+
+    .icon-label {
+        color: $gphc-blue;
+        &:not(.always) {
+          opacity: 0;
+          transition: opacity linear 200ms;
+        }
+       
+    }
+
+    &:hover {
+        .icon-label {
+            opacity: 1;
+            color: $gphc-purple;
+        }
+    }
+
+    &.info {
+   
+        .circle {
+            background-color: $gphc-aqua;
+            i {
+              color: white;
+            }
+        }
+        &.active, &.active:hover {
+            .circle {
+              background-color: $gphc-aqua;
+          }
+          i {
+            color: white !important;
+          }
+        }
+    }
+
+    &.create {
+        .circle {
+          width: 1.65em;
+          height: 1.67em;
+            line-height: 1.5em;
+
+            i {
+                top: 1px;
+            }
+        }
+    }
+
+    &.list, &.next, &.prev {
+        i {
+            top: 2px;
+        }
+    }
+
+    &.next {
+        i {
+            left: 2px;
+        }
+    }
+
+    &.prev {
+        i {
+            right: 3px;
+        }
+    }
+
+    &.cancel, &.next, &.prev, &.list {
+        .circle {
+            background-color: white;
+
+            &:hover {
+                i {
+                    color: $gphc-purple;
+                }
+            }
+
+            i {
+                color: $gphc-blue;
+                transition: 300ms linear color;
+            }
+        }
+    }
+
+    &.disabled {
+        cursor: default;
+
+        .circle {
+            background-color: $grey;
+
+            &:hover {
+                i {
+                    color: white;
+                }
+            }
+
+            i {
+                color: white;
+            }
+        }
+
+        .icon-label {
+            display: none;
+        }
+    }
+}
+
+/* bootstrap override */
+.close {
+    float: none;
+    opacity: 1;
+    text-shadow: none;
+}
+
+:host-context(.toolbar) {
+
+    .gphc-icon {
+        .circle {
+            background-color: $gphc-blue;
+            box-shadow: none;
+
+            &:hover {
+                i {
+                    color: white;
+                }
+            }
+
+            i {
+                color: white;
+            }
+        }
+
+        &.active {
+            .circle {
+               background: white;
+                i {
+                    color: $gphc-blue;
+                }
+            }
+        }
+
+        &.disabled {
+            .circle {
+             
+                i {
+                    color: grey;
+                }
+            }
+        }
+    }
+}

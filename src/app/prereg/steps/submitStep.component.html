@@ -1,0 +1,13 @@
+<ng-template #content>
+  <h2>Submit your application</h2>
+  <div style="padding:40px 0 10px 0">
+    <p class="intro-text">As you have already made a payment you can submit this application without paying again. </p>
+    <p class="intro-text">Click the 'next' button if you are ready. </p>
+  </div>
+
+  <app-collapsible [trigger]="serverErrors && !!serverErrors.length">
+      <p class="form-error-block" style="font-size:1.2em" *ngFor="let error of serverErrors">
+        {{ 'Server validation error: ' + error.errors.join(',') }}
+      </p>
+    </app-collapsible>
+</ng-template>

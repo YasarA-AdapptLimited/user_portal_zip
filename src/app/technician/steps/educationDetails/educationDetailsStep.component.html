@@ -1,0 +1,156 @@
+<ng-template #content>
+  <div class="header mb-4">
+    <h2>
+      <div>Education details</div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showHelp = !showHelp" [static]='true'>
+      </app-gphc-icon>
+    </h2>
+  </div>
+
+
+  <app-collapsible [trigger]="showHelp" class="help-block">
+    <div class="row help-text mb-2">
+      <div class="col-md-12">
+        <p>
+          Please select the GPhC approved knowledge and competency qualifications you have completed.
+          Your certificate will have the full course title and a code printed on it, and the date on which you were
+          awarded the qualification.
+        </p>
+        <p>
+          See the application form guidance notes for further information. The start date of each qualification is the
+          date you formally started studying.
+          Your course provider should be able to remind you of this if you are unsure.
+        </p>
+      </div>
+    </div>
+  </app-collapsible>
+
+  <section class="section-spacing">
+    <div class="row mt-3">
+      <div class="col-md-12 mb-3">
+        <h3 [class.error]="touched && ((hasKnowledgeQualificationSet && hasCombinedQualificationSet) ||
+        (hasCompetencyQualificationSet && hasCombinedQualificationSet)) ">Knowledge based qualification</h3>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-xl-8 ml-3 col-md-12 col-xs-12">
+            <div class="form-group" [class.invalid]="(touched || knowledge.touched) && ((hasKnowledgeQualificationSet && hasCombinedQualificationSet) ||
+            (hasCompetencyQualificationSet && hasCombinedQualificationSet)) ">
+              <label for="chooseCourseProvider">Course provider</label>
+              <div class="form-control" [class.readonly]="readonly">
+                <mat-select [(ngModel)]="educationDetails.knowledge.qualificationId"
+                  placeholder="Choose a course provider" name="qualificationSelecton" required #knowledge="ngModel"
+                  (ngModelChange)="update()"  panelClass="edu-qualification-field">
+                  <mat-option [value]="null" selected>
+                    choose a course provider
+                  </mat-option>
+                  <mat-option *ngFor="let knowledgeQualification of knowledgeQualifications"
+                    [value]="knowledgeQualification.id">
+                    {{ knowledgeQualification.courseName }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-12 col-xl-offset-2 col-md-12 col-xs-12 ml-4">
+            <div class="form-group" [class.invalid]="touched && (knowledgeDateNotSet)">
+              <app-daterange [endDateTitle]="'Date awarded'"
+                [fromDate]="educationDetails.knowledge.dateCommenced !== null ? educationDetails.knowledge.dateCommenced : 'choose a date'"
+                [toDate]="educationDetails.knowledge.dateAwarded !== null ? educationDetails.knowledge.dateAwarded : 'choose a date'"
+                (changed)="updateKnowledgeDates($event)"></app-daterange>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <h3 [class.error]="touched && ((hasKnowledgeQualificationSet && hasCombinedQualificationSet) ||
+        (hasCompetencyQualificationSet && hasCombinedQualificationSet)) ">Competency based qualification</h3>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-xl-8 ml-3 col-md-12 col-xs-12">
+            <div class="form-group" [class.invalid]="(touched || competency.touched) && ((hasKnowledgeQualificationSet && hasCombinedQualificationSet) ||
+            (hasCompetencyQualificationSet && hasCombinedQualificationSet)) ">
+              <label for="chooseCourseProvider">Course provider</label>
+              <div class="form-control">
+                <mat-select [(ngModel)]="educationDetails.competency.qualificationId"
+                  placeholder="Choose a course provider" name="competencyTypeSelection" (ngModelChange)="update()"
+                  required #competency="ngModel"  panelClass="edu-qualification-field">
+                  <mat-option [value]="null" selected>
+                    choose a course provider
+                  </mat-option>
+                  <mat-option *ngFor="let competencyQualification of competencyQualifications"
+                    [value]="competencyQualification.id">
+                    {{ competencyQualification.courseName }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-12 col-md-12 col-xs-12 ml-4">
+            <div class="form-group" [class.invalid]="touched && (competencyDatesNotSet)">
+              <app-daterange [endDateTitle]="'Date awarded'"
+                [fromDate]="educationDetails.competency.dateCommenced !== null ? educationDetails.competency.dateCommenced : 'choose a date'"
+                [toDate]="educationDetails.competency.dateAwarded !== null ? educationDetails.competency.dateAwarded : 'choose a date'"
+                (changed)="updateCompetencyDates($event)"></app-daterange>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="row pt-3">
+    <div class="col-md-12">
+      <h3 style="border-left:none !important">or</h3>
+    </div>
+  </div>
+  <section class="section-spacing">
+    <div class="row mt-3">
+      <div class="col-md-12 mb-3">
+        <h3 [class.error]="touched && ((hasKnowledgeQualificationSet && hasCombinedQualificationSet) ||
+        (hasCompetencyQualificationSet && hasCombinedQualificationSet)) ">Combined programme/qualification (single
+          certificate)</h3>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-xl-8 ml-3 col-md-12 col-xs-12">
+            <div class="form-group" [class.invalid]="(touched || combined.touched) && ((hasKnowledgeQualificationSet && hasCombinedQualificationSet) ||
+            (hasCompetencyQualificationSet && hasCombinedQualificationSet))">
+              <label for="chooseCourseProvider">Course provider</label>
+              <div class="form-control ">
+                <mat-select [(ngModel)]="educationDetails.combined.qualificationId"
+                  placeholder="Choose a course provider" name="combinedQualificationSelection"
+                  (ngModelChange)="update()" required #combined="ngModel" panelClass="edu-qualification-field">
+                  <mat-option [value]="null" selected>
+                    choose a course provider
+                  </mat-option>
+                  <mat-option *ngFor="let combinedQualification of combinedQualifications"
+                    [value]="combinedQualification.id">
+                    {{ combinedQualification.courseName }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-12 col-md-12 col-xs-12 ml-4">
+            <div class="form-group" [class.invalid]=" touched && combinedDatesNotSet">
+              <app-daterange [endDateTitle]="'Date awarded'"
+                [fromDate]="educationDetails.combined.dateCommenced !== null ? educationDetails.combined.dateCommenced : 'choose a date'"
+                [toDate]="educationDetails.combined.dateAwarded !== null ? educationDetails.combined.dateAwarded : 'choose a date'"
+                (changed)="updateCombinedDates($event)"></app-daterange>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</ng-template>

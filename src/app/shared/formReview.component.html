@@ -1,0 +1,15 @@
+<div class="content spread">
+  <div class="row no-gutters">
+    <div class="col-md-{{editWidth}} left-col">
+      <app-sticky>
+        <ng-content select=".form-edit"></ng-content>
+        <div style="margin-top:40px">
+          <ng-content select=".form-buttons"></ng-content>
+        </div>
+      </app-sticky>
+    </div>
+    <div class="col-md-{{readWidth}} right-col ">
+      <ng-content select=".form-read"></ng-content>
+    </div>
+  </div>
+</div>

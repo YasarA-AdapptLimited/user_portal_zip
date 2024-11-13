@@ -1,0 +1,109 @@
+<p>vr-payment-step works!</p>
+<ng-template #content>
+    <h2 class="spacer">
+     Annual renewal fee
+      <img src="/assets/images/creditcards/poweredByWorldPay.gif" alt="Worldpay Logo" style="float:right" title="Payments Powered by WorldPay"
+      /></h2>
+  
+    <section *ngIf="worldpayConfig else loading" class="fadein card-selection">
+     
+  
+      <div class="intro-text" style="margin-bottom:2em;">
+        <p>
+         If you pay your annual fee by Quarterly Direct Debit and you still have an outstanding balance to pay for the current renewal year you are required to pay the 
+         total renewal annual fee before you can request voluntary removal from the register.
+        </p>
+        <p>
+         Our records show that the following quarterly payments are still outstanding. On the next page you will be able to pay the total
+         outstanding. If you dont think that this is correct please <a href="https://www.pharmacyregulation.org/contact-us" target="_blank">contact us</a>
+        </p>
+        <p>
+          After you had paid the outstanding renewal fee please remember to cancel the direct debit mandate with your bank.
+        </p>
+        
+      </div>
+  
+
+      <!--payemnt table-->
+
+      <div>
+        <table class="results-details" style="width: 100%; margin-top: 10px;margin-bottom: 20px">
+          <tr>
+            <th> Payment fee description</th>
+            <th> Collection method</th>
+            <th> Payment due date</th>
+            <th> Amount </th>
+          </tr>
+          <tr  *ngFor="let item of outStandingPaymentDetails; let i = index;" style ="margin-top: 10px">
+          <td> {{item.paymentDescription}}</td>
+          <td> {{collectionMethod[item.collectionMethod] | caseSplit}}</td>
+          <td> {{item.paymentDate | utcDate}}</td>
+          <td class="pound"> {{item.paymentAmount}}  </td>
+          </tr>
+        </table>
+      </div>
+
+      <!--end payment table-->
+
+   
+   <section>
+    <div class="row">
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="details">Total annual renewal fee outstanding</label> 
+              <div class="pound col-md-6 form-control readonly" [innerHTML]="application.pendingFee"></div>  
+                     
+             
+          </div>
+      </div>
+  </div>
+   </section>
+     
+    
+  
+  
+      <h3>Please select your card type</h3>
+  
+        <div class="intro-text" style="margin-bottom:1em;">
+          <p>
+            We can only accept payments made in pounds sterling (GBP). Payments are processed using worldpay, for more information please
+            review their
+            <a href="https://www.worldpay.com/uk/worldpay-privacy-notice" target="_blank">privacy policy</a>.
+          </p>
+          <p>
+          When you make a card payment, you may be redirected to your card provider’s site to enter another password before they authorise
+          your payment. You can find out more about 3-D Secure authentication from your card provider.
+          </p>
+        </div>
+  
+      <mat-radio-group [(ngModel)]="selectedCard" >
+        <mat-radio-button *ngFor="let card of creditCards" value="{{card.id}}" [aria-label]="card.id">
+          <img src="/assets/images/creditcards/{{card.id}}.gif" alt="{{card.name}} Logo" title="{{card.name}} Logo" />
+          <br/> {{card.name}}
+        </mat-radio-button>
+      </mat-radio-group>
+  
+      <form [action]="worldpayConfig.paymentUrl" name="worldayForm" method="post" #worldpayForm>
+          <input type="hidden" name="paymentType" [value]="selectedCard" />
+          <input type="hidden" name="testMode" [value]="worldpayConfig.testMode" />
+          <input type="hidden" name="instId" [value]="worldpayConfig.instId" />
+          <input type="hidden" name="M_Callback" [value]="worldpayConfig.worldPayCallbackUrl" />
+          <input type="hidden" name="desc" [value]="'GPhC registration application fee'" />
+          <input type="hidden" name="currency" [value]="'GBP'" />
+          <input type="hidden" name="hideCurrency" [value]="true" />
+          <input type="hidden" name="amount" [value]="fee" />
+          <input type="hidden" name="cartId" [value]="cartId" />
+        </form>
+      
+  
+    </section>
+  
+  
+  
+  </ng-template>
+  
+  <ng-template #loading>
+      <div class="step-loading">
+        <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+      </div>
+    </ng-template>

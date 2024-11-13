@@ -1,0 +1,41 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <h1>Receipts</h1>
+    <p class="intro-text">
+      View your payment history and print copies of your receipts
+    </p>
+  </div>
+</app-banner>
+<div class="content no-boxes" *ngIf="!loading && !failed">
+  <p *ngIf="receipts && receipts.length === 0" class="no-data">
+    No receipts available
+  </p>
+  <div *ngIf="receipts?.length > 0" style="padding-bottom: 20px;overflow-x: auto;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Reference #</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Channel</th>
+          <th>Amount</th>
+          <th *ngIf="user.registrant">Registration number</th>
+          <th >Registered name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="clickable" 
+          *ngFor="let receipt of receipts" 
+          (click)="showReceipt(receipt)">
+          <td><button class="btn-link" aria-label="View or print receipt" (click)="showReceipt(receipt)">{{receipt.paymentNumber}}</button></td>
+          <td>{{receipt.description}}</td>
+          <td>{{ receipt.paymentDate | utcDate }}</td>
+          <td>{{ PaymentChannel[receipt.paymentChannel] }}</td>
+          <td> {{ receipt.amount | currency: 'GBP': 'symbol' : '.2' }} </td>
+          <td *ngIf="user.registrant"> {{ user.registrant.registrationNumber  }} </td>
+          <td > {{ user.toString() }} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

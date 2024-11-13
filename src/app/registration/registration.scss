@@ -1,0 +1,25 @@
+@import '../style/variables';
+
+i {
+
+  font-size: 173px;
+  @media (max-width: 767px) {
+    font-size: 140px !important;
+  }
+
+  &.letter {
+    font-size: 18px;
+      color: $gphc-blue;
+      margin-right: 7px;
+
+  }
+}
+
+.btn-text {
+  @media(min-width: 1024px) {
+    font-size:1.2em;
+  }
+  @media (max-width: 575px) {
+    font-size:1.4em;
+  }
+}

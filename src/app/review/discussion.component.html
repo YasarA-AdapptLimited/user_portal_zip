@@ -1,0 +1,30 @@
+
+ 
+  <div class="message-container" #messageRef>
+      <h4><div style="flex-grow:1">Discussion</div><i (click)="close()" class="fa fa-close"></i></h4>
+    <div *ngFor="let group of groupedByDate">
+      <div class="date-bar">
+        <div class="bar"></div>
+        <div class="date">{{ group?.date | date: 'd MMMM' }}</div>
+        <div class="bar"></div>
+      </div>
+      <div *ngFor="let message of group.messages; let i = index">
+        <div class="clearfix">
+          <div class="message" [ngClass]="{'my':message.currentUsersMessage}">
+            <p>{{message.text | stripHtml }}</p>
+            <span class="message-time" *ngIf="i === 0 || message.ticks - group.messages[i-1].ticks > 60000">
+              {{message.time}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="send-box-container" (keydown)="onKeyDown($event)">
+    <div class="send-box" [class.has-focus]="hasFocus">
+      <div class="message-box" (focus)="hasFocus = true" (blur)="hasFocus=false" #sendboxRef placeholder="Type a message here"
+        contenteditable=""></div>
+      <button *ngIf="!sending" type="button" class="btn btn-default shadow" (click)="send()">Send</button>
+      <app-spinner *ngIf="sending" [tiny]="true"></app-spinner>
+
+    </div>
+  </div>

@@ -1,0 +1,102 @@
+
+@import "../style/variables";
+
+.content {
+  padding-top:4px;
+}
+
+@media (min-width: 768px) {
+  .content.spread {
+    
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    .left-col {
+      padding-right:8px !important;
+    }
+    .right-col {
+      padding-left:8px !important;
+    }
+  }
+
+
+
+}
+
+@media (max-width: 767px) {
+    h2.content-header {
+        display: block;
+        background: $gphc-blue !important;
+        color: white !important;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .content {
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
+}
+
+.content {
+    padding-right: 0 !important;
+}
+
+.right-col {
+  section {
+    margin-right: 4px;
+  }
+}
+
+
+
+::ng-deep {
+
+    section {
+    margin-top: 15px !important;
+  }
+
+  @media (min-width: 768px) {
+    .content {
+        padding-left: 40px !important;
+    }
+
+  .card {
+    margin-bottom: 20px !important;
+  }
+  }
+
+
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #ececec;
+        opacity: 1;
+        border-color: #dcdcdc;
+    }
+
+    @media (max-width: 767px) {
+        .card {
+            margin-top: 0 !important;
+            margin-bottom: 0;
+        }
+
+        h2.content-header {
+            display: none !important;
+        }
+
+        p.intro-text {
+            font-size:1em;
+        }
+    }
+
+    @media (max-width: 530px) {
+
+
+       
+
+        .form-body > .input-group {
+            padding-left: 15px;
+            padding-right: 25px;
+            margin-bottom: 10px;
+        }
+    }
+}

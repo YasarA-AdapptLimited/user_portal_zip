@@ -1,0 +1,19 @@
+<section *ngFor="let questionGroup of form.questionGroups; let i = index">
+  <h2 [innerHTML]="questionGroup.title" *ngIf="i === 0 && titleVisible" style="margin-bottom:30px" tabindex="0"></h2>
+  <h3 *ngIf="i > 0" [innerHTML]="questionGroup.title" tabindex="0"></h3>
+  <p *ngIf="questionGroup.body" class="intro-text" [innerHTML]="questionGroup.body" tabindex="0"></p>
+
+  <ng-container *ngFor="let question of questionGroup.questions">
+    
+    <app-declaration-question [form]="form" [question]="question">
+    </app-declaration-question>
+
+    <app-collapsible [trigger]="showRevalidationWarning && question.shortName==='QE'">
+      <div class="important">
+          If you have not yet submitted a revalidation record for the current renewal period, please ensure that you do so by the submission due date shown on the revalidation page. If you do not you will be placed into remediation.
+      </div>
+    </app-collapsible>
+
+  </ng-container>
+
+</section>

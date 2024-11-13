@@ -1,0 +1,239 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <h1 tabindex="0">Home</h1>
+    <p class="intro-text" *ngIf="isRTR" tabindex="0">
+      A summary of your professional registration status
+    </p>
+    <p class="intro-text" *ngIf="!isRTR" tabindex="0">
+      You can view your previous registration details or apply for restoration of your registration by clicking on the icons below.
+    </p>
+  </div>
+</app-banner>
+<div class="content spread registrant-summary">
+<!--RTR Dashboard -->
+ <div class="fadein" *ngIf="!isRTR">
+    <div class="row" *ngIf="noPendingFee">
+        <div class="col-sm-6 left-col">
+          <app-registrant-badge link="/registration"></app-registrant-badge>
+        </div>
+        <div class="col-sm-6 right-col">
+          <ng-container [ngTemplateOutlet]="rtrApplicationTile"></ng-container>
+        </div>
+    </div>
+    <div class="row" *ngIf="!noPendingFee">
+      <div class="col-sm-4 left-col">
+        <app-registrant-badge link="/registration"></app-registrant-badge>
+      </div>
+      <div class="col-sm-4">
+        <ng-container [ngTemplateOutlet]="rtrApplicationTile"></ng-container>
+      </div>
+      <div class="col-sm-4 right-col">
+        <ng-container [ngTemplateOutlet]="paymentTile"></ng-container>      
+      </div>
+    </div>
+  </div>
+<!-- RTR Dashboard Ends-->
+  <div class="row fadein" *ngIf="isRTR">
+    
+
+
+    <div class="col-sm-4 left-col">
+      <app-registrant-badge link="/registration"></app-registrant-badge>
+    </div>
+
+    <app-form-section [loading]="loadingRevalidation" [badge]="true" [loaderFill]="true" class="col-sm-4 mid-col"
+
+      [link]="registrant.exemptFromRevalidationSubmissions ? '' : '/revalidation'">
+      <span class="section-header">Revalidation</span>
+
+
+      <div class="section-body">
+        <ng-container *ngIf="!registrant.exemptFromRevalidationSubmissions else revalidationExemptionTemplate">
+
+          <ng-container *ngIf="validator.submission && !revalidationError else revalidationErrorTemplate">
+
+            <div *ngIf="!validator.submission.submitted else revalidationSubmittedTemplate" class="text-center">
+              <app-progress-indicator tab-index="-1" class="status-icon" routerLink="/revalidation" [item]="validator.submission"
+                [size]="3"></app-progress-indicator>
+              <div class="btn-text">
+                <span *ngIf="!validator.submission.progress" tabindex="0">None marked completed</span>
+                <span *ngIf="validator.submission.progress && !validator.submission.completed" tabindex="0">In progress</span>
+                <span *ngIf="validator.submission.completed" tabindex="0">Ready to be submitted</span>
+                <br />
+                <span tabindex="0">Due by {{ validator.expectations.submissionDeadline | utcDate }}</span>
+              </div>
+            </div>
+
+          </ng-container>
+
+        </ng-container>
+
+      </div>
+
+    </app-form-section>
+    <app-form-section *ngIf="user.useNewWorldpayFlow" [loading]="loadingRenewal" [loaderFill]="true" class="col-sm-4 right-col" [link]="'/renewal'">
+      <span class="section-header">Renewal</span>
+      <div class="section-body renewal text-center" *ngIf="!renewalError else renewalErrorTemplate">
+        <div *ngIf="renewal && renewal.isDue" class="text-center">
+          <i class="fa fa-arrow-circle-right due status-icon" aria-hidden="true"></i>
+          <div class="btn-text" role="button" tabindex="0">
+            Due
+          </div>
+        </div>
+
+        <div *ngIf="renewal && renewal.notDue" class="text-center">
+          <i class="fa fa-hourglass-o notdue status-icon" aria-hidden="true"></i>
+          <div class="btn-text" role="button" tabindex="0">
+            Not due
+          </div>
+        </div>
+
+        <div *ngIf="renewal && renewal.isComplete">
+          <div class="text-center">
+            <i class="fa fa-check-circle completed completed-lg status-icon" aria-hidden="true"></i>
+            <div class="btn-text" role="button" tabindex="0">
+              Complete
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </app-form-section>
+    <app-form-section *ngIf="!user.useNewWorldpayFlow" [loading]="loadingRenewal" [loaderFill]="true" class="col-sm-4 right-col" [link]="'/renewal2'">
+      <span class="section-header">Renewal</span>
+      <div class="section-body renewal text-center" *ngIf="!renewalError else renewalErrorTemplate">
+        <div *ngIf="renewal && renewal.isDue" class="text-center">
+          <i class="fa fa-arrow-circle-right due status-icon" aria-hidden="true"></i>
+          <div class="btn-text" role="button" tabindex="0">
+            Due
+          </div>
+        </div>
+
+        <div *ngIf="renewal && renewal.notDue" class="text-center">
+          <i class="fa fa-hourglass-o notdue status-icon" aria-hidden="true"></i>
+          <div class="btn-text" role="button" tabindex="0">
+            Not due
+          </div>
+        </div>
+
+        <div *ngIf="renewal && renewal.isComplete">
+          <div class="text-center">
+            <i class="fa fa-check-circle completed completed-lg status-icon" aria-hidden="true"></i>
+            <div class="btn-text" role="button" tabindex="0">
+              Complete
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </app-form-section>
+
+  </div>
+</div>
+
+<div class="content spread registrant-summary" *ngIf="showNoticeOfEntry && isRTR">
+  <div class="row fadein">
+    <div class="col-sm-4 left-col">
+      <app-form-section link="/registration/letter/1">
+        <span class="section-header">Notice of entry</span>
+        <div class="section-body text-center">
+          <i class="fa fa-envelope status-icon letter"></i>
+          <div class="btn-text" role="button" tabindex="0">
+            View or print
+          </div>
+        </div>
+      </app-form-section>
+    </div>
+  </div>
+</div>
+
+<ng-template #rtrApplicationTile>
+  <app-form-section class="fadein" [link]="isApplicationOpen ? '/returnToRegister/application' : ''"
+    [loading]="loadingApplication" [loaderFill]="true">
+    <span class="section-header">Application for restoration to the register</span>
+
+    <div class="section-body" >
+      <div class="text-center">
+        <i class="fa fa-id-card-o status-icon " aria-hidden="true"></i>
+        <div class="btn-text" role="button" tabindex="0">
+          <span>{{ status }}</span> 
+         <br/>
+          {{ registrant.toString() }}
+          <br/>
+          {{registrant.registrationNumber}}
+        </div>
+        <!--<div class="text-center btn-text">
+          Only apply once you have sat the registration assessment and you have a satisfactory final declaration
+        </div>-->
+      </div>
+
+    </div>
+
+
+    <ng-template #applicationClosed>
+      <div class="text-center">
+        <i class="fa fa-clock-o status-icon notdue " aria-hidden="true"></i>
+        <div class="btn-text" *ngIf="applicationClosedMessage">
+          {{ applicationClosedMessage }}
+        </div>
+      </div>
+    </ng-template>
+  </app-form-section>
+</ng-template>
+
+<ng-template #paymentTile>
+  <app-form-section class="fadein" *ngIf="user.useNewWorldpayFlow" link="/returnToRegister/application/restoration-payment" [loading]="loadingApplication"
+    [loaderFill]="true">
+    <span class="section-header" >Restoration fee</span>
+    <div class="section-body" *ngIf="!error; else errorTemplate">
+      <div class="text-center">
+        <i class="fa fa-arrow-circle-right due status-icon success" aria-hidden="true"></i>
+        <div class="btn-text" role="button" tabindex="0">
+          Make payment now
+        </div>
+      </div>
+    </div>
+  </app-form-section>
+  <app-form-section class="fadein" *ngIf="!user.useNewWorldpayFlow" link="/returnToRegister/application/restoration-payment2" [loading]="loadingApplication"
+    [loaderFill]="true">
+    <span class="section-header" >Restoration fee</span>
+    <div class="section-body" *ngIf="!error; else errorTemplate">
+      <div class="text-center">
+        <i class="fa fa-arrow-circle-right due status-icon success" aria-hidden="true"></i>
+        <div class="btn-text" role="button" tabindex="0">
+          Make payment now
+        </div>
+      </div>
+    </div>
+  </app-form-section>
+</ng-template>
+
+<ng-template #renewalErrorTemplate>
+  <div class="section-body">
+    <div class="text-center">
+      <i class="fa fa-warning error status-icon" aria-hidden="true"></i>
+      <p class="btn-text">Error: {{ renewalError.statusText || (renewalError | json) }}</p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #revalidationErrorTemplate>
+  <div class="text-center">
+    <i class="fa fa-warning error status-icon" aria-hidden="true"></i>
+    <p class="btn-text">Error</p>
+  </div>
+</ng-template>
+
+<ng-template #revalidationExemptionTemplate>
+  <div class="text-center">
+    <i class="fa fa-ban status-icon notdue" style="font-size:153px;padding-top:0" aria-hidden="true"></i>
+    <p class="btn-text">Please file your revalidation under your pharmacist account.</p>
+  </div>
+</ng-template>
+
+<ng-template #revalidationSubmittedTemplate>
+  <div style="text-align:center">
+    <i class="fa fa-clock-o submitted success status-icon"></i>
+    <p class="btn-text">Submitted</p>
+  </div>
+</ng-template>

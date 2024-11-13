@@ -1,0 +1,88 @@
+<app-banner [noButtons]="true">
+  <div class="banner-left" style="text-align:center">
+    <h1 class="sm-show">Account activation</h1>
+    <p class="intro-text">
+      Follow the steps below to activate your account
+    </p>
+  </div>
+</app-banner>
+<div class="activation content">
+
+  <section>
+
+    <app-carousel [items]="steps" [selectedIndex]="currentStep" [$item]="itemTemplate">
+
+      <ng-template let-item let-step="index" #itemTemplate>
+        <div class="template-container">
+          <div *ngIf="step === 0">
+            <h2>Please select your role</h2>
+            <ul>
+                <li>
+                  <button class="btn btn-default " aria-label="Pharmacy technician"
+                    (click)="selectRole(ActivationType.Technician)"
+                    [class.selected]="selectedRole===ActivationType.Technician">
+                    Pharmacy technician applicant
+                    <p class="info">
+                        Select this option if you want to register as a pharmacy technician.
+                    </p>
+                  </button>
+                </li>
+              <li>
+                <button class="btn btn-default " aria-label="Student" (click)="selectRole(ActivationType.Student)"
+                  [class.selected]="selectedRole===ActivationType.Student">
+                  MPharm or OSPAP student
+                  <p class="info">
+                    Select this option if you are an MPharm or OSPAP student and want to apply to join the foundation training scheme.
+                  </p>
+                </button>
+              </li>
+
+              <li>
+                <button class="btn btn-default " aria-label="Pre-registration trainee" (click)="selectRole(ActivationType.Prereg)"
+                  [class.selected]="selectedRole===ActivationType.Prereg">
+                  Foundation trainee pharmacist
+                  <p class="info">
+                    I am a foundation trainee and I want to apply to register as a pharmacist
+                  </p>
+                </button>
+              </li>
+              <li>
+                <button class="btn btn-default " aria-label="Existing registrant" (click)="selectRole(ActivationType.Registrant)"
+                  [class.selected]="selectedRole===ActivationType.Registrant">
+                  New or returning registrant
+                  <p class="info">
+                    Select this option if you have successfully applied to register using a paper form and have been sent an activation code in your notice of entry letter.
+                  </p>
+                </button>
+              </li>
+            </ul>
+
+          </div>
+
+          <div *ngIf="step>0">
+            <div [ngSwitch]="selectedRole">
+
+              <app-technician-activation
+              [step]="step" [active]="step===currentStep" (activationChange)="activation=$event"
+              [activation]="activation" (stepChange)="navigateTo($event)" *ngSwitchCase="ActivationType.Technician"
+              ></app-technician-activation>
+
+              <app-student-activation [step]="step" [active]="step===currentStep" (activationChange)="activation=$event"
+                [activation]="activation" (stepChange)="navigateTo($event)" *ngSwitchCase="ActivationType.Student"></app-student-activation>
+
+              <app-prereg-activation [step]="step" [active]="step===currentStep" (activationChange)="activation=$event"
+                [activation]="activation" (stepChange)="navigateTo($event)" *ngSwitchCase="ActivationType.Prereg"></app-prereg-activation>
+
+              <app-registrant-activation [step]="step" [active]="step===currentStep" (stepChange)="navigateTo($event)"
+                (activationChange)="activation=$event" [activation]="activation" *ngSwitchCase="ActivationType.Registrant"></app-registrant-activation>
+
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+    </app-carousel>
+
+  </section>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="question">
+
+  <label *ngIf="question.type !== AnswerType.FreeText" [innerHTML]="question.title" 
+  [attr.for]="question.id" 
+  [id]="'labelFor-'+ question.id"
+  [class.error]="question.isValid===false"
+  [class.has-help-text]="!!question.body"></label>
+  <h2 class="label"  
+  [class.error]="question.isValid===false"
+    *ngIf="question.type === AnswerType.FreeText" 
+    [innerHTML]="question.title" 
+    [id]="'labelFor-'+ question.id"
+    [class.has-help-text]="!!question.body"
+    (click)="setFocus()"
+    > </h2>
+
+
+    <div class="form-group">
+      <p *ngIf="question.body">{{question.body}}</p>
+      <app-form-question-control 
+      [visible]="visible"
+        [question]="question"
+        [form]="form"
+        [readonly]="readonly"
+        [hasFocus]="hasFocus"
+      ></app-form-question-control>
+    </div>
+
+
+</div>

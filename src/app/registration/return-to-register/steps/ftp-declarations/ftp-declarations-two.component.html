@@ -1,0 +1,260 @@
+<ng-template #content>
+    <h2 class="spacer">{{ declarationHeading }}</h2>
+    <form #form="ngForm" novalidate>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" [class.invalid]="(touched || question1.touched) && question1.invalid">
+                    <div class="card card-non ">
+                        <label class="card-header">Question 8</label>
+                    </div>
+                    <label for="question1">
+                        Have you worked as a pharmacist or pharmacy technician in 
+                        Great Britain while not registered with the GPhC?
+                    </label><br/>
+                    <mat-radio-group name="question1" #question1="ngModel"
+                        [(ngModel)]="question10.isRegistered"
+                        (ngModelChange)="propagate()" required>
+                        <mat-radio-button [aria-label]="'yes'" name="answer1" [value]="true">Yes</mat-radio-button>
+                        <mat-radio-button [aria-label]="'no'" name="answer1" [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>            
+            </div>
+        </div>
+
+        <div class="row" *ngIf="question10.isRegistered === true">
+            <div class="col-md-12">
+                <div class="form-group" [class.invalid]="(touched || question11.touched) && question11.invalid">
+                    <label for="question11">
+                        Has this already been investigated by the GPhC?
+                    </label><br/>
+                    <mat-radio-group name="question11" #question11="ngModel"
+                                [(ngModel)]="question10.isInvestigated"
+                                (ngModelChange)="propagate()" required>
+                                <mat-radio-button [aria-label]="'yes'" name="answer11" [value]="true">Yes</mat-radio-button>
+                                <mat-radio-button [aria-label]="'no'" name="answer11" [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </div>
+        
+        <div  *ngIf="question10.isRegistered === true && question10.isInvestigated === true">
+            <div class="row">
+                <p class="important">
+                    Please give us the case reference number and the month and year when you declared this. 
+                     We will use this information to find your case and assess if it affects your current 
+                     fitness to practise.  We may contact you for more information.
+                </p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" [class.invalid]="(touched || refNumber1.touched) && refNumber1.invalid">
+                        <label for="caseRefNumber1">Case reference number</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="caseRefNumber1" #refNumber1="ngModel" class="form-control"
+                                (blur)="propagate()" [(ngModel)]="question10.caseReferenceNo" required/>
+                            </div>
+                        </div>                                                                        
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+    
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="investigationDate1">Investigation date</label>
+                        <app-utc-date-picker name="investigationDate1" #invDate1="ngModel" [min]="minDate" [max]="expiryDate" 
+                        [(ngModel)]="question10.investigationDate" (ngModelChange)="dateChange()">
+                        </app-utc-date-picker>
+                    </div>
+                </div> 
+            </div> 
+        </div>       
+
+        <div  *ngIf="question10.isRegistered===true && question10.isInvestigated === false">
+        <div class="row">
+            <p class="important">
+                Please give us the details of your unregistered practice.  
+                We will use this information to investigate the incident and 
+                assess your current fitness to practise.  We may contact you or 
+                your employer for more information.
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" [class.invalid]="(touched || title.touched) && title.invalid">
+                    <label for="jobTitle">Your job title</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="jobTitle" #title="ngModel" class="form-control"
+                            (blur)="propagate()" [(ngModel)]="question10.titleUsed" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 col-xl-offset-2 col-md-12 col-xs-12">
+                <div class="form-group" [class.invalid]="(touched) && (!question10.titleUsedFrom || !question10.titleUsedUntil)">
+                    <label for="investigationDate">Dates of your unregistered practice</label>
+                    <app-daterange [isPastDateAllowed]="true" [fromDate]="question10.titleUsedFrom"
+                    [toDate]="question10.titleUsedUntil" (changed)="onDateRangeChange($event)"                    
+                    overlapErrorMessage="Invalid start date - placement dates must not overlap">
+                    </app-daterange>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" [class.invalid]="(touched || employerName.touched) && employerName.invalid">
+                    <label for="employerName">Employer Name</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="employerName" class="form-control"  (blur)="propagate()" [(ngModel)]="question10.employerName"
+                            required #employerName="ngModel" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" [class.invalid]="(touched || addressEdit.touched) && !question10.employerAddress">
+                    <label for="employerAddress">Employer Address</label>
+                    <app-address-edit #addressEdit [(ngModel)]="question10.employerAddress" [touched]="touched" name="editAddress" (ngModelChange)="update()">
+                    </app-address-edit>
+                </div>
+            </div>  
+        </div>
+    </div>  
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" [class.invalid]="(touched || question2.touched) && question2.invalid">
+                    <div class="card card-non ">
+                        <label class="card-header">Question 9</label>
+                    </div> 
+                    <label for="question2">
+                        Have you used the title ‘pharmacist’ or ‘pharmacy technician’ 
+                        (or their Welsh equivalents ‘fferyllydd’ or ‘echnegydd fferylliaeth’) 
+                        while not registered with the GPhC?
+                    </label><br/>
+                    <mat-radio-group name="question2" #question2="ngModel"
+                        [(ngModel)]="question11.isRegistered"
+                        (ngModelChange)="propagate()" required>
+                        <mat-radio-button [aria-label]="'yes'" name="answer2" [value]="true">Yes</mat-radio-button>
+                        <mat-radio-button [aria-label]="'no'" name="answer2" [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>            
+            </div>
+        </div>
+
+        
+        <div class="row" *ngIf="question11.isRegistered === true">
+            <div class="col-md-12">
+                <div class="form-group" [class.invalid]="(touched || isInvestigated.touched) && isInvestigated.invalid">
+                    <label for="question11">
+                        Has this already been investigated by the GPhC?
+                    </label><br/>
+                    <mat-radio-group name="question21" #isInvestigated="ngModel"
+                                [(ngModel)]="question11.isInvestigated"
+                                (ngModelChange)="propagate()" required>
+                                <mat-radio-button [aria-label]="'yes'" name="answer21" [value]="true">Yes</mat-radio-button>
+                                <mat-radio-button [aria-label]="'no'" name="answer21" [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="question11.isRegistered === true && question11.isInvestigated === true">
+            <p class="important">
+                Please give us the case reference number and the month and year when you declared this.  
+                We will use this information to find your case and assess if it affects your current fitness 
+                to practise.  We may contact you for more information.
+            </p>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" [class.invalid]="(touched || refNumber2.touched) && refNumber2.invalid">
+                        <label for="caseRefNumber2">Case reference number</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="caseRefNumber2" #refNumber2="ngModel" class="form-control" [(ngModel)]="question11.caseReferenceNo"
+                                (blur)="propagate()" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="investigationDate2">Investigation date</label>
+                        <app-utc-date-picker name="investigationDate2" [min]="minDate" [max]="expiryDate" 
+                        [(ngModel)]="question11.investigationDate" (ngModelChange)="dateChange()">
+                        </app-utc-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="question11.isRegistered === true && question11.isInvestigated === false">
+            <p class="important">
+                Please give us the details of your unregistered practice.  
+                We will use this information to investigate the incident and 
+                assess your current fitness to practise.  We may contact you or 
+                your employer for more information.
+            </p>
+
+            <div class="row">
+                <div class="col-md-12">                    
+                    <div class="form-group" [class.invalid]="(touched || titleInUse.touched) && titleInUse.invalid">
+                        <label for="titleUsed">Title you used</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" required name="titleUsed" class="form-control" [(ngModel)]="question11.titleUsed"
+                                (blur)="propagate()" #titleInUse="ngModel"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-12 col-xl-offset-2 col-md-12 col-xs-12">
+                    <div class="form-group" [class.invalid]="(touched || title.touched) && (!question11.titleUsedFrom || !question11.titleUsedUntil)">
+                        <label>Dates of title use</label>
+                        <app-daterange [isPastDateAllowed]="true" [fromDate]="question11.titleUsedFrom"
+                        [toDate]="question11.titleUsedUntil" (changed)="onDatesChange($event)"                    
+                        overlapErrorMessage="Invalid start date - placement dates must not overlap">
+                        </app-daterange>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" [class.invalid]="(touched || usageDescription.touched) && usageDescription.invalid">
+                        <label for="usage">How or where you used it?</label>
+                        <textarea class="form-control" name="usageDescription"
+                            id="usageDescription" [(ngModel)]="question11.howWhereUsedIt" #usageDescription="ngModel"
+                            (ngModelChange)="propagate()" maxlength="5001" required>
+                        </textarea>
+                        <p class="form-error" *ngIf="question11.howWhereUsedIt && question11.howWhereUsedIt.length > 5000 ">
+                            You can only enter a maximum of 5000 characters in this field
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-template>

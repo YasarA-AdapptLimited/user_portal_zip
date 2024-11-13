@@ -1,0 +1,85 @@
+<ng-template #content>
+    <h2 class="step-header" [ngClass]="!showTooltip ? 'spacer' : 'mrgn-btm-15' " [attr.aria-label]="title" tabindex="0">{{title}}</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label class="mrgn-btm-15" tabindex="0">You can use this form to voluntarily remove yourself from the public 
+                facing register if you no longer want to be registered as a pharmacy professional in Great Britain.
+            </label>
+        </div>
+    </div>
+
+    <form #form="ngForm" novalidate>
+    <div class="mrgn-btm-15">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="removalDateChosen" tabindex="0">What date would you like to be removed from the register?</label>
+                <app-utc-date-picker name="removalDateChosen" [min]="minDate" [max]="expiryDate" 
+                [(ngModel)]="voluntaryRemovalDetails.dateOfRegistryRemoval" (ngModelChange)="dateChange()">
+                </app-utc-date-picker>
+            </div>            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+            <label for="reasonForRemoval" tabindex="0">Please tell us why you want to have your entry removed from the register.</label>                              
+                <select class="form-control" name="reasonForRemoval" required #reasonForRemoval="ngModel" [(ngModel)]="voluntaryRemovalDetails.reasonForRemoval" (change)="onReasonChange()">      
+                    <option *ngFor="let reason of reasons" [value]="reason">{{reason}}</option>
+                </select>
+            </div>
+            <p class="important" tabindex="0" role="alert">This information will not be used in assessing this or any future applications. 
+                It will help us to understand why pharmacy professionals chose to leave the register. Please select 
+                'prefer not to say' if you do not want to give a reason.
+            </p>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="voluntaryRemovalDetails.reasonForRemoval === 'Health' || voluntaryRemovalDetails.reasonForRemoval === 'Other'">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="details" tabindex="0">Please provide a short explanation</label>                   
+                <textarea class="form-control" name="reasonForRemovalDetails" id="details" #details="ngModel" maxlength="2001"
+                 [(ngModel)]="voluntaryRemovalDetails.reasonForRemovalDetails" (ngModelChange)="validate()"></textarea>
+                <p role="alert" tabindex="0" class="form-error" *ngIf="voluntaryRemovalDetails.reasonForRemovalDetails && voluntaryRemovalDetails.reasonForRemovalDetails.length > 2000 ">
+                    You can only enter a maximum of 2000 characters in this field
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div *ngIf="SIdetails"> 
+        <h3 tabindex="0">Superintendent</h3>
+        <label class="mrgn-btm-15" tabindex="0">You are shown as the superintendent for the pharmacy organisation below. Please make sure
+            you have advised the owner of the organistaion that you have requested removal from the register, so that
+            they can make arrangements for a new superintendent.
+        </label>
+
+        <label class="mrgn-btm-15" tabindex="0">You will not be permitted to act as a superintendent after the date 
+            of your removal. The owner will need to nominate a new superintendent and give us their details to continue
+            to operate legally.
+        </label>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ownerName" tabindex="0">Owner name</label>                   
+                    <input type="text" [disabled]="true" name="ownerName" class="form-control" [(ngModel)]="SIdetails.ownerName"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ownerNumber" tabindex="0">Owner number</label>                   
+                    <input id="ownerNumber" type="text" [disabled]="true" name="ownerNumber" class="form-control" [(ngModel)]="SIdetails.ownerNumber"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</ng-template>

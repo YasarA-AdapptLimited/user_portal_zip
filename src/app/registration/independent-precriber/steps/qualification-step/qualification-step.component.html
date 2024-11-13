@@ -1,0 +1,114 @@
+<ng-template #content>
+    <h2 class="qualification-step-header" [ngClass]="!showTooltip ? 'spacer' : 'mrgn-btm-15' "> Qualification details 
+            <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showTooltip = !showTooltip" [static]='true'
+            class="headingIcon"></app-gphc-icon>        
+    </h2>
+
+    <app-collapsible [trigger]="showTooltip" class="help-block spacer">
+        <div class="help-text">
+            The details below were supplied to us by your course provider. If any of the details are incorrect please 
+            <a class="color-white" href="https://www.pharmacyregulation.org/about-us/contact-us" target="_blank">contact us</a>.
+        </div>        
+    </app-collapsible>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="courseTitle">Course provider</label>
+                <input id="courseTitle" name="courseTitle" type="text" class="form-control" readonly [value]="applicant?.courseTitle || ''" />
+            </div>            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="dateAwarded">Date awarded</label>
+                <input id="dateAwarded" name="dateAwarded" type="text" class="form-control" readonly [value]="(applicant?.dateAwarded  | utcDate) || ''" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="clinicalSpecialities">Clinical specialties in which you will have prescribing responsibilities</label>
+                <input id="clinicalSpecialities" name="clinicalSpecialities" type="text" class="form-control" [(ngModel)]="applicantFormDetails.clinicalSpecialities" />
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="isDateBeyondSixMonths">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="important">
+                    As it has been more than six months since you were awarded your prescribing qualification, please provide details of a ‘prescribing mentor’.
+                     This person must be a prescribing pharmacist or other prescribing healthcare professional who you could refer to in cases of doubt or for 
+                     professional reassurance, for a period of one month from the date your annotation is added to your register entry.
+                </div>
+            </div>        
+        </div>
+
+        <form #form="ngForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" [class.invalid]="(touched && prescriberMentor.invalid)">
+                    <label for="prescriberMentor">Is your prescriber mentor registered with the GPhC?</label><br/>
+                <mat-radio-group id="prescriberMentor" name="prescriberMentor" #prescriberMentor="ngModel"
+                    [(ngModel)]="counterSignatureDetails.isMentorRegistered"
+                    (ngModelChange)="onMentorRegistrationChange($event)"
+                    [disabled]="countersigned && !this.prescriberMentorNotRegistered && counterSignatureDetails.countersignerGPhCId" required>
+                    <mat-radio-button [aria-label]="'yes'" name="mentor" [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button [aria-label]="'no'" name="mentor" [value]="false">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>            
+            </div>
+        </div>
+        <ng-container *ngIf="prescriberMentorNotRegistered && prescriberMentorNotRegistered!== null">            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" [class.invalid]="((mentorName.touched && mentorName.invalid) || (touched && mentorName.invalid))">
+                        <label for="mentorName">Prescriber mentor name</label>
+                        <input id="mentorName" type="text" #mentorName="ngModel" name="mentorName" class="form-control" [(ngModel)]="counterSignatureDetails.prescriberMentorName" 
+                        [disabled]="countersigned && !this.prescriberMentorNotRegistered && counterSignatureDetails.countersignerGPhCId" required (blur)="propagate()"/>
+                    </div>            
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" [class.invalid]="((registrationNumber.touched && registrationNumber.invalid) || (touched && registrationNumber.invalid))">
+                        <label for="registrationNumber">Registration number</label>
+                        <input id="registrationNumber" type="text" #registrationNumber="ngModel" name="registrationNumber" class="form-control" [(ngModel)]="counterSignatureDetails.prescriberRegistrationNo" 
+                        [disabled]="countersigned && !this.prescriberMentorNotRegistered && counterSignatureDetails.countersignerGPhCId" required (blur)="propagate()"/>
+                    </div>            
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" [class.invalid]="((regulatoryBody.touched && regulatoryBody.invalid) || (touched && regulatoryBody.invalid))">
+                        <label for="regulatoryBody">UK regulatory body </label>                   
+                        <select id="regulatoryBody" class="form-control" name="regulatoryBody" required #regulatoryBody="ngModel" [(ngModel)]="counterSignatureDetails.ukRegulatoryBody" 
+                        [disabled]="countersigned && !this.prescriberMentorNotRegistered && counterSignatureDetails.countersignerGPhCId"  (change)="propagate()" required>      
+                            <option *ngFor="let regulator of regulators" [value]="regulator">{{regulator}}</option>
+                        </select>
+                    </div>            
+                </div>
+            </div>    
+        
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group"  [class.invalid]="(touched && applicantFormDetails?.attachments.length === 0)">
+                        <label>I have provided a copy of a letter from this prescriber, 
+                            confirming that they are willing to act as a mentor</label>
+                            <app-file-upload #files [existing]="applicantFormDetails.attachments" [type]="uploadType" [sessionId]="sessionId" [min]="1" [max]="1" [deleteUrl]="deleteUrl"
+                            [attachmentType]="attachmentType" [maxMb]="8" (uploaded)="onDocUpload($event)" (deleted)="onDocDelete($event)"
+                            [disableDeleteButton]="countersigned && !this.prescriberMentorNotRegistered && counterSignatureDetails.countersignerGPhCId"></app-file-upload>
+                    </div>            
+                </div>
+            </div>
+        </ng-container>
+    </form>
+    </ng-container>
+</ng-template>

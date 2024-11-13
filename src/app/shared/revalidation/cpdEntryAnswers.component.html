@@ -1,0 +1,11 @@
+<div *ngIf="cpdEntry">
+  <div *ngFor="let group of cpdEntry.form.questionGroups">
+      <div *ngFor="let question of group.questions">
+    <div class="question" [innerHTML]="question.title"></div>
+    <div class="answer" *ngIf="question.type === AnswerType.DateTime">
+      {{ question.answer | date:'dd/MM/yyyy HH:mm'}}
+    </div>
+    <div class="answer" *ngIf="question.type !== AnswerType.DateTime" [innerHTML]="question.answer">
+    </div>
+  </div>
+</div>

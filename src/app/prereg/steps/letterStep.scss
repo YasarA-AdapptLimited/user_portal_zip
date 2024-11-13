@@ -1,0 +1,10 @@
+
+section.letter-of-good-standing {
+  ::ng-deep {
+    .collapsible .wrapper {
+      padding: 10px;
+    }
+    label + mat-radio-group { display: block }
+  }
+  
+}

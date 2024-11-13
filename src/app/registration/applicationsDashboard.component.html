@@ -1,0 +1,33 @@
+<app-banner [loading]="loadingApplications">
+    <div aria-label="Access your applications" class="banner-left">
+      <h1 tabindex="0">Applications</h1>
+      <p tabindex="0" class="intro-text">
+        Access your applications
+      </p>
+    </div>
+  </app-banner>
+  <div class="content spread registrant-summary">
+    <p class="no-data" *ngIf="!loadingApplications && applications.length === 0">
+        No application available at the moment.
+    </p>
+  <div class="row fadein">
+      <div class="col-sm-4 left-col margin-10 applications" *ngFor="let application of applications">
+       <app-form-section class="fadein" [link]="application.link"
+       [loading]="application.loading" [loaderFill]="true">
+       <span class="section-header">{{application.header}}</span>
+ 
+       <div class="section-body">
+         <div class="text-center">
+           <i class="fa fa-id-card-o status-icon " aria-hidden="true"></i>
+           <div class="btn-text" *ngIf="application.status">
+             {{ ApplicationStatus[application.status] | caseSplit:application.isCCPSApplication }}
+           </div>
+           <div *ngIf="application.regulatoryBodyName">
+              <p class="tile-label">{{ application.regulatoryBodyName }}</p>
+           </div>
+          </div>
+       </div>
+     </app-form-section>
+      </div>
+    </div>
+  </div>

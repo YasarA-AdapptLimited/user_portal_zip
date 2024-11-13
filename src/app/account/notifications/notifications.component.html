@@ -1,0 +1,101 @@
+<mat-progress-bar aria-label="loading"  style="position: absolute;" *ngIf="loading" mode="indeterminate" color="primary"></mat-progress-bar>
+
+<div class="content no-boxes" >
+
+  <ng-container *ngIf="notifications?.length else emptyTemplate">
+    <ng-container *ngIf="!layout.state.xs">
+      <div style="display:flex">
+        <div class="list">
+          <ng-container *ngTemplateOutlet="pager"></ng-container>
+          <div class="list-item" [class.selected]="item===selectedItem" [class.unread]="!item.deactivatedAt"  *ngFor="let item of notifications" [class.no-deactivate]="!item.deactivateManually"
+            (click)="open(item)">
+            <div class="header-container">
+              <ng-container *ngTemplateOutlet="header; context:{$implicit:item}"></ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="message-content">
+          <div style="position: relative">
+
+            <div *ngIf="selectedItem" [@slideIn] class="message-container">
+              <div class="message-header">
+                <div class="sender" tabindex="0">{{ selectedItem.sender }}</div>
+                <div class="title" tabindex="0">
+                  <i *ngIf="!selectedItem.deactivateManually" class="fa fa-warning danger"></i>
+                  {{ selectedItem.title }}
+                </div>
+                <div class="date" tabindex="0">{{ selectedItem.time | utcDate }}</div>
+              </div>
+              <div #messageContent class="message-body" role="region" tabindex="0">
+                <app-notification-content [item]="selectedItem"></app-notification-content>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="layout.state.xs">
+      <ng-container *ngTemplateOutlet="pager"></ng-container>
+      <ng-container *ngFor="let item of notifications">
+        <div class="list" style="width: 100%;">
+
+          <div class="list-item" [class.unread]="!item.deactivatedAt" 
+          [class.no-deactivate]="!item.deactivateManually" [class.selected]="item===selectedItem" (click)="open(item)" tabindex="0">
+            <div class="header-container">
+              <ng-container *ngTemplateOutlet="header; context:{$implicit:item}"></ng-container>
+            </div>
+          </div>
+        </div>
+
+        <app-collapsible [trigger]="!!selectedItem && item===selectedItem">
+          <div *ngIf="selectedItem" class="message-content" style="padding: 0; border-top: 1px solid #dad8d8;">
+            <div class="message-body message-container" style="margin-top:0">
+              <app-notification-content [item]="selectedItem"></app-notification-content>
+            </div>
+          </div>
+        </app-collapsible>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <!--
+  <button class="btn" *ngIf="!loading" (click)="createTestNotification()">Create a test notification</button>-->
+</div>
+<ng-template #emptyTemplate>
+  <p class="no-data" *ngIf="!loading" [@slideIn] tabindex="0">
+    You don't have any notifications
+  </p>
+</ng-template>
+
+<ng-template #loadingContent>
+  Loading content...
+</ng-template>
+
+<ng-template #header let-item>
+  <div class="header">
+    <div class="sender">
+      <div class="unread-indicator"></div>
+      <div tabindex="0">{{item.sender}}</div>
+    </div>
+    <div class="date" tabindex="0"> {{item.time | utcDate }}</div>
+  </div>
+  <div class="summary" tabindex="0">
+    {{ item.title }}
+  </div>
+  <div tabindex="0" #messageContentSkip class="sr-only" role="button">Message content skip - clickable</div>
+</ng-template>
+
+<ng-template #pager>
+  <div class="pager" *ngIf="notifications?.length">
+    <span class="info">{{ pageFrom }} - {{ pageTo }} of {{totalCount}}</span>
+
+    <button [disabled]="pageNum === 0" (click)="prevPage()" aria-label="Previous page">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button [disabled]="(pageNum + 1) * pageSize >= totalCount" (click)="nextPage()" aria-label="Next page">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+</ng-template>

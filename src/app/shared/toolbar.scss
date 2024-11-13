@@ -1,0 +1,135 @@
+@import "../style/variables";
+
+.toolbar-container {
+ /* position:relative; */
+  height: #{$navbar-height}px;
+  background:transparent;
+  z-index: 5;
+  position: relative;
+}
+.toolbar {
+    background: $gphc-blue;
+    &.secondary {
+      background: $gphc-aqua;
+    }
+    height: #{$navbar-height}px;
+    /*
+    position:absolute;
+    width:100%;*/
+  /*  padding-left:20px;*/
+    overflow:hidden;
+
+    .toolbar-left {
+      min-width: 20px;
+    }
+
+    .toolbar-title {
+      display:flex;
+      padding-left: 20px;
+      &.centered {
+        justify-content: center;
+      }
+    }
+    .toolbar-inner {
+        display: flex;
+
+        ::ng-deep {
+            .toolbar-left, .toolbar-right {
+                display: flex;
+            }
+
+            button:focus .circle.fa-stack {
+              box-shadow: none !important;
+              animation: none;
+            }
+
+            button {
+              height: #{$navbar-height}px;
+            }
+        }
+    }
+
+    color: white;
+
+    ::ng-deep {
+
+      .fa-stack {
+        width: 50px !important;
+      }
+      @media (max-width:350px) {
+        .fa-stack {
+          width: 1.8em !important;
+          font-size: 24px;
+        }
+      }
+
+  
+
+      .gphc-icon {
+
+     
+        .circle {
+          border: none;
+          border-radius: 0 !important;
+          height: #{$navbar-height}px !important;
+          display: flex !important;
+          background: transparent !important;
+          align-items: center !important;
+          .fa-stack-1x, .fa-stack-2x {
+            position: static !important;
+          }
+
+          i {
+            transition: color 300ms linear;
+          }
+          
+        }
+
+        &:not(.active):not(.disabled):hover {
+          .circle {
+            background-color: darken($gphc-blue,5%) !important;
+          }
+          .toolbar.secondary & {
+            .circle {
+              background-color: $gphc-aqua !important;
+            }
+          }
+        }
+
+        &:not(.disabled).active {
+          .circle {
+            background: $gphc-purple !important;
+            i {
+              color: #fff !important;
+            }
+          }
+        
+        }
+
+        &.disabled {
+          i {
+            color: #7493ad !important;
+          }
+        }
+      }
+    }
+
+
+    .toolbar-title {
+        flex-grow: 1;
+        line-height: 60px;
+        font-size: 1.4em;
+    }
+
+    @media(max-width:500px) {
+
+      .title {
+        display:none;
+      }
+
+    }
+
+  
+}
+
+

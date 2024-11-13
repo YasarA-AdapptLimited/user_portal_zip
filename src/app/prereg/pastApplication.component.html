@@ -1,0 +1,24 @@
+
+<app-banner [loading]="loading">
+    <div class="banner-left">
+        <div style="display:flex">
+            <h1 class="sm-show" style="flex-grow:1">Past Application</h1>
+        </div>
+        <p class="intro-text">Review your past application created on: {{ applicationDate?.createdAt | date:'dd/MM/yyyy'}}
+        </p>
+    </div>
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading">
+    <section class="section-to-print">
+      <h1>Application for registration</h1>
+        <app-reg-application-review 
+         *ngIf="!loading"
+         [application]="application" 
+         [readonly]="true"
+         [formId]="formId">
+        </app-reg-application-review>
+    </section>
+</div>
+
+    

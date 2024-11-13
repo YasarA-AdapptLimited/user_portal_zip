@@ -1,0 +1,29 @@
+<div class="excluded items" *ngIf="items && items.length">
+  <div class="row table-row header  title-row no-gutters">
+
+    <div class="col-8">
+      {{title}} ({{items.length}})
+    </div>
+  </div>
+  <div class="row table-row child-row no-gutters" *ngFor="let item of items">
+
+    <div class="col-8" >
+      <i class="fa fa-level-up"></i>
+      <button [appTooltip]="itemTitleTooltip" class="item-title btn-link"
+      (click)="open(item)">
+      {{item.title}}</button>
+    </div>
+    
+    <div class="col-2 text-center">
+      <button (click)="delete(item)" class="btn-abs icon-button-light"  [appTooltip]="deleteTooltip">
+          <i class="fa fa-2x fa-trash"></i>
+      </button>
+    </div>
+    <div class="col-2 text-right" >
+      <button class="btn-abs  icon-button-light"  *ngIf="!readonly" [appTooltip]="includeTooltip" (click)="toggleIsPartOfSubmission(item)">
+          <i  class="fa fa-2x fa-plus-square-o "></i>
+      </button>
+
+    </div>
+  </div>
+</div>

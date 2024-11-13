@@ -1,0 +1,42 @@
+<section [class.loading]="loading" [class.section-badge]="badge" [class.saving]="saving"
+  [tabindex]="link ? 0 : -1" 
+  [class.receive-focus]="!!link" 
+  (keydown.enter)="onKeyPressEnter($event)" 
+  (click)="onClick($event)" 
+  (keydown.escape)="cancelEdit()"
+  [class.foreground]="foreground"
+  class="form-section"
+  [class.editing]="editing"
+>
+
+  <div class="section-header-container" [class.primary]="primary">
+    <h2 class="section-header"><ng-content select=".section-header" ></ng-content></h2>
+
+    <i *ngIf="!loaderFill" class="fa fa-circle-o-notch fa-spin fa-fw loading"></i>
+    <app-gphc-icon #editButton *ngIf="!editing && editable" [showLabelAlways]="true" [iconType]="'edit'" (click)="toggleEdit()">
+    </app-gphc-icon>
+    <app-gphc-icon *ngIf="editing && allowSave" [showLabelAlways]="true" [offset]="50" [iconType]="'save'" (click)="save()" [tabindex]="invalid ? -1 : 0" [disabled]="invalid">
+    </app-gphc-icon>
+    <app-gphc-icon *ngIf="editing" [showLabelAlways]="true" [iconType]="'cancel'" (click)="toggleEdit()">
+    </app-gphc-icon>
+
+  </div>
+
+  <div class="section-body-container">
+    <div [hidden]="editing">
+      <div *ngIf="!loaderFill || (loaderFill && !loading)" >
+        <ng-content select=".section-body"></ng-content>
+      </div>
+      <div *ngIf="loaderFill" class="text-center">
+        <i  class="fa fa-circle-o-notch fa-spin fa-fw loading"></i>
+      </div>
+    </div>
+    <div [hidden]="!editing">
+      <ng-content select=".section-edit"></ng-content>
+    </div>
+  </div>
+  <div class="section-sub-container">
+      <ng-content select=".section-sub"></ng-content>
+  </div>
+
+</section>

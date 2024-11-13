@@ -1,0 +1,8 @@
+<p class="{{className}}" *ngFor="let error of errors">
+    <ng-container *ngIf="error.property">
+      <span *ngIf="showAsServerError">Server validation error: </span>{{error.property}}: {{ error.errors.join(', ') }}
+    </ng-container>
+    <ng-container *ngIf="!error.property">
+        <span *ngIf="showAsServerError">Server validation error: </span>{{ error.errors.join(', ') }}
+    </ng-container>
+</p>

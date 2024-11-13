@@ -1,0 +1,99 @@
+<section style="position: relative;">
+    <section [class.allow-edit]="!readonly">
+        <h3>
+          <div class="grow">{{stepTitle}}</div>
+          <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+            (click)="goToStep(VoluntaryRemovalApplicationStep.DateReasonForRemovalRequired)">
+          </app-gphc-icon>
+        </h3>
+
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="dateOfRegistryRemoval"  tabindex="0" id="dateOfRemovalLabel">What date would you like to be removed from the register?</label>
+                          <div class="col-md-6 form-control readonly" tabindex="0"[innerHTML]="voluntaryRemovalDetails?.dateOfRegistryRemoval | utcDate" aria-describedby="dateOfRemovalLabel"></div>
+                        </div>
+                </div>
+
+                <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="reasonForRemoval"  tabindex="0" id="reasonForRemovalLabel">Please tell us why you want to have your entry removed from the register.</label>
+                          <div class="col-md-6 form-control readonly" tabindex="0"[innerHTML]="voluntaryRemovalDetails?.reasonForRemoval" aria-describedby="reasonForRemovalLabel"></div>
+                        </div>
+                </div>
+
+                <div class="col-md-12" *ngIf="voluntaryRemovalDetails.reasonForRemovalDetails">                        
+                        <div class="form-group">
+                          <label for="reasonForRemovalDetails"  tabindex="0" id="reasonForRemovalDetailsLabel">Please provide a short explanation</label>
+                          <div class="col-md-6 form-control readonly" tabindex="0"[innerHTML]="voluntaryRemovalDetails.reasonForRemovalDetails" aria-describedby="reasonForRemovalDetailsLabel"></div>
+                        </div>
+                </div>
+        </div>                     
+                    
+        <ng-template [ngIf]="SIdetails">
+            <div class="row">                    
+                
+                <div class="col-md-12">
+                    <h3>Superintendent</h3>
+
+                    <p class="important">You are shown as the superintendent for the pharmacy organisation below. Please make sure
+                            you have advised the owner of the organistaion that you have requested removal from the register, so that
+                            they can make arrangements for a new superintendent.
+                
+                            <br>
+                            You will not be permitted to act as a superintendent after the date 
+                            of your removal. The owner will need to nominate a new superintendent and give us their details to continue
+                            to operate legally.
+                    </p>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="ownerName">Owner name</label>
+                            <div class="form-control readonly" [innerHTML]="SIdetails.ownerName"></div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Owner number</label>
+                            <div class="form-control readonly" [innerHTML]="SIdetails.ownerNumber"></div>
+                        </div>
+                    </div>                        
+                </div>                    
+            </div>
+        </ng-template>
+    </section>
+
+    <section [class.allow-edit]="!readonly">
+        <h3>
+            <div class="grow">FtP declarations</div>
+            <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+              (click)="goToStep(VoluntaryRemovalApplicationStep.FtPDeclarations)">
+            </app-gphc-icon>
+          </h3>
+          <app-vr-declaration-summary formIndex="0" [formId]="formId" [application]="application"></app-vr-declaration-summary>
+    </section>
+
+    <section [class.allow-edit]="!readonly">
+        <h3>
+            <div class="grow">Application declarations</div>
+            <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+              (click)="goToStep(VoluntaryRemovalApplicationStep.Declarations)">
+            </app-gphc-icon>
+          </h3>
+          <div class="form-group">
+            <div class="form-control" readonly>
+              I have read and understand the declarations.
+            </div>
+          </div>
+    </section>
+
+    <section [class.allow-edit]="!readonly">
+      <h3>
+        <div class="grow">Equality and diversity</div>
+        <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(VoluntaryRemovalApplicationStep.EDIDetails)">
+        </app-gphc-icon>
+      </h3>
+      <app-edi-summary [edi]="application.activeForm.equalityDiversity"></app-edi-summary>
+    </section>
+</section>    

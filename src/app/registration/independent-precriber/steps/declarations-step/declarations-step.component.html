@@ -1,0 +1,135 @@
+<ng-template #content>
+
+  <div class="header">
+    <h2>
+      <div>
+        Declarations
+      </div>
+
+    </h2>
+  </div>
+  <p style="font-weight: bold;">I declare that :</p>
+  <section class="readonly p-2">
+
+    <p class="intro-text">
+      I am qualified to practise as an independent prescriber
+    </p>
+    <div class="mb-1">
+      <mat-radio-group id="qualifiedIndependentPrescriber"
+        [(ngModel)]="application.activeForm.declaration.isQ1Confirmed" (ngModelChange)="update()">
+        <mat-radio-button aria-label="confirm as true" [value]="true">
+          <h4>Yes</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="confirm as false" [value]="false">
+          <h4>No</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!--<mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ1Confirmed"
+          name="qualifiedIndependentPrescriber" required #isQualifiedIndependentPrescriber="ngModel">
+          I am qualified to practise as an independent prescriber
+        </mat-checkbox>-->
+
+  </section>
+
+  <section class="readonly p-2">
+    <p class="intro-text">
+      I request that my entry in Part 1 of the register is annotated to reflect that I am a qualified independent
+      prescriber
+    </p>
+    <div class="mb-1">
+      <mat-radio-group id="part1EntryAnnotation" [(ngModel)]="application.activeForm.declaration.isQ2Confirmed"
+        (ngModelChange)="update()">
+        <mat-radio-button aria-label="confirm as true" [value]="true">
+          <h4>Yes</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="confirm as false" [value]="false">
+          <h4>No</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!--<mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ2Confirmed"
+      name="part1EntryAnnotation" required #ispart1EntryAnnotation="ngModel">
+      I request my entry in Part 1 of the register to be annotated as an independent prescriber
+    </mat-checkbox>-->
+
+  </section>
+
+  <section class="readonly p-2">
+    <p class="intro-text">
+      I understand that I must not practise as an independent prescriber until I receive a notification confirming that
+      an annotation has been added to my register entry
+    </p>
+    <div class="mb-1">
+      <mat-radio-group id="confirmNotificationFromGphc" [(ngModel)]="application.activeForm.declaration.isQ3Confirmed"
+        (ngModelChange)="update()">
+        <mat-radio-button aria-label="confirm as true" [value]="true">
+          <h4>Yes</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="confirm as false" [value]="false">
+          <h4>No</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!--<mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ3Confirmed"
+        name="confirmNotificationFromGphc" required #isconfirmNotificationFromGphc="ngModel">
+        I understand that I must not prescribe until I receive the confirmation notification within myGPhC
+      </mat-checkbox>-->
+
+  </section>
+
+  <section class="readonly p-2">
+
+    <p class="intro-text">
+      The information that I have provided in this application, and within any supporting documentation that I have
+      uploaded, is complete, true and accurate
+    </p>
+    <div class="mb-1">
+      <mat-radio-group id="confirmingInformationIsAccurate"
+        [(ngModel)]="application.activeForm.declaration.isQ4Confirmed" (ngModelChange)="update()">
+        <mat-radio-button aria-label="confirm as true" [value]="true">
+          <h4>Yes</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="confirm as false" [value]="false">
+          <h4>No</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!--<mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ4Confirmed"
+        name="confirmingInformationIsAccurate" required #isconfirmingInformationIsAccurate="ngModel">
+        The information that I have provided in this application, and within any supporting documentation that I have uploaded, is complete, true and accurate 
+      </mat-checkbox>-->
+
+  </section>
+
+  <section class="readonly p-2">
+
+    <p class="intro-text">
+      I understand that if I am found to have given false or misleading information in connection with my application,
+      this may be treated as misconduct, and could result in my removal from the register
+    </p>
+    <div class="mb-1">
+      <mat-radio-group id="confirmingNotGivenMisleadingInfo"
+        [(ngModel)]="application.activeForm.declaration.isQ5Confirmed" (ngModelChange)="update()">
+        <mat-radio-button aria-label="confirm as true" [value]="true">
+          <h4>Yes</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="confirm as false" [value]="false">
+          <h4>No</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+
+    <!-- <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.declaration.isQ5Confirmed"
+        name="confirmingNotGivenMisleadingInfo" required #isconfirmingNotGivenMisleadingInfo="ngModel">
+        I understand that if I am found to have given false or misleading information in connection with my application, this may be treated as misconduct, and could result in my removal from the register
+      </mat-checkbox>-->
+
+  </section>
+
+</ng-template>

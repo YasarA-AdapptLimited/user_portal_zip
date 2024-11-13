@@ -1,0 +1,89 @@
+<app-banner [leftColWidth]=9 [info]="true" [loading]="loading">
+  <div class="banner-left ">
+    <div style="display:flex">
+      <div style="flex-grow: 1">
+        <h1 class="sm-show">
+          Exceptional circumstance
+        </h1>
+        <p class="intro-text" *ngIf="!loading" class="fadein">
+          Reference number {{ extenuatingCircumstance.referenceNumber }}, received on {{ extenuatingCircumstance.submissionDate | utcDate}}
+        </p>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+
+  </div>
+</app-banner>
+<div class="content spread sm-no-margin">
+
+  <div class="row body fadein" *ngIf="!loading">
+    <div class="col-md-8">
+
+      <section>
+
+        <div style="min-height: 500px" *ngIf="!loading" class="fadein">
+
+          <div style="display:flex">
+            <h2 style="flex-grow:1">{{extenuatingCircumstance.subject}}</h2>
+            <div class="ext-circ-status {{ExtCircDecision[extenuatingCircumstance.decision]}}">{{ extenuatingCircumstance.decision ? (ExtCircDecision[extenuatingCircumstance.decision] | caseSplit) : 'Received'
+              }}</div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 40px;margin-top: 20px;">
+
+            <label for="subject">Request title</label>
+
+            <div class="form-control readonly">{{extenuatingCircumstance.subject}}</div>
+
+          </div>
+
+          <div *ngFor="let questionGroup of extenuatingCircumstance.form.questionGroups">
+            <app-form-question [form]="extenuatingCircumstance.form" *ngFor="let question of questionGroup.questions" [question]="question"
+              [readonly]="true">
+            </app-form-question>
+          </div>
+
+          <label>Evidence</label>
+          <div *ngFor="let file of extenuatingCircumstance.proofs" class="form-group">
+
+            <div (click)="download(file)" class="form-control readonly link">
+              <div style="display:flex" id="'file-'+i">
+                <div class="icon">
+                  <i class="fa fa-download"></i>
+                </div>
+                <div class="ml-2">{{file.filename}}</div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </section>
+    </div>
+
+    <div class="col-md-4 right-col" *ngIf="!!extenuatingCircumstance.review">
+      <app-form-section [link]="adviceLink">
+        <h2 class="section-header">Notice of decision</h2>
+        <div class="section-body text-center">
+          <i class="fa fa-envelope status-icon letter"></i>
+          <div class="btn-text">
+            View or print
+          </div>
+        </div>
+      </app-form-section>
+    </div>
+
+
+
+
+
+
+  </div>
+
+</div>

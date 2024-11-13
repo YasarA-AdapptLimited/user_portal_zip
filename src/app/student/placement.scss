@@ -1,0 +1,21 @@
+:host {
+
+  .metadata-item {
+    i { float: none;}
+    display: flex;
+    max-width: 600px;
+  }
+  ::ng-deep {
+    h4 {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      max-width: 600px;
+      padding-bottom: 10px;
+      border-bottom: 5px solid #f5f5f5;
+    }
+    .limit-width {
+      max-width: 600px;
+    }
+  }
+
+}

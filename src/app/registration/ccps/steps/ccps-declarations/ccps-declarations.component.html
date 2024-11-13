@@ -1,0 +1,159 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>Application declarations</div>
+    </h2>
+  </div>
+  <ng-container *ngIf="isRegistered; then registered else notRegistered"></ng-container>
+
+  <ng-template #registered>
+    <div>
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ1Confirmed"
+        name="ccpsFromRegister" #isCcpsRegister="ngModel" required>
+          The information I have provided for this application for a certificate
+          of current professional status and fitness to practise history is
+          complete, true and accurate.
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+                  isCcpsRegister.touched &&
+                  isCcpsRegister.invalid
+                ">
+                  <div class="error">
+                      <p>
+                          Please select this checkbox
+                      </p>
+                  </div>
+              </app-collapsible>
+      </p>
+    </div>
+  
+    <div>
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ2Confirmed"
+        name="NoToFtpDeclarartions" required #NoToFtpDeclarartions="ngModel">
+          I am aware that I must notify the registrar of any changes to my name,
+          home address or other contact details within one month starting on the
+          day on which the change occurred.
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+                  NoToFtpDeclarartions.touched && NoToFtpDeclarartions.invalid
+                ">
+                  <div class="error">
+                      <p>
+                          Please select this checkbox
+                      </p>
+                  </div>
+              </app-collapsible>
+      </p>
+    </div>
+  
+    <div>
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ3Confirmed"
+        name="ConfirmByGphcAndRps" required #isGphcAndRpsConfirmed="ngModel">
+          I am aware that I must notify the registrar if there is any change in
+          the circumstances relating to the fitness to practise declaration that I
+          have made in this application within seven days, starting on the day on
+          which the event occurred.
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+                  isGphcAndRpsConfirmed.touched && isGphcAndRpsConfirmed.invalid
+                ">
+                  <div class="error">
+                      <p>
+                          Please select this checkbox
+                      </p>
+                  </div>
+              </app-collapsible>
+      </p>
+    </div>
+  
+    <div>
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ4Confirmed"
+        name="ConfirmByGphcAndRps2" required #isGphcAndRpsConfirmed2="ngModel">
+          I understand that if I am found to have given false or misleading
+          information in connection with this application for a CCPS, this may be
+          treated as misconduct, which may result in my removal from the register.
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+                  isGphcAndRpsConfirmed2.touched && isGphcAndRpsConfirmed2.invalid
+                ">
+                  <div class="error">
+                      <p>
+                          Please select this checkbox
+                      </p>
+                  </div>
+              </app-collapsible>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ5Confirmed"
+        name="consentToGPhC" required #consentToGPhC="ngModel">
+        I give my consent for the GPhC to use the information I have provided in this application 
+        and any fitness to practise history (where applicable) to produce a CCPS and to send it to 
+        my nominated regulatory authority. I am aware that this may mean my personal data will be 
+        transferred outside the UK and the European Union, depending on the location of my selected regulator. 
+        </mat-checkbox>
+        <app-collapsible [trigger]="consentToGPhC.touched && consentToGPhC.invalid">
+            <div class="error">
+                <p>
+                    Please select this checkbox
+                </p>
+            </div>
+        </app-collapsible>
+      </p>
+    </div>
+  </ng-template>
+  <ng-template #notRegistered>
+    <div>
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ1Confirmed"
+        name="ccpsFromRegister" #isCcpsRegister="ngModel" required>
+        The information I have provided for this application for a certificate of current professional status and fitness to practise history is complete, true and accurate.
+        </mat-checkbox>
+        <app-collapsible [trigger]="
+                  isCcpsRegister.touched &&
+                  isCcpsRegister.invalid
+                ">
+                  <div class="error">
+                      <p>
+                          Please select this checkbox
+                      </p>
+                  </div>
+              </app-collapsible>
+      </p>
+    </div>  
+
+    <div>
+      <p>
+        <mat-checkbox (change)="update()" [(ngModel)]="application.activeForm.appDeclaration.isQ5Confirmed"
+        name="consentToGPhC" required #consentToGPhC="ngModel">
+        I give my consent for the GPhC to use the information I have provided in this application
+         and any fitness to practise history (where applicable) to produce a CCPS and to send it to 
+         my nominated regulatory authority. I am aware that this may mean my personal data will be 
+         transferred outside the UK and the European Union, depending on the location of my selected regulator. 
+        </mat-checkbox>
+        <app-collapsible [trigger]="consentToGPhC.touched && consentToGPhC.invalid">
+            <div class="error">
+                <p>
+                    Please select this checkbox
+                </p>
+            </div>
+        </app-collapsible>
+      </p>
+    </div>
+  </ng-template>
+  
+  <section class="declaration-step">
+    <div style="padding: 20px">
+      <mat-checkbox name="overallDeclaration" #focus [(ngModel)]="application.activeForm.isOverallDeclarationAcknowledged"
+      (ngModelChange)="update()">
+        <h4>I have read and understood the declarations</h4>
+      </mat-checkbox>
+    </div>
+  </section>
+</ng-template>

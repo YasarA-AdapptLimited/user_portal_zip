@@ -1,0 +1,146 @@
+<ng-template #content>
+  <div class="header mb-4">
+    <h2 style="margin:0 !important">
+      <div>{{title}}</div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showHelp = !showHelp" [static]='true'>
+      </app-gphc-icon>
+    </h2>
+  </div>
+
+
+  <app-collapsible [trigger]="showHelp" class="help-block">
+    <div class="row help-text">
+      <div class="col-md-12">
+        <p>
+          You can enter details of up to three placements. The total training time of all placements must equal 364 days
+          exactly
+          (52 weeks). You can enter the details of up to three designated supervisors for each placement.
+        </p>
+        <p>
+          The earliest date you can start your training is <b>{{trainingStartDate}}. </b>
+          If you complete any training you complete before this date, it will not count towards your 52-week total.
+        </p>
+        <p>
+          You must start your training on or before <b>{{trainingEndDate}}.</b>
+          This is because you must complete a certain amount of training before you are eligible to apply to sit the
+          registration assessment.
+        </p>
+      </div>
+    </div>
+  </app-collapsible>
+
+
+  <div *ngIf="ready$ | async else loadingTemplate" class="fadein mt-4">
+    <app-collapsible [trigger]="learningContractRejected">
+      <div class="form-error-block mb-4">
+        <p>
+          <i style="color:white" class="fa fa-warning 2x"></i>&nbsp;One or more designated supervisors has refused to sign your learning
+          contract.
+        </p>
+        <p *ngIf="feedback">
+          Designated supervisor's feedback: {{ tutorFeedback }}
+        </p>
+        <p>
+          Please make the necessary changes to your training details.
+        </p>
+      </div>
+    </app-collapsible>
+    <app-collapsible [trigger]="tutorIneligible">
+      <p class="form-error-block">
+        <i style="color:white" class="fa fa-warning 2x"></i>&nbsp;One or more designated supervisors is no longer eligible. Please
+        contact the GPhC.
+      </p>
+    </app-collapsible>
+
+    <section style="max-width: 600px">
+
+      <h3>Training scheme</h3>
+      <p class="important">
+        This information is collected for reporting purposes
+      </p>
+      <div class="ml-4">
+        <div class="form-group">
+          <label for="nesOriel">Were you allocated your foundation training placement through the national
+            recruitment scheme (Oriel)?</label>
+          <div class="mt-2">
+            <mat-radio-group id="nesOriel" name="nesOriel" class="multiline"
+              [(ngModel)]="application.activeForm.trainingScheme.type" (change)="trainingSchemeChanged()">
+              <mat-radio-button [value]="TrainingSchemeType.None">No</mat-radio-button><br />
+              <mat-radio-button [value]="TrainingSchemeType.Oriel">Yes, I was allocated my placement through Oriel
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <app-collapsible [trigger]="requireTrainingSchemeNumber">
+
+          <div class="form-group">
+            <label for="trainingSchemeNumber">Training scheme number</label>
+            <input class="form-control" type="text" id="trainingSchemeNumber" name="trainingSchemeNumber" #focus
+              #trainingSchemeNumber="ngModel" [(ngModel)]="application.activeForm.trainingScheme.number"
+              (ngModelChange)="changed()">
+            <!-- <app-collapsible [trigger]="(touched || trainingSchemeNumber.touched )">
+              <p class="form-error">
+                You must enter your training scheme number
+              </p>
+            </app-collapsible> -->
+          </div>
+          <div class="important">
+            <p>
+              Please add your training scheme number, if you know it. If not, leave the box blank. This will not affect
+              your application.
+            </p>
+          </div>
+
+
+        </app-collapsible>
+      </div>
+
+
+    </section>
+
+
+    <div *ngIf="trainingSchemeValid" class="fadein">
+
+      <section class="placement mt-4" *ngFor="let placement of placements; let i = index;" [class.first]="i===0">
+
+        <div style="display:flex">
+          <h3 style="flex-grow: 1">Your {{nth(i)}} placement</h3>
+          <button class="btn btn-primary btn-lg" style="height: 45px;" *ngIf="i > 0"
+            (click)="removePlacement(i)">Remove</button>
+        </div>
+
+        <div class="ml-4">
+          <app-placement [placement]="placement" [index]="i" (changed)="changed($event)" [touched]="touched">
+          </app-placement>
+        </div>
+
+      </section>
+
+      <div class="weeks-progress fadein" *ngIf="placementsValid">
+        <div class="weeks-progress-wrapper">
+          <h5 style="flex-grow:1" [class.error]="daysProgress.error">
+            Total number of training days entered
+          </h5>
+          <div>
+            <app-progress-indicator description="Total number of training days entered" [tooltip]="getProgressTooltip()"
+              [item]="daysProgress" size="2"></app-progress-indicator>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <button class="btn btn-lg btn-primary btn-block"
+      *ngIf="placementsValid && placements.length < 3 && daysProgress.progress < 364" (click)="addPlacement()">Add
+      another placement...</button>
+
+  </div>
+
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div class="step-loading">
+    <mat-progress-bar aria-label="loading step"  mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>

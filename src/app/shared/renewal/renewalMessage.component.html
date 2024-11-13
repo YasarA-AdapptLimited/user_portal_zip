@@ -1,0 +1,113 @@
+<div [ngSwitch]="renewal.status">
+  <!--
+  <div *ngSwitchCase="RenewalStatus.RemovalVoluntary">
+    <p class="intro-text">
+      You have applied for voluntary removal from the register.<br /><br /> If you want to renew your registration, please
+      email us at
+      <a href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a>.
+    </p>
+  </div>
+-->
+  <div *ngSwitchCase="RenewalStatus.NotDue">
+    <p class="intro-text" aria-label="Renewal status - nothing to renew" tabindex="0">You don't have anything to renew at the moment</p>
+  </div>
+  <div *ngSwitchCase="RenewalStatus.PaymentInProgress">
+  
+    <p class="intro-text" aria-label="Renewal status - payment in progress" tabindex="0">
+      Our records show that your payment and declarations have been made.<br /><br/> 
+      We are processing your payment, so please
+      allow 24 hours for your receipt to become available.
+    </p>
+  </div>
+
+  <div *ngSwitchCase="RenewalStatus.Complete">
+
+    <div *ngIf="renewal.isCash">
+      <p class="intro-text"  aria-label="Renewal status - payment made" tabindex="0">
+        Our records show that your payment and declarations have been made, so you do not need to take any further action.
+      </p>
+    </div>
+    <div *ngIf="renewal.isDD">
+      <p class="intro-text" aria-label="Renewal status - payment made" tabindex="0">
+        Our records show that you have already made your declarations, so you do not need
+        to take any further action.
+      </p>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="RenewalStatus.Pending">
+    <div *ngIf="renewal.isCash">
+      <p class="intro-text"  aria-label="Renewal status - pending" tabindex="0">
+        Our records show that you have not yet made your declarations and payment.
+      </p>
+    </div>
+    <div *ngIf="renewal.isDD">
+      <p class="intro-text" aria-label="Renewal status - pending" tabindex="0">
+        Our records show that you have not yet made your declarations.
+      </p>
+      <p class="intro-text" aria-label="Renewal status - due date" tabindex="0">
+        You must complete your declarations by {{renewal.windowCloseDate | date:'dd/MM/yyyy' }}.
+      </p>
+    </div>
+  </div>
+
+
+  <div *ngSwitchCase="RenewalStatus.DDPaymentPending">
+
+    <p class="intro-text" aria-label="Renewal status - payment pending" tabindex="0">
+      Our records show that you have already made your declarations, so you do not need
+      to take any further action.
+    </p>
+  </div>
+
+  <div *ngSwitchCase="RenewalStatus.DDDeclarationMissed">
+    <p class="intro-text" aria-label="Renewal status - declarations & payment required" tabindex="0">
+      Our records show that you have not yet made your declarations and payment.
+    </p>
+  </div>
+
+  <div *ngSwitchCase="RenewalStatus.DDPaymentFailed">
+    <p class="intro-text" aria-label="Renewal status - payment failed, action required" tabindex="0">
+      Your direct debit payment failed. You can still renew your registration, but you will need to make a declaration and pay
+      the fee using a debit or credit card.
+    </p>
+  </div>
+
+  <div *ngSwitchCase="RenewalStatus.RenewalDeadlineMissed">
+    <p class="intro-text" aria-label="Renewal status - renewal deadline missed" tabindex="0">
+      Our records show that you have not renewed your registration by the renewal date. Because of this, your entry will be removed
+      from the register after your registration has expired.
+    </p>
+    <p tabindex="0">To restore your entry to the register please send us a completed Application for Restoration form. You can download this
+      form at
+      <a class="external" target="_blank" title="link to registration restoration page on the GPhC main website" href="http: //pharmacyregulation.org/restoration">http://pharmacyregulation.org/restoration</a>
+    </p>
+  </div>
+<!--
+  <div *ngSwitchCase="RenewalStatus.Inconsistency">
+    <p class="intro-text">
+      We have found an inconsistency in the records we hold for you and we cannot go ahead with your renewal application.
+    </p>
+    <p>Please phone us on 020 3713 8000 or email <a href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a>.</p>
+  </div>
+
+  <div *ngSwitchCase="RenewalStatus.NotDue">
+    <p class="intro-text">
+      Our records show that your renewal is not due.
+    </p>
+    <p>
+      We will send you notice of your next renewal date at least three months before your registration expiry date.
+    </p>
+  </div>
+
+  <div *ngSwitchCase="RenewalStatus.NullData">
+    <p class="intro-text">
+      Currently we don’t need you to act regarding your registration renewal.
+    </p>
+    <p>
+      We will notify you annually when your renewal deadline is approaching.
+    </p>
+  </div>
+-->
+
+</div>

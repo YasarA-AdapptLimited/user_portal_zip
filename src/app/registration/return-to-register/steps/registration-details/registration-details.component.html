@@ -1,0 +1,108 @@
+<ng-template #content>
+    <h2 class="step-header" class="spacer">  {{title}}</h2>
+
+    <form #form="ngForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="registrationNumber">Registration number</label>
+                    <input type="text" [disabled]="true" name="registrationNumber" class="form-control" [(ngModel)]="details.registrationNumber"/>
+                </div>            
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="registrationStatus">Registration status</label>
+                    <input type="text" [disabled]="true" name="registrationStatus" class="form-control" [(ngModel)]="registrationStatus"/>
+                </div>            
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="previousAnnotation">Previous annotation</label>
+                    <input type="text" [disabled]="true" name="previousAnnotation" class="form-control" [(ngModel)]="previousAnnotation"/>
+                </div>            
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="registrationRoute">Registration route</label>
+                    <input type="text" [disabled]="true" name="registrationRoute" class="form-control" [(ngModel)]="registrationRoute"/>
+                </div>            
+            </div>
+        </div>
+
+        <div *ngIf="isEnglishCertificateRequired">
+            <h3>English language qualification</h3>
+            <div class="important">
+                We need to check that the pharmacy professionals returning or joining the register have sufficient English language competence to practise safely and effectively. 
+                If you first joined the register before 1 November 2016, or have not provided evidence before, you will need to include it with this application. 
+                You can <a href="https://www.pharmacyregulation.org/registration/new-language-and-revised-indemnity-requirements" target="_blank">find out more about this requirement on our website</a>.
+
+                <br/><br/>
+                You can provide evidence by:
+                <ul style="list-style-type: disc;">
+                    <li>
+                        uploading a copy of your IELTS certificate
+                    </li>
+                    <li>providing us with your Occupational English Test (OET) candidate number</li>
+                    <li>providing an employer reference by uploading <a href="https://www.pharmacyregulation.org/registration/new-language-and-revised-indemnity-requirements" target="_blank">a completed reference form available on our website</a></li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-radio-group [(ngModel)]="englishQualificationType" name="englishQualificationType" (ngModelChange)="onLangQualTypeChange($event)">
+                        <mat-radio-button *ngFor="let type of qualificationTypes" [aria-label]="type.name" [value]="type.val">{{type.name}}</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="englishQualificationType && isEnglishCertificationTypeIELTS">                
+                <div class="col-md-6">
+                    <div class="form-group">                                                
+                        <app-file-upload #ielts [existing]="IELTSAttachment" [type]="uploadType" [sessionId]="sessionId" [min]="1" [max]="1" [deleteUrl]="deleteUrl"
+                            [attachmentType]="attachmentType.IELTSCertificate" [maxMb]="8" (uploaded)="onDocUpload($event)" (deleted)="onDocDelete($event)"
+                            [disableDeleteButton]="false" [allowedFileTypes]="['.pdf', '.PDF', '.doc', '.DOC', '.docx', '.DOCX', '.jpg', '.JPG', '.jpeg', '.JPEG']"></app-file-upload>                        
+                    </div>           
+                </div>                                      
+            </div>
+
+            <div class="row" *ngIf="englishQualificationType && isEnglishCertificationTypeReference">                
+                <div class="col-md-6">
+                    <div class="form-group">                                                
+                        <app-file-upload #employerRef [existing]="employerRefAttachment" [type]="uploadType" [sessionId]="sessionId" [min]="1" [max]="1" [deleteUrl]="deleteUrl"
+                            [attachmentType]="attachmentType.EmployerReferenceForEnglishCertificate" [maxMb]="8" (uploaded)="onDocUpload($event)" (deleted)="onDocDelete($event)"
+                            [disableDeleteButton]="false" [allowedFileTypes]="['.pdf', '.PDF', '.doc', '.DOC', '.docx', '.DOCX', '.jpg', '.JPG', '.jpeg', '.JPEG']"></app-file-upload>                        
+                    </div>           
+                </div>                                      
+            </div>
+
+            <div class="row" *ngIf="englishQualificationType && isEnglishCertificationTypeOET">
+                <div class="col-md-6">
+                    <div class="form-group" [class.invalid]="(touched || oetNo.touched) && oetNo.invalid">                        
+                        <input required #oetNo="ngModel" type="text" name="OETNumber" class="mrgn-top-1em form-control" (blur)="onOETNumberChange($event)" [(ngModel)]="returnToRegisterDetails.oetCandidateNo" (blur)="propagate()"/>
+                    </div>            
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group" [class.invalid]="(touched || consent.touched) && consent.invalid">
+                        <mat-checkbox (change)="propagate()" [(ngModel)]="returnToRegisterDetails.confirmAccessOETPortal"
+                        name="consetConfirmation" #consent="ngModel" required>
+                        I confirm that I have given the General Pharmaceutical Council access to my 
+                        English language test results in the OET website.
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mrgn-btm-1em"></div>
+        </div>
+    </form>
+</ng-template>

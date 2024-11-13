@@ -1,0 +1,126 @@
+<app-banner [loading]="loading" [leftColWidth]="10" [class.in-progress]="step > 0">
+    <div *ngIf="!step" class="banner-left ">
+      <h1>Renewal</h1>
+      <p class="intro-text" >
+        Complete the process to renew your professional registration
+      </p>
+    </div>
+
+    <div *ngIf="currentStep?.form" class="banner-left fadein  col-lg-8 col-md-12">
+      <h1 class="sm-show">{{currentStep.name}}</h1>
+      <p class="intro-text" [innerHTML]="form.formBody">
+      </p>
+    </div>
+
+    <div *ngIf="currentStep?.payment" class="banner-left fadein  col-lg-8 col-md-12">
+      <div *ngIf="renewal.paymentMethod === RenewalPaymentMethod.PaymentCard">
+        <h1 class="sm-show">Declaration agreement &amp; Payment</h1>
+        <p class="intro-text">
+          To proceed to make your payment, first select your card type and click the checkbox to indicate that you agree, then click 'Continue'.
+        </p>
+      </div>
+
+      <div *ngIf="renewal.paymentMethod !== RenewalPaymentMethod.PaymentCard">
+        <h1 class="sm-show">Declaration agreement</h1>
+        <p class="intro-text">
+          To complete your declaration, click the checkbox to indicate that you agree, then click 'Continue'.
+        </p>
+      </div>
+    </div>
+
+    <div *ngIf="currentStep?.completed" class="banner-left fadein">
+      <h1 class="sm-show">Renewal complete</h1>
+      <p class="intro-text">Thank you, your declarations have now been received.</p>
+    </div>
+  </app-banner>
+
+ <!-- <button class="btn btn-default" (click)="failTest()">Fail Test</button>-->
+<div class="content spread renew fadein"  *ngIf="step === 0" >
+  <app-renewal-splash [renewal]="renewal" (onStart)="next()"></app-renewal-splash>
+</div>
+<div class="content">
+  <app-form-layout *ngIf="step > 0">
+    <section class="form-body renew in-progress slide" [class.started]="started">
+      <!--
+     <app-wizard-steps [steps]="steps" [step]="step" [sticky]="true"></app-wizard-steps>
+    -->
+      <app-declaration *ngIf="currentStep?.form" [form]="form" [revalidationCompleted]="renewal.revalidationCompleted">
+      </app-declaration>
+
+      <app-payment-old [renewal]="renewal" [config]="worldpayConfig" *ngIf="currentStep?.payment"></app-payment-old>
+
+      <section *ngIf="currentStep?.completed">
+          <div class="section-header-container">
+        <h2>Direct Debit
+          <span *ngIf="renewal.paymentMethod === RenewalPaymentMethod.DirectDebitAnnual">single</span>
+          <span *ngIf="renewal.paymentMethod === RenewalPaymentMethod.DirectDebitQuarterly">quarterly</span> payment
+        </h2>
+          </div>
+          <div class="section-body-container">
+        <p>
+          Please see your renewal notice to find out when your Direct Debit payment will be taken. Your receipt will be available to
+          download after
+          <span *ngIf="renewal.paymentMethod === RenewalPaymentMethod.DirectDebitAnnual">your Direct Debit payment has been taken.</span>
+          <span *ngIf="renewal.paymentMethod === RenewalPaymentMethod.DirectDebitQuarterly">the first Direct Debit payment has been taken.  The amount paid and amount still owing displayed on this receipt will be updated after each payment is taken.</span>
+        </p>
+        </div>
+      </section>
+
+      <app-collapsible [trigger]="showWorldpayDisabledMessage">
+          <div class="important">
+            <p style="font-size:1.2em; font-weight:bold">Worldpay redirect disabled</p>
+            <p>Cart ID: {{ cartId }}</p>
+          </div>
+        </app-collapsible>
+
+      <div class="row no-gutters button-section"  *ngIf="step > 0 && !currentStep?.completed">
+        <div class="col-4 text-center">
+          <button type="button" (click)="prev()" aria-label="Go back" class="btn btn-default btn-lg shadow btn-round" alt="Previous step" title="Previous step">
+             <i class="fa fa-arrow-left"></i>
+            </button>
+          <div class="btn-text">
+            Back
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="progress-container" *ngIf="currentStep?.form">
+            <app-progress-indicator  [light]="true" [item]="form" [size]="3"></app-progress-indicator>
+          </div>
+        </div>
+        <div class="col-4 text-center">
+          <div *ngIf="!saving">
+            <button type="button" aria-label="Continue" (click)="next()" [disabled]="!allowNext()" class="btn btn-primary btn-lg shadow btn-round"  title="Continue"><i class="fa fa-arrow-right"></i></button>
+            <div class="btn-text" [class.disabled]="!allowNext()">
+              Continue
+            </div>
+          </div>
+           <div *ngIf="saving" class="saving-declaration">
+             <app-spinner></app-spinner>
+            </div>
+        </div>
+      </div>
+
+
+
+    </section>
+
+ 
+ 
+
+  </app-form-layout>
+</div>
+<div *ngIf="renewal && worldpayConfig!== undefined">
+    <form [action]="worldpayConfig.paymentUrl" name="worldayForm" method="post" #worldpayForm>
+        <input type="hidden" name="paymentType" [value]="selectedCard" />
+        <input type="hidden" name="testMode" [value]="worldpayConfig.testMode" />
+        <input type="hidden" name="instId" [value]="worldpayConfig.instId" />
+        <input type="hidden" name="M_Callback" [value]="worldpayConfig.worldPayCallbackUrl" />
+        <input type="hidden" name="desc" [value]="'GPhC Renewal Fees'" />
+        <input type="hidden" name="currency" [value]="'GBP'" />
+        <input type="hidden" name="hideCurrency" [value]="true" />
+        <input type="hidden" name="amount" [value]="renewal.renewalFee" />
+        <input type="hidden" name="cartId" [value]="cartId" />
+      </form>
+</div>
+
+

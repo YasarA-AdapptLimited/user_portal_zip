@@ -1,0 +1,172 @@
+<form #form="ngForm" novalidate>
+  <div *ngIf="manualInput">
+    <p class="intro-text">Please fill out your address.</p>
+    <div class="form-group" [class.invalid]="line1.touched && line1.invalid">
+      <label for="lineOne">Line 1</label>
+      <input id="lineOne" #focus class="form-control" required #line1="ngModel" [(ngModel)]="address.line1" (blur)="propagate()"
+        inputValidator name="line1"/>
+      <app-collapsible [trigger]="line1.touched && line1.errors?.required === true">
+        <p class="form-error">
+          Line 1 is mandatory
+        </p>
+      </app-collapsible>
+      <app-collapsible [trigger]="(touched || line1?.touched)  && line1?.errors?.inputValidator">
+        <p class="form-error">
+          {{line1?.errors?.inputValidator}}
+        </p>
+      </app-collapsible>
+    </div>
+    <div class="form-group" [class.invalid]="line2.touched && line2.invalid">
+      <label for="lineTwo">Line 2</label>
+      <input id="lineTwo" class="form-control" #line2="ngModel" [(ngModel)]="address.line2" (blur)="propagate()" inputValidator name="line2" />
+      <app-collapsible [trigger]="(touched || line2?.touched)  && line2?.errors?.inputValidator">
+        <p class="form-error">
+          {{line2?.errors?.inputValidator}}
+        </p>
+      </app-collapsible>
+    </div>
+    <div class="form-group" [class.invalid]="line3.touched && line3.invalid">
+      <label for="lineThree">Line 3</label>
+      <input id="lineThree" class="form-control" #line3="ngModel" [(ngModel)]="address.line3" (blur)="propagate()" inputValidator name="line3" />
+      <app-collapsible [trigger]="(touched || line3?.touched)  && line3?.errors?.inputValidator">
+        <p class="form-error">
+          {{line3?.errors?.inputValidator}}
+        </p>
+      </app-collapsible>
+    </div>
+    <div class="form-group" [class.invalid]="town.touched && town.invalid">
+      <label for="townAddress">Town</label>
+      <input id="townAddress" class="form-control" required #town="ngModel" [(ngModel)]="address.town" (blur)="propagate()" name="town"
+        inputValidator />
+      <app-collapsible [trigger]="town.touched && (town.errors?.required === true)">
+        <p class="form-error">
+          Town is mandatory
+        </p>
+      </app-collapsible>
+      <app-collapsible [trigger]="(touched || town?.touched) && town?.errors?.inputValidator">
+        <p class="form-error">
+          {{town?.errors?.inputValidator}}
+        </p>
+      </app-collapsible>
+    </div>
+    <div class="form-group" [class.invalid]="county.touched && county.invalid">
+      <label for="county">County</label>
+      <input id="county" class="form-control" #county="ngModel" [(ngModel)]="address.county" (blur)="propagate()" inputValidator name="county" />
+      <app-collapsible [trigger]="(touched || county?.touched) && county?.errors?.inputValidator">
+        <p class="form-error">
+          {{county?.errors?.inputValidator}}
+        </p>
+      </app-collapsible>
+    </div>
+    <div class="form-group" [class.invalid]="postcode.touched && postcode.invalid">
+      <label for="code">Postcode</label>
+      <input id="code" class="form-control" required #postcode="ngModel" [(ngModel)]="address.postcode" (blur)="propagate()"
+        inputValidator name="postcode" />
+      <app-collapsible [trigger]="postcode.touched && (postcode.errors?.required === true)">
+        <p class="form-error">
+          Postcode is mandatory
+        </p>
+      </app-collapsible>
+      <app-collapsible [trigger]="(touched || postcode?.touched) && postcode?.errors?.inputValidator">
+        <p class="form-error">
+          {{postcode?.errors?.inputValidator}}
+        </p>
+      </app-collapsible>
+    </div>
+    <div class="form-group" [class.invalid]="country.touched && country.invalid">
+      <label  id="countryLabel">Country</label>
+      <select aria-labelledby="countryLabel" class="form-control" required #country="ngModel" [(ngModel)]="address.country"  (change)="propagate();onCountryChange()" name="country">
+        <option selected disabled value="">Please select country</option>
+        <option *ngFor="let x of countries" [value]="x.value">{{x.value}}</option>
+      </select>
+      <app-collapsible [trigger]="country.touched && (country.errors?.required === true)">
+        <p class="form-error">
+          Country is mandatory
+        </p>
+      </app-collapsible>
+      <app-collapsible [trigger]="(touched || country?.touched) && country?.errors?.inputValidator">
+        <p class="form-error">
+          {{country?.errors?.inputValidator}}
+        </p>
+      </app-collapsible>
+    </div>
+
+    <div class="form-group" *ngIf="country.value === uk_fullForm" [class.invalid]="(resident.touched && resident.invalid)">
+      <div class="labelWithTooltip">
+        <label id="residentLabel">In which country of the United Kingdom are you resident?</label>
+        <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showTooltip = !showTooltip" [static]='true'
+            class="headingIcon"></app-gphc-icon>
+      </div>
+      <div class="padding-7">
+      <app-collapsible [trigger]="showTooltip" class="help-block">
+        <div class="help-text">
+          <p>We will use this information in analysis of the register.</p>
+          <p>If you are resident of Northern Ireland, Isle of Man or Channel Islands, please select option 'Other'</p>
+        </div>        
+      </app-collapsible>
+      </div>
+      <select aria-labelledby="residentLabel" class="form-control" name="resident" required #resident="ngModel" [(ngModel)]="address.homeNation"  (change)="propagate()">      
+        <option *ngFor="let x of UKcountries" [value]="x.homeNation">{{x.country}}</option>
+      </select>
+  
+      <app-collapsible [trigger]="resident.touched && resident.errors?.required">
+        <p class="form-error">
+          Resident country is mandatory
+        </p>
+      </app-collapsible>
+    </div>
+
+
+  </div>
+
+  <div *ngIf="!manualInput">
+
+    <div *ngIf="lineOneEditable" class="form-group" [class.invalid]="(touched || line1.touched) && line1.invalid">
+      <label for="notManualLineOne">Line 1</label>
+      <input id="notManualLineOne" #focus class="form-control" required #line1="ngModel" [(ngModel)]="address.line1" (blur)="propagate()"
+        inputValidator name="line1" />
+      <app-collapsible [trigger]="(line1.touched) && (line1.errors?.required === true)">
+        <p class="form-error">
+          Line 1 is mandatory
+        </p>
+      </app-collapsible>
+      <app-collapsible [trigger]="(touched || line1?.touched) && line1?.errors?.inputValidator">
+        <p class="form-error">
+          {{line1?.errors?.inputValidator}}
+        </p>
+      </app-collapsible>
+    </div>
+    <div *ngIf="!lineOneEditable" class="form-group">
+      <label for="readOnlyLineOne">Line 1</label>
+      <input id="readOnlyLineOne" class="form-control" tabindex="-1" readonly [value]="address.line1" />
+    </div>
+    <div class="form-group" *ngIf="address.line2">
+      <label for="readOnlyLineTwo">Line 2</label>
+      <input id="readOnlyLineTwo" class="form-control" tabindex="-1" readonly [value]="address.line2" />
+    </div>
+    <div class="form-group" *ngIf="address.line3">
+      <label for="readOnlyLineThree">Line 3</label>
+      <input id="readOnlyLineThree" class="form-control" tabindex="-1" readonly [value]="address.line3" />
+    </div>
+    <div class="form-group" *ngIf="address.town">
+      <label for="readOnlyTown">Town</label>
+      <input id="readOnlyTown" class="form-control" tabindex="-1" readonly [value]="address.town" />
+    </div>
+    <div class="form-group" *ngIf="address.county">
+      <label for="readOnlyCounty">County</label>
+      <input id="readOnlyCounty" class="form-control" tabindex="-1" readonly [value]="address.county" />
+    </div>
+    <div class="form-group" *ngIf="address.postcode">
+      <label for="readOnlyPostCode">Postcode</label>
+      <input id="readOnlyPostCode" class="form-control" tabindex="-1" readonly [value]="address.postcode" />
+    </div>
+    <div class="form-group">
+      <label for="readOnlyCountry">Country</label>
+      <input id="readOnlyCountry" class="form-control" tabindex="-1" readonly [value]="address.country" />
+    </div>
+    <div *ngIf="(address?.country === uk_fullForm)" class="form-group">
+      <label for="readOnlyResidentCountry">In which country of the United Kingdom are you resident?</label>
+      <input id="readOnlyResidentCountry" class="form-control" tabindex="-1" readonly [value]="residentCountry()" />
+    </div>
+  </div>
+</form>

@@ -1,0 +1,5 @@
+<app-registrant-dashboard *ngIf="user.isRegistrant"></app-registrant-dashboard>
+<app-reviewer-dashboard *ngIf="user.isJustReviewer"></app-reviewer-dashboard>
+<app-student-dashboard *ngIf="user.isStudent"></app-student-dashboard>
+<app-prereg-dashboard *ngIf="user.isPrereg"></app-prereg-dashboard>
+<app-technician-dashboard *ngIf="user.isTechnicianApplicant"></app-technician-dashboard>

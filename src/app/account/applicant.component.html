@@ -1,0 +1,141 @@
+<section class="fadein" *ngIf="applicant">
+  <div class="row" *ngIf="!isAssessmentReport && !isAssessmentRegistration">
+    <div class="col-md-4 ">
+      <div class="form-group" [class.invalid]="(touched || salutation.touched) && salutation.invalid">
+        <label for="title">Title</label>
+
+        <input id="title" [readonly]="readonly" type="text" #salutationInput placeholder="Enter title..." class="form-control"
+          required [formControl]="salutation" [matAutocomplete]="auto">
+
+
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredSalutations | async" [value]="option.key">
+            {{ option.key }}
+          </mat-option>
+        </mat-autocomplete>
+
+
+        <app-collapsible [trigger]="salutation.touched && salutation.errors?.required">
+          <p class="form-error">
+            This is mandatory
+          </p>
+        </app-collapsible>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" *ngIf="isAssessmentRegistration">
+    <div class="col-md-4 ">
+      <div class="form-group">
+        <label for="salutationTitle">Title</label>
+        <input id="salutationTitle" readonly type="text" #salutationInput class="form-control" [formControl]="salutation">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredSalutations | async" [value]="option.key">
+            {{ option.key }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 ">
+      <div class="form-group">
+        <label for="firstName">First name</label>
+        <input id="firstName" type="text" class="form-control" readonly [value]="applicant.forenames" />
+      </div>
+    </div>
+    <div class="col-md-4 ">
+      <div class="form-group">
+        <label for="middleName">Middle name</label>
+        <input id="middleName" type="text" class="form-control" readonly [value]="applicant?.middleName || ''" />
+      </div>
+    </div>
+    <div class="col-md-4 ">
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input id="lastName" type="text" class="form-control" readonly [value]="applicant?.surname" />
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="isAssessmentRegistration">
+    <div class="col-md-6">
+      <div class="form-group ">
+        <label for="foundationTraineeNumber">Foundation trainee number</label>
+        <input id="foundationTraineeNumber" type="text" class="form-control" readonly [value]="applicant?.preEntryNumber" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="dateOfBirth">
+          Date of birth
+        </label>
+        <input id="dateOfBirth" type="text" class="form-control" readonly [value]="applicant?.dateOfBirth | dobDate" />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group " *ngIf="isAssessmentReport">
+    <label for="preEntryNumber">Pre entry number</label>
+    <div id="preEntryNumber" class="form-control readonly" [innerHTML]="applicant?.preEntryNumber"></div>
+  </div>
+
+  <div class="important registrant-message" *ngIf="!isStudent && !isTechnician && !isAssessmentRegistration">
+    <p>
+      This is your name as it will appear on the register, if your application is successful. Your name is an important
+      piece of information which we need to verify as part of your application, using your birth certificate.
+    </p>
+    <p>
+      If you want to register using a name other than the one on your birth certificate (because you have married, or
+      want to
+      use a version of your name which does not include all your given names as shown on your birth certificate, for
+      example), you
+      must formally tell us by filling in a statutory declaration form.
+    </p>
+    <p>
+      <a href="https://pharmacyregulation.org/pharmacists/registering-pharmacist/uk-qualified-pharmacist-registration"
+        target="_blank"> Read the application guidance to find out more</a>
+    </p>
+  </div>
+
+
+  <div class="row" *ngIf="!isAssessmentReport">
+    <div class="col-md-4" *ngIf="!isAssessmentRegistration">
+      <div class="form-group">
+        <label for="dob">
+          Date of birth
+        </label>
+        <input id="dob" type="text" class="form-control" readonly [value]="applicant?.dateOfBirth | dobDate" />
+      </div>
+    </div>
+
+    <div class="col-md-8 " *ngIf="!isTechnician && !isAssessmentRegistration">
+      <div class="form-group">
+        <label for="qualification">
+          Qualification
+        </label>
+        <input id="qualification" type="text" class="form-control" readonly [value]="applicant?.qualification?.courseName" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!isAssessmentReport">
+    <div class="col-md-4 " *ngIf="!isAssessmentRegistration">
+      <div class="form-group" [class.invalid]="touched && noNationality">
+        <label for="nationality">
+          Nationality
+        </label>
+        <select id="nationality" [disabled]="readonly" class="form-control" [(ngModel)]="applicant.equalityDiversity.nationality"
+          (ngModelChange)="propagateChange(applicant)">
+          <option [value]="zero" selected>Select nationality...</option>
+          <option *ngFor="let option of nationalities" [value]="option.id">{{option.name}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+
+</section>

@@ -1,0 +1,15 @@
+<div class="card card-non" 
+  [class.valid]="question.isValid"
+  [class.warning]="question.wrongAlternative || question.hasWrongAlternative"
+>
+  <label [attr.for]="question.id" class="card-header" [innerHTML]="question.title"></label>
+  <div class="card-block" role="region">
+    <div class="form-group">
+      <p *ngIf="question.body" [innerHTML]="question.body" aria-label="Question body" tabindex="0"></p>
+      <app-form-question-control 
+      [form]="form" 
+      [readonly]="readonly"
+      [question]="question"></app-form-question-control>
+    </div>
+  </div>
+</div>

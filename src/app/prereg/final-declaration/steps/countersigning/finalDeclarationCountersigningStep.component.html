@@ -1,0 +1,187 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>Completing your final progress report</div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showTooltip = !showTooltip" [static]='true'
+        class="headingIcon"></app-gphc-icon>
+    </h2>
+  </div>
+
+  <div class="row spacing mb-4">
+    <div class="col-md-12">
+      <app-collapsible [trigger]="showTooltip" class="help-block">
+        <div class="help-text">
+          <p>
+            The pharmacist you chose to complete this report must be your designated supervisor, who is currently responsible for your
+            training.
+          </p>
+          <p>
+            The designated supervisor you nominate to complete this report will receive a notification through their myGPhC account that
+            your report
+            has been sent to them to sign. You will receive a notification once your designated supervisor has completed your report.
+          </p>
+          <p>
+            Your designated supervisor will be asked to make a final assessment on your competence and whether you or not you are fit to
+            join the
+            register.
+          </p>
+          <p>
+            You can only send your final declaration to one designated supervisor to complete. If you have more than one designated supervisor, the one
+            who
+            completes this final declaration takes the ultimate responsibility for the decision.
+          </p>
+          <p>
+            If your final declaration is marked as satisfactory, you will be able to complete the application to
+            register as a
+            pharmacist if you choose to.
+          </p>
+          <p>
+            If your progress report is marked as unsatisfactory, you will be able to request another final declaration
+            when your
+            designated supervisor thinks this is appropriate.
+          </p>
+          <p>
+            Your designated supervisor will receive a notification to let them know your report has been submitted to them, but it is
+            your
+            responsibility to make sure they complete the report.
+          </p>
+        </div>
+      </app-collapsible>
+    </div>
+  </div>
+
+  <section class="countersigning">
+
+    <app-collapsible [trigger]="selectedPharmacist !== undefined">
+
+      <div>
+        <h3>
+          <!--<div>Select your tutor to complete your progress report</div>-->
+          <div>Completing your progress report</div>
+
+        </h3>
+      </div>
+
+
+
+      <div class="important " *ngIf="!awaitingCountersigning && !countersigned && !sending">
+        <p class="m-0">
+          Please select the designated supervisor from the list below who is overseeing your training and is completing your final
+          progress report.
+        </p>
+      </div>
+      <section>
+        <div class="row">
+          <div class="col-md-9"><label for="selectTutor" class="ml-2">Designated supervisor</label></div>
+          <div class="col-md-3">
+            <span style="float:right;padding-bottom: 10px;">
+              <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="subHeaderTooltip = !subHeaderTooltip"
+                [static]='true' class="headingIcon"></app-gphc-icon>
+            </span>
+          </div>
+        </div>
+
+        <div class="row spacing mb-4">
+          <div class="col-md-12">
+            <app-collapsible [trigger]="subHeaderTooltip" class="help-block">
+              <div class="help-text">
+                <p>
+                  You are assessed against the foundation performance standards so you can show that you can carry
+                  out specified
+                  tasks in a particular way. For further information please refer to the <a
+                    href="https://www.pharmacyregulation.org/preregmanual" target="_blank" style="color:#fff;"><span
+                      class="bold-underline">foundation training manual.</span></a>
+                </p>
+
+              </div>
+            </app-collapsible>
+          </div>
+        </div>
+
+
+        <div class="form-group col-md-12">
+          <div class="form-control">
+            <mat-select id="selectTutor" [(ngModel)]="selectedPharmacist" placeholder="Select a designated supervisor" (ngModelChange)="validate()"
+              [disabled]="awaitingCountersigning || countersigned">
+              <mat-option *ngFor="let tutor of application?.tutorDetails" [value]="tutor.registrationNumber">
+                {{ tutor.registrationNumber }} - {{ tutor.name }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+
+        <div style="padding: 20px" *ngIf="!awaitingCountersigning && !countersigned && !sending">
+          <button class="btn-lg btn-block btn-primary" [disabled]="!selectedPharmacist"
+            (click)="sendForCountersigning()">Send your progress report for completion</button>
+        </div>
+        <app-collapsible [trigger]="serverErrors && !!serverErrors.length">
+          <p class="form-error-block" *ngFor="let error of serverErrors">
+            {{ 'Server validation error: ' + error.errors.join(',') }}
+          </p>
+        </app-collapsible>
+
+
+      </section>
+
+    </app-collapsible>
+
+    <!--<app-collapsible [trigger]="countersigned || awaitingCountersigning || sending">
+      <div class="important">
+        <p>
+          You will not be able to make an application to sit the registration assessment until your tutor has
+          completed your 39 week progress report and marked it as satisfactory. It is your responsibility to
+          ensure that your tutor logs into their myGPhC account and completes your 39 week progress report.
+        </p>
+      </div>
+    </app-collapsible>-->
+
+    <app-collapsible [trigger]="countersigned || awaitingCountersigning || sending">
+      <div class="countersign-status form-control">
+
+        <ng-container *ngIf="(sending || recalling) else countersignTemplate">
+          <i class="fa fa-circle-o-notch fa-spin fa-fw loading" style="font-size:4em"></i>
+          <div class="message">
+            <span *ngIf="recalling">Recalling application...</span>
+            <span *ngIf="sending"> Sending to selected pharmacist...</span>
+          </div>
+        </ng-container>
+
+        <ng-template #countersignTemplate>
+          <ng-container *ngIf="countersigned else awaitingTemplate">
+            <i class="fa fa-check-circle success"></i>
+            <div class="message">
+              <p>
+                Your progress report has now been completed.
+              </p>
+              <p>
+                Please click on the blue arrow below to review the report
+              </p>
+
+            </div>
+          </ng-container>
+        </ng-template>
+
+
+
+        <ng-template #awaitingTemplate>
+
+
+          <i class="fa fa-clock-o"></i>
+          <div class="message">
+            Your progress report is now waiting to be completed
+          </div>
+          <button (click)="recall()" class="btn btn-lg btn-block btn-primary">
+            Recall progress report from selected designated supervisor
+          </button>
+
+        </ng-template>
+
+      </div>
+    </app-collapsible>
+
+
+
+
+
+  </section>

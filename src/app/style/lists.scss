@@ -1,0 +1,53 @@
+.help-text ul {
+  
+  list-style-type: disc;
+  li {
+    font-size: 18px;
+  }
+}
+
+ul.documents {
+  list-style-type: none;
+   margin: 0;
+   padding: 0;
+   margin-top: 20px;
+   li {
+    border-bottom: 3px solid $gphc-background;
+   
+    &:hover, &:focus {
+      border-bottom-color: $gphc-accent-yellow;
+      color: $gphc-purple;
+      a {
+        color: $gphc-purple !important;
+      }
+    }
+   a {
+     cursor: pointer;
+     display: flex;
+     border: none !important;
+     border-bottom: 5px solid $gphc-background;
+     transition: 200ms linear background-color;
+     padding:7px 5px 7px 5px;
+     padding-bottom: 7px !important;
+     align-items: center;
+   
+
+     .filename {
+       flex-grow: 1;
+     }
+
+     i {
+      font-size: 1.5em;
+      &:not(.fa-download) {
+        margin-right: 10px;
+      }
+      
+    }
+   }
+  }
+
+}
+
+
+
+

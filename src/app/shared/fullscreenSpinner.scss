@@ -1,0 +1,32 @@
+@import '../style/variables';
+
+:host {
+
+  .wrapper {
+    position: absolute;
+    top:0;
+    display: table;
+    height:100%;
+    width:100%;
+    text-align: center;
+    .spinner-container {
+      z-index:99999;
+      display: table-cell;
+      vertical-align: middle;
+    }
+   
+    .spinner {
+      margin: 0 auto;
+      background: white;
+      color: $gphc-blue;
+      border-radius: 50%;
+      width: 120px; 
+      height: 120px;
+     
+      &.large {
+        width:150px;height:150px;font-size:1.2em;
+      }
+    }
+  }
+
+}

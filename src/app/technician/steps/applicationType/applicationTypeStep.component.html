@@ -1,0 +1,71 @@
+<ng-template #content>
+  <div class="header mb-4">
+    <h2>
+      <div>Application type</div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showHelp = !showHelp" [static]='true'>
+      </app-gphc-icon>
+    </h2>
+  </div>
+
+  <app-collapsible [trigger]="showHelp" class="help-block">
+    <div class="row help-text mb-2">
+      <div class="col-md-12">
+        <p>
+          To register as a pharmacy technician with recognised UK qualifications you will need to successfully complete:
+        </p>
+        <ul>
+          <li>
+            <b>either</b> one of the recognised competency-based qualifications <b>and</b> one of the recognised knowledge-based 
+            qualifications listed in the criteria, <b>or</b> a combined competency qualification, also listed in the criteria
+          </li>
+          <li>
+            a minimum of two years’ work-based experience in the UK, or a shorter period if either:
+            <ul style="list-style-type: bullet">
+              <li>
+                you have qualified as a pharmacy technician or a pharmacist in a country outside the UK; or
+              </li>
+              <li>
+                you have completed a recent period of pre-registration pharmacist training in the UK.
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </app-collapsible>
+
+
+
+  <section class="criteria-for-registration">
+    <form>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="important">Tell us how you meet the criteria for registration so that we can assess your
+            application appropriately</div>
+          <div class="ml-1">
+
+            <div class="form-group question" [class.invalid]="(touched || appType.touched) && appType.invalid">
+              <p><label for="completed" matLabel>I have completed:</label></p>
+              <mat-radio-group aria-label="Yes or no selection" name="applicationType" #appType="ngModel" required
+                [(ngModel)]="application.activeForm.applicationType" (ngModelChange)="update($event)">
+                <mat-radio-button [value]="ApplicationProcessType.TwoYears" name="Yes" type="radio" style="width: 80%;">
+                  <span>
+                    recognised UK qualifications and a two-year period of relevant work
+                    experience
+                  </span>
+                </mat-radio-button>
+                <mat-radio-button [value]="ApplicationProcessType.LessThanTwoYears" name="No" type="radio" style="width: 80%;">
+                  <span>
+                    recognised UK qualifications, a reduced period of work experience, 
+                    and either a non-UK pharmacy qualification or a recent period of pre-registration pharmacist training in the UK.
+                  </span>
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+</ng-template>

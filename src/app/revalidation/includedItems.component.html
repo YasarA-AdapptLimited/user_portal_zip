@@ -1,0 +1,41 @@
+<div class="items" *ngIf="(requiredCount > 0 && !readonly) || items.length > 0"
+  [class.warning]="items.length > requiredCount" [class.completed]="isCompleted && (items.length === requiredCount)">
+  <div class="row table-row header  title-row no-gutters">
+    <div class="col-8">
+      {{title}} <span *ngIf="readonly">({{items.length}})</span>
+    </div>
+    <div class="col-2 item-count" *ngIf="!readonly">
+      <span [class.invalid]="items.length > requiredCount" [appTooltip]="itemCountTooltip">
+        {{items.length}}/{{requiredCount}}
+      </span>
+    </div>
+
+    <div class="col-2" *ngIf="!readonly">
+      <app-gphc-icon [tooltip]="createTooltip" [iconType]="'create'" [offset]="-13" [offsetTop]="-30" [label]="Create"
+        (click)="create()"></app-gphc-icon>
+    </div>
+  </div>
+
+  <div class="row table-row child-row no-gutters" *ngFor="let item of items; let i = index">
+    <div class="col-8">
+      <i class="fa fa-level-up"></i>
+
+      <button [appTooltip]="itemTitleTooltip" class="item-title btn-link" (click)="open(item)">
+        {{item.title}}</button>
+    </div>
+
+    <div class="col-2 clickable progress-indicator" *ngIf="!readonly">
+      <app-progress-indicator [tooltip]="getItemTooltip(item)" [percent]="true" (click)="toggleCompleted(item)"
+        [noLabel]="true" [item]="item"></app-progress-indicator>
+    </div>
+    <div class="col-2 text-right" *ngIf="!readonly">
+      <button name="Exclude item" aria-label="Exclude item" class="btn-abs icon-button-light" [appTooltip]="excludeTooltip"
+        (click)="toggleIsPartOfSubmission(item)">
+        <i class="fa fa-2x fa-minus-square-o"></i>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="items.length > requiredCount" style="padding: 5px">
+    <div class="form-error pad-left" [innerHTML]="overMaxWarning">
+    </div>
+  </div>

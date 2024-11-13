@@ -1,0 +1,36 @@
+<h2 class="header" mat-dialog-title>
+  Your communication preferences</h2>
+
+<mat-dialog-content>
+
+  <app-comms-preferences *ngIf="preference && saveState!==SaveState.saved" [comms]="preference.comms" [saveState]="saveState"
+    (saveStateChange)="onSaveStateChange($event)"></app-comms-preferences>
+  <p *ngIf="saveState===SaveState.untouched" class="intro-text">You can update your preferences at any time in the
+    <em>Account</em> section</p>
+
+  <p *ngIf="saveState===SaveState.saved" class="intro-text" style="padding-top:20px; padding-bottom: 20px">Thank you. Your preferences have been saved
+  </p>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+  <button *ngIf="!saving && saveState===SaveState.untouched" class="btn btn-primary btn-lg" (click)="trySave()">
+    Set preferences</button>
+
+  <button *ngIf="!saving && saveState===SaveState.saved" class="btn btn-primary btn-lg btn-close" (click)="close()">
+    OK</button>
+
+  <div *ngIf="!saving && saveState===SaveState.confirmationRequired" style="display: flex;width: 100%;padding-left:20px;padding-right: 20px">
+
+    <button class="btn btn-primary btn-lg " (click)="change()">
+      Yes</button>
+    <button *ngIf="saveState===SaveState.confirmationRequired" class="btn btn-primary btn-lg" (click)="confirm()">
+      No</button>
+
+  </div>
+
+  <button *ngIf="saving" class="btn btn-primary btn-lg">Saving your preferences...</button>
+
+  <mat-progress-bar aria-label="loading"  style="bottom:-12px;" *ngIf="saving" mode="indeterminate" color="primary"></mat-progress-bar>
+</mat-dialog-actions>

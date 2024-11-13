@@ -1,0 +1,212 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>
+        Your details
+      </div>
+    </h2>
+  </div>
+
+  <form #form="ngForm" novalidate>
+  <section>
+
+    <div class="row">
+      <div class="col-md-9">
+        <div class="form-group">
+          <label>Full name</label><br />
+          <div type="text" class="form-control readonly" [innerHTML]="registrantFullName"></div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="form-group" [class.invalid]="(touched || registrantNameConfirmation.touched) && registrantNameConfirmation.invalid">
+
+          <label for="isUserNameConfirmed">Is this the name you wish to be registered under if your
+            application is
+            successful?</label>
+
+          <br />
+          <mat-radio-group
+            aria-label="Is this the name you wish to be registered under if your application is successful?"
+            [(ngModel)]="registrantDetails.confirmUserNameChange" name="registrantNameConfirmation" required
+            (ngModelChange)="update()" #registrantNameConfirmation="ngModel" ngModel>
+            <mat-radio-button aria-label="confirm registrant name as true" [value]="true">Yes</mat-radio-button>
+            <mat-radio-button aria-label="confirm registrant name as false" [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+
+          <app-collapsible
+            [trigger]="(registrantNameConfirmation.value !== null && (touched || registrantNameConfirmation.touched) && registrantNameConfirmation.errors?.required)">
+            <p class="form-error">
+              This is mandatory
+            </p>
+          </app-collapsible>
+        </div>
+        <!--file upload when user select option 'No' for name -->
+
+        <app-collapsible [trigger]="registrantNameConfirmation.value === false">
+          <!--<p class="important">
+            If your name has changed since you were last registered, please enter your new name in the fields below.
+          </p>-->
+          <p class="important">
+            Enter your name in the boxes below how you would like it to appear on the register. 
+            You must provide  evidence of your official name change, by uploading a copy of an official document 
+            which confirms the change in your name for example, a marriage certificate, civil partnership certificate,
+             deed poll, decree absolute, or final order.</p>
+        <section>
+            <div class="row">
+              <div class="col-md-4 ">
+                <div class="form-group" [class.invalid]="(touched || salutation.touched) && salutation.invalid">
+                  <label for="title">Title</label>
+          
+                  <input [readonly]="readonly" type="text" #salutationInput placeholder="Enter title..." class="form-control"
+                    required [formControl]="salutation" [matAutocomplete]="auto" [value]="titleName" (blur)="onTitleChange($event)" id="title">                  
+                    <mat-autocomplete #auto="matAutocomplete" >
+                    <mat-option *ngFor="let option of filteredSalutations | async" [value]="option.key">
+                      {{ option.key }}
+                    </mat-option>
+                  </mat-autocomplete>
+          
+          
+                  <app-collapsible [trigger]="salutation.touched && salutation.errors?.required">
+                    <p class="form-error">
+                      This is mandatory
+                    </p>
+                  </app-collapsible>
+                  <app-collapsible [trigger]="titleError">
+                    <p class="form-error">
+                     Please select a valid title
+                    </p>
+                  </app-collapsible>
+          
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4 ">
+                <div class="form-group" [class.invalid]="(touched || forename.touched) && forename.invalid">
+                  <label>First name</label>
+                  <input type="text" class="form-control" [(ngModel)]="registrantDetails.forenames" #forename="ngModel" 
+                  (blur)="propagate()" name="forename" required/>
+                </div>
+                <app-collapsible
+                [trigger]=" (touched || forename.touched) && forename.errors?.required === true">
+                <p class="form-error">
+                  This is mandatory
+                </p>
+              </app-collapsible>
+              </div>
+              <div class="col-md-4 ">
+                <div class="form-group" >
+                  <label>Middle name</label>
+                  <input type="text" class="form-control" [(ngModel)]="registrantDetails.middleName" name="middleName" />
+                </div>
+                <app-collapsible
+                [trigger]="(registrantNameConfirmation.value !== null && (touched || registrantNameConfirmation.touched) && registrantNameConfirmation.errors?.required)">
+                <p class="form-error">
+                  This is mandatory
+                </p>
+              </app-collapsible>
+              </div>
+              <div class="col-md-4 ">
+                <div class="form-group" [class.invalid]="(touched || surname.touched) && surname.invalid">
+                  <label>Last name</label>
+                  <input type="text" class="form-control" [(ngModel)]="registrantDetails.surname" #surname="ngModel"
+                  (blur)="propagate()" name="surname" required/>
+                </div>
+                <app-collapsible
+                [trigger]="(touched || surname.touched) && surname.errors?.required === true">
+                <p class="form-error">
+                  This is mandatory
+                </p>
+              </app-collapsible>
+              </div>
+            </div>
+         
+          </section>
+          <section class="supporting-documents">
+
+            <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+              [touched]="touched" (uploaded)="onUploaded($event)" [isRTR]="true" [attachments]="attachments"
+              [attachmentType]="AttachmentType.OfficialDocummentConfirmingNameChange" min="1" max="1" [mandatory]="true"
+              [requireCertifier]="false" title="Image of official document confirming name change">
+            </app-supporting-documents-item>
+
+          </section>
+
+
+
+        </app-collapsible>
+
+
+        <!--ends-->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>
+                Date of birth
+              </label>
+              <input type="text" class="form-control" readonly
+                [value]="application.personalDetails?.dateOfBirth | dobDate" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <section>
+      <div class="header">
+        <h3 [class.error]="touched && contactValid === false">
+          <div>
+            Contact details
+          </div>
+        </h3>
+      </div>
+      <app-collapsible [trigger]="true" class="help-block">
+        <div class="help-text">
+          <p>
+            If your contact details are incorrect, update them in the 'Account' tab.
+          </p>
+        </div>
+      </app-collapsible>
+      <div class="limit-width">
+        <app-contact-edit #contact [emailNotRequire]="true" [phoneNumberReadonly]="true"
+          [(ngModel)]="application.personalDetails.contact" (ngModelChange)="update()" name="contact">
+        </app-contact-edit>
+      </div>
+    </section>
+
+  </section>
+
+
+  <section>
+    <div class="header">
+      <h3 [class.error]="touched && contactValid === false">
+        <div>
+          Home address
+        </div>
+      </h3>
+    </div>
+    <app-collapsible [trigger]="true" class="help-block">
+      <div class="help-text">
+        <p>
+          If your address details are incorrect, update them in the 'Account' tab.
+        </p>
+      </div>
+    </app-collapsible>
+    <div class="limit-width">
+      <app-address [address]="application.personalDetails.address"></app-address>
+    </div>
+  </section>
+</form>
+
+
+
+</ng-template>

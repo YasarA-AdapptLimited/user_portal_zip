@@ -1,0 +1,42 @@
+@import './variables';
+.fa-level-up {
+  transform: rotateZ(90deg);
+  font-size: 1.5em;
+  color: $gphc-background;
+  margin-right: 10px;
+  margin-left: 5px;
+  float: left;
+  margin-top: -2px;
+  padding-left:2px;
+}
+
+
+::ng-deep {
+  .status-icon {    
+    padding-bottom: 15px;
+    min-height: 165px;
+    display: block;
+  }
+}
+
+i.completed {
+  color: $gphc-aqua;
+  font-size: 28px;
+  border-radius: 50%;
+
+  &.completed-lg {
+      font-size: 173px;
+  }
+}
+
+.warning-icon, .warning-text {
+  color: $gphc-accent-orange !important;
+}
+
+::ng-deep fa.letter {
+  color: $gphc-aqua;
+  font-size: 153px;
+  @media (max-width: 767px){
+    font-size:123px
+  }
+}

@@ -1,0 +1,49 @@
+.padding-0 {
+  padding: 0px;
+
+  .col-md-6 {
+    display: inline-block;
+  }
+}
+
+.float-right {
+  float: right;
+}
+
+.mrg-btm-55{
+  margin-bottom: 55px;
+}
+
+::ng-deep {
+  app-gphc-icon {
+    display: block;
+
+    button.gphc-icon {
+      right: 20px !important;
+      font-size: 23px !important;
+      position: absolute;
+
+      &.cancel {
+        #buttonLabel {
+          display: none;
+        }
+      }
+
+      &.disabled .circle{
+        pointer-events: none;
+      }
+    }
+
+    &.deleteIcon {
+      position: absolute;
+      right: 60px;
+    }
+
+    &.iconDisabled {
+      div.gphc-icon-wrapper,
+      button.gphc-icon {
+        pointer-events: none;
+      }
+    }
+  }
+}

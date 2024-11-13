@@ -1,0 +1,49 @@
+<div [ngSwitch]="question.type">
+
+  <app-form-alternative [readonly]="readonly" *ngSwitchCase="type.Alternative" [question]="question" [form]="form"></app-form-alternative>
+
+  <div *ngSwitchCase="type.Email">
+    <input [readonly]="readonly" [class.error]="question.isValid===false" [placeholder]="question.title" type="email" class="form-control"
+      [name]="question.id" [id]="question.id" #control [value]="question.answer? question.answer : ''" (blur)="update(control.value)"
+    />
+
+    <app-collapsible [trigger]="question.isValid===false && !!question.answer">
+      <p class="form-error">
+        Please check that you have entered the email address correctly
+      </p>
+    </app-collapsible>
+  </div>
+
+  <input [readonly]="readonly" [class.error]="question.isValid===false" *ngSwitchCase="type.ShortText" [placeholder]="question.title"
+    type="text" class="form-control" [name]="question.id" [id]="question.id" #control [value]="question.answer? question.answer : ''"
+    (blur)="update(control.value)" />
+
+  <input [readonly]="readonly" [class.error]="question.isValid===false" *ngSwitchCase="type.LongText" [placeholder]="question.title"
+    type="text" class="form-control" [name]="question.id" [id]="question.id" #control [value]="question.answer? question.answer : ''"
+    (blur)="update(control.value)" />
+
+  <app-text-editor *ngSwitchCase="type.FreeText" (contentChanged)="update($event)" (infoChanged)="onInfoChanged($event)" [error]="question.isValid===false"
+    [content]="question.answer" [readonly]="readonly" [description]="question.title" [hasFocus]="hasFocus" [inputId]="question.id"></app-text-editor>
+
+  <input [readonly]="readonly" [class.error]="question.isValid===false" *ngSwitchCase="type.Bool" type="checkbox" class="form-control"
+    [name]="question.id" [value]="question.answer" (change)="update(question.answer)" />
+
+  <div *ngSwitchCase="type.Number">
+    <div style="width: 100px;">
+      <input [readonly]="readonly" [class.error]="question.isValid===false" type="text" class="form-control" [min]="question.min"
+        [max]="question.max" [name]="question.id" [(ngModel)]="question.answer" [placeholder]="question.min + '-' + question.max"
+        (blur)="update(question.answer)" (ngModelChange)="update(question.answer)" />
+    </div>
+
+  </div>
+
+  <div *ngSwitchCase="type.Date">
+    <app-utc-date-picker [question]="question" [readonly]="readonly" [name]="question.id" [min]="question.min" [max]="question.max" [error]="question.isValid===false"
+      [(ngModel)]="question.answer" (ngModelChange)="update(question.answer)">
+    </app-utc-date-picker>
+  </div>
+</div>
+
+<app-collapsible [trigger]="question.errors.length">
+  <p class="form-error" *ngFor="let error of question.errors">{{error}}</p>
+</app-collapsible>

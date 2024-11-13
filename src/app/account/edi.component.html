@@ -1,0 +1,66 @@
+<section>
+  <h3 [class.error]="touched && !valid.Ethnicity" aria-label="Ethnicity" tabindex="0">Ethnicity</h3>
+  <div class="form-group">
+    <mat-radio-group role="radiogroup" [(ngModel)]="selection.ethnicity.selected" name="ethnicity" (ngModelChange)="ethnicitySelected($event)">
+      <div *ngFor="let item of service.options.ethnicity" role="region">
+        <h4 [attr.aria-label]="item.group" tabindex="0">{{item.group}}</h4>
+        <div class="row" style="margin-bottom: 20px">
+          <div *ngFor="let option of item.subGroups" class="col-md-4 keep-padding">
+            <mat-radio-button [aria-label]="option.name" role="radio" tabindex="0" [value]="option.id">{{option.name}}
+            </mat-radio-button>
+          </div>
+        </div>
+      </div>
+    </mat-radio-group>
+  </div>
+  <app-collapsible [trigger]="service.isOtherEthnicity(selection.ethnicity.selected)">
+    <div class="form-group limit-width" [class.invalid]="(touched || ethnicityOther.touched) && ethnicityOther.invalid">
+      <label for="ethnicity-other">Please specify</label>
+      <input [required]="service.isOtherEthnicity(selection.ethnicity.selected)" #ethnicityOtherInput #ethnicityOther="ngModel"
+        class="form-control" name="ethnicity-other" (blur)="propagate()" id="ethnicity-other" type="text" [(ngModel)]="selection.ethnicity.other"
+      />
+      <app-collapsible [trigger]="ethnicityOther.touched && ethnicityOther.errors?.required">
+        <p class="form-error">
+          This is mandatory
+        </p>
+      </app-collapsible>
+    </div>
+  </app-collapsible>
+</section>
+
+<section *ngFor="let section of service.options.sections; let i = index">
+  <h3 [class.error]="touched && !valid[section.name]" [attr.aria-label]="section.name" tabindex="0">{{section.name | caseSplit}}</h3>
+  <div>
+    <mat-radio-group role="radiogroup" [(ngModel)]="selection.sections[section.name].selected" (ngModelChange)="sectionSelected(section, i, $event)"
+      [name]="section.name" *ngIf="section.groups.length <= 10">
+      <div class="row">
+        <div *ngFor="let option of section.groups" role="radio" class="col-md-4 keep-padding">
+          <mat-radio-button [aria-label]="option.name" [value]="option.id">{{option.name}}
+          </mat-radio-button>
+        </div>
+      </div>
+    </mat-radio-group>
+    <!-- this is the nationality section -->
+    <div *ngIf="section.groups.length > 10" class="limit-width">
+      <select class="form-control" [name]="section.name" [(ngModel)]="selection.sections[section.name].selected" (ngModelChange)="sectionSelected(section, i, $event)">
+        <option [value]="0" selected>Select {{ section.name.toLowerCase() }}...</option>
+        <option *ngFor="let option of section.groups" [value]="option.id">{{option.name}}</option>
+      </select>
+    </div>
+    <!-- This is where the nationality section ends. -->
+    <app-collapsible [trigger]="service.isOtherSection(section, selection.sections[section.name].selected)">
+      <div class="form-group limit-width">
+        <label [for]="section.name + 'other'">Please specify</label>
+        <input [required]="service.isOtherSectionMandatory(section, selection.sections[section.name].selected)" #other="ngModel" #otherInput
+          class="form-control" [name]="section.name + 'other'" (blur)="propagate()" [id]="section.name + 'other'" type="text"
+          [(ngModel)]="selection.sections[section.name].other" />
+
+        <app-collapsible [trigger]="other.touched && other.invalid && other.errors?.required">
+          <p class="form-error">
+            This is mandatory
+          </p>
+        </app-collapsible>
+      </div>
+    </app-collapsible>
+  </div>
+</section>

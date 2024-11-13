@@ -1,0 +1,13 @@
+@import '../style/variables';
+
+:host {
+
+  input.error {
+    border-color: $error;
+  }
+
+  .fa-calendar {
+    color: $gphc-blue;
+    font-size: 1.3em;
+  }
+}

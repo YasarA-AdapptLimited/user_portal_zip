@@ -1,0 +1,102 @@
+<section>
+  <div class="col-md-12">
+    <app-collapsible [trigger]="!isCombinedQualification">
+      <div class="row">
+        <div class="col-xl-8 ml-3 col-md-12 col-xs-12">
+          <h4 class="mb-4">
+            Knowledge 
+          </h4>
+          <div class="form-group">
+            <label for="chooseCourseProvider">Course provider</label>
+            <div class="form-control readonly">
+              <mat-select [(ngModel)]="educationDetails.knowledge.qualificationId" placeholder="Choose a course provider"
+                name="qualificationSelecton" required #knowledge="ngModel" [disabled]="true">
+                <mat-option *ngFor="let knowledgeQualification of knowledgeQualifications"
+                  [value]="knowledgeQualification.id">
+                  {{ knowledgeQualification.courseName }}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-12 col-xl-offset-2 col-md-12 col-xs-12 ml-4">
+            <div class="form-group" >
+              <app-daterange 
+              [readonly]="true"
+              [fromDate]="educationDetails.knowledge.dateCommenced"
+              [toDate]="educationDetails.knowledge.dateAwarded"
+              ></app-daterange>
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-xl-8 ml-3 col-md-12 col-xs-12">
+                <h4 class="mb-4">Competency </h4>
+                <div class="form-group">
+                  <label for="chooseCourseProvider">Course provider</label>
+                  <div class="form-control readonly">
+                    <mat-select 
+                      [(ngModel)]="educationDetails.competency.qualificationId" 
+                      placeholder="Choose a course provider"
+                      name="competencyTypeSelection"
+                       required #competency="ngModel"
+                       [disabled]="true"
+                      >
+                      <mat-option *ngFor="let competencyQualification of competencyQualifications" [value]="competencyQualification.id">
+                        {{ competencyQualification.courseName }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-12 col-md-12 col-xs-12 ml-4">
+                <div class="form-group">
+                  <app-daterange 
+                  [readonly]="true"
+                  [fromDate]="educationDetails.competency.dateCommenced"
+                  [toDate]="educationDetails.competency.dateAwarded"
+                  ></app-daterange>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </app-collapsible>
+  
+    <!--combined-->
+    <app-collapsible [trigger]="isCombinedQualification">
+      <div class="row">
+        <div class="col-xl-8 ml-3 col-md-12 col-xs-12">
+          <h4 class="mb-4">
+            Combined Qualification 
+          </h4>
+          <div class="form-group">
+            <label for="chooseCourseProvider">Course provider</label>
+            <div class="form-control readonly">
+              <mat-select [(ngModel)]="educationDetails.combined.qualificationId" placeholder="Choose a course provider"
+                name="qualificationSelecton" required #combined="ngModel" [disabled]="true">
+                <mat-option *ngFor="let combinedQualification of combinedQualifications"
+                  [value]="combinedQualification.id">
+                  {{ combinedQualification.courseName }}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-12 col-xl-offset-2 col-md-12 col-xs-12 ml-4">
+            <div class="form-group">
+              <app-daterange 
+              [readonly]="true"
+              [fromDate]="educationDetails.combined.dateCommenced"
+              [toDate]="educationDetails.combined.dateAwarded"
+              ></app-daterange>
+            </div>
+          </div>
+      </div>
+    </app-collapsible>
+   
+  </div>
+
+</section>

@@ -1,0 +1,68 @@
+<ng-template #content>
+  <div class="">
+    <h2 class="spacer">
+        Personal details
+    </h2>
+  </div>
+
+  <section>
+
+    <section>
+      <div class="important registrant-message">
+        <p>
+            The pre-populated information below was provided to us by your university. Please complete the rest of your personal information.
+            If any of the pre-populated information is not correct please <a href="https://www.pharmacyregulation.org/about-us/contact-us" target="_blank">contact us</a> 
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <app-applicant [isStudent]="true" [(ngModel)]="applicant" [touched]="touched" (ngModelChange)="update()"></app-applicant>
+    </section>
+
+    <section>
+      <div class="header">
+        <h3 [class.error]="touched && contactValid === false">
+          <div>
+            Contact details
+          </div>
+          <div>
+            <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" [static]="true" (click)="showContactHelp = !showContactHelp"></app-gphc-icon>
+          </div>
+        </h3>
+      </div>
+
+      <app-collapsible [trigger]="showContactHelp" class="help-block">
+        <div class="help-text">
+          <p>
+            Enter a mobile number 8 - 11 numbers long, which begins with 07. We may use this number to contact you by
+            SMS in future,
+            if you agree to this in your communication preferences. You can manage these in the 'account' tab.
+          </p>
+        </div>
+      </app-collapsible>
+
+
+      <div class="limit-width">
+        <app-contact-edit #contact [emailReadonly]="true" [(ngModel)]="applicant.contact" (ngModelChange)="update()"></app-contact-edit>
+      </div>
+    </section>
+
+  </section>
+
+
+  <section>
+    <h3 [class.error]="touched && hasAddress === false">Home address</h3>
+    <p class="important">
+      Please enter or update your home address below. We may use this address for correspondence about your application or training.
+    </p>
+    <div class="limit-width">
+      <app-address-edit [(ngModel)]="applicant.address" [touched]="touched" (ngModelChange)="update()"></app-address-edit>
+    </div>
+  </section>
+
+
+
+
+
+</ng-template>

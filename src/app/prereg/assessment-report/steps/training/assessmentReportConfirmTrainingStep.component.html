@@ -1,0 +1,74 @@
+<ng-template #content>
+
+  <div class="header">
+    <h2>
+      <div>
+        Training
+      </div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]='true' class="headingIcon"></app-gphc-icon>
+    </h2>
+  </div>
+
+  <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+    <div class="help-text">
+      <p>
+        The training details we hold for you are shown below. Please check these carefully and contact us if any of the
+        information is incorrect.
+      </p>
+    </div>
+  </app-collapsible>
+
+  <section>
+    <h3 [class.error]="touched  && !trainingConfirmed">Training</h3>
+    <p class="important">Please confirm your training details are correct.</p>
+    <app-assessment-report-trainee-placement [trainingSites]="application.training.trainedAt"
+      [tutors]="application.tutorDetails"></app-assessment-report-trainee-placement>
+
+    <div class="mb-3">
+      <mat-radio-group id="confirmTraining" [(ngModel)]="trainingConfirmed" (ngModelChange)="validate()">
+        <mat-radio-button aria-label="Training details are correct" [value]="true">
+          <h4>Correct</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="Training details are incorrect" [value]="false">
+          <h4>Incorrect</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+
+    </div>
+
+    <app-collapsible [trigger]="trainingConfirmed === false">
+      <p class="important">
+        <a href="https://www.pharmacyregulation.org/forms " target="_gphc_main_site">
+          Please submit a change of training details form to correct your details
+        </a>
+        before continuing.
+      </p>
+    </app-collapsible>
+  </section>
+
+  <!--<section>
+    <h3>Joint Tutor</h3>
+    <label class="mb-3">Do you have a joint tutoring arrangement?</label>
+
+    <mat-radio-group class="d-block" id="jointTutoring" [(ngModel)]="jointTutoring" (ngModelChange)="validate()">
+      <mat-radio-button aria-label="Joint tutor is true" [value]="true">
+        <h4>Yes</h4>
+      </mat-radio-button>
+      <mat-radio-button aria-label="Joint tutor is false" [value]="false">
+        <h4>No</h4>
+      </mat-radio-button>
+    </mat-radio-group>
+
+
+  </section>
+
+  <p class="important">
+    You are assessed against the pre-registration performance standards so you can show that you can carry out
+    specified tasks in a particular way. For further information please refer to the
+    <a href="http://www.pharmacyregulation.org/developing-and-demonstrating-your-knowledge-and-competence"
+      target="_gphc_main_site">pre-registration
+      manual</a>
+  </p>-->
+
+</ng-template>

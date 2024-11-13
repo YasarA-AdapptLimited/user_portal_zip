@@ -1,0 +1,192 @@
+@import "../style/variables";
+:host {
+
+ &.main { 
+   .banner {
+
+    .header {
+      height: auto;
+
+      ::ng-deep .toolbar-content .btn {
+        font-size: 1.4em;
+        padding-top: 0;
+        i {
+          display: block !important
+        }
+      }
+      padding: 40px;
+      .title {
+        padding: 0;
+        h1 {
+          font-size: 2.8em;
+          margin-bottom: 15px;
+        }
+        p.intro-text {
+          font-size: 1.4em;
+        }
+      }
+    }
+
+  }
+
+
+  @media(max-width: 767px) {
+    .banner .header  {
+      padding: 20px !important;
+    }
+ 
+    h1 { display: none; }
+  }
+ }
+
+
+.banner {
+    background: $banner-background;
+    position: relative;
+    z-index: 1;
+
+     .header {
+
+      @media (min-width: 630px) {
+        display: flex;
+        align-items: center;
+        height: 115px;
+      }
+
+      .toolbar {
+        display:flex;
+        flex-direction: row;
+        order: 2;
+        height: 100%;
+      }
+
+      .title {
+        order: 0;
+        padding: 30px;
+        padding-left : 40px;
+        ::ng-deep h1, ::ng-deep p.intro-text, ::ng-deep .sub-heading {
+          flex-grow:1;
+          color: white;
+        }
+        ::ng-deep p.intro-text {
+          margin-bottom:0 !important;
+        }
+        @media(max-width:630px) {
+          padding-top: 23px;
+          padding-bottom: 5px;
+        }
+      }
+
+      ::ng-deep .toolbar-content {
+        display:flex;
+        flex-direction: row;
+        align-self: flex-start;
+        padding-right: 10px;
+        height: 100%;
+
+        .buttons {
+          display:flex;
+        }
+
+       .btn {
+          display:flex;
+          flex-direction: column;
+          align-content: center;
+          align-items: center;
+          font-size: 1.15em;
+          padding-left: 15px;
+          padding-right: 15px;
+          height: 100%;
+       /*   border-radius: 50% !important;*/
+          color: white;
+          padding-top: 25px;
+          max-width: 100px;
+          font-weight:bold;
+          i {
+            font-size:2em;
+            height: 50px;
+         /*   display:flex;
+            align-items: center;
+            align-content: center;
+            flex-grow:0.62;
+           
+            height: 70px;*/
+           
+          }
+          @media(max-width:630px) {
+            padding-top: 7px;
+            i { display: none;}
+          }
+       
+       
+          &:not(.btn-back) {
+            margin-right:10px;
+          }
+         
+        
+        }
+      }
+ 
+     
+    }
+
+    &.important {
+      background: $gphc-purple;
+    }
+
+    &.info {
+      background: darken($gphc-blue, 5%);
+    }
+
+    li {
+      margin: 10px 0 10px 0;
+    }
+
+}
+
+@media (max-width: 767px) {
+  ::ng-deep {
+    .title {
+      padding-left: 20px !important;
+    }
+    h1 {
+      font-size: 2.3em;
+    }
+  }
+}
+
+    @media (max-width: 530px) {
+      ::ng-deep {
+
+        h1 {
+          font-size: 2.3em;
+        }
+      }
+    }
+
+
+
+
+::ng-deep mat-progress-bar {
+  height: 0.5em !important;
+    .mat-progress-bar-fill::after {
+        background: white;
+    }
+
+    .mat-progress-bar-background {
+        background: darken($gphc-background,5%) !important;
+    }
+
+    .mat-progress-bar-buffer {
+        background: darken($gphc-background,5%) !important;
+    }
+
+    .mat-progress-bar-primary {
+        background: darken($gphc-background,5%) !important;
+    }
+
+    .mat-progress-bar-secondary {
+        background: darken($gphc-background,5%) !important;
+    }
+}
+}

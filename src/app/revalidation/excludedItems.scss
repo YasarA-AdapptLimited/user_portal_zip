@@ -1,0 +1,80 @@
+@import "../style/variables";
+
+.btn-primary, .btn-default {
+    text-align: center;
+}
+
+.item-count {
+    text-align: center;
+}
+
+.create, a.completed {
+    color: #6bc16b;
+}
+
+i.delete {
+    font-size: 28px;
+}
+
+.title-row {
+    padding-left: 5px;
+}
+
+.icon-column {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    width: 30px;
+}
+
+.child-row {
+  padding-top: 5px;
+    border-left: 3px solid transparent;
+    align-items: center;
+
+    .btn-default {
+        background: transparent !important;
+    }
+}
+
+.items {
+    margin-top: 30px;
+    margin-left: -20px;
+   
+    padding-left: 10px;
+    border-left: 12px solid $light-grey;
+    transition: border-color 300ms linear;
+
+    @media (max-width:767px) {
+      margin-left: -15px;
+      border-left: none;
+    }
+}
+
+button.item-title {
+  display:flex;
+  text-align:left;
+  color: $gphc-blue;
+  /*
+  &:focus {
+    padding: 0 !important;
+    margin: -3px !important;
+    margin-left: -8px !important;
+    margin-top: -1px !important;
+    padding-top: 1px !important;
+    padding-bottom: 3px !important;
+    border-radius: 5px !important;
+  }*/
+}
+
+a:focus {
+  border: none !important;
+}
+.table-row {
+  &.header {
+    color: $gphc-blue;
+    font-size:1.2em;
+    border-bottom: none;
+  }
+}
+

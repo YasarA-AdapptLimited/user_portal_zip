@@ -1,0 +1,851 @@
+{
+  "templateGroup": [
+    {
+      "dynamicFormId": "812d5e24-d2b3-4d10-a3da-7d8c686275e0",
+      "formTitle": "Declaration of Fitness to Practise",
+      "formBody": "Before answering any declaration please ensure that you have read and understood published guidance relating to the question.  This is available on our website (relative link provided) and/or included in the guidance for the application for registration, restoration or return to practise.",
+      "type": 1,
+      "questionGroups": [
+        {
+          "title": "Declaration of fitness to practise",
+          "body": "Under the Rehabilitation of Offenders Act 1974 (Exceptions) Order 1975 and the Rehabilitation of Offenders Act 1974 (Exclusions and Exceptions) (Scotland) Order 2003, you are exempt from the provisions of Section 4(2) of the Rehabilitation of Offenders Act 1974. Therefore you are not entitled to withhold information about convictions which for other purposes are spent under the provisions of the Act, and failure to disclose such convictions could result in disciplinary action.",
+          "questions": [
+            {
+              "id": "64433245-3551-4324-a4e3-99eb049beef8",
+              "shortName": "FTP_Q1",
+              "title": "Question 1",
+              "type": 1,
+              "body": "Has a determination ever been made against you by a regulatory body in the United Kingdom responsible under any enactment for the regulation of a health or social care profession to the effect that your fitness to practise as a member of a profession regulated by that body is impaired, or a determination by a regulatory body elsewhere to the same effect?",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "2f17da31-505a-4c13-97ac-a910777f7301",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [
+                    {
+                      "id": "434f3c59-489b-4c11-a7dc-78ebf48d31da",
+                      "shortName": null,
+                      "title": "Have you previously advised the GPhC or the RPSGB of this information?",
+                      "type": 1,
+                      "body": null,
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "2fb85509-9153-4a94-9b01-5d38052ba2c3",
+                          "name": "Y",
+                          "text": "Yes",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "6fc41306-88a7-46cc-8892-91482e2cc1d7",
+                          "name": "N",
+                          "text": "No",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": true
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "0258fd63-4f7a-460f-a76b-226573fee20f",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "7b7cff60-bcbf-454c-aa05-84ed632bd834",
+              "shortName": "FTP_Q2",
+              "title": "Question 2",
+              "type": 1,
+              "body": "Do you currently have any problems with your physical or mental health that may impair your ability to practise safely and effectively or which otherwise impairs your ability to carry out your duties in a safe and effective manner?",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "0805ed30-ff2c-4aec-855f-d014e8d05cac",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [
+                    {
+                      "id": "aca35c80-83f7-4a05-92ed-a05095825ed6",
+                      "shortName": null,
+                      "title": "Have you previously advised the GPhC or the RPSGB of this information?",
+                      "type": 1,
+                      "body": null,
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "1978563f-4ca8-4a85-a028-88a0fdbb82bd",
+                          "name": "Y",
+                          "text": "Yes",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "81ce9c92-e2fe-4e82-8c8f-5a5a5e00930a",
+                          "name": "N",
+                          "text": "No",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": true
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "2aaac749-ba67-40d2-b2a2-43a7c8a44ca1",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "b9a47f04-9daf-4b23-8fa0-0fa2aac5cf17",
+              "shortName": "FTP_Q3",
+              "title": "Question 3",
+              "type": 1,
+              "body": "Have you previously been convicted or cautioned for a criminal offence in the British Islands or elsewhere (which, if committed in England, Scotland or Wales would constitute a criminal offence) or have you previously agreed to be bound over to keep the peace by a Magistrates’ court in England or Wales?",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "06549506-7201-4664-ba7a-241044a68b6d",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [
+                    {
+                      "id": "cbcac668-ce05-4187-be13-0e0399a1d84e",
+                      "shortName": null,
+                      "title": "Have you previously advised the GPhC or the RPSGB of this information?",
+                      "type": 1,
+                      "body": null,
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "f55fddbc-a7f0-4d12-9358-3f0a22a2ef8a",
+                          "name": "Y",
+                          "text": "Yes",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "868a8c2e-a58d-4f52-b91c-42c3795c44c1",
+                          "name": "N",
+                          "text": "No",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": true
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "3e79907a-4ea3-4687-8355-1335d6995cd5",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "0ca650c9-db6f-427c-b399-fbb974321690",
+              "shortName": "FTP_Q4",
+              "title": "Question 4",
+              "type": 1,
+              "body": "Have you previously agreed to pay a penalty under section 115A of the Social Security Administration Act 1992 (penalty as alternative to prosecution)?",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "f63d1abc-f22e-47e6-bcfe-23ecff5556f8",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [
+                    {
+                      "id": "9694483e-0ef9-4972-8490-5457abf58a5a",
+                      "shortName": null,
+                      "title": "Have you previously advised the GPhC or the RPSGB of this information?",
+                      "type": 1,
+                      "body": null,
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "5778abf4-b5b2-4806-81eb-df6e1932e5b0",
+                          "name": "Y",
+                          "text": "Yes",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "954c6c5a-7ac9-41bf-a803-f22aec49e6b7",
+                          "name": "N",
+                          "text": "No",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": true
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "c7d073b1-8f7c-4cb8-bdf5-e792a06b50b5",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "2aaa74b9-e787-4b04-8d38-f2932426f456",
+              "shortName": "FTP_Q5",
+              "title": "Question 5",
+              "type": 1,
+              "body": "Are you currently under investigation by any regulatory body (other than the GPhC) or criminal enforcement authority (e.g. police or NHS Counter Fraud Service) in the British Islands or elsewhere?",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "7786b5b1-5b3b-4137-93c2-c691220f6fc4",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [
+                    {
+                      "id": "d2439abf-8075-43aa-b2fd-2c1a7176a910",
+                      "shortName": null,
+                      "title": "Have you previously advised the GPhC or the RPSGB of this information?",
+                      "type": 1,
+                      "body": null,
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "c64ae954-f9ef-4e65-bc88-36289c9c63ee",
+                          "name": "Y",
+                          "text": "Yes",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "06b51fe4-3ddd-4d0b-90de-87f61d82500b",
+                          "name": "N",
+                          "text": "No",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": true
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "a09558c2-ad11-4bd4-b843-77096bf7a414",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "e195bfae-cf55-4e66-8445-d2a6dc2025d5",
+              "shortName": "FTP_Q6",
+              "title": "Question 6",
+              "type": 1,
+              "body": "Have you previously accepted a conditional offer under section 302 of the Criminal Procedure (Scotland) Act 1995 (fixed penalty: conditional offer by procurator fiscal) or have you previously been subject to an order under section 246(2) or (3) of the Criminal Procedure (Scotland) Act 1995 discharging you absolutely (admonition and absolute discharge)?",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "37280204-f4e5-4413-a2b3-706c76bb21bb",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [
+                    {
+                      "id": "b4b06447-0ba6-42ed-b960-8bdb6f0f7ed1",
+                      "shortName": null,
+                      "title": "Have you previously advised the GPhC or the RPSGB of this information?",
+                      "type": 1,
+                      "body": null,
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "834c2546-e3cf-4574-a118-0bbf81441d17",
+                          "name": "Y",
+                          "text": "Yes",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "6f389099-1697-4ae5-bcf2-7633c5cccb5c",
+                          "name": "N",
+                          "text": "No",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": true
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "ee0f34ff-290c-476a-a09b-343c2d16bcf4",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "9b953e48-3054-438d-a8d3-d6148f181729",
+              "shortName": "FTP_Q7",
+              "title": "Question 7",
+              "type": 1,
+              "body": "Have you previously been included by the Independent Safeguarding Authority (also known as the Independent Barring Board) barred list (in England, Wales or Northern Ireland) or the children’s list or adult’s list maintained by the Scottish Ministers?",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "5402645f-8035-4714-b2a9-3c1bdcc9f68e",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [
+                    {
+                      "id": "1af37ee3-ae73-4451-a495-38bfc082fe9d",
+                      "shortName": null,
+                      "title": "Have you previously advised the GPhC or the RPSGB of this information?",
+                      "type": 1,
+                      "body": null,
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "32065da6-185f-4754-9d0c-6e0a2ef69938",
+                          "name": "Y",
+                          "text": "Yes",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "2121bf2c-1a6a-4974-84aa-ba35c5f60b5b",
+                          "name": "N",
+                          "text": "No",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": true
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "034f121c-4338-4c63-b43b-18ea0368c9d5",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dynamicFormId": "f371f9f7-7ed0-433f-bc98-9d4f18d14ca8",
+      "formTitle": "Registration / Renewal Declarations",
+      "formBody": "Before answering any declaration please ensure that you have read and understood published guidance relating to the question.  This is available on our website (relative link provided) and/or included in the guidance for the application for registration, restoration or return to practise.",
+      "type": 2,
+      "questionGroups": [
+        {
+          "title": "Indemnity Arrangement Declarations",
+          "body": "Link to Guidance on Web Site.",
+          "questions": [
+            {
+              "id": "a5babfff-d486-4a1c-8c9d-ba9f0e9ee4ea",
+              "shortName": "R_Q1",
+              "title": "A. Location of Practice",
+              "type": 1,
+              "body": "I declare that I am applying for registration/restoration/renewal of registration in Part 1/Part 2 of the Register and that, in accordance with Article 20(3) of the Pharmacy Order 2010, I intend to practise as a pharmacist/pharmacy technician in Great Britain, the Channel Islands or the Isle of Man.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "92593c84-54b4-4f34-a7c9-e8ab3d1f8c1f",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "b132c327-ec95-4d83-929f-8de48bac031f",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "e1965668-0b98-4e1f-a76b-3c55d33a6900",
+              "shortName": "R_Q2",
+              "title": "B. Indemnity Arrangements",
+              "type": 1,
+              "body": "Do you currently have appropriate indemnity arrangements in place?",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "bd37fab2-eaef-4e64-93e9-ee5f16e595fe",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [
+                    {
+                      "id": "9cfc6048-8022-40e2-99c9-ffb0d0cd311a",
+                      "shortName": null,
+                      "title": "",
+                      "type": 1,
+                      "body": "The indemnity arrangement is provided by:",
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "7e260ce7-b5f4-40b5-980b-df920eb95b55",
+                          "name": "E",
+                          "text": "Employer",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "44392c25-89d9-455b-87db-6b50abd90062",
+                          "name": "P",
+                          "text": "A personal arrangement with an indemnity/insurance provider",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "2f50015a-9edb-4cdf-97b5-270e911f9a2f",
+                          "name": "C",
+                          "text": "A combination of employer provided indemnity arrangement and a personal arrangement.",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "2cae522c-18f3-4542-a081-53bfd68172d2",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [
+                    {
+                      "id": "3a97249b-2ac7-4c24-b881-0297105d3a29",
+                      "shortName": null,
+                      "title": "",
+                      "type": 1,
+                      "body": "I understand that, upon entry or renewal of entry in the Register, I cannot practise as a pharmacist/pharmacy technician unless there is in force an indemnity arrangement which provides appropriate cover in relation to my scope of practice.",
+                      "min": null,
+                      "max": null,
+                      "isRequired": true,
+                      "alternatives": [
+                        {
+                          "id": "4a29e185-29a0-490a-aaf8-6dfb8c943dcf",
+                          "name": "Y",
+                          "text": "Yes",
+                          "questions": [],
+                          "isRequired": true,
+                          "showAdditionalInfo": false
+                        },
+                        {
+                          "id": "fd2d7721-86eb-4816-b98b-e9d254128138",
+                          "name": "N",
+                          "text": "No",
+                          "questions": [],
+                          "isRequired": false,
+                          "showAdditionalInfo": false
+                        }
+                      ]
+                    }
+                  ],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "ae12a00d-ee88-4795-af26-04d1442b168b",
+              "shortName": "R_Q3",
+              "title": "C. Changes in Indemnity Arrangements",
+              "type": 1,
+              "body": "I agree to inform the Registrar in writing within 7 days if I cease to have appropriate indemnity arrangements in force and understand that my entry may be removed from the Register if I no longer have appropriate indemnity arrangements in force.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "198bbfe3-6d20-4881-aa92-74d2b233bff7",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "a21e49fe-cdc4-4f11-b5e9-fb7566e5322d",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Knowledge of English Language Declaration",
+          "body": "Link to Guidance on Web Site.",
+          "questions": [
+            {
+              "id": "614d3505-2c2b-443b-a3d3-df8dbb3045c9",
+              "shortName": "R_Q4",
+              "title": "D. Evidence of Knowledge of English Language",
+              "type": 1,
+              "body": "I declare that I have evidence, information or documents which show that I have the knowledge of English which is necessary for the safe and effective practice as a pharmacist/pharmacy technician.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "785f3a9f-2837-4268-8448-00d1912622ce",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "c5b03807-a714-473f-befe-5e76b8e5f7fc",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Continuing Professional Development Declaration",
+          "body": "Link to Guidance on Web Site.",
+          "questions": [
+            {
+              "id": "f0768cec-07eb-4aaf-bca6-860bef219326",
+              "shortName": "R_Q5",
+              "title": "E. Recording of Continuing Professional Development",
+              "type": 1,
+              "body": "I declare that I am currently carrying out and recording continuing professional development (CPD) activity, and will continue to do so, in line with the GPhC’s standards and framework for CPD and standards for pharmacy professionals. I will submit my CPD records to the GPhC when I am asked to do so.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "a9ee6069-8a7d-4c79-895c-4fe99dbd1f96",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "a5a0c54b-f42d-4006-9de4-9a52ba604fd2",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "General",
+          "body": "",
+          "questions": [
+            {
+              "id": "9847efe1-efef-46fd-8972-bf6a460bc241",
+              "shortName": "R_Q6",
+              "title": "F. Read and Understood Guidance on Declarations",
+              "type": 1,
+              "body": "I declare that prior to making my fitness to practise and renewal/registration/restoration declarations, I have read and understood the guidance provided on the GPhC website relating to all these declarations.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "f052e652-2bae-465d-accb-96cd4f9b5419",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "481a155b-d050-4b85-babd-43d3539f6f6b",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "8e547e70-cb3c-4b59-9a13-ee02afc84901",
+              "shortName": "R_Q7",
+              "title": "G. Keeping Details Updated",
+              "type": 1,
+              "body": "I declare that the information that I have provided in this application for registration/renewal is complete, true and accurate. I am also aware that I am under a duty to notify the Registrar of any changes to my name, home address or other contact details within one month starting on the day on which the change occurred.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "37e88b09-f576-4f2c-847d-7bd170817055",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "15f76dc3-4a12-4131-b5f7-8c8d31963d0f",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "600b090e-b1d0-4b19-89ad-b4dc19bc0b67",
+              "shortName": "R_Q8",
+              "title": "H. Adherence to the Standards Relating to Conduct, Ethic and Performance",
+              "type": 1,
+              "body": "With the exception of matters already notified to the General Pharmaceutical Council, I declare that I have and will adhere to the standards relating to conduct, ethic and performance as published by the GPhC.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "30625388-9c0c-4c0e-8652-8abcbbfab09e",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "1a7b4e2d-0ab5-47a2-8ee6-9f70be4c49ea",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "9c4f8f54-2195-4200-a608-37439de6b343",
+              "shortName": "R_Q9",
+              "title": "I. Investigations by any Enforcement or Regulatory Body",
+              "type": 1,
+              "body": "I declare that I am not aware of any investigation by any enforcement or regulatory body, or proceedings brought by such a body that relates to my fitness to practise, that the GPhC is not already aware of, or of any act or omission on my part that might render me liable to an allegation being referred to the Council that my fitness to practise is impaired.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "f6efa83d-7d04-4a5a-aa9e-247e40e059b4",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "9933d9fc-498c-4fe8-ab13-f5d3fd59859c",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "c4dbdbf7-d5e3-42dd-bebb-9130cc5f3d42",
+              "shortName": "R_Q10",
+              "title": "J. Duty to Notify Registrar of Changes",
+              "type": 1,
+              "body": "I declare that I accept that I am under a duty to notify the Registrar if there is any change in the circumstances relating to the fitness to practise declarations that I have made within 7 days starting on the day on which the event occurred.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "18f02f5e-2e82-4027-ab99-4254813ed65d",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "194e6170-6324-4cef-8381-bbc252554389",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "51ab9698-d077-472e-a8ff-6ce688b61557",
+              "shortName": "R_Q11",
+              "title": "K. Completion of Declarations",
+              "type": 1,
+              "body": "I declare that I understand if the declaration included in this application for renewal/registration/restoration is not completed to the satisfaction of the Registrar, my application for renewal/registration/restoration will not be processes and I will be deemed to have failed to pay the renewal/registration/restoration fee.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "5956cb58-5370-4953-b8f5-f76e725f1fc3",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "45f0b438-1915-4482-99f0-9d4a44830135",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            },
+            {
+              "id": "baf825e8-bb5c-4591-861d-371a7b005d07",
+              "shortName": "R_Q12",
+              "title": "L. Integrity of Information Given",
+              "type": 1,
+              "body": "I declare that I understand that if I am found to have given false or misleading information in connection with my application for registration, restoration or renewal this may be treated as misconduct, which may result in my removal from the Register.",
+              "min": null,
+              "max": null,
+              "isRequired": true,
+              "alternatives": [
+                {
+                  "id": "b79afa3a-98ad-4d9e-8673-6d5c23f5c29c",
+                  "name": "Y",
+                  "text": "Yes",
+                  "questions": [],
+                  "isRequired": true,
+                  "showAdditionalInfo": false
+                },
+                {
+                  "id": "ff9273e2-ba4e-47e2-8977-2cddf1e60b48",
+                  "name": "N",
+                  "text": "No",
+                  "questions": [],
+                  "isRequired": false,
+                  "showAdditionalInfo": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

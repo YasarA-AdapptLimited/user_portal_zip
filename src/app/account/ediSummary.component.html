@@ -1,0 +1,32 @@
+<ng-container *ngIf="summary else loading">
+
+  <div class="row">
+    <ng-container  *ngFor="let item of summary;let i = index" style="margin-bottom: 20px">
+
+      <div class="col-md-6" style="margin-top:10px" *ngIf="i%3===0">
+        
+          <label [for]="'edi-'+i">{{ item.name }}</label>
+          <div class="form-control readonly" [id]="'edi-'+i">
+            {{ item.value }}
+          </div>
+      
+      </div>
+      <div class="col-md-6" style="margin-top:10px"  *ngIf="i%3!==0">
+        
+        <label [for]="'edi-'+i">{{ item.name }}</label>
+        <div class="form-control readonly" [id]="'edi-'+i">
+          {{ item.value }}
+        </div>
+        
+      </div>
+
+    </ng-container>
+  </div>
+</ng-container>
+
+
+<ng-template #loading>
+  <div class="step-loading">
+    <mat-progress-bar aria-label="loading step"  mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>

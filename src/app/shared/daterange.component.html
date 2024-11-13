@@ -1,0 +1,25 @@
+<div class="row form-group" [class.invalid]="!valid">
+
+  <div class="form-group col-sm-4" [class.invalid]="overlapError">
+    <label>Start date</label>
+    <app-utc-date-picker [min]="fromMin" [max]="fromMax" [width]="width"
+     [readonly]="readonly" [(ngModel)]="fromDate" (ngModelChange)="validate()"></app-utc-date-picker>
+  </div>
+
+  <div class="form-group col-sm-4">
+    <label>{{ endDateTitle }}</label>
+    <app-utc-date-picker [min]="toMin" [max]="toMax" [width]="width"
+    [readonly]="readonly" [(ngModel)]="toDate" (ngModelChange)="validate()"></app-utc-date-picker>
+  </div>
+</div>
+
+<app-collapsible [trigger]="!valid">
+    <p class="form-error" *ngFor="let message of errorMessages">
+      {{ message }}
+    </p>
+</app-collapsible>
+<app-collapsible [trigger]="overlapError">
+    <p class="form-error">
+      {{ overlapErrorMessage || 'Dates must not overlap' }}
+    </p>
+</app-collapsible>

@@ -1,0 +1,128 @@
+<app-collapsible [trigger]="item === undefined">
+  <form>
+    <div class="form-group" style="padding-top: 15px">
+      <label for="searchBy" class="mr-3">Search by</label>
+      <mat-radio-group name="registrantSearchBy" id="registrantSearchBy" (ngModelChange)="setFocus()"
+        [(ngModel)]="searchParams.searchBy">
+        <mat-radio-button [value]="RegisterSearchBy.Number" name="number" type="radio">Registration number
+        </mat-radio-button>
+        <mat-radio-button [value]="RegisterSearchBy.Name" name="name" type="radio">Name</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" *ngIf="searchByNumber">
+        <div class="form-group"
+          [class.invalid]="searchByNumber && (searched || touched || regNumber.touched ) && regNumber.errors?.required">
+
+          <input type="search" #focus class="form-control" placeholder="Enter number..." name="regNumber" id="regNumber"
+            required (ngModelChange)="clearNoResults()" #regNumber="ngModel" [(ngModel)]="searchParams.regNumber">
+
+          <app-collapsible
+            [trigger]="searchByNumber && (searched || touched || regNumber.touched ) && regNumber.errors?.required">
+            <p class="form-error">
+              Please enter a registration number
+            </p>
+          </app-collapsible>
+        </div>
+
+      </div>
+
+      <div class="col-md-3" *ngIf="searchByName">
+        <div class="form-group"
+          [class.invalid]="searchByName && (searched || touched || lastName.touched ) && lastName.errors?.required">
+          <input type="text" #focus class="form-control" placeholder="Last name..." id="lastName"
+            [(ngModel)]="searchParams.lastName" required (ngModelChange)="clearNoResults()" #lastName="ngModel"
+            name="lastName">
+          <app-collapsible
+            [trigger]="searchByName && (searched || touched || lastName.touched ) && lastName.errors?.required">
+            <p class="form-error">
+              You must provide a last name
+            </p>
+          </app-collapsible>
+        </div>
+      </div>
+
+      <div class="col-md-3" *ngIf="searchByName">
+        <div class="form-group">
+          <input type="text" class="form-control" (ngModelChange)="clearNoResults()" placeholder="First name..."
+            id="firstName" name="firstName" [(ngModel)]="searchParams.firstName">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <button class="btn btn-default btn-lg" type="submit" (click)="search()">Search</button>
+      </div>
+    </div>
+
+  </form>
+
+  <app-collapsible [trigger]="searching">
+    <div style="display:flex;align-items:center;padding-bottom:10px;">
+      <app-spinner [tiny]="true"></app-spinner>
+      <div style="padding-left:10px">Searching for {{title}}s...</div>
+    </div>
+  </app-collapsible>
+
+  <app-collapsible [trigger]="!searching && results !== undefined && results.length > 0">
+    <div style="margin-top: 20px">
+      <label id="resultsLabel" [class.error]="touched && !item">Select a {{title}}</label>
+      <div class="results" #resultsList>
+        <table class="table">
+          <tr>
+            <th>Name</th>
+            <th>Number</th>
+            <th>Town</th>
+            <!-- <th>Eligible</th> -->
+          </tr>
+          <tr *ngFor="let item of results" (click)="setSelected(item)" class="hover link" 
+            style="font-size:0.8em">
+            <td>{{ item.forenames + ' ' + item.surname }}</td>
+            <td>{{ item.registrationNumber }}</td>
+            <td>{{ item.town }}</td>
+            <!-- <td>{{ item.eligibleAsTutor | friendlyBoolean }}</td> -->
+          </tr>
+        </table>
+      </div>
+
+      <div class="text-center load-more" *ngIf="showLoadMore">
+        <button class="btn btn-default btn-lg btn-block " (click)="loadMore()" [disabled]="loadingMore">
+          <span *ngIf="!loadingMore">More results...</span>
+          <span *ngIf="loadingMore">Loading....</span>
+        </button>
+        <div *ngIf="loadingMore">
+          <mat-progress-bar aria-label="loading" mode="indeterminate" color="primary"></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </app-collapsible>
+
+  <div *ngIf="noResultsVisible">
+
+    <p class="intro-text" *ngIf="searchParams.searchBy === RegisterSearchBy.Number">
+      <!-- Couldn't find any {{title}}s with registration number '{{searchParams.regNumber}}'.  -->
+      The registration number that you have entered is incorrect. Please check the details and try again.
+    </p>
+    <p class="intro-text" *ngIf="searchParams.searchBy === RegisterSearchBy.Name">
+      Couldn't find any {{title}}s called '{{ (searchParams.firstName ? searchParams.firstName + ' ' : '') +
+      searchParams.lastName
+      }}'.
+    </p>
+  </div>
+
+</app-collapsible>
+
+<app-collapsible [trigger]="item !== undefined">
+  <div class="row">
+    <div class="col-md-6 limit-width">
+      <div class="form-group">
+        <div class="form-control" readonly>
+          {{render(item)}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <button type="button" *ngIf="!readonly" (click)="cancelSelection()" class="btn btn-default btn-lg">Change</button>
+    </div>
+  </div>
+</app-collapsible>

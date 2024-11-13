@@ -1,0 +1,92 @@
+<section [class.allow-edit]="!readonly">
+  <section>
+    <h3>
+      <div class="grow">Personal details</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.PersonalDetails)">
+      </app-gphc-icon>
+    </h3>
+    <app-applicant [(ngModel)]="applicant" [readonly]="true"></app-applicant>
+  </section>
+  <section *ngIf="showContactDetails">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Contact details</div>
+          <app-gphc-icon size="24" top="-15" right="5" iconType="edit" (click)="goToStep(RegApplicationStep.PersonalDetails)">
+          </app-gphc-icon>
+        </h3>
+        <app-contact [contact]="applicant.contact"></app-contact>
+      </div>
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Home address</div>
+          <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.PersonalDetails)"></app-gphc-icon>
+        </h3>
+        <app-address [address]="applicant.address"></app-address>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h3>
+      <div class="grow">Training</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.TrainingConfirmation)"></app-gphc-icon>
+    </h3>
+    <app-trainee-placement [application]="application"></app-trainee-placement>
+  </section>
+
+  <section>
+    <h3>
+      <div class="grow">Assessment</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.TrainingConfirmation)"></app-gphc-icon>
+    </h3>
+    <app-trainee-assessment [application]="application"></app-trainee-assessment>
+  </section>
+
+  <section>
+    <h3>
+      <div class="grow">Letter of Good Standing</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.LetterOfGoodStanding)"></app-gphc-icon>
+    </h3>
+    <app-letterstep-summary [application]="application"></app-letterstep-summary>
+  </section>
+
+  <section>
+    <h3>
+      <div class="grow">Declaration of fitness to practise</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.FtpDeclaration1)"></app-gphc-icon>
+    </h3>
+    <app-declaration-summary [formId]="formId"  formIndex="0" [application]="application"></app-declaration-summary>
+  </section>
+
+  <section>
+    <h3>
+      <div class="grow">Overall declaration</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.OverallDeclaration)"></app-gphc-icon>
+    </h3>
+    <div class="form-group">
+      <div class="form-control" readonly>
+        I have read and understand the overall declaration
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <h3>
+      <div class="grow">Supporting documents</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.SupportingDocuments)"></app-gphc-icon>
+    </h3>
+    <app-supporting-documents-summary [isStudent]="false" [formId]="formId" [application]="application"></app-supporting-documents-summary>
+  </section>
+
+  <section *ngIf="showEdi">
+
+    <h3>
+      <div class="grow">Equality and diversity</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(RegApplicationStep.Edi)"></app-gphc-icon>
+    </h3>
+
+    <app-edi-summary [edi]="application.trainee.equalityDiversity"></app-edi-summary>
+
+  </section>
+</section>

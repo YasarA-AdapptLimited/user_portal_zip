@@ -1,0 +1,167 @@
+<section style="position: relative;">
+  <section [class.allow-edit]="!readonly">
+    <h3>
+      <div class="grow">Personal details</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(TechnicianApplicationStep.PersonalDetails)">
+      </app-gphc-icon>
+    </h3>
+    <app-applicant [(ngModel)]="applicant" [readonly]="true" [isTechnician]="true"></app-applicant>
+  </section>
+
+  <section [class.allow-edit]="!readonly" *ngIf="showContactDetails">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Contact details</div>
+          <app-gphc-icon size="24" top="-15" right="5" iconType="edit"
+            (click)="goToStep(TechnicianApplicationStep.PersonalDetails)">
+          </app-gphc-icon>
+        </h3>
+        <app-contact [contact]="applicant.contact"></app-contact>
+      </div>
+      <div class="col-md-6">
+        <h3>
+          <div class="grow">Home address</div>
+          <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+            (click)="goToStep(TechnicianApplicationStep.PersonalDetails)"></app-gphc-icon>
+        </h3>
+        <app-address [address]="applicant.address"></app-address>
+      </div>
+    </div>
+  </section>
+
+  <section [class.allow-edit]="!readonly">
+    <section class="mt-4">
+      <h3>
+        <div class="grow">Application type</div>
+        <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+          (click)="goToStep(TechnicianApplicationStep.EvidenceType)">
+        </app-gphc-icon>
+      </h3>
+
+
+      <div class="ml-4">
+        <div class="form-group">
+          <label for="nesOriel">I have completed:</label>
+          <div class="mt-2">
+
+            <div class="form-control readonly"
+              *ngIf="application.activeForm.applicationType === ApplicationType.LessThanTwoYears">
+              recognised UK knowledge and competency based qualifications, a non-UK pharmacy qualification and a
+              period of relevant work experience.
+            </div>
+            <div class="form-control readonly"
+              *ngIf="application.activeForm.applicationType === ApplicationType.TwoYears">
+              recognised UK knowledge and competency based qualifications and a two-year period of relevant work
+              experience.
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <h3>
+        <div class="grow">Education details</div>
+        <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+          (click)="goToStep(TechnicianApplicationStep.Education)">
+        </app-gphc-icon>
+      </h3>
+
+      <app-education-details-step-summary [application]="application" [readonly]="true"></app-education-details-step-summary>
+
+    </section>
+
+
+
+    <section class="placement mt-4" *ngFor="let experience of workExperiences; let i = index;" [class.first]="i===0"
+      [class.allow-edit]="!readonly">
+      <h3>
+        <div class="grow">Your {{nth(i)}} placement</div>
+        <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+          (click)="goToStep(TechnicianApplicationStep.WorkExperience)">
+        </app-gphc-icon>
+      </h3>
+
+      <div class="ml-4">
+        <app-work-experience [workExperience]="experience" [readonly]="true"></app-work-experience>
+      </div>
+    </section>
+
+    <section>
+      <h3>
+        <div class="grow">Previous registrations</div>
+        <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(TechnicianApplicationStep.PreviousApplicationsAndRegistrations)">
+        </app-gphc-icon>
+      </h3>
+      <app-previous-applications-and-registrations-summary [application]="application">
+  
+      </app-previous-applications-and-registrations-summary>
+  
+    </section>
+  </section>
+
+
+
+  <section *ngIf="showEdi">
+    <h3>
+      <div class="grow">Equality and diversity</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit" (click)="goToStep(TechnicianApplicationStep.Edi)">
+      </app-gphc-icon>
+    </h3>
+    <app-edi-summary [edi]="application.trainee.equalityDiversity"></app-edi-summary>
+  </section>
+
+  <section>
+    <h3>
+      <div class="grow">Declaration of fitness to practise</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(TechnicianApplicationStep.FtpDeclaration1)"></app-gphc-icon>
+    </h3>
+    <app-declaration-summary formIndex="0" [formId]="formId" [application]="application"></app-declaration-summary>
+  </section>
+
+  <section *ngIf="showOverallDeclaration">
+    <h3>
+      <div class="grow">Overall declaration</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(TechnicianApplicationStep.OverallDeclaration)"></app-gphc-icon>
+    </h3>
+    <div class="form-group">
+      <div class="form-control" readonly>
+        I have read and understand the overall declaration
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <h3>
+      <div class="grow">Supporting documents</div>
+      <app-gphc-icon size="24" top="-15" right="0" iconType="edit"
+        (click)="goToStep(TechnicianApplicationStep.SupportingDocuments)"></app-gphc-icon>
+    </h3>
+   <!--<app-supporting-documents-summary [isTechnician]="true" [isCountersignerView]="isCountersignerView"
+    [application]="application" [formId]="formId">
+    </app-supporting-documents-summary>-->
+    
+          <div *ngFor="let file of attachments" class="form-group">
+            <label [for]="'file-'+i">{{ AttachmentType[file.type] | caseSplit }}</label>
+              <div (click)="download(file)" class="form-control readonly link">
+                  <div style="display:flex" id="'file-'+i">
+                      <div class="icon">
+                          <i class="fa fa-download"></i>
+                      </div>
+                      <div class="ml-2">{{file.filename}}</div>
+                  </div>
+              </div>
+          </div>
+  
+  </section>
+
+
+
+</section>

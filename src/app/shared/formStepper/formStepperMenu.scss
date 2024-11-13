@@ -1,0 +1,31 @@
+
+@import '../../style/variables';
+
+:host {
+
+  i {
+    font-size:1.3em;
+
+    &.fa-clock-o {
+      font-size: 1.7em;
+      color: $gphc-purple;
+    }
+  }
+}
+
+[mat-mdc-menu-item]
+{ 
+ /* transition: all 100ms linear;*/
+  font-size: 17px;
+  min-width: 250px;
+ /* &.selected {
+  background: lighten($gphc-background, 5%) !important;
+}*/
+}
+
+
+.title {
+  flex-grow:1;
+  line-height: initial;
+  padding: 8px 16px;
+}

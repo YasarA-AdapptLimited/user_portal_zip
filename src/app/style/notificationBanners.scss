@@ -1,0 +1,130 @@
+.notification-banner {
+
+  z-index: 99999;
+  position: relative;
+  padding: 2em 2em 1.7em 2.5em !important;
+  color: white;
+  font-size: 1.2em !important;
+  line-height: 1.5em;
+  min-height: 130px;
+
+  &.error-handler {
+    background: $error;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  h3 {
+      color: white;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    &.col-md-4,  &.col-md-5 {
+      .fill {
+        flex-grow: 1;
+      }
+      flex-direction: row;
+      align-items: flex-start;
+      button {
+        margin-left: .5em;
+      }
+    }
+    button {
+      background: transparent;
+      color: white;
+      border: 4px solid white !important;
+      font-weight: bold;
+      margin-top: .2em;
+      min-width: 130px;
+    }
+  }
+
+
+
+  ::ng-deep {
+      mat-spinner {
+          margin: 0 auto;
+      }
+
+      @media (min-width: 768px) {
+          mat-spinner {
+              margin-right: 0;
+          }
+      }
+  }
+
+
+  @media (max-width: 768px) {
+      min-height: 190px;
+      .row {
+        flex-direction:column;
+      }
+  }
+
+  .buttons {
+      @media (min-width: 768px) {
+          text-align: right;
+      }
+
+      @media (max-width: 768px) {
+          margin-top: 20px;
+
+          .btn {
+              width: 100%;
+          }
+      }
+    }
+
+
+}
+
+
+
+  .route-block {
+    padding: 30px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    text-align: center;
+    min-height: 500px;
+    color: $error;
+
+    i {
+      font-size:180px;
+    padding:30px 40px 30px;
+      color: $error;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: $error;
+        margin-bottom: 30px;
+    }
+    @media (max-width: 525px){
+      h1 {
+        font-size: 30px;
+        line-height:1.2em;
+      }
+    }
+}
+
+.initialising {
+    padding: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: #fff;
+    height: 100vh;
+    color: $gphc-blue;
+
+    div {
+      margin-top:10px;
+    }
+
+    ::ng-deep mat-spinner {
+      margin: 0 auto;
+    }
+}
+
+

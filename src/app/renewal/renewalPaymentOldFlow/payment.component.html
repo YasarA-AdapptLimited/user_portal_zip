@@ -1,0 +1,40 @@
+<!--<section>
+  <h2>Data Protection Act 1998</h2>
+  <p class="intro-text">
+    The GPhC is a data controller registered with the Information Commissioner’s Office. The GPhC makes use of personal data
+    to support its work as the regulatory body for pharmacists, pharmacy technicians and retail pharmacy premises in Great
+    Britain. Data may be shared with third parties in pursuance of the GPhC's statutory aims, objectives, powers and responsibilities
+    under the Pharmacy Order 2010, the rules made under the Order and other legislation. Personal data may be processed for
+    purposes including (but not limited to) updating the register, administering and maintaining registration, processing
+    complaints, compiling statistics and keeping stakeholders updated with information about the GPhC . Please note that
+    the GPhC will not share your personal data on a commercial basis with any third party.
+  </p>
+</section> -->
+<section>
+  <h2>Declaration agreement</h2>
+    <div class="form-group">
+    <p class="intro-text">
+      <mat-checkbox  [(ngModel)]="renewal.agreed" aria-label="Declaration agreement">
+        I have read, understood, agree to, and completed the Fitness to Practise matters and the Declaration for renewal in the Register
+      </mat-checkbox>
+    </p>
+  </div>
+</section>
+<section *ngIf="renewal.paymentMethod === RenewalPaymentMethod.PaymentCard">
+<h2>Fees To Be Paid
+  <img src="/assets/images/creditcards/poweredByWorldPay.gif" alt="Worldpay Logo" style="float:right" title="Payments Powered by WorldPay"
+  />
+</h2>
+<p class="intro-text">
+  Renewal Fee: {{renewal.renewalFee | currency: 'GBP': 'symbol' :'.2'}}
+</p>
+<div class="form-group">
+  <p class="intro-text">Please select your card type</p>
+  <mat-radio-group [(ngModel)]="renewal.selectedCard">
+    <mat-radio-button *ngFor="let card of creditCards" value="{{card.id}}" [aria-label]="card.id">
+      <img src="/assets/images/creditcards/{{card.id}}.gif" alt="{{card.name}} Logo" title="{{card.name}} Logo" /> <br/>
+      {{card.name}}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+</section>

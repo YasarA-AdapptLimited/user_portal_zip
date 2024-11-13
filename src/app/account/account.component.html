@@ -1,0 +1,22 @@
+<app-banner [loading]="loading">
+    <div class="banner-left">
+      <h1>Account</h1>
+      <p class="intro-text">
+        Change your address, update your contact details and account preferences
+      </p>
+    </div>
+</app-banner>
+<div class="content spread">
+  <div class="row fadein" *ngIf="user">
+      <div  class="col-md-7 left-col">
+          <app-address-editable [address]="user.address"></app-address-editable>
+          <app-preference-editable></app-preference-editable>
+         
+        </div>
+    <div class="col-md-5 right-col">
+      <app-contact-editable  [contact]="user.contact"></app-contact-editable>
+    
+    </div>
+    
+  </div>
+</div>

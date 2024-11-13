@@ -1,0 +1,23 @@
+<h2 class="header alertTitle">
+  <b>{{alertTitle}}</b>
+</h2>
+<h4 class="header">
+  <b>{{title}}</b>
+</h4>
+<mat-dialog-content>
+  <p>
+    {{content}}
+  </p>  
+  <p *ngIf="isNotEdge">
+   <a href="microsoft-edge:https://www.mygphc.org">open in EDGE click here</a>
+  </p>
+  <p *ngIf="isBlockedByCookies">
+    <i style="font-size:14px !important">If you are still experiencing difficulties please <a href="https://www.mygphc.org/signin/faq" target="_blank">click here</a>
+      to take you to our FAQ’s to help with logging in to your mygphc</i>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="btn btn-primary btn-lg" (click)="close()">
+    OK
+  </button>
+</mat-dialog-actions>

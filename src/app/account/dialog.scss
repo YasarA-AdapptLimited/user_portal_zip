@@ -1,0 +1,21 @@
+@import '../style/variables';
+
+h2 {
+  font-size: 32px;
+  font-weight: bold;
+}
+@media (max-width: 767px) {
+  h2 {
+    font-size: 24px;
+  }
+}
+
+
+mat-dialog-content {
+  
+  .intro-text {
+    font-weight: bold;
+    color: $gphc-purple;
+  }
+
+}

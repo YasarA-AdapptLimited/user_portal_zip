@@ -1,0 +1,256 @@
+<ng-template #content>
+  <div class="spacer">
+    <h2>
+      <div>
+        Supporting Documents
+      </div>
+    </h2>
+  </div>
+
+
+  <section class="supporting-documents">
+
+    <div class="important">
+      Upload scanned copies of all supporting documents. For further information please refer to
+      <a href="https://www.pharmacyregulation.org/pharmacy-technicians/registering-pharmacy-technician/uk-qualified-pharmacy-technician-registration" target="_blank">
+        Registering as a pharmacy technician
+      </a>
+    </div>
+
+    <div *ngIf="application.activeForm.applicationType === ApplicationProcessType.TwoYears">
+      <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+        [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+        [isTechnician]="true" [attachmentType]="AttachmentType.BirthCertificate" min="1" max="1" [mandatory]="true"
+        [requireCertifier]="true" title="Birth certificate">
+        <div class="help-text">
+          <p>
+            Upload a scanned copy of your birth certificate
+          </p>
+          <p>
+            <b>If you were born in England, Wales or Scotland</b> you must submit a birth
+            certificate issued by the General Registers Office or the General Registers Office of
+            Scotland.
+          </p>
+          <p>
+            <b>If you were NOT born in England, Wales or Scotland</b> you must submit a certified copy of your birth
+            certificate. Any document that is not written in English must be accompanied by a translation.
+          </p>
+
+          <p>
+            <b>If you are not able to provide a birth certificate</b> you can submit Statutory Declaration A, which
+            needs to be completed with a solicitor.
+          </p>
+        </div>
+      </app-supporting-documents-item>
+
+      <div *ngIf="!isCombinedQualification">
+
+        <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+          [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+          [attachmentType]="AttachmentType.KnowledgeBasedQualification" min="1" max="1"
+          [mandatory]="false" [isTechnician]="true" [requireCertifier]="true"
+          title="Knowledge based qualification">
+          <div class="help-text">
+            <p>
+              Please upload a scanned copy of your qualification certificate, if you have it
+            </p>
+          </div>
+        </app-supporting-documents-item>
+
+        <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+          [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+          [attachmentType]="AttachmentType.CompetencyBasedQualification" min="1" max="1"
+          [mandatory]="false" [isTechnician]="true" [requireCertifier]="true"
+          title="Competency based qualification">
+          <div class="help-text">
+            <p>
+              Please upload a scanned copy of your qualification certificate, if you have it
+            </p>
+          </div>
+        </app-supporting-documents-item>
+      </div>
+
+      <div *ngIf="isCombinedQualification">
+        <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+          [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+          [attachmentType]="AttachmentType.CombinedQualification" min="1" max="1"
+          [mandatory]="false" [isTechnician]="true" [requireCertifier]="true"
+          title="Combined qualification">
+          <div class="help-text">
+            <p>
+              Please upload a scanned copy of your qualification certificate, if you have it
+            </p>
+          </div>
+        </app-supporting-documents-item>
+      </div>
+
+      <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+        [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+        [attachmentType]="AttachmentType.Photo" min="1" max="1" [mandatory]="true" [requireCertifier]="false"
+        [isTechnician]="true" title="Identity photograph">
+        <div class="help-text">
+          <p>
+            Upload a recent photograph of yourself. It must be taken against a plain background and show your face and
+            shoulders. We will send this to your supervisor to verify your identity.
+          </p>
+        </div>
+      </app-supporting-documents-item>
+
+
+      <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+        [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+        [requireTitle]="true" [attachmentType]="AttachmentType.ProofOfIdentity" min="1" max="3" [mandatory]="true"
+        [requireCertifier]="true" [isTechnician]="true" title="Identity document(s)">
+        <div class="help-text">
+          <p>
+            Upload a scanned version of the certified identity document(s). For further information refer to
+            <a href="https://www.pharmacyregulation.org/pharmacy-technicians/registering-pharmacy-technician/uk-qualified-pharmacy-technician-registration" target="_blank"
+              style="color: white; font-weight: bold;border-bottom: 1px solid white"> registering as a pharmacy
+              technician</a>
+
+          </p>
+        </div>
+      </app-supporting-documents-item>
+
+
+
+    </div>
+
+    <div *ngIf="application.activeForm.applicationType === ApplicationProcessType.LessThanTwoYears">
+
+
+
+
+
+      <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+        [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+        [isTechnician]="true" [requiresAdditionalQuestion]="true" [qualificationType]="'Overseas qualification'"
+        [attachmentType]="AttachmentType.OverseasQualification" min="1" max="2" [mandatory]="false"
+        [requireCertifier]="true" title="Overseas qualification">
+        <div class="help-text">
+          <p>
+            If you are applying to register with less than two years of qualifying UK work experience based on a non-UK
+            pharmacy qualification,
+            upload a certified copy of the qualification certificate.
+          </p>
+          <p>
+            Please note that you will also need to arrange for copies of your academic transcript and evidence that you
+            are eligible to practice as a
+            pharmacist or pharmacy technician in your country of qualification to be sent directly to the GPhC from the
+            relevant authorities.
+          </p>
+        </div>
+      </app-supporting-documents-item>
+
+
+      <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+        [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+        [isTechnician]="true" [attachmentType]="AttachmentType.BirthCertificate" min="1" max="1" [mandatory]="true"
+        [requireCertifier]="true" title="Birth certificate">
+        <div class="help-text">
+          <p>
+            Upload a scanned copy of your birth certificate
+          </p>
+          <p>
+            <b>If you were born in England, Wales or Scotland</b> you must submit a birth
+            certificate issued by the General Registers Office or the General Registers Office of
+            Scotland.
+          </p>
+          <p>
+            <b>If you were NOT born in England, Wales or Scotland</b> you must submit a certified copy of your birth
+            certificate. Any document that is not written in English must be accompanied by a translation.
+          </p>
+
+          <p>
+            <b>If you are not able to provide a birth certificate</b> you can submit Statutory Declaration A, which
+            needs to be completed with a solicitor.
+          </p>
+        </div>
+      </app-supporting-documents-item>
+
+      <div *ngIf="!isCombinedQualification">
+
+        <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+          [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+          [attachmentType]="AttachmentType.KnowledgeBasedQualification" min="1" max="1"
+          [mandatory]="false" [isTechnician]="true" [requireCertifier]="true"
+          title="Knowledge based qualification">
+          <div class="help-text">
+            <p>
+              Please upload a scanned copy of your qualification certificate, if you have it
+            </p>
+          </div>
+        </app-supporting-documents-item>
+
+        <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+          [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+          [attachmentType]="AttachmentType.CompetencyBasedQualification" min="1" max="1"
+          [mandatory]="false" [isTechnician]="true" [requireCertifier]="true"
+          title="Competency based qualification">
+          <div class="help-text">
+            <p>
+              Please upload a scanned copy of your qualification certificate, if you have it
+            </p>
+          </div>
+        </app-supporting-documents-item>
+      </div>
+      <div *ngIf="isCombinedQualification">
+        <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+          [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+          [attachmentType]="AttachmentType.CombinedQualification" min="1" max="1"
+          [mandatory]="false" [isTechnician]="true" [requireCertifier]="true"
+          title="Combined qualification">
+          <div class="help-text">
+            <p>
+              Please upload a scanned copy of your qualification certificate, if you have it
+            </p>
+          </div>
+        </app-supporting-documents-item>
+      </div>
+
+
+      <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+        [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+        [attachmentType]="AttachmentType.Photo" min="1" max="1" [mandatory]="true" [requireCertifier]="false"
+        [isTechnician]="true" title="Identity photograph">
+        <div class="help-text">
+          <p>
+            Upload a recent photograph of yourself. It must be taken against a plain background and show your face and
+            shoulders. We
+            will send this to your supervisor to verify your identity
+          </p>
+        </div>
+      </app-supporting-documents-item>
+
+
+      <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId"
+        [touched]="touched" (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+        [attachmentType]="AttachmentType.ProofOfIdentity" min="1" max="2" [mandatory]="true" [requireCertifier]="true"
+        [isTechnician]="true" [requireTitle]="true" title="Identity document(s)">
+        <div class="help-text">
+          <p>
+            Please upload a scanned version of the certified copy of your identity document(s). See the application
+            guidance for more information about what you need to provide.
+          </p>
+        </div>
+      </app-supporting-documents-item>
+
+      <div class="row mt-3 mb-3 ml-1">
+        <div [class.error]="(touched || hasRequested.touched) && hasRequested.invalid">
+          <mat-checkbox required name="requested"
+            [(ngModel)]="application.activeForm.isSupportingDocumentsForwardedConfirmed"
+            (ngModelChange)="updateApplication()" #hasRequested="ngModel">
+            I confirm that I will send the original copies of the documents shown above to the GPhC and I understand
+            that
+            my application for registration can not proceed if I do not send them.
+          </mat-checkbox>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+  </section>
+</ng-template>

@@ -1,0 +1,52 @@
+<form #form="ngForm" novalidate>
+  <div *ngIf="!emailNotRequire" class="form-group" [class.invalid]="(touched || email.touched) && email.invalid">
+    <label for="email">Email</label>
+    <input class="form-control" [readonly]="emailReadonly" (ngModelChange)="propagate()" (blur)="propagate()" #focus
+      #email="ngModel" name="email" id="email" [(ngModel)]="contact.email" required
+      pattern="[-a-zA-Z0-9~!$%^&*_=+}{\'?]+(\.[-a-zA-Z0-9~!$%^&*_=+}{\'?]+)*@([a-zA-Z0-9_][-a-zA-Z0-9_]*(\.[-a-zA-Z0-9_]+)*\.([a-zA-Z]{2,})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?" />
+    <app-collapsible [trigger]="serverEmailErrors?.length">
+      <p class="form-error" *ngFor="let error of serverEmailErrors">
+        {{error}}
+      </p>
+    </app-collapsible>
+    <app-collapsible [trigger]="(touched || email.touched) && email.errors?.pattern">
+      <p class="form-error">
+        Please check that you have entered your email address correctly
+      </p>
+    </app-collapsible>
+    <app-collapsible [trigger]="(touched || email.touched)&& email.errors?.required">
+      <p class="form-error">
+        You must provide an email address
+      </p>
+    </app-collapsible>
+    <app-collapsible [trigger]="email.dirty">
+      <div style="padding-top: 10px">
+        <div class="important">If you change your email address, we will send an email to your new address. You will
+          need to respond to the link
+          in this email to activate the change.</div>
+      </div>
+    </app-collapsible>
+  </div>
+
+
+  <div class="col-md-12" style="padding: 0;">
+    <div class="form-group" [class.invalid]="(touched || mob.touched) && mob.invalid">
+      <label for="mob">UK mobile phone number</label>
+      <input class="form-control" pattern="(07)\d+" #mob="ngModel" name="mob" id="mob" [(ngModel)]="contact.mobilePhone"
+        (ngModelChange)="propagate()" [readonly]="phoneNumberReadonly" (blur)="propagate()" required />
+      <app-collapsible [trigger]="(touched || mob.touched) && mob.errors?.pattern && mob.errors?.required">
+        <p class="form-error">
+          Please check that you have entered your UK mobile phone number correctly
+        </p>
+      </app-collapsible>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="phone1">Home phone number</label>
+    <input class="form-control" name="phone1" id="phone1" (ngModelChange)="propagate()" [readonly]="phoneNumberReadonly"
+      (blur)="propagate()" [(ngModel)]="contact.telephone1" />
+  </div>
+
+</form>

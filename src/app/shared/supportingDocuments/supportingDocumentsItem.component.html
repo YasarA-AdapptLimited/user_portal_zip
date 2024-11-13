@@ -1,0 +1,27 @@
+<section>
+  <div style="display:flex;align-items:center">
+
+    <h3 style="flex-grow:1;margin-bottom: 0 !important;" [class.error]="touched && !valid" *ngIf="!isTechnician">
+      {{title}}</h3>
+
+    <h3 *ngIf="isTechnician" style="flex-grow:1;margin-bottom: 0 !important;" [class.error]="touched && !valid">
+      {{title}}</h3>
+
+    <div *ngIf="mandatory" class="badge pull-right" style="font-size:18px;margin-right:15px;color: #fff;"
+      [class.badge-danger]="touched && !valid">Mandatory</div>
+
+    <app-gphc-icon *ngIf="!isStudent && !isRTR" [static]="true" [tooltip]="helpTooltip" [active]="showHelp" [iconType]="'info'"
+      (click)="showHelp = !showHelp"></app-gphc-icon>
+
+  </div>
+
+  <app-collapsible [trigger]="showHelp" class="help-block">
+    <ng-content select=".help-text"></ng-content>
+  </app-collapsible>
+
+  <app-file-upload [sessionId]="sessionId" [touched]="touched" [type]="uploadType" [min]="min" [max]="max" [maxMb]="8"
+    (uploaded)="onUploaded($event)" [requireCertifier]="requireCertifier" [requirePOCertifier]="isPostOfficeSelected" [existing]="attachments[attachmentType]"
+    [titleOptions]="titleOptions" [requireTitle]="requireTitle" [requireExpiryDate]="requireExpiryDate"
+    [attachmentType]="attachmentType" [deleteUrl]="deleteUrl"></app-file-upload>
+
+</section>

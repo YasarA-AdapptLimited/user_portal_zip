@@ -1,0 +1,45 @@
+@import '../style/variables';
+
+:host {
+  table.table tr td {
+    vertical-align: middle;
+  }
+
+  tr.completed {
+    background: #f5f9f3 !important;
+  }
+  .clickable.count {
+
+    color: $gphc-blue;
+    font-weight: bold;
+  
+
+    padding: 3px 10px;
+  }
+
+  .search-bar {
+    padding: 30px;
+    background: #f3f3f3;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2) inset;
+    width: 100%;
+    .btn-close-search {
+      color: $gphc-blue;
+      font-size: 2em;
+    }
+
+    @media (min-width: 768px) {
+      input.review-title { width:400px; }
+    }
+    .no-results {
+      color: $gphc-blue;
+      font-size: 1.2em;
+    }
+    .search-results {
+      margin-top: 15px;
+      width: 100%;
+    }
+    button:disabled {
+      background: lightgrey !important;
+    }
+  }
+}

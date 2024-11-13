@@ -1,0 +1,25 @@
+@import '../../../../../app/style/variables.scss';
+
+table.details {
+    border: 1px solid black;
+
+    thead{
+        tr {
+            background: $gphc-blue;
+            color: white;
+        }
+    }
+  
+     th, td {
+       padding: 15px;
+       border: 1px solid black;
+       width: auto;
+     }
+     th {
+       font-weight: bold;             
+     }
+     tr td:first-child {
+       color:black;
+     }
+    margin-bottom:20px;
+ }

@@ -1,0 +1,128 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1">Notice of intention to remove</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+  <section class="letter-header">
+    <app-letter-header [letterDate]="letterDate" [registrant]="auth.user.registrant"
+      [registrantAddress]="auth.user.address"></app-letter-header>
+    <section class="notice-of-entry section-to-print">
+      <section class="notice-of-entry-wrapper">
+
+
+        <h2 class="longer-notice">Notice of intended removal from the GPhC register</h2>
+
+        <div class="main-content">
+          <p>
+            I am writing to confirm that your myGPhC record shows you have failed to submit your complete revalidation
+            record to the
+            GPhC. Please be aware that this notice is not related to the renewal of your registration.
+          </p>
+          <p>
+            We have previously reminded you that your registration is at risk if you do not submit a complete
+            revalidation record,
+            and do not provide evidence of exceptional circumstances which explain why you have not submitted a record.
+          </p>
+          <p>
+            Under the <i>GPhC (Continuing Professional Development and Consequential Amendments Rules) Order of
+              Council 2011</i>, we may take action that could lead to your removal from the register.
+          </p>
+
+          <p>
+            If you want to stay on the register and continue to practise as a pharmacy professional, you have two
+            options at this
+            stage. You must either:
+          </p>
+          <ol>
+            <li>
+              submit your complete revalidation record via myGPhc, or
+            </li>
+            <li>
+              write to us, setting out the reasons why your entry should not be removed from the register. You must
+              include any
+              relevant evidence of exceptional circumstances in support of your reasons. Address your written reasons to
+              the
+              registrar.
+            </li>
+          </ol>
+
+          <p>
+            We must receive your complete revalidation record, or your written reasons with supportive evidence, within
+            28 days of
+            the date of this letter. If we do not, we may remove you from the register. Please note that this process is
+            separate to
+            the renewal of your registration. If you have not yet renewed your registration you may still be removed
+            from the
+            register for failure to renew, even if you now submit your revalidation record.
+          </p>
+          <p>
+            If you choose to send us your written reasons and supportive evidence explaining why you were unable to
+            submit your
+            revalidation record, this information will be considered by the registrar, who will then decide whether or
+            not you may
+            continue to be registered.
+          </p>
+
+          <p>
+            You also have the option of requesting that your reasons and evidence be considered by the Fitness to
+            Practise Committee
+            at a hearing. If you would prefer that a hearing takes place, you must notify the GPhC when you send in your
+            written
+            reasons. If you do not state clearly that you want a hearing to take place, the registrar will make the
+            decision about
+            your registration without a hearing taking place.
+          </p>
+
+          <p>
+            <b>Important: </b> if you do not submit your written reasons and any relevant supportive evidence, you do
+            not have the option of requesting
+            a hearing. The registrar will make the decision about whether or not you may continue to be registered.
+          </p>
+
+          <p>
+            If you request a hearing, the purpose of the hearing will be for the Fitness to Practise Committee to make
+            ‘findings of
+            fact’. The registrar will use these findings in making the final decision regarding your registration.
+          </p>
+
+          <p>
+            For more information about what will happen at a hearing, see Rule 33 of The GPhC (Fitness to Practise and
+            Disqualification etc. Rule) Order of Council 2010.
+          </p>
+
+          <p>
+            This is your final reminder to take action. Your register entry may be removed if you do not respond to this
+            request.
+          </p>
+
+
+          <p>
+            If you have any questions, please contact our Customer Services Team by email at <a
+              href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a>
+          </p>
+
+          <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+        </div>
+      </section>
+    </section>
+  </section>
+
+</div>

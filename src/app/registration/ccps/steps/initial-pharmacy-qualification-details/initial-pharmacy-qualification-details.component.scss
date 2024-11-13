@@ -1,0 +1,35 @@
+.padding-0 {
+    padding: 0px;
+
+    .col-md-6 {
+        display: inline-block;
+    }
+}
+.float-right{
+    float:right;
+}
+
+::ng-deep {
+  app-gphc-icon {
+    display: block;
+
+    button.gphc-icon {
+      right: 20px !important;
+      font-size: 23px !important;
+      position: absolute;
+
+      &.cancel {
+        #buttonLabel {
+          display: none;
+        }
+      }
+    }
+
+    &.deleteIcon {
+      position: absolute;
+      right: 60px;
+    }
+
+  }
+}
+

@@ -1,0 +1,148 @@
+@import "../style/variables";
+
+.maintenance-signin-btn{
+    background-color: $gphc-aqua;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0px;
+    left: 0px;
+}
+
+.content {
+    background: $gphc-background !important;
+}
+
+a.link-white{
+  color:white; 
+  cursor: pointer;
+  font-size: 1.167rem;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.hidden-login {
+  font-size: 1.4rem;
+  max-width: 700px;
+  margin: 0 auto;
+  i {
+    color: white;
+    font-size:4em;
+  }
+}
+
+.login-container {
+  min-height: calc(100vh - 334px);
+  @media (max-width:767px) {
+    min-height: calc(100vh - 304px);
+  }
+  @media (max-width:530px) {
+    min-height: calc(100vh - 249px);
+  }
+
+  display: table;
+  height:100%;
+  width:100%;
+}
+
+.progress-bar-container {
+  height: 2px;
+  background: $gphc-aqua;
+}
+
+::ng-deep mat-progress-bar {
+  height: 0.5em !important;
+    .mat-progress-bar-fill::after {
+        background: white;
+    }
+
+    .mat-progress-bar-background {
+        background: $gphc-background !important;
+    }
+
+    .mat-progress-bar-buffer {
+        background: $gphc-background  !important;
+    }
+
+    .mat-progress-bar-primary {
+        background: $gphc-background  !important;
+    }
+
+    .mat-progress-bar-secondary {
+        background: $gphc-background  !important;
+    }
+}
+
+
+.login {
+
+  display: table-cell;
+  vertical-align: middle;
+
+  h2 {
+    color:white;
+  }
+  @media (max-width:530px) {
+    h2 {
+      font-size:1.8em;
+    }
+  }
+    
+    background: $gphc-aqua !important;
+
+    button.cancel {
+      color: white;
+      border: 2px solid white !important;
+      padding: 10px 20px 10px 20px;
+      font-size: 20px;
+    }
+
+    p.intro-text {
+      color: white;
+      padding: 25px;
+    }
+
+    ::ng-deep {
+        mat-spinner {
+            margin: 0 auto;
+        }
+        .gphc-warning {
+            margin: 0 auto;
+            width: 50%;
+        }
+    }
+
+    .btn-text {
+        color: white;
+        font-size: 2.3em;
+        font-family: Bitter;
+    }
+
+    ::ng-deep .gphc-warning {
+        margin: 0 auto; 
+        width: 50%;
+        text-align: left;
+        h2 {
+            padding: 25px;
+        }
+    }
+}
+
+.col-md-4 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+    .col-md-4 {
+        padding-left: 20px;
+    }
+}
+
+::ng-deep {
+    .banner .info .info-content {
+        max-width: none !important;
+    }
+}

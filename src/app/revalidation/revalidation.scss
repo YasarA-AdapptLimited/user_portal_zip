@@ -1,0 +1,150 @@
+@import "../style/variables";
+@import "../style/animation";
+
+:host {
+
+
+div.confirm-revalidation {
+
+    label.confirm-revalidation  {
+        display: block;
+        padding-bottom: 13px;        
+    }
+
+    h3 {
+        padding-bottom: 13px;
+        &.invalid {
+            color: #c52e2e;
+        }
+    }
+
+}
+
+
+round-progress {
+    margin: 0 auto;
+}
+
+button, a {
+    cursor: pointer;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.sub-heading {
+  color: $gphc-blue;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .section-body-container {
+        padding-top: 10px;
+    }
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link:hover {
+    border-color: white !important;
+    border-bottom-color: #eceeef !important;
+}
+
+.section-sub.deadline-info {
+  font-weight: bold;
+  background: white !important;
+  color: #5d5d5d;
+}
+
+.tab {
+    padding: 10px;
+    text-align: center;
+    background: white;
+    text-transform: uppercase;
+    color: $gphc-blue;
+
+    &.active {
+        border-bottom: 2px solid $gphc-accent-orange;
+        color: #656565;
+    }
+}
+
+::ng-deep {
+    .submitting {
+        mat-spinner {
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+    }
+}
+
+.cpd-entries {
+    margin-top: -10px;
+}
+
+i.submitted {
+    font-size: 176px;
+    color: $gphc-blue;
+    margin: 30px;
+    margin-bottom: 10px;
+}
+
+::ng-deep {
+    .items:not(:first-child) {
+        margin-top: 12px;
+    }
+}
+
+.invalid .italics{
+    font-style: italic;
+}
+
+.Submitted, .Rejected {
+    font-size: 1.167rem;
+}
+
+.linkOutline:focus, .linkOutline:active{
+    outline: 7px solid #fcc340;
+    display: block;
+    border-radius: 15px;
+    outline-offset: 0px;
+}
+
+.question-section {
+    padding: 0px 15px;
+
+    a {
+        section {
+            margin-top: 15px;
+
+            .section-header-container {
+                h2 {
+                    color: white;
+                    font-size: 1.5rem;
+                    padding: 0px;
+                }
+            }            
+
+            .intro-text {
+                font-size: 1.1em;
+            }
+        }
+    }
+
+    @media(max-width: 767px) {
+        padding: 15px 0px;
+
+        section.info {
+            .section-header-container{
+                h2{
+                    padding-bottom: 5px!important;
+                }                
+            }
+            .intro-text {
+                font-size: 1em;
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+}

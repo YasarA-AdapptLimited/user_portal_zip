@@ -1,0 +1,239 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+      <h1 class="sm-show" style="flex-grow:1">Foundation training welcome letter</h1>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+          <i class="fa fa-print"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+
+  <section class="letter-header">
+
+    <app-letter-header [letterDate]="letterDate" [registrant]="registrant" [registrantAddress]="auth.user.address">
+    </app-letter-header>
+
+
+    <section class="notice-of-entry no-print">
+      <section class="notice-of-entry-wrapper ">
+
+
+
+        <h2 class="notice">Foundation training welcome letter
+        </h2>
+
+        <div class="main-content">
+          <!-- <p>Dear {{ registrant.title }} {{ registrant.surname }}</p> -->
+          <p>I am pleased to confirm that you are now approved to begin foundation training. You are eligible to
+            start training from the date given in your training record.</p>
+          <p>Foundation training lasts for at least 52 weeks. Your training provider will work with you to help
+            you achieve the performance standards you need to become a registered pharmacist. As long as you meet the
+            standards, and your designated supervisor confirms this through your progress reports (see below), you will be eligible to
+            sit the registration assessment towards the end of your training.</p>
+          <p>If you pass the assessment and gain the necessary practical experience (as confirmed by your designated supervisor through
+            the final declaration), you will be eligible to apply to be registered as a pharmacist.</p>
+          <p>This letter contains important information that you will need as you progress through your training, so
+            please read it carefully.
+          </p>
+
+          <b>Your foundation training number</b>
+          <p>
+            Your foundation training number is: <b>{{ preEntryNumber }}.</b>
+          </p>
+          <p>
+            Please make a careful note of it, as you will need to quote it if you phone or email us, and when you apply
+            to sit the registration assessment.
+          </p>
+
+
+          <b>Your training record</b>
+          <p>Your training record contains the details that we currently hold for you. Please check them carefully and
+            email us within seven days if you think there is a mistake or if your circumstances change. If your details
+            are incorrect, or if they change, this may affect whether you can sit the registration assessment.</p>
+          <p>It is your responsibility to make sure your training provider has an up to date copy of your training
+            record.</p>
+          <p><b>Important: </b>your online training record will not automatically update to reflect any changes you make
+            to your training throughout the year. If there are changes to your training arrangements and you need an
+            updated copy of your training record, please contact us.</p>
+
+          <b>The foundation training manual</b>
+          <p>The online foundation training manual sets out key information about your foundation training
+            year. It is important that you read every section thoroughly and that you are familiar with all its
+            contents. </p>
+
+          <p>We update the manual from time to time during the training year, so the online version will have the most
+            up-to-date information. You can download the entire manual as a PDF or just print the parts you feel you
+            need.</p>
+          <p>Your designated supervisor can also refer to the online foundation training manual, as well as specific guidance and
+            resources for designated supervisors. Please also make sure you give your designated supervisor a copy of this letter.</p>
+
+          <b>Progress reports</b>
+          <p>Your progress reports are a vital record of your progress through the foundation training year. Your
+            designated supervisor will need to complete and sign your reports each quarter (after 13, 26, and 39 weeks). They will need
+            to confirm that your progress is at least ‘satisfactory’ at week 39 before you can sit the assessment.
+            Please submit a copy of the week 39 progress report to us, as well as any signed as ‘unsatisfactory’. </p>
+          <p>Please note that the assessment summary is a document purely for your own records. You do not need to
+            submit a copy to us, unless we request it. </p>
+
+          <b>Becoming a pharmacy professional</b>
+          <p>It’s important to be proactive during your training, and make sure that you keep up to date with what is
+            happening in your profession rather than just relying on information from us. This will help you to develop
+            your knowledge and skills, and to prepare to start carrying out the revalidation activity you will need to
+            complete if you become registered as a pharmacy professional.</p>
+          <p>You can find out more about revalidation on our main website, including what you we need to carry out,
+            record and submit each year of registration.</p>
+
+          <b>Time limit to register</b>
+          <p>To make sure that you have up-to-date knowledge and skills when you apply to register as a pharmacist,
+            there is a time limit for completing your study and training to meet the registration criteria.</p>
+          <p>You must successfully complete, within <b>eight years of the date you began your MPharm degree, or within
+              four years of the date you began your OSPAP postgraduate diploma:</b></p>
+          <ul class="bullet-point">
+            <li>a UK accredited MPharm degree or OSPAP qualification</li>
+            <li>
+              52 weeks of foundation training in England, Scotland or Wales signed off as satisfactory by your
+              designated supervisor
+            </li>
+            <li>the GPhC registration assessment with a pass result</li>
+            <li>a registration application</li>
+          </ul>
+          <p>Please see the criteria for registration as a pharmacist for more information.</p>
+          <p><b>Important: </b>if, during your training year, you have a change of circumstances that may affect how
+            long it takes you to complete your foundation training you should tell us.</p>
+
+          <b>Staying in touch with us during your training</b>
+
+          <p>During the year we will contact you to give you useful information about your training, and to tell you
+            about the arrangements for sitting the registration assessment. We will contact you by email, so <b>make
+              sure the email address you provided when you created your myGPhC account is correct</b>. You can update
+            your email at any time through your myGPhC account.</p>
+          <p>You will find <b>all the official GPhC forms that you may need to send to us</b> throughout the year in the
+            foundation training manual on our website.</p>
+          <p>If you need to contact us, you can use the <a href="https://www.pharmacyregulation.org/content/contact-us "
+              target="_blank"><b>email form in the foundation training manual</b></a>, or call the Customer Contact Centre
+            on <b>020 3731 8000</b>. </p>
+          <p>If you need to send us any important documents by post, make sure you use recorded delivery or a service
+            that allows you to track the correspondence and check that it has been delivered safely.</p>
+          <p>You can also find out about any changes to foundation policy or processes by going to the GPhC
+            website, or via Twitter, Facebook, or LinkedIn.</p>
+
+          <b>Issues with your training</b>
+          <p>
+            During your training, you may meet situations that you do not expect. You should be able to resolve most of
+            these with your designated supervisor, but sometimes you may need to contact us for advice.
+          </p>
+          <p>You can find answers to most questions either in the training manual or on our website- please check there
+            first. If you do feel you need more information, you can contact us using the details above.</p>
+          <p>I wish you the best of luck in your training, and I look forward to welcoming you onto our register next
+            year.</p>
+          <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+        </div>
+      </section>
+    </section>
+  </section>
+
+
+  <section class="letter-header">
+
+    <section class="notice-of-entry training-record section-to-print">
+      <section class="notice-of-entry-wrapper">
+        <div class="logos">
+          <img class="logo" alt="General Pharmaceutical Council logo" src="/assets/images/logo-GPhC-blue-cropped.png" />
+        </div>
+
+        <h2>Foundation training record</h2>
+        <p>This training record confirms the training site details we had for you at the time your application was
+          provisionally approved.</p>
+        <p>
+          If your training details changed after your application was provisionally approved these will not be reflected
+          in this training record and an updated training record will be sent to you
+          separately.
+        </p>
+        <p>
+          You must check that the details below are correct. If there are any errors, please email us at
+          foundation@pharmacyregulation.org as soon as possible. If your training record is not correct, this may affect
+          whether you are eligible to sit the registration assessment or to register. We only recognise approved
+          training as shown below.
+        </p>
+        <p>
+          If your initial start date, shown below, is after Friday 2 August 2024, you cannot meet the eligibility criteria for
+the summer assessment. This means that you will not be able to sit the summer 2025 registration assessment.
+        </p>
+        <p>Please provide a copy of this foundation training record to your employer(s) and keep a copy for you
+          own records.</p>
+        <p><b>Important: </b>your online training record will not automatically update to reflect any changes you make
+          to your training throughout the year. If there are changes to your training arrangements and you need an
+          updated copy of your training record, please contact us.</p>
+
+        <p>
+
+        </p>
+        <h3>Trainee details</h3>
+        <table class="traineeDetails">
+          <tr>
+            <td>Name</td>
+            <td>{{ registrant.forenames }} {{ registrant.surname }}</td>
+          </tr>
+          <tr>
+            <td>Job title</td>
+            <td>Foundation Trainee</td>
+          </tr>
+          <tr>
+            <td>Foundation training no</td>
+            <td>{{ preEntryNumber }}</td>
+          </tr>
+          <tr>
+            <td>Email address</td>
+            <td>{{ registrantEmail }}</td>
+          </tr>
+        </table>
+        <br>
+
+        <h3>Training details</h3>
+        <table class="trainingDetails">
+
+          <tr>
+            <th>Training Dates</th>
+            <th>Training Site</th>
+          </tr>
+          <tr *ngFor="let trainingSite of trainingSites;">
+            <td width="30%" height="10%">{{ trainingSite.StartDate | date:'dd MMMM yy' }} -
+              {{ trainingSite.EndDate | date:'dd MMMM yy' }} </td>
+
+            <td>
+              {{ trainingSite.PharmacyName }}
+
+              {{ trainingSite.AddressLine1 }}
+
+              {{ trainingSite.AddressLine2 }}
+
+              {{ trainingSite.AddressLine3 }}
+
+              {{ trainingSite.Town }}
+
+              {{ trainingSite.County }}
+
+              {{ trainingSite.PostCode }}
+            </td>
+          </tr>
+        </table>
+      </section>
+    </section>
+  </section>
+
+
+</div>

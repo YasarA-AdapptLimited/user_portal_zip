@@ -1,0 +1,167 @@
+@import "../style/variables";
+
+:host {
+
+  @media (min-width: 768px) {
+    .content {
+      padding: 40px;
+    }
+    section { margin-top: 0;}
+  }
+
+  @media (max-width: 1024px) {
+    .content {
+      padding-left: 0 !important; 
+      padding-right: 0 !important; 
+    }
+
+
+  }
+
+  .signature img {
+    width: 180px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+
+  ::ng-deep .banner-left {
+
+    .button-container {
+      margin-top:-20px;
+      margin-left: 20px;
+      text-align: center;
+      @media (max-width: 500px) {
+        height: 50px;
+        width: 50px;
+      button {
+          height: 50px;
+          width: 50px;
+          // font-size:0.8em;
+          padding: 0;
+        }
+      }
+      .btn-text {
+        color: white !important;
+      }
+     
+    }
+
+  }
+
+  section.notice-of-entry, section.notice-of-advice {
+    max-width: 800px;
+    section.notice-of-entry-wrapper {
+      position: relative;
+    }
+
+    .notice {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      font-size:1.5em;
+      text-align: center;
+      color: black;
+    }
+  
+    header {
+      div.address {
+        p {
+            margin: 0;
+            padding: 0;
+          }
+      }
+      p.dear {
+        margin: 11% 0 0!important;
+      }
+    }
+    header, 
+    div.main-content {
+      width: 95%;
+      margin: 0 auto;
+      p {
+        padding: 0;
+      }
+      ul li {
+          margin-bottom: 1em;
+        } 
+    }
+
+    table.regDetails {
+        background-color: $light-grey!important;
+        position: absolute;
+        right: 4.3em;
+        top: 9em;
+        width: 30%;
+  
+        th , td + td {
+          color: $gphc-blue;
+          text-align: left;
+          padding-left: 1em;
+        }
+
+        tr > td:first-child {
+          text-align: right;
+        }
+    }
+
+    @media only screen and (min-width: 1920px) {
+      table.regDetails {
+        right: 14.3em;
+      }
+    } 
+  }
+
+
+
+  .logo {
+      width: 180px;
+      margin-top: 20px;
+      margin-bottom: 60px;
+  }
+
+
+  @media print {
+   ::ng-deep app-banner {
+      display: none;
+    }
+  
+    app-collapsible ::ng-deep {
+    display: none;
+   }
+
+  section.section-to-print {
+      max-height: 99%;
+      font-size: 10pt;
+
+   
+      h1 {
+        font-size: 15pt;
+      }
+
+      p, ul li {
+        font-weight: 400;
+      }
+
+      div.main-content {
+        margin: 0 auto;
+        ul li {
+          margin-bottom: 16pt;
+        }
+      }
+
+      table.regDetails {
+        background-color: $light-grey!important;
+        -webkit-print-color-adjust: exact;
+        position: absolute;
+        top: 90pt;
+        right: 35pt;
+        width: 205pt;
+        th {
+          text-align: right;
+        }
+      }
+
+    }
+  } // end of print styles
+
+}

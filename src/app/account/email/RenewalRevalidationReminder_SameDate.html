@@ -1,0 +1,55 @@
+﻿@model dynamic
+<div style="width: 100%;height: 100%;color: #3e3e3e;
+  font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma', 'sans-serif';font-size: 14px;font-style: normal;font-variant: normal;font-weight: 400;line-height: 20px;padding: 0 0 20px 0; ">
+  <!--[if mso]>
+ <table><tr><td width="450">
+<![endif]-->
+  <div style="max-width: 450px;width: 450px;">
+    <div style="margin: 0;margin-bottom: 10px;background: white;">
+      <img style="width: 450px;height: 93px;" alt="mygphc email banner" src="https://strgt1prdmgcnt4874ragrs.blob.core.windows.net/mail-templates/Content/mygphc-email-banner.png" />
+      <table style="width: 100%; margin-top: 10px;margin-bottom: 20px">
+          <tr>
+            <td style="color: white; width: 100%;background: #026f92;text-align: center;height:40px;vertical-align:middle;font-size: 17px;">
+              GPhC Renewal reminder
+            </td>
+          </tr>
+        </table>
+
+      <div style="padding-left: 10px;padding-right: 20px">
+        <p>Dear @Model.FirstName,</p>
+
+        <p>Your registration renewal is now due. Please log in to your myGPhC account and complete any of the following
+          steps that are still outstanding:</p>
+        <ul>
+          <li>complete your renewal declarations</li>
+          <li>pay your registration renewal fee</li>
+          <li>submit your revalidation records covering your previous 12-month period of registration</li>
+        </ul>
+
+        <p>If you do not do so before your renewal due date, your registration will be at risk and we may take action
+          that could lead to your removal from the register.</p>
+        <p>
+          If you do not want to renew your registration and have already completed a voluntary removal form, please
+          ignore this reminder.</p>
+        <p>Yours sincerely,</p>
+        <p>@Model.Sender</p>
+        <p><b>Head of Customer Services</b></p>
+      </div>
+      <table style="width: 100%">
+          <tr>
+            <td style="width: 100%;background: #35a079;text-align: center;height:70px;vertical-align:middle;font-size: 17px;">
+  
+              <a href="@Model.Link" style="color: white;border-bottom: 1px solid white;text-decoration: none;">Go to
+                MyGPhC</a>
+  
+            </td>
+          </tr>
+        </table>
+  
+
+    </div>
+  </div>
+  <!--[if mso]>
+</td></tr></table>
+<![endif]-->
+</div>

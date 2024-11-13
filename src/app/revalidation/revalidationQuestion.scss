@@ -1,0 +1,30 @@
+@import "../style/variables";
+
+
+.required-indicator {
+  color: $error;
+}
+.question {
+    position: relative;
+
+    &.readonly {
+      background: white;
+      padding: 0;
+      margin: 0;
+    }
+
+    &:not(.last) {
+        margin-bottom: 30px;
+    }
+    .question-header {
+      display: flex;
+    }
+}
+
+::ng-deep {
+    .revalidation-question {
+        .gphc-icon {
+            top: -10px;
+        }
+    }
+}

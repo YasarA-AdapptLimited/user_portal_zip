@@ -1,0 +1,71 @@
+<app-form-section [editable]="true" [invalid]="!prefForm?.valid" (onEdit)="onEdit()" (onCancel)="cancel()" (onSave)="trySave()" [autoToggle]="false"
+  [saving]="saving" [editing]="editing">
+  <span class="section-header">Preferences</span>
+  <div class="section-body">
+    <h3>Communications</h3>
+    <div class="form-group" style="margin-top:7px">
+
+      <b>Receive essential information about my current registration</b> (such as renewal reminders and revalidation information)
+      by:
+      <div class="table-row">
+        <div class="col-grow">
+          <i class="fa fa-level-up"></i>email</div>
+        <div class="col-">{{ preference.comms.essentialEmails | friendlyBoolean }}</div>
+      </div>
+      <div class="table-row">
+        <div class="col-grow">
+          <i class="fa fa-level-up"></i>text message</div>
+        <div class="col-">{{ preference.comms.essentialTexts | friendlyBoolean }}</div>
+      </div>
+    </div>
+    <div class="form-group" style="margin-top:7px">
+
+      <b>Receive important information relevant to my current registration</b> as a pharmacy professional (such as updates on key
+      regulatory changes and invitations to respond to consultations) by:
+      <div class="table-row">
+        <div class="col-grow">
+          <i class="fa fa-level-up"></i>email</div>
+        <div class="col-">{{ preference.comms.importantEmails | friendlyBoolean }}</div>
+      </div>
+      <div class="table-row">
+        <div class="col-grow">
+          <i class="fa fa-level-up"></i>text message</div>
+        <div class="col-">{{ preference.comms.importantTexts | friendlyBoolean }}</div>
+      </div>
+    </div>
+    <h3>User interface</h3>
+    <div class="table-row">
+      <div class="col-grow">
+        <i class="fa fa-level-up"></i>Show tooltips</div>
+      <div class="col-">{{ preference.ui.showTooltips | friendlyBoolean }}</div>
+    </div>
+  </div>
+
+  <div class="section-edit">
+    <form #prefForm="ngForm">
+
+      <h3 style="margin-bottom: 15px">Communications</h3>
+      <app-comms-preferences [showWarnings]="false" *ngIf="editablePreference" [comms]="editablePreference.comms"
+        [saveState]="saveState" (saveStateChange)="onSaveStateChange($event)"></app-comms-preferences>
+
+      <div *ngIf="saveState === SaveState.confirmationRequired" style="display:flex">
+        <button class="btn btn-primary" (click)="change()">Yes</button> <button (click)="confirm()" class="btn btn-default">No</button>
+      </div>
+
+      <div *ngIf="saveState === SaveState.untouched">
+
+        <h3>myGPhC</h3>
+        <div class="form-group" style="margin-top:7px">
+          <i class="fa fa-level-up"></i>
+          <mat-checkbox name="showTooltips" [(ngModel)]="editablePreference.ui.showTooltips">
+            Show tooltips
+          </mat-checkbox>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+
+
+</app-form-section>

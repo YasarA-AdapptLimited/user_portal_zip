@@ -1,0 +1,35 @@
+<ng-template #content>
+  <div class="spacer">
+    <h2>
+      <div>
+        Photo identification
+      </div>
+    </h2>
+  </div>
+
+
+  <section class="supporting-documents">
+
+    <div class="important">
+      Upload a scanned copy of either your university ID card, valid passport, or a UK/EEA photo driving license which
+      was
+      issued within the last five years.
+    </div>
+
+
+    <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId" [touched]="touched"
+      (uploaded)="onUploaded($event)" [isStudent]="true" [attachments]="attachments"
+      [attachmentType]="AttachmentType.Photo" min="1" max="1" [mandatory]="true" [requireCertifier]="false"
+      title="Photo identity document">
+      <!--<div class="help-text">
+        <p>
+          Upload both sides of a certified copy of a passport photograph of you which has been certified on the back as
+          well as the
+          <a href="https://www.pharmacyregulation.org/education/pharmacist-pre-registration-training-scheme/pre-registration-training-placement/applying
+          " target="_blank" class="tooltip-link">photograph certification form.</a>
+        </p>
+      </div>-->
+    </app-supporting-documents-item>
+
+  </section>
+</ng-template>

@@ -1,0 +1,59 @@
+@import "../style/variables";
+
+ul.wizard-steps {
+    
+    list-style: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    li {
+        /*flex-grow: 1;*/
+        text-align: center;
+        padding-left:10px;
+        color: $gphc-blue;
+        font-size:1.1em;
+        position:relative;
+
+    
+
+        .dot {
+            border: 7px solid white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 auto;
+            i.completed {
+              background: white;
+              font-size:42px;
+            }
+        }
+
+
+        &.current .name {
+        
+          border-bottom: 2px solid $gphc-blue;
+          
+          
+        }
+
+        &.current .dot {
+            background-color: $gphc-accent-yellow !important;
+            color: white;
+        }
+
+        &.completed .dot {
+            background-color: $gphc-aqua !important;
+            color: white;
+        }
+
+        .name {}
+    }
+}
+
+@media (max-width: 767px) {
+    .wizard-steps {
+        display: none;
+    }
+}

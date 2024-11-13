@@ -1,0 +1,203 @@
+{
+  "success": true,
+  "error": null,
+  "data": {
+    "id": "b65a21bb-2ccc-4849-99cf-5da5e0a031fd",
+    "submissionId": "0a42d90e-ae43-4bab-a945-036d0564e210",
+    "submissionDate": "2018-12-18T23:13:41.497",
+    "entries": [
+      {
+        "id": "b99c02e3-5fb6-47a5-bd34-25fa91257487",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "Symptoms in the Pharmacy",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div>I want to learn more about the Management of Common Illnesses in the Pharmacy.<br></div><div>This learning will be relevant to me because although currently my main job is at The Organic Pharmacy, which is quite different than a regular community pharmacy, I feel I would like to start as a Locum Pharmacist as well in my spare time. <br></div><div>This learning will help me to refresh and keep up to date my skills and knowledge in the area of Community Pharmacy and the Management of the most Common Conditions.<br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div>For this purpose, I have bought a textbook called Symptoms in the Pharmacy A Guide to the Management of Common Illnesses. The book looks easy to use and informative, so I am planning to read it carefully, make notes and discuss any questions with colleagues in the area of Community Pharmacy.&nbsp;<br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<div>Reading this book before and during locuming, was definitely a very helpful and beneficial activity for me but also for the customers using my services. I refreshed quite well my knowledge and ability to handle situations, where patients appear with common symptoms like cough, allergic rhinitis, nausea, vomiting, constipation, diarrhoea, cystitis, insomnia, etc. My confidence and decision making regarding when I should refer a patient to the doctor, appeared to be improved already. I also have the book with me when I have a locum shift in order to be able to use it as a reference if required.&nbsp;<br></div><div>I believe it is very important for a community pharmacist to be confident, be able to take the right decisions and management approaches for usual symptoms as this is when customers need us the most.&nbsp;<br></div><div>One day, that I was working as a locum, an elderly woman showed up complaining of indigestions and upset stomach. I managed to ask all the correct questions and concluded that the problem was due to the diclofenac medication that she was taking, so I had to refer her to go back to her doctor. It appeared that this was the correct course of action and I felt very happy and satisfied that I managed the situation correctly, even though I was not practicing as a community pharmacist for a while; the patient was satisfied as well as I was able to identify what was wrong.&nbsp;</div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "ad456519-1381-43b6-a324-36436fae4eeb",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "Herbal Medicines",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div>I want to learn more about Herbal Medicines, their action and their interactions with allopathic medicines in order to be used safely and effectively by patients.&nbsp;<br></div><div>This learning is relevant to me because I work in The Organic Pharmacy, where only herbal medicines are supplied. The products can be in the form of Herbal Tinctures and Supplements but also Homeopathic Remedies. As a result, I have to be able to provide to patients correct advice and especially in the case of Herbal Tinctures I need to be able to identify possible interactions with allopathic medication. Although I always check for safety and have already gained some experience in the area, I feel there is still lots of space to enhance my knowledge and gain further confidence when counselling patients.</div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div>I plan to talk to other pharmacists that work much longer than me in the company and ask them about their experience. I also want to finish studying the Official Guidance Books provided by The Organic Pharmacy, which explain very well the main uses, indications and contraindications of the products. In addition I have ordered a textbook called \"Encyclopedia of Herbal Medicine\", which appears to be very informative regarding the beneficial uses of herbs. Last but not least, I have found online from trustworthy sources PDF Articles and Files on the topic; one of which is called \"Potential Herb Drug Interactions for Commonly Used Herbs\" and I find to be very easy to use and highly applicable.&nbsp;<br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<div>I learnt more about the most common herbs that are used regularly for various conditions and most importantly which ones are the most risky with lots of contraindications and interactions. Having enhanced my understanding and familiarity with the sector of herbal medicines, provides me with confidence and enough capacity to be able to advise and council customers effectively with less stress or worry. Feeling less stressed makes me more proactive and potent at doing my job. <br></div><div>Before having started to read and learn further for the topic, I caught myself feeling a lot of pressure every-time that a patient would ask me questions like: So is that ok if I also take medication for depression? etc. On most occasions, I would call a pharmacist from another branch or check on the available data. I still always double check, however there is a big difference; now most of the time I check to be 100% sure while before I was lacking enough knowledge. This is something that the patient could feel when discussing with them and can definitely have a negative impact on my performance. After having completed my readings, the difference when counselling patients was dramatic as there is flow and confidence. I have received, several complements from customers on how helpful I was and how much I cared to check everything and provide them with detailed information while my manager pointed that out too. <br></div><div>Seeing my customers satisfied and happy is the most worthy reward for my effort and motivates me to keep learning.<br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "f9ededfa-99a8-47ad-a60d-203ae4381bec",
+        "type": 1,
+        "typeAsString": "Planned",
+        "title": "Dermatology Expertise",
+        "form": {
+          "dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+          "type": 3,
+          "title": "Planned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "What are you planning to learn?",
+                  "answer": "<div>I am planning to learn in depth to recognise different skin conditions and what is the best medical approach to improve them.&nbsp;<br></div><div>This learning is relevant to me because my new job is in an online dermatology specialised pharmacy and on many occasions I find myself lacking the required knowledge or confidence.<br></div><div>This learning will help me to council patients with confidence, be able to recognise from their photos and their answers of the consultation, what is the skin condition and advise them accordingly with high knowledge of the field.<br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "How are you planning to learn it?",
+                  "answer": "<div>I plan to learn the different dermatology topics of the Dermatology E-Learning Program through my CPPE Account. I will also try to find any reliable and relevant articles on these topics online and on suitable journals or textbooks. Finally, I will try to discuss and ask as much as possible my colleague, who is in that field for a longer time and thus with enhanced experience.&nbsp;<br></div><div>For the future, I also consider to undertake the Online Msc Dermatology in Clinical Practice that is available from the University of South Wales.<br></div>"
+                }
+              ]
+            },
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning has benefited the people using your services",
+                  "answer": "<div>I learnt much more about the most common skin issues like acne, rosacea or pigmentation but also others. Especially for acne, which I would say is by far the number one reason of concern for which mostly young patients are contacting us. I found myself improving significantly my knowledge and my capability of recognising different kinds of acne (i.e. Acne Vulgaris, Pustules, Nodules, Cystic Acne, etc) and treatment approach. <br></div><div>I ascertained my improvement as I started contacting less and less the Consultant Dermatologist of the Pharmacy for advice and guidance. This is something that my colleague noticed too and so confirmed my development in the area. I felt very satisfied and happy when performing a phone consultation with a patient with acne, I was able to answer all enquiries of the patient with confidence, provide extra information and advice. At the end of that call, patient thanked me with warmth and expressed her pleasure and how helpful our discussion was. This was very important to me as in the past, in most cases I would have had to say to the patient that I will need to ask the consultant dermatologist for further advice and get back to them, which although necessary on some occasions, usually can sound inconvenient for the patient and minimises the connection and effective communication between me and patients. Now, I can speak to them with certainty and enhanced knowledge and that is recognisable by them.<br></div><div>To conclude, I would say my skills and confidence in counselling patients with dermatological concerns has improved considerably, but of course there is still place for improvement.<br></div><div><br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      },
+      {
+        "id": "fa69e483-99dc-4f0c-831e-dd66b9f42bb7",
+        "type": 2,
+        "typeAsString": "Unplanned",
+        "title": "Depression in Young People",
+        "form": {
+          "dynamicFormId": "3e3066b3-ca8a-4d61-8685-4c95b4e47e93",
+          "type": 4,
+          "title": "Unplanned CPD",
+          "questionGroups": [
+            {
+              "title": null,
+              "body": null,
+              "questions": [
+                {
+                  "type": 256,
+                  "title": "Describe an unplanned event or activity that enabled you to learn something new or refresh your knowledge or skills",
+                  "answer": "<div>I was reading one of the Clinical Pharmacist issues from the Pharmaceutical Journal and I came across a CPD Article with title Depression in Young People: Identification and Management. Although, I haven't thought to specifically concern myself with the topic of Depression at that point, I found the title and format of the article very interesting and I went through while I also completed the CPD Module online at the Pharmaceutical Journal website. <br></div><div>I refreshed my knowledge about the four-tier strategic framework of CAMHS, how to diagnose depression, the various treatment options available and the role of the Pharmacist and Pharmacy Team in managing and supporting young people.<br></div>"
+                },
+                {
+                  "type": 256,
+                  "title": "Give an example of how this learning benefited the people using your services",
+                  "answer": "<div>Depression unfortunately is a common condition not only among adults but also young people or children. Due to the nature of the condition, it is essential for healthcare professionals to be well informed and know how to manage situations where people are affected by depression. <br></div><div>Having completed this module, I felt it helped me to be more conscious in identifying depression but also being more informative to the patients when dispensing their antidepressant medication. I found it useful not only as part of my locum pharmacy work but also at The Organic Pharmacy that I work. Although, there is no allopathic medication there, it is a place that many people and many young individuals are approaching due to depression and they are looking for a natural treatment. There, I now have the skills and ability to ask the patient specific questions about their symptoms (International Statistical Classification of Disease Symptoms for the Diagnosis of Depression) and if I feel necessary, I politely refer them to their doctor (appropriate Tier of CAMHS)<br></div><div>In the case of the community pharmacy, when I received a prescription for depression recently, I found myself being increasingly informative to them regarding their treatment, explaining the delay onset, time course, that they shouldn't stop them suddenly, the potential side effects and also reassure them that their antidepressant therapy is not addictive and is extremely important to follow their treatment plan as directed. Being ready to provide all of these information to the patient, was obviously appreciated and as the mother said, felt reassured.<br></div><div>I am now even more interested in the topic of depression and I plan to learn more about it in the near future<br></div>"
+                }
+              ]
+            }
+          ]
+        },
+        "currentReviewerAnnotation": null,
+        "otherReviewerAnnotation": null
+      }
+    ],
+    "isLeadReviewer": true,
+    "currentReviewerAssessment": 0,
+    "currentReviewerAssessmentAsString": "Unknown",
+    "otherReviewerAssessment": 0,
+    "otherReviewerAssessmentAsString": "Unknown",
+    "isFeedbackEditable": false,
+    "feedback": null,
+    "previousFeedback": null,
+    "discussionStatus": null,
+    "discussionStatusAsString": null,
+    "stage": 4,
+    "stageAsString": "Unknown",
+    "messages":  [
+      {
+        "currentUsersMessage": true,
+        "dateTime": "21/1/2019 09:55:07",
+        "text": "Hello fellow reviewer, how are you ?",
+        "userRole": 1,
+        "userRoleAsString": "LeadReviewer"
+      },
+      {
+        "currentUsersMessage": false,
+        "dateTime": "21/1/2019 09:59:07",
+        "text": "Great thanks. Looks like a really interesting CPD entry doesn't it ?",
+        "userRole": 1,
+        "userRoleAsString": "PeerReviewer"
+      },
+      {
+        "currentUsersMessage": true,
+        "dateTime": "21/1/2019 10:05:10",
+        "text": "Yes indeed.",
+        "userRole": 1,
+        "userRoleAsString": "LeadReviewer"
+      }
+    ]
+  }
+}

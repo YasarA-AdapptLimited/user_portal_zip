@@ -1,0 +1,94 @@
+<!---<app-toolbar [title]="'Annotate'" [loading]="loading">
+
+  <div class="toolbar-left">
+    <app-gphc-icon [static]="true" (click)="exit()" [iconType]="'return'"></app-gphc-icon>
+  </div>
+
+  <div class="toolbar-right">
+
+    <app-gphc-icon [static]="true" style="border-right: 1px solid #6c9fb7;" [active]="showHelp" (click)="showHelp = !showHelp"
+      [iconType]="'info'"></app-gphc-icon>
+
+    <app-carousel-nav [items]="items" [selectedIndex]="selectedIndex" (selected)="navigate($event.index)"></app-carousel-nav>
+
+    <app-gphc-icon [disabled]="!review?.currentReviewerAssessment || selectedIndex < items.length-1" [static]="true"
+      [iconType]="'submit'" [label]="'submit & exit'" (click)="saveAssessment()">
+    </app-gphc-icon>
+  </div>
+
+</app-toolbar>-->
+
+<app-review-header>
+
+  <div class="buttons">
+    <button  class="btn no-focus" [disabled]="submitted || (!review?.currentReviewerAssessment || selectedIndex < items.length-1)"
+      (click)="saveAssessment()">
+      <i class="fa  fa-upload"></i>
+      submit
+    </button>
+
+  </div>
+</app-review-header>
+
+<app-collapsible [trigger]="manager.helpVisible$ | async">
+  <app-banner [important]="true">
+    <div class="banner-left">
+
+      <span *ngIf="!submitted">  Read through the revalidation entries that were submitted and annotate where needed to help you with the
+          discussion that will follow between you and your peer reviewer. On the last page you can set your initial assessment.</span>
+          
+      <span *ngIf="submitted">You have already submitted your annotations and initial assessment. This review will move to the discussion stage once the other reviewer has also completed their annotations.</span>
+    </div>
+    <div class="banner-right">
+      <button (click)="manager.closeHelp()" class="btn btn-lg btn-default"
+        style="float:right;background:transparent">OK</button>
+    </div>
+  </app-banner>
+</app-collapsible>
+
+<div class="annotate review-content">
+  <div class="row no-gutters fadein">
+    <div class="col-12">
+      <app-carousel (onScrollStart)="onScrollStart()" (onScrollEnd)="onScrollEnd()" [items]="manager.items" (selectedItem)="saveCurrentEdit()"
+        [$item]="itemTemplate" [selectedIndex]="manager.selectedEntryIndex$ | async" [margin]="1"></app-carousel>
+
+    </div>
+    <ng-template let-item let-i="index" #itemTemplate>
+
+      <div class="row content spread spread-bottom" *ngIf="!item.assessment">
+
+        <div class="col-lg-7 left-col align-space">
+          <section class="annotate-content">
+            <app-cpd-entry [cpdEntry]="item" [typeVisible]="true"></app-cpd-entry>
+          </section>
+        </div>
+        <div class="col-lg-5 right-col align-space" >
+          <section class="annotate-content">
+            <h4>Your annotation</h4>
+            <div style="margin-top: 20px">
+              <app-text-editor [readonly]="submitted" [placeholder]="'Your annotation...'" (contentChanged)="update(item, $event)"
+                [content]="item.currentReviewerAnnotation" [id]="annotation">
+              </app-text-editor>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div *ngIf="item.assessment">
+        <section class="annotate-content">
+          <div class="assessment section-header" style="display:flex">
+            <h4 style="flex-grow: 1">Initial assessment</h4>
+            <app-gphc-icon [iconType]="'info'" [static]="true" (click)="assessmentHelpVisible = !assessmentHelpVisible">
+            </app-gphc-icon>
+          </div>
+          <app-collapsible class="help-block" [trigger]="assessmentHelpVisible">
+            <app-assessment-help></app-assessment-help>
+          </app-collapsible>
+          <app-assessment [readonly]="submitted" [review]="review"></app-assessment>
+        </section>
+      </div>
+
+
+
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<app-remediation-letter *ngIf="letterType===LetterType.Remediation">
+</app-remediation-letter>
+
+<app-nor-letter *ngIf="letterType===LetterType.NoticeOfRemoval">
+</app-nor-letter>
+
+<app-noir-letter *ngIf="letterType===LetterType.NoticeOfIntentToRemove">
+</app-noir-letter>
+
+<app-noe-letter *ngIf="letterType===LetterType.NoticeOfEntry" [isRegistrant]="true">
+</app-noe-letter>
+
+<app-training-record-letter *ngIf="letterType===LetterType.TrainingRecord">
+</app-training-record-letter>
+
+<app-renewal-letter *ngIf="letterType===LetterType.Renewal">
+</app-renewal-letter>
+
+
+<app-noe-letter [isRegistrant]="false" *ngIf="letterType===LetterType.TechnicianApplicantNoticeOfEntryLetter">
+</app-noe-letter>
+
+<app-assessment-approve-letter *ngIf="letterType===LetterType.AssessmentAttemptApplicationApprovedLetter">
+</app-assessment-approve-letter>
+
+<app-assessment-attempt-pass-letter [isRegistrant]="false"
+  *ngIf="letterType===LetterType.AssessmentAttemptResultPassOutcome">
+</app-assessment-attempt-pass-letter>
+
+<app-assessment-first-second-attempt-fail-letter [isRegistrant]="false"
+  *ngIf="letterType===LetterType.AssessmentAttemptResult1Or2SittingFailOutcome">
+</app-assessment-first-second-attempt-fail-letter>
+
+<app-assessment-third-attempt-fail-letter [isRegistrant]="false"
+  *ngIf="letterType===LetterType.AssessmentAttemptResult3SittingFailOutcome"></app-assessment-third-attempt-fail-letter>
+
+<app-vr-confirmation-letter *ngIf="letterType===LetterType.VoluntaryRemovalIntimationLetter"></app-vr-confirmation-letter> 
+
+<app-revalidation-partial-submission-letter *ngIf="letterType===LetterType.PartialRevalidationSubmitLetter"></app-revalidation-partial-submission-letter>

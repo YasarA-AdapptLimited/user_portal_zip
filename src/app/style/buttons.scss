@@ -1,0 +1,182 @@
+button, input, optgroup, select, textarea {
+  font-family: 'Open sans' !important;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  &:not(.no-click), &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+.btn, .btn-primary, .btn-default {
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  white-space: normal;
+} 
+
+.notificaton-banner {
+  .btn, .btn-primary, .btn-default {
+    border-radius: 30px !important;
+  }
+}
+
+.btn-default {
+  color: $gphc-purple;
+  transition: color 200ms linear;
+  background: white;
+}
+
+.btn-selected {
+  background: $gphc-purple !important;
+  color: white !important;
+}
+
+.btn-round {
+  height: 150px;
+  width: 150px;
+  border-radius: 50% !important;
+  font-size: 1em;
+
+  i {
+      font-size: 5em;
+      margin-top: 0.1em;
+      margin-bottom: 0.1em;
+  }
+  &.btn-default {
+    transition: 200ms linear background-color;
+  }
+
+  &[disabled] {
+    background-color: $grey;
+  }
+
+  &.btn-round-md {
+    height: 100px;
+    width: 100px;
+    font-size: 1.5em;
+
+      i {
+          font-size: 3.2em;
+          margin-top: 0.05em;
+          margin-bottom: 0.05em;
+      }
+  }
+
+  &.btn-round-sm {
+      height: 75px;
+      width: 75px;
+    font-size: 1.2em;
+      i {
+          font-size: 2.5em;
+          margin-top: 0.05em;
+          margin-bottom: 0.05em;
+      }
+  }
+}
+
+.btn-text {
+  color: $gphc-blue;
+  font-weight: 900;
+  margin-top: 5px;
+  &.disabled {
+    color:#b7b7b7
+  }
+}
+
+.btn-center {
+  margin: 0 auto;
+  display: block;
+}
+
+
+.btn:disabled, .btn.disabled {
+  background: #b7b7b7  !important;
+  border-color: #b7b7b7  !important;
+  color: white !important;
+}
+
+.btn-primary {
+  background-color: $gphc-blue;
+  border-color: $gphc-blue !important;
+  color: white !important;
+  font-weight:bold;
+  transition: background-color 200ms linear;
+
+  &:hover, &:focus {
+      background-color: $gphc-purple;
+  }
+}
+
+.btn-success, .btn-message {
+  background-color: $gphc-aqua !important;
+  border-color: $gphc-aqua !important;
+  color: white !important;
+}
+
+.btn-reject {
+  background-color: $error !important;
+  border-color: $error !important;
+  color: white !important;
+}
+
+.btn-default {
+  background-color: #fff;
+  color: $gphc-blue;
+  /*
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.02), 0 0 2px rgba(0, 0, 0, 0.12);
+*/
+  &:hover, &:focus {
+      color: $gphc-purple;
+  }
+
+  &.active {
+      background-color: $gphc-blue !important;
+      border-color: $gphc-blue !important;
+      color: white !important;
+  }
+}
+
+.clickable, .btn, .btn-primary, .btn-secondary, .btn-default {
+  cursor: pointer;
+}
+
+
+.icon-button-light {
+  color:#ccc;
+  height: 35px;
+  vertical-align:middle;
+  transition: color 200ms linear;
+  &:hover, &:focus {
+    color: $gphc-purple;
+  }
+}
+
+.btn-abs {
+  position: absolute;
+  right: 2px;
+  top: -12px;
+}
+
+.button-section {
+  margin: -20px;
+  margin-top: 40px;
+  padding: 10px;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  @media(min-width:768px) {
+    min-height: 230px;
+  }
+  @media(max-width:767px) {
+    min-height: 200px;
+  }
+ 
+}
+
+button.gphc-icon {
+  .circle {
+    border: 2px solid #fff;
+  }
+}

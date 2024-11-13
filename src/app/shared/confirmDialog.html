@@ -1,0 +1,32 @@
+<h3>{{title}}</h3>
+<mat-dialog-content style="max-width:650px;">
+
+  <div class="intro-text" style="margin-top:20px;margin-bottom: 30px;" [innerHTML]="message">
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center" style="flex-grow: 1" *ngIf="allowCancel">
+    <button aria-label="Close" class="btn btn-default btn-round btn-round-sm" mat-dialog-close>
+      <i class="fa fa-close"></i>
+    </button>
+    <div class="btn-text">{{ data.cancelText || 'No' }}</div>
+  </div>
+
+  <div class="text-center" style="flex-grow: 1" *ngIf="allowNext">
+    <button aria-label="Confirm text" class="btn btn-primary btn-round btn-round-sm" [mat-dialog-close]="true"><i
+        class="fa fa-check"></i></button>
+    <div class="btn-text">{{ data.confirmText || 'Yes' }}</div>
+  </div>
+  <div class="text-center" style="flex-grow: 1" *ngIf="confirmProgressReport">
+    <button style="margin: 20px 0;" class="btn btn-primary btn-lg" [mat-dialog-close]="true">
+
+      View your 39 week progress report
+    </button>
+  </div>
+  <div class="text-center" style="flex-grow: 1" *ngIf="confirmFinalDeclaration">
+    <button style="margin: 20px 0;" class="btn btn-primary btn-lg" [mat-dialog-close]="true">
+
+      View your final declaration
+    </button>
+  </div>
+</mat-dialog-actions>

@@ -1,0 +1,10 @@
+<div class="question-wrapper" [class.open]="faq.isOpen">
+  <div faq #faq="faq" #ref class="question" [class.open]="faq.isOpen">
+    <ng-content select="h2" ></ng-content>
+    <h2  [class.open]="faq.isOpen"><i class="fa fa-chevron-down"></i></h2>
+  </div>
+  <div [@openState]="faq.openState" class="answer">
+    <ng-content select="div">
+    </ng-content>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+@media print {
+  app-collapsible, 
+  app-tooltip-container, 
+  app-overlay, 
+  app-fullscreen-spinner, 
+  .footer, 
+  iframe,  
+  .no-print {
+    display: none !important;
+  }
+
+  .page {
+    background: white;
+    .content {
+      max-height: none !important;
+    }
+  }
+
+
+
+}
+@media screen {
+
+  .print-only {
+    display: none !important;
+  }
+}

@@ -1,0 +1,19 @@
+.carousel-container {
+    position: relative;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+

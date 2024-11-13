@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>myGPhC</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Bitter|Open+Sans" rel="stylesheet">
+
+  <!-- height 100% on body mucks up angular material modal -->
+  <style>
+    html,
+    body {
+      font-family: 'Open Sans', sans-serif!important;
+      width: 100%;
+      margin:0;
+    }
+  </style>
+
+  <script src="https://use.fontawesome.com/87697a51aa.js"></script>
+
+</head>
+
+<body>
+
+
+   <style>
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .fadein {
+      animation: fadein 400ms;
+    }
+
+    body {
+      background-color: #fff;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .page {
+      padding-top: 30px;
+      padding-bottom: 40px;
+      background-color: #4fb490;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+
+    .banner {
+      text-align: center;
+      background: #4fb490;
+      position: relative;
+      z-index: 1;
+      padding: 10px 20px;
+    }
+
+    .banner h2 {
+      color: white !important;
+      font-family: Bitter;
+      margin-bottom: 35px;
+    }
+    .banner h3 {
+      padding-top: 20px;
+      color: white !important;
+      margin-bottom: 15px;
+    }
+
+    .loading {
+      padding-top: 60px;
+      padding-bottom: 60px;
+      max-width: 630px;
+      margin: 0 auto;
+    }
+
+    .banner p,
+    .banner .intro-text {
+      color: #fff;
+      font-weight: normal;
+      margin-bottom: 0;
+      line-height: 1.6em;
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width:1024px) {
+      .banner p,
+      .banner .intro-text {
+        font-size: 1.4em;
+      }
+
+    }
+
+
+    .panel {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width:600px) {
+      .panel {
+        margin-top: 0;
+      }
+      .banner p {
+        padding: 0
+      }
+    }
+
+
+
+    p {
+      margin-bottom: 2px;
+    }
+
+
+
+
+    button {
+      padding: 0;
+      border: none;
+      background: transparent;
+      border-radius: 0 !important;
+      font-size: 24px !important;
+      margin-bottom: 10px;
+      width: 100%;
+      border: none !important;
+      outline: none !important;
+      border-radius: 0 !important;
+      white-space: normal;
+      padding: 5px;
+      display: block;
+      text-align: center;
+      font-size: 24px !important;
+      color: white;
+      transition: 200ms linear background-color;
+      margin-bottom: 10px !important;
+    }
+
+
+
+
+    .branding {
+      height: 208px;
+      overflow: hidden;
+      position: relative;
+      background: white;
+    }
+
+    .rings {
+      position: absolute;
+      right: 70px;
+      z-index: 0;
+      width: 260px;
+      -webkit-transform: rotateZ(13deg);
+      transform: rotateZ(0deg);
+    }
+
+    .mygphc {
+      position: absolute;
+      right: 20px;
+      top: 30px;
+    }
+
+    .mygphc-logo {
+      color: #00759b;
+      font-family: 'Bitter';
+      font-weight: bold;
+      font-size: 40px;
+    }
+
+    .logo {
+      display: block;
+      border: none;
+      text-decoration: none !important;
+      padding-left: 45px;
+      padding-top: 45px;
+      padding-bottom: 20px;
+    }
+
+    .logo img {
+      width: 254px;
+    }
+
+    @media (max-width: 767px) {
+      .branding {
+        height: 180px;
+      }
+
+      .rings {
+        width: 210px !important;
+        right: 80px !important;
+      }
+
+
+      .mygphc-logo {
+        font-size: 35px !important;
+      }
+
+      .logo {
+        padding-top: 40px !important;
+        padding-left: 30px;
+
+      }
+      .logo img {
+        width: 214px !important;
+        height: 98px !important;
+      }
+    }
+
+    @media (max-width: 530px) {
+      .mygphc {
+        position: absolute;
+        right: 20px;
+        top: 23px !important;
+
+      }
+      .mygphc-logo {
+        font-size: 25px !important;
+      }
+
+      .branding {
+        height: 125px;
+      }
+
+      .logo {
+        margin-left: 5px;
+        padding-left: 20px;
+        padding-top: 30px !important;
+
+
+      }
+      .logo img {
+        width: 150px !important;
+        height: 69px !important;
+      }
+
+      .rings {
+        display: none;
+      }
+    }
+
+    @media (max-height: 530px) {
+      .branding {
+        height: 125px;
+      }
+
+      .logo {
+        padding-top: 30px !important;
+      }
+      .logo img {
+        width: 150px !important;
+        height: 69px !important;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .mygphc {
+        top: 23px !important;
+      }
+
+      .mygphc-logo {
+        font-size: 23px !important;
+      }
+    }
+
+    .navbar-inner {
+      height: 58px;
+      position: relative;
+      padding-top: 0;
+      margin-bottom: 0;
+      z-index: 5;
+      background: #00759b;
+    }
+
+
+
+    .page {
+      min-height: calc(100vh - 266px);
+      background: #4fb490;
+      padding: 0 40px 0 40px;
+      padding-bottom: 100px;
+      /* max-width: 600px; */
+    }
+
+    p {
+      color: #fff;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+
+    @media(max-width:1024px) {
+
+      h2 {
+        font-size: 35px;
+      }
+    }
+
+    @media(max-width:767px) {
+      h2 {
+        margin-top: 20px;
+        font-size: 30px;
+      }
+      h3 {
+
+        font-size: 20px;
+      }
+    }
+
+
+
+    @media (max-width:767px) {
+      .page {
+        min-height: calc(100vh - 238px);
+        padding: 10px 0 10px 0;
+      }
+
+      .loading {
+        padding-top:30px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .page.spread {
+        padding-bottom: 20px;
+      }
+    }
+
+    @media (max-width:530px) {
+      .page {
+        min-height: calc(100vh - 183px);
+      }
+    }
+
+    .page a,
+    .page a:link,
+    .page a:visited,
+    .page .btn-link {
+      color: #026f92;
+      border-bottom: 2px solid #026f92;
+      font-weight: bold;
+      text-decoration: none;
+      /* background-color: yellow; */
+    }
+
+    .page.no-boxes {
+      padding-top: 20px;
+      background: white;
+    }
+
+    div.content {
+      font-weight: normal!important;
+      text-align: left;
+      padding-left: 45px;
+    }
+
+
+
+      </style>
+
+
+ <div class="branding">
+
+    <img src='https://webapp-t1dev-mygphcweb-6eb6.azurewebsites.net/assets/adb2c/images/rings-large.png' class="rings fadein"
+      alt="" aria-hidden="true" />
+
+    <span class="logo">
+      <img src="https://webapp-t1dev-mygphcweb-6eb6.azurewebsites.net/assets/adb2c/images/logo-GPhC-blue-cropped.png" alt="General Pharmaceutical Council logo">
+    </span>
+
+    <div class="mygphc">
+      <span class="mygphc-logo">myGPhC</span>
+    </div>
+  </div>
+
+
+
+
+  <div class="navbar-inner">
+  </div>
+  <div class="page fadein">
+    <div class="banner loading">
+      <i class="fa fa-cogs" style="font-size:9em;color: white;padding-bottom: 30px;"></i>
+      <h2>Site currently unavailable</h2>
+      <div class="content">
+        <p class="intro-text">myGPhC is not currently available while we upgrade to the new system.</p>
+        <p>If you are a pharmacist or pharmacy technician registered with us, <a href="https://www.pharmacyregulation.org/news/mygphc-new-system-upgrade" alt="Find out more about signing up to the new system on our website"> find our more about signing up to the new system on our website</a></p>
+      </div>
+    </div>
+</div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116303383-1"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-116303383-1', {
+            'page_title': 'Site down',
+            'page_path': 'site-down.html'
+          });
+</script>
+
+</body>
+
+</html>

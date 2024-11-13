@@ -1,0 +1,64 @@
+<mat-radio-group *ngIf="!readonly" [class.multi-line]="question.alternatives.length > 2"
+  [id]="question.id"
+   [value]="question.answer">
+
+  <p class="sr-only-custom" aria-label="How to select an answer using the keyboard" tabindex="0">
+    By default no answer is selected, to select "yes" or "no": press <kbd><i class="fa fa-arrow-left"></i>&nbsp;left</kbd> or <kbd>right&nbsp;<i class="fa fa-arrow-right"></i></kbd>.
+  </p>
+
+  <mat-radio-button
+  [aria-label]="alternative.text"
+
+  (change)='alternativeSelections.next(alternative)'
+  *ngFor="let alternative of question.alternatives"
+  [value]="alternative.id">{{alternative.text}}</mat-radio-button>
+</mat-radio-group>
+
+<div  *ngIf="readonly" class="form-control" readonly style="width:auto; display: inline-block; margin-bottom:10px;">
+  <span>{{ selectedAlternativeText }}</span>
+</div>
+
+<app-collapsible  [trigger]="question.wrongAlternative">
+  <p class="form-error" >
+  You must meet this requirement.
+  </p>
+</app-collapsible>
+
+<app-collapsible [trigger]="selectedAlternative === alternative"
+  *ngFor="let alternative of question.alternatives" >
+  <ng-container  *ngFor="let followup of alternative.questions">
+    <app-followup-question *ngIf="!followup.isHidden" [visible]="selectedAlternative === alternative" [readonly]="readonly" [question]="followup" [form]="form">
+    </app-followup-question>
+  </ng-container>
+</app-collapsible>
+
+<app-collapsible [trigger]="selectedAlternative?.showAdditionalInfo && formType === false">
+  <div class="important registrant-message" *ngIf="!isApplicationCCPS">
+      You must <a href="https://www.pharmacyregulation.org/patients-and-public/reporting-concerns/how-we-deal-concerns/declarations-pharmacy-professionals" target="_blank">tell us about this by filling in a <span class="italics">making a declaration form</span></a>, once you have completed this online you will need to enter the declaration reference number in the field below, this will be sent to you in a confirmation email. 
+      We will use the information you give us in the form to assess if you are fit to practise, and if you meet the criteria to register as a pharmacy professional. If do not provide us enough information your application will be delayed.
+      <br><label for="declarationrefnum">Declaration reference number : </label>
+      <input type="text" id="declarationrefnum" name="declarationrefnum" [(ngModel)]="question['referenceNumber']" 
+       (blur)="onReferenceNumberChange($event, selectedAlternative)" [readonly]="readonly" required  [ngClass]="{'read-only-input': readonly}">
+  </div>    
+  <div class="important registrant-message" *ngIf="isApplicationCCPS">
+    You must tell us about this by filling in a <a href="https://www.pharmacyregulation.org/patients-and-public/reporting-concerns/how-we-deal-concerns/declarations-pharmacy-professionals/making-declaration-about-your-fitness-practise" target="_blank"><span class="italics">making a declaration</span></a> form. Once you have completed this online you will need to enter the declaration reference in the field below, this will be sent to you in a confirmation email when you submit.
+    We will use the information you give us in the form to assess if you are fit to practise, and share that information with the organisation you have specified. If do not provide us enough information your application will be delayed.
+      <br><label for="declarationrefnum">Declaration reference number : </label>
+      <input type="text" id="declarationrefnum" name="declarationrefnum" [(ngModel)]="question['referenceNumber']" 
+       (blur)="onReferenceNumberChange($event, selectedAlternative)" [readonly]="readonly" required  [ngClass]="{'read-only-input': readonly}">
+</div>
+</app-collapsible>
+
+<app-collapsible [trigger]="selectedAlternative?.showAdditionalInfo && formType === true">
+  <div class="important registrant-message">
+
+    You must <a href="https://www.pharmacyregulation.org/patients-and-public/reporting-concerns/how-we-deal-concerns/declarations-pharmacy-professionals" target="_blank">tell us about this by filling in a <span class="italics">making a declaration form</span></a>, 
+    once you have completed this online you will need to enter the declaration reference in the field below, 
+    this will be sent to you in a confirmation email when you submit. We will use the information you give us in the form to assess if 
+    you are fit to practise and whether it is in the public interest to remove your entry from the register. If do not provide us enough information your application will be delayed.
+      
+    <br><label for="declarationrefnum">Declaration reference number : </label>
+      <input type="text" id="declarationrefnum" name="declarationrefnum" [(ngModel)]="question['referenceNumber']" 
+       (blur)="onReferenceNumberChange($event, selectedAlternative)" [readonly]="readonly" required [ngClass]="{'read-only-input': readonly}">
+  </div>
+</app-collapsible>

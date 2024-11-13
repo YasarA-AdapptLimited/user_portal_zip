@@ -1,0 +1,17 @@
+<div *ngIf="progress" class="progress-wrapper no-focus" [ngClass]="sizeName" tabindex="-1">
+  <button (click)="onClick($event)" [tabindex]="hasClick ? 0 : -1" [class.no-click]="!hasClick" [appTooltip]="tooltip"
+    class="no-pad no-focus" [class.completed]="progress.completed" [name]="description" [attr.aria-label]="description">
+    <div class="current currentIndy" [class.extra-small]="extraSmall" [class.exsmall]="exSmall"
+      [class.normal]="!!progressLabel" [class.warning]="progress.error" *ngIf="!progress.completed && !noLabel"
+      [innerText]="progressLabel || currentValue"></div>
+
+    <round-progress *ngIf="!progress.completed" [background]="background" [color]="getColor()" [stroke]="stroke"
+      [radius]="radius" [current]="progress.progress" [max]="progress.total" [responsive]="true" aria-label="progress indicator">
+    </round-progress>
+    <p class="sr-only-custom" aria-label="Progress indicator" aria-live="polite" role="alert" tabindex="0">
+      You have completed {{progress.progress}} of {{progress.total}} steps.
+    </p>
+
+    <i *ngIf="progress.completed" class="fa fa-check-circle completed" aria-hidden="true"></i>
+  </button>
+</div>

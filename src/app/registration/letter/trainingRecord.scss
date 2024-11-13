@@ -1,0 +1,65 @@
+@import '../../style/variables.scss';
+
+:host {
+
+  .training-record {
+
+    margin-top: 80px !important;
+
+    h1, h2, h3 {
+      color: $gphc-blue !important;
+      font-family: 'Open sans', sans-serif !important;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.3rem !important;
+      line-height: 1.4em !important;
+    }
+
+    table.trainingDetails {
+      background-color: $light-grey!important;
+      font-size: .9em;
+      th + th {
+        text-align: left;  
+        padding-left: 3.5em; 
+      }
+      td + td {        
+        text-align: left;  
+        padding-left: 3.5em;      
+      }
+
+      tr > td:first-child {
+        border: 1px;
+        text-align: left;        
+      }
+      tr {
+        margin-bottom: .5em;
+      }
+    }
+    table.traineeDetails {
+      background-color: $light-grey!important;
+
+      th , td + td {        
+        text-align: left;
+        padding-left: 1em;        
+      }
+
+      tr > td:first-child {
+        border: 1px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      
+    }
+  }
+
+  @media print {
+    section.training-record {
+      margin-top: 0 !important;
+      font-size:0.9em;
+    }
+  }
+ 
+}

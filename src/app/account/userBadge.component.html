@@ -1,0 +1,9 @@
+<app-form-section [link]="link" [badge]="true"  [class.clickable]="!!link">
+  <span class="section-header" tabindex="0" [attr.aria-label]="title">{{title}}</span>
+  <div class="section-body text-center">
+    <i class="fa fa-user-circle user status-icon" aria-label="User graphic" role="img" tabindex="0"></i>
+    <div class="btn-text" tabindex="0">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</app-form-section>

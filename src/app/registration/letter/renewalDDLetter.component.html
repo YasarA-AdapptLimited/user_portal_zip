@@ -1,0 +1,127 @@
+<section class="letter-header">
+
+  <app-letter-header [registrant]="auth.user.registrant" [registrantAddress]="auth.user.address">
+  </app-letter-header>
+  
+  <section class="notice-of-entry section-to-print">
+    <section class="notice-of-entry-wrapper">
+
+ 
+
+      <h2 class="notice">Your registration as a {{registrantType}} is due for renewal
+      </h2>
+
+      <div class="main-content">
+
+        <p>
+          Your registration as a {{registrantType}} will expire on {{ letter?.data.ExpiryDate | date: 'd MMMM yyyy' }}.
+          If you want to continue to practise as a {{registrantType}} after this date, you must renew your registration
+          at least two months before it is due to expire, by {{ letter?.data.RenewalDate | date: 'd MMMM yyyy' }}. This
+          requirement is set out in the Pharmacy Order 2010.
+
+        </p>
+
+        <p>
+          To renew your registration, you must log on to www.myGPhC.org and:
+        </p>
+        <ul>
+          <li>complete a set of declarations to confirm that you are fit to practise as a pharmacy professional</li>
+          <li>submit your revalidation records covering your previous 12-month period of registration</li>
+        </ul>
+
+        <h3>Your declarations</h3>
+        <p>You must log on to www.myGPhC.org to make your declarations, by the date set out below. If you miss this
+          deadline, your Direct Debit will not be collected and you will need to pay by card. </p>
+
+        <h3>Your payment</h3>
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="table-border">
+              <h2>Your registration renewal</h2>
+              <table class="table renewal-details">
+                <tr>
+                  <td>When you need to renew by:</td>
+                  <td>{{ letter?.data.DDDeclarationDeadline | date: 'd MMMM yyyy' }}</td>
+                </tr>
+                <tr>
+                  <td>Your registration number:</td>
+                  <td>{{registrant.registrationNumber}}</td>
+                </tr>
+
+              </table>
+
+              <p class="gphc-blue">If you don’t make your declarations in time your direct debit will be cancelled and
+                you will need to renew with a debit or credit card payment. </p>
+
+
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="table-border">
+              <h2>Your Direct Debit payment schedule</h2>
+              <table class="table renewal-details">
+
+                <tr>
+                  <th>Direct Debit date</th>
+                  <th>Renewal fee to be taken</th>
+                </tr>
+
+                <tr *ngFor="let item of letter.data.DirectDebitPayments">
+                  <td>{{item.Date | date: 'dd/MM/yyyy'}}</td>
+                  <td style="text-align:right">{{item.Amount | currency: 'GBP' : 'symbol' : '.2'}}</td>
+                </tr>
+
+
+
+              </table>
+
+              <p class="gphc-blue">If you don’t make your declarations in time your direct debit will be cancelled and
+                you will need to renew with a debit or credit card payment. </p>
+
+            </div>
+          </div>
+        </div>
+        <p>Your current method of payment is Direct Debit. This means that your fee payment is already set up. See the
+          payment schedule to see when your fee payment will be taken. <b>This will happen automatically if you complete
+            your renewal declarations by the date set out above.</b></p>
+
+
+        <h3>If you do not renew by {{ letter?.data.RenewalDate | date: 'd MMMM yyyy' }}</h3>
+        <p>
+          If you don’t renew your registration by the date above, we will take action to remove your entry from the
+          register when your registration expires. You are not able to practise as a {{registrantType}} unless you are
+          registered.
+        </p>
+
+        <h3>Meeting the revalidation requirement</h3>
+        <p>You can find more about what you need to record and submit in the revalidation framework. The framework and
+          other supporting materials are available on our website at <a
+            href="https://www.pharmacyregulation.org/pharmacists/revalidation-renewal/renew-your-registration"
+            target="_gphc_main_site">www.pharmacyregulation.org/revalidation</a> </p>
+
+        <h3>If you do not want to renew your registration</h3>
+        <p>If you’re not intending to renew your registration, tell us that you no longer want to be registered by
+          completing an <span style="font-style:italic">Application for voluntary removal form</span>, available on our
+          website. This helps us to keep the
+          register information accurate and allows you to choose when you leave the register. There is no charge to
+          leave
+          the register.</p>
+        <p>
+          If you need more information about renewing your registration, please go to <a
+            href="https://www.pharmacyregulation.org/renew"
+            target="_gphc_main_site">www.pharmacyregulation.org/renew</a> or email our Customer Contact Centre at <a
+            href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a>.
+        </p>
+
+        <p>
+          I look forward to your renewing your registration with the General Pharmaceutical Council for the coming year,
+          and to working together to promote the protection of patients and the public.
+        </p>
+
+        <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+      </div>
+
+    </section>
+  </section>
+</section>

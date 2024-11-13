@@ -1,0 +1,62 @@
+@import "../style/variables";
+
+:host {
+
+  @media (min-width: 768px) {
+    .content {
+      padding: 40px;
+    }
+    section { margin-top: 0;}
+  }
+
+  @media (max-width: 767px) {
+    .content {
+      padding-left: 0 !important; 
+      padding-right: 0 !important; 
+    }
+  }
+  
+
+
+  .receipt {
+      width: 100%;
+      min-height: 300px;
+      overflow: auto;
+
+      @media (min-width: 768px) {
+        padding: 40px;
+      }
+      @media screen {
+        @media (max-width: 500px) {
+          font-size:0.8em;
+        }
+      }
+     
+  }
+
+  h1 {
+      margin-bottom: 20px;
+  }
+  h2 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+  .logo {
+      width: 180px;
+      margin-top: 20px;
+      margin-bottom: 60px;
+  }
+
+  .disclaimer {
+    background: lighten($gphc-background, 5%);
+    padding: 18px;
+  }
+
+  table.table-padding {
+    margin-bottom: 2em;
+  }
+
+  .button-container .btn-round:focus {
+    box-shadow: 0 0 0 7px $gphc-accent-yellow !important;
+  }
+}

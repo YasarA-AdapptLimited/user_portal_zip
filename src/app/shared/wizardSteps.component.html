@@ -1,0 +1,14 @@
+
+<ul class="wizard-steps" >
+  <li *ngFor="let step of steps;  let i=index" 
+  [ngClass]="{'current': currentStep === i, 'completed': currentStep > i}" 
+  >
+  <!--
+  <div class="dot">
+    <i *ngIf="currentStep > i" class="fa fa-check-circle completed"></i>
+  </div>
+  -->
+  <i *ngIf="i > 0"  class="fa fa-long-arrow-right"></i>
+  <span class="name">{{step.name}}</span>
+</li>
+</ul>

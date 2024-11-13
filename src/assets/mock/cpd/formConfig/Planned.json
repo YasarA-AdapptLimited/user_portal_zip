@@ -1,0 +1,74 @@
+{
+	"id": null,
+	"dynamicFormId": "08c8cbd0-9d7c-46f4-8d17-6a044986c75a",
+	"formTitle": "Planned CPD Entry",
+	"formBody": "This is a previously planned event, and not something that just happened to take place. The expectation is that your CPD Submission will contain at least two planned events.",
+	"questionGroups": [{
+		"title": "To be filled out before the event.",
+		"body": null,
+		"questions": [{
+			"id": "b94ff6f9-60df-4dc1-86b7-46f5948d2c14",
+			"shortName": "PCPD_Q1",
+			"title": "When will this learning opportunity take place?",
+			"body": null,
+			"tooltip": null,
+			"type": 24,
+			"min": null,
+			"max": null,
+			"isRequired": false,
+			"answer": null,
+			"alternatives": [],
+			"date": null,
+			"time": null
+		},
+		{
+			"id": "51744616-6da7-488a-8fd7-76b2ed19ca79",
+			"shortName": "PCPD_Q2",
+			"title": "What are you planning to learn?",
+			"body": "Write a description of the expected outcome from this event or meeting.",
+			"tooltip": "Write a description of the expected outcome from this event or meeting.",
+			"type": 256,
+			"min": null,
+			"max": null,
+			"isRequired": false,
+			"answer": null,
+			"alternatives": [],
+			"date": null,
+			"time": null
+		},
+		{
+			"id": "237edf3a-941c-466d-a893-86a30f43e659",
+			"shortName": "PCPD_Q3",
+			"title": "How are you planning to learn it?",
+			"body": "Write a description of the event or meeting.",
+			"tooltip": "Write a description of the event or meeting.",
+			"type": 256,
+			"min": null,
+			"max": null,
+			"isRequired": false,
+			"answer": null,
+			"alternatives": [],
+			"date": null,
+			"time": null
+		}]
+	},
+	{
+		"title": "To be filled out after the event.",
+		"body": null,
+		"questions": [{
+			"id": "c217f433-5138-460d-84af-2baf6d46fba9",
+			"shortName": "PCPD_Q4",
+			"title": "Give an example of how this learning benefited your patients or service users?",
+			"body": "Explain the actual learnings from this planned event.",
+			"tooltip": "Explain the actual learnings from this planned event.",
+			"type": 256,
+			"min": null,
+			"max": null,
+			"isRequired": false,
+			"answer": null,
+			"alternatives": [],
+			"date": null,
+			"time": null
+		}]
+	}]
+}

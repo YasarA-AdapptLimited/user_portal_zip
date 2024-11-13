@@ -1,0 +1,42 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>
+        {{ title }}
+      </div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]='true' class="headingIcon"></app-gphc-icon>
+    </h2>
+  </div>
+  <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+    <div class="help-text">
+      <p>
+       Please include any comments you like to make about your progress report. These comments will not be shared
+       with your designated supervisor but will be for your own records
+      </p>
+    </div>
+  </app-collapsible>
+
+  <div class="form-group" style="padding-top: 20px;" [class.invalid]=" traineefeed.invalid && traineefeed.touched">
+    <label for="traineeComments">Trainee comments</label>
+
+
+    <textarea id="traineeComments" class="form-control" #traineeFeedbackInput name="traineeFeedbackOnTutorAssessment"
+      id="traineeFeedbackOnTutorAssessment" [(ngModel)]="traineeFeedbackOnTutorAssessment" #traineefeed="ngModel"
+      maxlength="maxChars" (ngModelChange)="validate()">
+  </textarea>
+    <p class="form-error" *ngIf="traineeFeedbackOnTutorAssessment && traineeFeedbackOnTutorAssessment.length > 2000 ">
+      You can only enter a maximum of 2000 characters in this field
+    </p>
+    <!--<app-collapsible [trigger]="traineefeed.valid || traineefeed.touched">
+      <p class="mt-2">
+        {{characterleft}} charcter(s) left
+      </p>
+    </app-collapsible>-->
+    <app-collapsible [trigger]="!!serverErrors.length">
+      <app-validation-errors [errors]="serverErrors"></app-validation-errors>
+    </app-collapsible>
+  </div>
+
+
+</ng-template>

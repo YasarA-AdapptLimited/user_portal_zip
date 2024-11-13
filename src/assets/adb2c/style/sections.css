@@ -1,0 +1,42 @@
+section {
+  background: white;
+  padding: 20px;
+  padding-top: 25px;
+  margin-top: 20px;
+}
+
+section h2, .intro {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  color: #00759b;
+  font-weight: 900;
+  font-size: 32px;
+  font-family: 'Bitter';
+  line-height: 1.2em;
+}
+
+.section-header-container {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  section {
+    margin-top: 0 !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  section h2 {
+    font-size: 26px;
+  }
+  section h3 {
+    font-size: 20px;
+  }
+  section p.intro-text {
+    margin-bottom: 20px;
+  }
+  .section-body-container {
+    padding-top: 20px;
+  }
+}

@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label for="email">Email</label>
+  <input id="email" class="form-control" tabindex="-1" readonly [value]="getEmailValue()" type="email"/>
+  <div *ngIf="contact?.awaitingEmailConfirmation" style="padding-top: 10px">
+    <div class="important">You have requested to change your email address, but have not yet responded to the confirmation email we sent to your
+      new address.</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="mobileNumber">UK mobile phone number</label>
+  <input id="mobileNumber" class="form-control" tabindex="-1" readonly [value]="contact?.mobilePhone" />
+</div>
+
+<div class="form-group">
+  <label for="homeNumber">Home phone number</label>
+  <input id="homeNumber" class="form-control" tabindex="-1" readonly [value]="contact?.telephone1" />
+</div>

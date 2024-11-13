@@ -1,0 +1,71 @@
+<div class="top-nav">
+
+  <button (click)="exit()" aria-label="Back" class="btn btn-back">
+    <i class="fa fa-arrow-left"></i>
+    Back to revalidation
+  </button>
+  <div style="flex-grow: 1">
+
+  </div>
+
+</div>
+<app-banner2 [info]="true" heading="Revalidation" [subHeading]="title">
+
+  <div class="toolbar-content" *ngIf="revalidation">
+    <!---
+    <button class="btn no-focus" >
+      <i class="fa fa-info"></i>
+      help
+    </button>-->
+
+    <app-carousel-nav [items]="revalidation.entries" label="entries" [selectedIndex]="selectedEntryIndex$ | async"
+      (onIndexSelected)="selectedEntryIndex$.next($event.index)">
+    </app-carousel-nav>
+
+
+  </div>
+
+</app-banner2>
+
+<div class="feedback review-content fadein" *ngIf="revalidation">
+
+  <div class="row content spread" style="padding-bottom:0">
+
+    <div class="col-md-6 left-col no-print">
+
+      <app-carousel [items]="revalidation.entries" [$item]="itemTemplate" [$prev]="prevTemplate" [$next]="nextTemplate"
+        [selectedIndex]="selectedEntryIndex$ | async">
+      </app-carousel>
+
+      <ng-template let-item let-i="index" #itemTemplate>
+        <div class="template-container">
+          <section style="margin-bottom: 40px;">
+            <app-cpd-entry [cpdEntry]="item" [typeVisible]="false" [annotationsVisible]="true"></app-cpd-entry>
+          </section>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="print-only">
+      <section *ngFor="let item of revalidation.entries" >
+        <app-cpd-entry style="display:block; page-break-after: always;" [cpdEntry]="item" [typeVisible]="false" [annotationsVisible]="true"></app-cpd-entry>
+      </section>
+    </div>
+
+    <div class="col-md-6 right-col" >
+
+      <section  class="feedback-sections-container fadein" *ngIf="feedback" style="display:block;page-break-before: always;">
+        <h4>Feedback</h4>
+        <div *ngFor="let section of sections">
+          <h5>
+            {{section.title}}
+          </h5>
+          <div class="feedback" [innerHTML]="feedback[section.feedbackType]">
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+</div>

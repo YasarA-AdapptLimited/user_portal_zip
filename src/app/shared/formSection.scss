@@ -1,0 +1,88 @@
+@import "../style/variables";
+:host {
+
+  section {
+
+      &:not(.receive-focus) {
+        cursor: normal !important;
+      }
+
+      .section-body-container {
+          i.loading {
+              font-size: 78px;
+              color: $gphc-background;
+              display: none;
+              margin: 0 auto;
+              margin-top: 50px;
+                
+              @media (max-width:767px) {
+                margin-top:25px;
+              }
+
+          }
+      
+          ::ng-deep h3 {
+            font-size: 20px;
+            margin: 20px 0 0 0;
+          }
+      }
+
+      .section-header-container {
+          position: relative;
+          padding-bottom: 15px;
+          font-family: 'Bitter', serif !important;
+          font-size: 28px;
+          font-weight: 900;
+          color: $gphc-blue;
+
+          &.primary {
+              color: $gphc-purple !important;
+              font-size: 2.3em;
+              padding-top: 15px;
+              padding-bottom: 25px;
+              line-height: 1.1;
+          }
+
+          i.loading {
+              font-size: 46px;
+              color: $gphc-background;
+              display: none;
+              position: absolute;
+              right: -10px;
+              top: 0;
+          }
+          h2, h3, h4, .section-header {
+            color: $gphc-blue;
+            font-weight: bold;
+          }
+          @media (max-width:767px) {
+          
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 24px;
+            h2, h3, h4, .section-header {
+            
+              margin-top:10px;
+            }
+            ::ng-deep .gphc-icon-wrapper {
+              top: 4px !important;
+              .gphc-icon.info:not(.active):not(:hover) {
+                .circle {
+                  background-color: $gphc-aqua !important;
+                }
+              }
+            }
+          }
+      }
+  }
+
+  section.loading, section.saving {
+      i.loading {
+          display: block !important;
+      }
+
+      app-gphc-icon {
+          display: none;
+      }
+  }
+}

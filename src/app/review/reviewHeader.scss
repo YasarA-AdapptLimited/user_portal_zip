@@ -1,0 +1,79 @@
+@import '../style/variables';
+
+
+:host {
+
+
+  ::ng-deep .banner-left p.intro-text {
+    margin-bottom: 30px !important;
+    line-height: 1.7em;
+  }
+
+ 
+
+
+  .lead-reviewer.badge {
+    background-color: $gphc-accent-fushia;
+    color: white;
+
+  }
+  .secondary-reviewer.badge {
+    background-color: grey;
+    color: white;
+    
+  }
+
+  .content {
+    padding: 0 20px 0 20px !important;
+  }
+
+  ::ng-deep h4 {
+   margin-bottom: 20px;
+  }
+
+
+  ::ng-deep .banner .header .toolbar-content {
+    padding-right: 0 !important;
+  }
+  ::ng-deep .banner .header .toolbar-content .btn {
+    margin-right: 0 !important;
+  }
+  ::ng-deep app-banner2 {
+
+    .header .title {
+      padding-left: 20px !important;
+    }
+
+      button:focus {
+        outline: none;
+        box-shadow: none;
+      }
+      button.active {
+        background: $gphc-purple;
+      }
+      button.open {
+        background: #024e67;
+      }
+      button[disabled] {
+        background: transparent !important;
+        opacity:0.2;
+      }
+
+
+    }
+  .top-nav {
+    display: flex;
+    background: #024e67;
+    align-items: center;
+    color: white;
+    button {
+      color: white;
+    }
+    padding-right: 20px;
+  }
+
+
+
+
+
+}

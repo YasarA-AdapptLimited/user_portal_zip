@@ -1,0 +1,16 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div class="pt-2 pb-2">
+        Personal details
+      </div>
+    </h2>
+  </div>
+  <section>
+    <section>
+      <app-applicant [isAssessmentReport]="true" [(ngModel)]="applicant" [touched]="touched" (ngModelChange)="update()"></app-applicant>
+    </section>
+
+  </section>
+
+</ng-template>

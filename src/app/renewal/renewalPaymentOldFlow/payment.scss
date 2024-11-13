@@ -1,0 +1,25 @@
+@import '../../style/variables';
+
+
+section:not(:first-child) h2 {
+  border-top: 12px solid $light-grey;
+  margin-top: 60px;
+  padding-top: 30px;
+  margin-bottom: 20px;
+  margin-left: -8px;
+  padding-left: 20px;
+  margin-right: -8px;
+  padding-right: 20px;
+}
+
+mat-radio-button {
+  margin: 20px!important;
+}
+::ng-deep .mat-checkbox-inner-container {
+  margin-left: 20px !important;
+  margin-right:  20px !important;
+}
+
+::ng-deep .mat-checkbox-label {
+  white-space: normal !important;
+}

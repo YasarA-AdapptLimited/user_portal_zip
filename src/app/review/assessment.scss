@@ -1,0 +1,57 @@
+@import "../style/variables";
+
+:host {
+
+
+  .performance {
+    display: flex;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+  }
+
+  .section-header {
+    position: relative;
+  }
+
+  .assessment, .performance-indicator {
+    flex-grow: 1;
+  }
+
+  .performance-indicator {
+    line-height: 1.4em !important;
+  }
+
+  @media (max-width:667px) {
+    .performance {
+      flex-direction:column;
+    }
+    .performance-indicator {
+      margin-bottom:7px;
+      margin-right: 0;
+    }
+    .assessment {
+      height:50px;
+      margin-top: -10px;
+      margin-bottom:10px;
+    }
+  }
+
+
+  .assessment-items {
+    display:flex;
+    flex-direction:column;
+  }
+  .assessment {
+    height: 70px;
+    text-align: center;
+    color: $gphc-blue;
+    i {
+      font-size: 3em;
+        .performance-vertical & {
+          font-size: 2em;
+        }
+    }
+    
+  }
+}

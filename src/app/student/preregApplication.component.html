@@ -1,0 +1,120 @@
+<div class="content row no-gutters">
+  <div class="col-lg-9 col-md-12 form-column">
+
+    <app-banner [loading]="loading" [error]="loadingError" [application]="true" [progressDark]="true">
+      <div class="banner-left">
+
+        <div style="display:flex;align-items:center">
+          <h1 style="flex-grow:1">Application for the foundation training year</h1>
+          <div class="d-md-none" style="flex-grow:1"></div>
+
+          <app-gphc-icon style="margin-bottom: 20px;" class="d-lg-none" [matMenuTriggerFor]="menu" [static]="true"
+            label="Steps" iconType="list"></app-gphc-icon>
+          <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <app-form-stepper-menu [summary]="formStepperService.summary$ | async" (navigate)="goToStep($event)">
+            </app-form-stepper-menu>
+          </mat-menu>
+        </div>
+
+        <p *ngIf="loadingError" class="intro-text">
+          <i class="fa fa-warning"></i> An error occurred while attempting to load your application
+        </p>
+
+      </div>
+    </app-banner>
+
+    <div *ngIf="!loading && !!application">
+
+      <ng-container *ngIf="applicationOpen else applicationClosed">
+
+
+        <div *ngIf="ineligible" class="form-control" style="font-size: 1.2em; padding: 40px;line-height: 1.2em">
+          <p>This application has been marked as ineligible.</p>
+          <app-prereg-application-review [readonly]="true" [application]="application"></app-prereg-application-review>
+        </div>
+
+        <a href="https://www.pharmacyregulation.org/students-and-trainees/pharmacist-education-and-training/foundation-training-scheme/foundation-training-placements"
+          target="_blank">View our online guidance for your application</a>
+        <app-prereg-application-review *ngIf="application.activeForm.readonly" [readonly]="true"
+          [application]="application"></app-prereg-application-review>
+
+        <app-form-stepper *ngIf="!application.activeForm.readonly" [ready]="ready" [stepChange]="stepChange()"
+          (stepChanged)="stepChanged($event)" [saving]="saving" [maxStep]="maxStep" [minStep]="minStep">
+
+          <app-personal-details-step [application]="application">
+          </app-personal-details-step>
+
+          <app-placement-step [application]="application"></app-placement-step>
+
+          <app-ftp-declaration-step [application]="application">
+          </app-ftp-declaration-step>
+
+          <app-overall-declaration-step [application]="application">
+          </app-overall-declaration-step>
+
+          <app-supporting-documents-step [application]="application">
+          </app-supporting-documents-step>
+
+          <app-equality-diversity-step [application]="application">
+          </app-equality-diversity-step>
+
+          <app-prereg-review-step [application]="application" (navigate)="goToStepId($event)"></app-prereg-review-step>
+
+          <app-learning-contract-step [application]="application">
+          </app-learning-contract-step>
+
+          <app-payment-step-old *ngIf="!useNewPaymentFlow" [application]="application"></app-payment-step-old>
+          <app-payment-step *ngIf="useNewPaymentFlow" [application]="application" (savingDetails)="savingDetails($event)" ></app-payment-step>
+
+        </app-form-stepper>
+
+      </ng-container>
+
+    </div>
+
+  </div>
+
+  <div class="col-lg-3 d-none d-lg-block" *ngIf="applicationOpen">
+
+    <div class="toolbar">
+
+      <button *ngIf="!layout.state.fullscreen" (click)="layout.setFullscreen(true)" aria-label="Maximise"
+        class="btn btn-back">
+        <i class="fa fa-window-maximize"></i>
+        &nbsp;<span>Maximise</span>
+      </button>
+      <button *ngIf="layout.state.fullscreen" (click)="layout.setFullscreen(false)" aria-label="Maximise"
+        class="btn btn-back">
+        <i class="fa fa-window-restore"></i>
+        <span>Restore</span>
+      </button>
+
+    </div>
+
+    <div *ngIf="application" class="menu">
+      <app-form-stepper-menu [summary]="formStepperService.summary$ | async" (navigate)="goToStep($event)">
+      </app-form-stepper-menu>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #applicationClosed>
+
+  <div class="col-sm-6 text-center">
+    <app-form-section class="fadein">
+      <span class="section-header">Application</span>
+      <span class="section-body">
+        <div class="text-center">
+          <i class="fa fa-clock-o status-icon notdue " aria-hidden="true" style="font-size: 9em"></i>
+          <div class="btn-text">
+            <p style="font-size: 1.5em;">
+              {{ applicationClosedMessage }}
+            </p>
+          </div>
+        </div>
+      </span>
+    </app-form-section>
+  </div>
+
+</ng-template>

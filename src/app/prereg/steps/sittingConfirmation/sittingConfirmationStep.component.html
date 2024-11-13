@@ -1,0 +1,72 @@
+<ng-template #content>
+
+  <div class="header">
+    <h2>
+      <div>
+        Confirm your training and assessment details
+      </div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp" [static]='true' class="headingIcon"></app-gphc-icon>
+    </h2>
+  </div>
+
+  <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+    <div class="help-text">
+      <p>
+        The information about your training shown here is taken from your pre-registration application form and any approved changes
+        to your training. Please confirm if these details are correct so that we can verify that you meet the criteria to
+        be registered.
+      </p>
+    </div>
+  </app-collapsible>
+
+
+  <section>
+    <h3 [class.error]="touched && trainingConfirmed === false">Training</h3>
+    <p class="important">Please confirm your training details are correct.</p>
+    <app-trainee-placement [application]="application"></app-trainee-placement>
+
+    <div style="margin: 20px 0">
+      <mat-radio-group id="confirmTraining" [(ngModel)]="trainingConfirmed" (ngModelChange)="validate()">
+        <mat-radio-button aria-label="Training details are correct" [value]="true">
+          <h4>Correct</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="Training details are incorrect" [value]="false">
+          <h4>Incorrect</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <app-collapsible [trigger]="trainingConfirmed===false">
+      <p class="important">
+        <a href="https://www.pharmacyregulation.org/about-us/contact-us" target="_gphc_main_site">
+          Please contact us to discuss your training details
+        </a>
+        before continuing with the application form.
+      </p>
+    </app-collapsible>
+  </section>
+
+  <section>
+    <h3 [class.error]="touched && assessmentConfirmed===false">Assessment results</h3>
+    <p class="important">Please confirm your assessment result details are correct.</p>
+    <app-trainee-assessment [application]="application"></app-trainee-assessment>
+
+    <div style="margin: 20px 0">
+      <mat-radio-group id="confirmAssessment" [(ngModel)]="assessmentConfirmed" (ngModelChange)="validate()">
+        <mat-radio-button aria-label="Assessment details are correct" [value]="true">
+          <h4>Correct</h4>
+        </mat-radio-button>
+        <mat-radio-button aria-label="Assessment details are incorrect" [value]="false">
+          <h4>Incorrect</h4>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <app-collapsible [trigger]="assessmentConfirmed===false">
+      <p class="important">
+        <a href="https://www.pharmacyregulation.org/about-us/contact-us">Please contact us to discuss your training details before</a>
+        continuing with the application form.
+      </p>
+    </app-collapsible>
+  </section>
+</ng-template>

@@ -1,0 +1,24 @@
+{
+  "dynamicFormId": "2",
+  "formTitle": "Test form",
+  "formBody": "This form is about email addresses",
+  "type": 1,
+  "questionGroups": [
+    {
+      "title": "Group 1",
+      "body": "Email address",
+      "questions": [
+        {
+          "id": "1",
+          "shortName": "Q1",
+          "title": "Question 1",
+          "type": 32,
+          "body": "What is your email address?",
+          "min": null,
+          "max": null,
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}

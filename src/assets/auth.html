@@ -1,0 +1,13 @@
+<script src="/assets/msal/msal-v0.1.5.js"></script>
+<script>
+  var clientId = 'b9c1d5db-e2fc-49ee-a1a4-588a7be1c3c6';
+  var msal = new Msal.UserAgentApplication(
+    clientId,
+    null,
+    function () { },
+    {
+      cacheLocation: 'localStorage',
+      redirectUri: '',
+      postLogoutRedirectUri: '',
+    });
+</script>

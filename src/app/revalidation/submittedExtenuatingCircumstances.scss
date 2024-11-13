@@ -1,0 +1,41 @@
+@import '../style/variables';
+:host {
+
+
+
+i.letter {
+      color: $gphc-blue;
+      font-size: 153px;
+      @media (max-width: 767px) {
+        font-size:123px
+      }
+  }
+
+
+  .ext-circ-status {
+    line-height: 2em;
+    @media (min-width: 768px) {
+      font-size: 1.2em;
+    }
+  }
+
+  
+  ::ng-deep label , ::ng-deep .label, ::ng-deep h2 {
+    font-family: 'Open Sans', sans-serif !important;
+    color: $gphc-blue;
+    font-weight: bold;
+    font-size: 1.1em;
+ 
+    @media (min-width: 768px) {
+      font-size: 1.2em;
+    }
+
+  }
+  ::ng-deep h2 {
+    padding-bottom: 5px !important;
+  }
+
+
+
+  
+}

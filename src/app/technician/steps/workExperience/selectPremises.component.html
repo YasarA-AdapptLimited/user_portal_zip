@@ -1,0 +1,168 @@
+<app-collapsible [trigger]="item === undefined">
+  <form>
+    <div class="form-group" style="padding-top: 15px">
+      <label for="searchBy" class="mr-3">Search by</label>
+      <mat-radio-group name="premisesSearchBy" id="premisesSearchBy" (ngModelChange)="setFocus()"
+        [(ngModel)]="searchParams.searchBy">
+        <mat-radio-button [value]="PremisesSearchBy.Number" name="number" type="radio">Registration number
+        </mat-radio-button>
+        <mat-radio-button [value]="PremisesSearchBy.Postcode" name="postcode" type="radio">Postcode</mat-radio-button>
+        <mat-radio-button [value]="PremisesSearchBy.NotOnRegister" name="notOnRegister" type="radio">Not on register
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" *ngIf="searchByNumber">
+        <div class="form-group"
+          [class.invalid]="searchParams.searchBy === PremisesSearchBy.Number && ((searched || touched || regNumber.touched ) && regNumber.errors?.required)">
+
+          <input type="search" #focus class="form-control" placeholder="Enter number..." name="regNumber" id="regNumber"
+            required (ngModelChange)="clearNoResults()" #regNumber="ngModel" [(ngModel)]="searchParams.regNumber">
+
+          <app-collapsible
+            [trigger]="searchParams.searchBy === PremisesSearchBy.Number && ((searched || touched || regNumber.touched ) && regNumber.errors?.required)">
+            <p class="form-error">
+              Please enter a registration number
+            </p>
+          </app-collapsible>
+        </div>
+
+      </div>
+
+      <div class="col-md-6" *ngIf="searchByPostcode">
+        <div class="form-group"
+          [class.invalid]="searchParams.searchBy === PremisesSearchBy.Postcode && ((searched || touched || postcode.touched ) && postcode.errors?.required)">
+
+          <input type="text" #focus class="form-control" placeholder="Enter postcode..." id="postcode"
+            [(ngModel)]="searchParams.postcode" required (ngModelChange)="clearNoResults()" #postcode="ngModel"
+            name="postcode">
+          <app-collapsible
+            [trigger]="searchParams.searchBy === PremisesSearchBy.Postcode && ((searched || touched || postcode.touched ) && postcode.errors?.required)">
+            <p class="form-error">
+              You must provide a postcode
+            </p>
+          </app-collapsible>
+        </div>
+      </div>
+
+      <div class="col-md-8" *ngIf="searchByNotOnRegister">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group unregisteredPremiseName" [class.invalid]="searchParams.searchBy === PremisesSearchBy.NotOnRegister && 
+            ((searched || touched || notRegisteredPremise.touched ) && 
+            notRegisteredPremise.errors?.required)">
+              <input type="text" #focus class="form-control" placeholder="Enter premise..." id="notRegisteredPremise"
+                [(ngModel)]="unregisteredPremiseSearchModel.name" required (ngModelChange)="update()"
+                #notRegisteredPremise="ngModel" name="premisesSearch" [class.readonly]="premiseSaved"
+                [disabled]="premiseSaved">
+              <app-collapsible
+                [trigger]="searchParams.searchBy === PremisesSearchBy.NotOnRegister && ((searched || touched || notRegisteredPremise.touched ) && notRegisteredPremise.errors?.required)">
+                <p class="form-error">
+                  You must provide a unregistered premise
+                </p>
+              </app-collapsible>
+            </div>
+          </div>
+          <!-- <div class="col-md-4">
+            <button class="btn btn-default  btn-lg" type="submit" (click)="premiseSaved = !premiseSaved">
+              {{ premiseSaved ? 'Edit' : 'Save' }}
+            </button>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <app-address-edit-technician
+              [(ngModel)]="unregisteredPremiseSearchModel.address" 
+              [touched]="touched"
+              (ngModelChange)="update()"
+              name="unregisteredPremise"
+              ></app-address-edit-technician>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4" *ngIf="!searchByNotOnRegister">
+        <label class="md-up" for="postcode"></label>
+        <button class="btn btn-default  btn-lg" type="submit" (click)="search()">Search</button>
+      </div>
+
+    </div>
+  </form>
+
+  <app-collapsible [trigger]="searching">
+    <div style="display:flex;align-items:center;padding-bottom:10px;">
+      <app-spinner [tiny]="true"></app-spinner>
+      <div style="padding-left:10px">Searching for {{title}}s...</div>
+    </div>
+  </app-collapsible>
+  <app-collapsible [trigger]="!searching && results?.length > 0">
+    <div style="margin-top: 20px">
+      <label id="resultsLabel" [class.error]="touched && !item">Select a {{title}}</label>
+
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Number</th>
+          <th>Owner</th>
+          <th>Address</th>
+          <!-- <th>Site approved to</th>
+          <th>Eligible</th> -->
+        </tr>
+        <tr *ngFor="let item of results" (click)="setSelected(item)" [class.link]="item.eligibleAsTrainingSite"
+          class="hover"  style="font-size:0.8em"
+          [appTooltip]="ineligibleTooltip(item)">
+          <td>{{ item.name }}</td>
+          <td>{{ item.registrationNumber }}</td>
+          <td>{{ item.owner }}</td>
+          <td>{{ item.address }}</td>
+          <!-- <td>{{ item.accreditedTo | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ item.eligibleAsTrainingSite | friendlyBoolean }}</td> -->
+        </tr>
+      </table>
+
+      <div aria-labelledby="resultsLabel" class="form-control" *ngIf="showLoadMore">
+
+        <button class="btn btn-default btn-lg btn-block " (click)="loadMore()" [disabled]="loadingMore">
+          <span *ngIf="!loadingMore">More results...</span>
+          <span *ngIf="loadingMore">Loading....</span>
+        </button>
+        <div *ngIf="loadingMore">
+          <mat-progress-bar aria-label="loading"  mode="indeterminate" color="primary"></mat-progress-bar>
+        </div>
+
+      </div>
+    </div>
+  </app-collapsible>
+
+  <div *ngIf="noResultsVisible">
+
+    <p class="intro-text" *ngIf="searchParams.searchBy === PremisesSearchBy.Number">
+      Couldn't find any {{title}}s with registration number '{{searchParams.regNumber}}'.
+    </p>
+    <p class="intro-text" *ngIf="searchParams.searchBy === PremisesSearchBy.Postcode">
+      Couldn't find any {{title}}s with postcode '{{searchParams.postcode}}'.
+    </p>
+  </div>
+
+</app-collapsible>
+
+<app-collapsible [trigger]="item !== undefined">
+  <div class="row">
+    <div class="col-md-6 limit-width">
+
+      <div *ngIf="item !== undefined" class="form-control" readonly>
+        {{render(item)}}
+      </div>
+
+    </div>
+    <div class="col-md-4">
+
+
+      <button type="button" *ngIf="!readonly" (click)="cancelSelection()" class="btn btn-default btn-lg">Change</button>
+
+    </div>
+  </div>
+</app-collapsible>

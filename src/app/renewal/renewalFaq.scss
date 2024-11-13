@@ -1,0 +1,41 @@
+@import "../style/variables";
+
+:host {
+  section {
+    margin-top: 0;
+  }
+
+    em {
+      font-weight: 900;
+      font-style:normal;
+    }
+
+    h2 > button {
+      text-align: left;
+      font-weight: bold;
+      color: #026f92;
+    }
+
+    h3 {
+      color: black;
+      font-size:1.2em;
+      margin-bottom: 1em;
+    }
+    
+    .faq-button {
+      width: 100%;
+    }
+    
+
+    @media (max-width: 767px) {
+      
+        // h2 {
+        //     font-size: 1.6em;
+        // }
+
+        h2 {
+          font-size: 1.1em;
+      }
+     
+    }
+}

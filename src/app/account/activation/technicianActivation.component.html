@@ -1,0 +1,69 @@
+<section *ngIf="step === 1 && activation" >
+
+  <div class="card">
+    <h2>Technician details</h2>
+
+    <p style="color: #026f92; font-weight: bold;">
+        Enter your name exactly as you would like it to appear on the register, 
+        see the <a href="http://pharmacyregulation.org/pharmacy-technicians/registering-pharmacy-technician/uk-qualified-pharmacy-technician-registration"
+        target="_blank" >
+        application guidance document 
+      </a> 
+      for further details.
+    </p>
+    
+    <div class="form-group">
+      <label for="firstName">
+        First name
+      </label>
+      <input id="firstName" #focus class="form-control" required
+       placeholder="Enter your first name here..." 
+       type="text" [(ngModel)]="activation.forenames" />
+    </div>
+    <div class="form-group">
+      <label for="middleName">
+        Middle name
+      </label>
+      <input id="middleName" #focus class="form-control" 
+      placeholder="Enter your middle name here..." type="text" 
+      [(ngModel)]="activation.middleName" />
+    </div>
+    <div class="form-group">
+      <label for="lastName">
+        Last name
+      </label>
+      <input id="lastName" #focus class="form-control" required 
+      placeholder="Enter your last name here..." type="text" 
+      [(ngModel)]="activation.surname" />
+    </div>
+
+
+    <app-dob (selected)="dobSelected($event)"></app-dob>
+
+    <app-collapsible [trigger]="activationFailed">
+      <div class="form-error" style="text-align:center;font-size:18px;padding:10px;">
+        <app-validation-errors [errors]="serverErrors"></app-validation-errors>
+      </div>
+    </app-collapsible>
+
+
+    <app-collapsible [trigger]="!loading"  class="padded">
+      <button [disabled]="!activation.forenames || !activation.surname || !activation.dob" class="btn btn-primary btn-block"
+        (click)="tempSignUp()">Create my account</button>
+        <button class="btn btn-default btn-block" (click)="prev()">Cancel</button>
+    </app-collapsible>
+
+    <app-collapsible [trigger]="loading" class="spinner-container">
+      <app-spinner [small]="true"></app-spinner>
+      <label>Attempting activation...</label>
+    </app-collapsible>
+
+  </div>
+</section>
+
+<section *ngIf="step === 2" >
+  <div class="card">
+    <h2>A confirmation email has been sent</h2>
+  </div>
+
+</section>

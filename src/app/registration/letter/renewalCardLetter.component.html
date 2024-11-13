@@ -1,0 +1,102 @@
+<section class="letter-header">
+
+  <app-letter-header [registrant]="auth.user.registrant" [registrantAddress]="auth.user.address">
+  </app-letter-header>
+  
+  <section class="notice-of-entry section-to-print">
+    <section class="notice-of-entry-wrapper">
+
+ 
+
+      <h2 class="notice">Your registration as a {{registrantType}} is due for renewal
+      </h2>
+
+      <div class="main-content">
+
+        <p>
+          Your registration as a {{registrantType}} will expire on {{ letter?.data.ExpiryDate | date: 'd MMMM yyyy' }}.
+          If you want to continue to practise as a {{registrantType}} after this date, you must renew your registration
+          at least two months before it is due to expire, by {{ letter?.data.RenewalDate | date: 'd MMMM yyyy' }}. This
+          requirement is set out in the Pharmacy Order 2010.
+
+        </p>
+
+        <p>
+          To renew your registration, you must log on to www.myGPhC.org and:
+        </p>
+        <ul>
+          <li>complete a set of declarations to confirm that you are fit to practise as a pharmacy professional</li>
+          <li>pay a registration renewal fee of {{letter?.data.AnnualRenewalAmount | currency: 'GBP' : 'symbol' :
+          '.2'}}.</li>
+          <li>submit your revalidation records covering your previous 12-month period of registration</li>
+        </ul>
+
+
+        <div class="table-border">
+          <h2>Your registration renewal</h2>
+          <table class="table renewal-details">
+            <tr>
+              <td>When you need to renew by:</td>
+              <td>{{ letter?.data.RenewalDate | date: 'd MMMM yyyy' }}</td>
+            </tr>
+            <tr>
+              <td>Your registration number:</td>
+              <td>{{registrant.registrationNumber}}</td>
+            </tr>
+            <tr>
+              <td>Your renewal fee:</td>
+              <td>{{letter?.data.AnnualRenewalAmount | currency: 'GBP' : 'symbol' : '.2'}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <h3>Ways to pay</h3>
+        <p>
+          We recommend that you pay your renewal fee by debit card, as you can do this easily when you log on to myGPhC
+          to make your declarations.
+          You can also pay by Direct Debit, either once a year, or divide your renewal fee into four quarterly payments.
+          If you want to pay by Direct Debit, you will need to set this up by
+          {{ letter?.data.DDMandateDeadline | date:'d MMMM yyyy' }}. See
+          <a href="https://www.pharmacyregulation.org/renew"
+            target="_gphc_main_site">www.pharmacyregulation.org/renew</a>
+          for more information on setting up a Direct Debit.
+        </p>
+
+        <h3>If you do not renew by {{ letter?.data.RenewalDate | date: 'd MMMM yyyy' }}</h3>
+        <p>
+          If you don’t renew your registration by the date above, we will take action to remove your entry from the
+          register when your registration expires. You are not able to practise as a {{registrantType}} unless you are
+          registered.
+        </p>
+
+        <h3>Meeting the revalidation requirement</h3>
+        <p>You can find more about what you need to record and submit in the revalidation framework. The framework and
+          other supporting materials are available on our website at <a
+            href="https://www.pharmacyregulation.org/pharmacists/revalidation-renewal/renew-your-registration"
+            target="_gphc_main_site">www.pharmacyregulation.org/revalidation</a> </p>
+
+        <h3>If you do not want to renew your registration</h3>
+        <p>If you’re not intending to renew your registration, tell us that you no longer want to be registered by
+          completing an <span style="font-style:italic">Application for voluntary removal form</span>, available on our
+          website. This helps us to keep the
+          register information accurate and allows you to choose when you leave the register. There is no charge to
+          leave
+          the register.</p>
+        <p>
+          If you need more information about renewing your registration, please go to <a
+            href="https://www.pharmacyregulation.org/renew"
+            target="_gphc_main_site">www.pharmacyregulation.org/renew</a> or email our Customer Contact Centre at <a
+            href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a>.
+        </p>
+
+        <p>
+          I look forward to your renewing your registration with the General Pharmaceutical Council for the coming year,
+          and to working together to promote the protection of patients and the public.
+        </p>
+
+        <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+      </div>
+
+    </section>
+  </section>
+</section>

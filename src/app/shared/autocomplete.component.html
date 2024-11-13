@@ -1,0 +1,16 @@
+
+  <input type="text"
+    [name]="name"
+    (keydown.enter)="trySelect()" 
+    [placeholder]="placeholder"
+    (blur)= "propagate()"
+    [id]="id"
+    [formControl]="myControl" 
+    class="form-control"
+    [matAutocomplete]="auto">
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      <span [innerHTML]="option"></span>
+    </mat-option>
+  </mat-autocomplete>

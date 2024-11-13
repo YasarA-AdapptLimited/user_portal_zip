@@ -1,0 +1,17 @@
+<ng-template #content>
+  <h2 class="spacer">{{ declarationHeading }}</h2>
+  <p class="important">
+    You must meet these requirements in order to continue with your application. 
+    If you are accepted to join the register you will have obligations in law to tell us if any of your circumstances change.
+  </p>
+  <section  *ngIf="(form$ | async) as form else loading" class="fadein" [class.touched]="!valid && touched">
+    <app-declaration [form]="form" [titleVisible]="false">
+    </app-declaration>
+  </section>
+</ng-template>
+
+<ng-template #loading>
+  <div class="step-loading">
+    <mat-progress-bar aria-label="loading step"  mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>

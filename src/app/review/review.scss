@@ -1,0 +1,15 @@
+:host {
+  .invalid-stage {
+    text-align: center;
+    font-size: 2em;
+    padding: 100px;
+  }
+  ::ng-deep .banner-left {
+    font-size: 1.2em;
+  }
+
+  ::ng-deep .scrollable {
+    max-height: calc(100vh - 214px);
+    overflow-y: auto;
+  }
+}

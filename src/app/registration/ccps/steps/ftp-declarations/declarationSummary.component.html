@@ -1,0 +1,24 @@
+<div *ngIf="(form$ | async) as form else loading">
+  <ng-container *ngIf="hasToDeclare.length else nothingToDeclare">
+    <app-declaration-question *ngFor="let question of hasToDeclare" [form]="form" [question]="question" [readonly]="true">
+    </app-declaration-question>
+  </ng-container>
+</div>
+
+<ng-template #nothingToDeclare>
+  <div class="form-control" readonly>
+    I have nothing to declare
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="step-loading" *ngIf="!empty else empty">
+    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="form-control" readonly>
+    Declarations not completed
+  </div>
+</ng-template>

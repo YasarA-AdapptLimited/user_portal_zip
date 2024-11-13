@@ -1,0 +1,50 @@
+<app-banner >
+  <div class="banner-left">
+    <h1>Home</h1>
+    <p class="intro-text">
+      Click on the reviews pane to view reviews assigned to you.
+    </p>
+  </div>
+</app-banner>
+<div class="content spread">
+
+  <div class="row">
+      <div class="col-sm-6 left-col" style="text-align: center;">
+          <div class="section-body">
+            <app-user-badge title="Reviewer">
+              {{ user.title }} {{ user.forenames }} {{ user.surname }}
+            </app-user-badge>
+          </div>
+        </div>
+
+    <app-form-section  [badge]="true"  class="col-sm-6 right-col"
+
+      link="/review">
+      <span class="section-header">Your reviews</span>
+
+
+      <div class="section-body">
+      
+
+        
+            <div class="text-center">
+                <i class="fa fa-list status-icon"></i>
+              <div class="btn-text">
+                View reviews assigned to you
+              </div>
+            </div>
+
+        
+
+       
+
+      </div>
+
+    </app-form-section>
+
+  
+
+  </div>
+</div>
+
+

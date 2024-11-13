@@ -1,0 +1,14 @@
+<div *ngFor="let questionGroup of form.questionGroups">
+  <h4 *ngIf="questionGroup.title">{{ questionGroup.title }}</h4>
+
+  <div *ngIf="questionGroup.body" [innerHTML]="questionGroup.body"></div>
+  <div style="margin-top:20px;" *ngFor="let question of questionGroup.questions; let i=index">
+    <app-revalidation-question (infoChanged)="onInfoChanged(question, $event)"
+     [last]="i === questionGroup.questions.length-1"
+     [readonly]="true"
+      [form]="form" [question]="question">
+    </app-revalidation-question>
+  </div>
+
+</div>
+

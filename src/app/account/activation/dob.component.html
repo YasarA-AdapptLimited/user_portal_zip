@@ -1,0 +1,28 @@
+<div class="form-group" [class.invalid]="invalid && entered()">
+  <label for="dateOfBirth">
+    Date of birth
+  </label>
+
+  <div style="display:flex">
+    <div style="margin-right:10px;">
+      <select id="dateOfBirth" #focus style="height: 46px !important;border-radius:0 !important;" class="form-control" (ngModelChange)="validateMonth($event)"
+        [(ngModel)]="dob.month">
+        <option *ngFor="let month of months" [ngValue]="month.id">{{month.name}}</option>
+      </select>
+    </div>
+    <div style="max-width: 65px;margin-right:10px;">
+      <input placeholder="Day" class="form-control" type="text" [(ngModel)]="dob.day" (ngModelChange)="validate()" />
+    </div>
+    <div style="max-width: 100px;">
+      <input placeholder="Year" class="form-control" type="text" [(ngModel)]="dob.year" (blur)="yearEntered()" (ngModelChange)="validate()"
+      />
+    </div>
+  </div>
+  <app-collapsible [trigger]="invalid && entered()">
+    <p class="form-error">
+      Please check that your date of birth has been entered correctly, you must
+      be at least 18 years old at the time you create your myGPhC account.
+    </p>
+  </app-collapsible>
+
+</div>

@@ -1,0 +1,15 @@
+.unregisteredPremiseName {
+    input.readonly {
+        cursor: not-allowed !important ;
+    }
+}
+
+.results { 
+    max-height: 200px; 
+    overflow-y: auto
+}
+
+tr.ineligible { 
+    background: #f5f5f5; 
+    color: #b7b7b7; 
+}

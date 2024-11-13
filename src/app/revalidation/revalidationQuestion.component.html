@@ -1,0 +1,51 @@
+<div class="question revalidation-question form-group"
+  [ngClass]="AnswerType[question.type].toLowerCase()" 
+  [class.last]="last"
+  [class.readonly]="readonly"
+  [class.invalid]="question.isValid===false">
+  <div class="question-header">
+
+    <div style="flex-grow:1">
+        <label *ngIf="question.type !== AnswerType.FreeText" [innerHTML]="question.title" 
+        [attr.for]="question.id" 
+        [id]="'labelFor-'+ question.id"
+        [class.has-help-text]="!!question.body"></label>
+      
+        <h2 class="label"  
+          *ngIf="question.type === AnswerType.FreeText" 
+          [innerHTML]="question.title" 
+          [id]="'labelFor-'+ question.id"
+          [class.has-help-text]="!!question.body"
+          (click)="setFocus()"
+          > </h2>
+      
+        <span class="required-indicator" [appTooltip]="requiredFieldTooltip" *ngIf="question.isRequired">(required)</span>
+    </div>
+
+    <app-gphc-icon [static]="true" *ngIf="question.body && !readonly" 
+    style="margin-top:-10px"
+    [tooltip]="helpTooltip"  
+    [active]="helpVisible"
+    [iconType]="'info'" [offset]="-12" (click)="toggleHelp()"></app-gphc-icon>
+  
+  
+  </div>
+
+
+  <app-collapsible [trigger]="helpVisible"  class="help-block" >
+    <div class="help-text" [innerHTML]="question.body">
+    </div>
+  </app-collapsible>
+
+  <app-form-question-control  *ngIf="!readonly"
+    (infoChanged)="onInfoChanged($event)" 
+    [form]="form"
+    [question]="question"
+    [hasFocus]="hasFocus"
+    >
+  </app-form-question-control>
+
+  <div *ngIf="readonly" [innerHTML]="question.answer">
+  </div>
+
+</div>

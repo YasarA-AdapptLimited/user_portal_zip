@@ -1,0 +1,368 @@
+<div class="row">
+  <div class="col-md-12">
+    <p class="important">
+      You have received this request from your foundation trainee as they have reached the 39 week stage of
+      foundation training.
+      By indicating Satisfactory below you are confirming that you have completed the 39 week appraisal and that the
+      trainee has demonstrated the required level you would expect for a trainee
+      at this stage in the foundation year.
+      This will then allow them to proceed with their assessment entry application. For more information on your role as
+      a foundation designated supervisor please <a
+        href="https://www.pharmacyregulation.org/education/pharmacist-pre-registration-training/tutors"
+        target="_blank">see
+        our website.</a>
+    </p>
+  </div>
+</div>
+
+<form #form="ngForm">
+
+
+  <section class="tutor-details">
+
+    <div class="row mt-4 mb-4">
+
+      <div class="col-md-12">
+        <h2 class="sub-heading">Your details</h2>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Full name </label>
+          <div type="text" class="form-control readonly">
+            {{ user.toString()}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Registration number </label>
+          <div type="text" class="form-control readonly" [innerHTML]="user.registrant.registrationNumber">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="trainee-details pb-3">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="sub-heading">Trainee details</h2>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Full name</label>
+          <div type="text" class="form-control readonly">
+            {{ formatName(application.trainee)}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Foundation training number </label>
+          <div type="text" class="form-control readonly" [innerHTML]="application.trainee.preEntryNumber">
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="application">
+      <div class="row" *ngFor="let site of application.training.trainedAt; let i = index;">
+        <div class="form-group col-md-4">
+          <label>Trained at</label>
+          <div class="form-control" tabindex="-1" readonly style="line-height: 1.7em;">
+            <b>{{site.trainingSite}}</b>
+            <br />
+            <span [innerHTML]="trainingSiteAdress[i]"></span>
+          </div>
+        </div>
+        <div class="form-group col-md-4 col-6">
+          <label for="startDate">Start date</label>
+          <input id="startDate" class="form-control" tabindex="-1" readonly [value]="site.startDate | utcDate" />
+        </div>
+        <div class="form-group col-md-4 col-6">
+          <label for="endDate">End date</label>
+          <input id="endDate" class="form-control" tabindex="-1" readonly [value]="site.endDate | utcDate" />
+        </div>
+      </div>
+    </ng-container>
+  </section>
+
+
+  <section class="comments-section">
+    <h2 class="sub-heading" [class.error]="traineePerfomance.invalid && submitting">Comments</h2>
+
+
+    <div class="form-group mt-3" [class.error]="traineePerfomance.invalid && (traineePerfomance.touched || submitting)">
+
+
+      <label for="problemsEffected">Do you feel that any problems, work-related or personal, have affected your trainee’s performance? If
+        “Yes” please give details (if the trainee is happy for them to be disclosed)</label><br />
+
+      <mat-radio-group id="problemsEffected" name="anyProblemsEffected" ngModel #formInput
+        [required]="response !== CountersignatureOutcome.Refused" #traineePerfomance="ngModel">
+        <mat-radio-button [value]="true" type="radio">Yes
+        </mat-radio-button>
+        <mat-radio-button [value]="false" type="radio">No
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <app-collapsible [trigger]="traineePerfomance.invalid && (traineePerfomance.touched || submitting)">
+        <div class="error mt-2" style="font-weight: bold;">
+          <p>
+            Please select an option
+          </p>
+        </div>
+      </app-collapsible>
+      <!-- <app-collapsible [trigger]="traineePerfomance.value === true">
+        <div class="form-group mt-2">
+          <label>Healthcare professional details</label>
+          <div class="row">
+            <div class="col-md-12 important">
+              <p>
+                If you have recorded a satisfactory outcome for your trainee write the name,
+                job title, and registration number (if known) of the healthcare professional you
+                have discussed this outcome with. You must have consent from the healthcare
+                professional to provide us with their details and make them aware that we
+                will keep this information, and may contact them in
+                relation to this decision.
+              </p>
+
+            </div>
+          </div>
+          <textarea class="form-control" #formInput
+            [required]="traineePerfomance.value === CountersignatureOutcome.Approved" name="problemDetails" ngModel
+            #progress="ngModel">
+          </textarea>
+          <app-collapsible [trigger]="progress.invalid && (progress.touched || submitting)">
+            <p class="form-error">
+              Please explain about trainee performance.
+            </p>
+          </app-collapsible>
+        </div>
+      </app-collapsible>-->
+    </div>
+
+
+
+    <div class="form-group mt-4" [class.error]="comment.invalid && (comment.touched || submitting)">
+      <p>
+        <label for="progressComments">
+          Comments on your trainee’s progress to date with regards to the interim learning outcomes, the registration
+          assessment
+          framework, and calculation questions
+        </label>
+      </p>
+      <textarea id="progressComments" class="form-control mt-2" name="traineeProgressComments" #formInput
+        [required]="response !== CountersignatureOutcome.Refused" [(ngModel)]="comments" #comment="ngModel">
+             </textarea>
+
+      <p class="form-error" *ngIf="comments && comments.length > 1000 ">
+        You can only enter a maximum of 1000 characters in this field
+      </p>
+
+      <!-- <div class="error" style="font-weight: bold;" *ngIf="comment.invalid && (comment.touched || submitting)">
+        <p class="mt-2">
+          please explain the reason for other leave by trainee
+        </p>
+      </div>-->
+    </div>
+
+
+
+    <div class="row mt-5 ">
+      <div class="col-md-12 d-flex justify-content-between">
+        <label style="align-self: center;">Number of days the trainee has been absent since starting foundation
+          training:
+          <p>(Please enter the leave taken by the trainee to the nearest whole day)</p>
+        </label>
+        <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+          [static]='true' class="headingIcon"></app-gphc-icon>
+      </div>
+      <app-collapsible [trigger]="showDetailsHelp">
+          <div class="col-md-12">
+            <div class="important">
+              <p>
+                Trainees have a 40 day limit on the number of days leave they can take throughout the foundation
+                year.
+              </p>
+              <ul style="list-style-type: disc">
+                <li>
+                  The 40-day limit includes public holidays, sickness and annual leave. For part-time training
+                  arrangements,
+                  the 40 days
+                  applies to the whole training period.
+                </li>
+                <li>
+                  If they are absent for more than 40 days, they will need to complete additional training to be
+                  eligible
+                  to
+                  sit the
+                  registration assessment. They must have completed at least 39 weeks of training by the application
+                  entry
+                  deadline for
+                  the sitting.
+                </li>
+                <li>
+                  If they are absent for more than 40 days before the 39-week progress review, you should delay the
+                  review
+                  until they have
+                  worked the additional days that have been missed to have completed the equivalent of 39 weeks
+                  training.
+                </li>
+              </ul>
+            </div>
+          </div>
+      </app-collapsible>
+
+      <div class="col-md-4">
+        <div class="form-group" [class.error]="annual.invalid && (annual.touched || submitting)">
+          <label for="annualLeave">Annual Leave (including Bank Holidays)</label>
+          <input id="annualLeave" type="number" class="form-control" #formInput min="0" max="999" maxlength="3" name="annualLeaves"
+            onkeypress="return event.charCode >= 48 " [required]="response !== CountersignatureOutcome.Refused" ngModel
+            #annual="ngModel" />
+        </div>
+
+        <app-collapsible [trigger]="annual.invalid && (annual.touched || submitting)">
+          <div class="error" style="font-weight: bold;">
+            <p class="mt-2">
+              Please enter a value, if no days have been taken, please enter ’0'
+            </p>
+          </div>
+        </app-collapsible>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group" [class.error]="sick.invalid && (sick.touched || submitting)">
+
+          <label for="sickness">Sickness</label>
+          <input id="sickness" type="number" class="form-control" name="sickLeaves" min="0" max="999" maxlength="3" #formInput
+            onkeypress="return event.charCode >= 48 " [required]="response !== CountersignatureOutcome.Refused" ngModel
+            #sick="ngModel" />
+        </div>
+        <app-collapsible [trigger]="sick.invalid && (sick.touched || submitting)">
+          <div class="error" style="font-weight: bold;">
+            <p class="mt-2">
+              Please enter a value, if no days have been taken, please enter ’0'
+            </p>
+          </div>
+        </app-collapsible>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group" [class.error]="otherAbsents.invalid && (otherAbsents.touched || submitting)">
+          <label for="other">Other</label>
+          <input id="other" type="number" class="form-control" name="otherLeaves" min="0" max="999" maxlength="3"
+            onkeypress="return event.charCode >= 48 " [required]="response !== CountersignatureOutcome.Refused"
+            #formInput ngModel #otherAbsents="ngModel" />
+
+        </div>
+        <app-collapsible [trigger]="otherAbsents.invalid && (otherAbsents.touched || submitting)">
+          <div class="error" style="font-weight: bold;">
+            <p class="mt-2">
+              Please enter a value, if no days have been taken, please enter ’0'
+            </p>
+          </div>
+        </app-collapsible>
+
+      </div>
+
+      <div class="col-md-12">
+        <app-collapsible [trigger]="otherAbsents.value > 0">
+          <div class="form-group" style="padding-top: 20px;"
+            [class.error]="anyOtherReason.invalid && (anyOtherReason.touched || submitting)">
+            <label for="reasonForLeave">Reason for other leave by trainee</label>
+            <textarea id="reasonForLeave" class="form-control" name="otherLeaveDetails" #formInput [required]="otherAbsents.value > 0"
+              #anyOtherReason="ngModel" [(ngModel)]="otherLeaveComment">
+            </textarea>
+            <p class="form-error" *ngIf="otherLeaveComment && otherLeaveComment.length > 500 ">
+              You can only enter a maximum of 500 characters in this field
+            </p>
+
+            <app-collapsible [trigger]="anyOtherReason.invalid && (anyOtherReason.touched || submitting)">
+              <div class="error" style="font-weight: bold;">
+                <p class="mt-2">
+                  Please enter a reason
+                </p>
+              </div>
+            </app-collapsible>
+          </div>
+        </app-collapsible>
+      </div>
+    </div>
+
+
+    <div class="form-group mb-4" style="padding-top: 20px;"
+      [class.error]="anyReason.invalid &&  (anyReason.touched || submitting)">
+
+      <label for="otherComments">Other comments</label>
+
+      <!-- <div class="row">
+         <div class="col-md-12 important">
+           <p>
+            If you have recorded a satisfactory outcome for your trainee write the name,
+            job title, and registration number (if known) of the healthcare professional you
+            have discussed this outcome with. You must have consent from the healthcare
+            professional to provide us with their details and make them aware that we
+            will keep this information, share it with the trainee and may contact them in
+             relation to this decision.
+           </p>
+
+         </div>
+       </div>-->
+      <textarea id="otherComments" class="form-control" name="commentsByTutor" #anyReason="ngModel" [(ngModel)]="otherComment">
+          </textarea>
+
+      <p class="form-error" *ngIf="otherComment && otherComment.length > 500">
+        You can only enter a maximum of 500 characters in this field
+      </p>
+
+      <!--<app-collapsible [trigger]="anyReason.invalid &&  (anyReason.touched || submitting)">
+        <div class="error" style="font-weight: bold;">
+          <p class="mt-2">
+            Please enter other comments about trainee(if any)
+          </p>
+        </div>
+      </app-collapsible>-->
+
+
+    </div>
+  </section>
+
+
+  <section class="decision-outcome">
+    <h2 class="sub-heading">Rate your trainees overall performance at 39 weeks of training</h2>
+    <div class="important">
+      The information you have provided will be visible to the trainee and may be used by the GPhC for any future
+      applications they make
+    </div>
+    <mat-radio-group name="response" id="response" [(ngModel)]="response" required>
+      <mat-radio-button [value]="CountersignatureOutcome.Approved" type="radio">
+        Satisfactory
+      </mat-radio-button>
+      <mat-radio-button [value]="CountersignatureOutcome.Rejected" type="radio">
+        Unsatisfactory
+      </mat-radio-button>
+      <mat-radio-button [value]="CountersignatureOutcome.Refused" name="name" type="radio">The progress report has been
+        sent to me in error</mat-radio-button>
+    </mat-radio-group>
+
+    <app-collapsible [trigger]="response===CountersignatureOutcome.Rejected">
+      <p class="important mt-3">
+        I confirm that I have discussed this outcome with the named trainee.
+      </p>
+    </app-collapsible>
+
+
+    <button class="btn btn-block btn-lg btn-primary mt-4" type="submit" (click)="submitOutcome(form.value)"
+      [disabled]="!response || ( comments.length > 1000) || ( otherComment.length > 500) || (otherLeaveComment.length > 500)">
+      <span>Submit decision</span>
+      <span *ngIf="validInputs" class="d-inline-block ml-4">
+        <app-spinner [tiny]="true"></app-spinner>
+      </span>
+    </button>
+
+  </section>
+
+
+</form>

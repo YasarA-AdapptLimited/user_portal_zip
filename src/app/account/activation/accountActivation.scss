@@ -1,0 +1,92 @@
+@import '../../style/variables';
+:host {
+
+  section {
+    max-width: 550px;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 2px;
+
+  }
+
+  ::ng-deep .template-container {
+      margin: 0 auto;
+      padding:10px;
+      box-sizing: border-box;
+      padding-right: 3em;
+      text-align: left;
+    }
+
+  ul {
+    padding : 0;
+  }
+  li {
+    list-style-type: none;
+    
+    button {
+      margin-bottom:20px;
+      margin-top: 20px;
+      padding-top: 15px;
+      background: transparent !important;
+      box-shadow:  0 0 0 7px lighten($gphc-background,5%);
+      &:hover {
+        background: lighten($gphc-background,5%) !important;
+      }
+      .info {
+        text-align:center;
+        font-size:0.7em;
+        margin-top: 10px;
+        color: $gphc-purple;
+      }
+
+      &.selected {
+        box-shadow:  0 0 0 7px $gphc-purple !important;
+        background: lighten($gphc-background,5%)  !important;
+        border-color: $gphc-purple  !important;
+      }
+    }
+  
+  }
+  
+  ::ng-deep h2 {
+    text-align: center;
+    margin-bottom: 20px !important;
+  }
+  ::ng-deep select.form-control {
+    height: 45px !important;
+  }
+  h2 {
+    font-size:28px;
+    @media(max-width:767px) {
+      margin-top:20px;
+      font-size:24px;
+    }
+  }
+
+  button {
+    border-radius: 0 !important;
+    font-size: 24px;
+    width: 100%;
+  }
+
+  .content {
+    margin-top: -20px;
+    padding-bottom: 40px;
+  }
+ 
+
+ 
+  ::ng-deep {
+    .spinner-container {
+      text-align: center; color: $gphc-blue;font-size:18px;
+    }
+
+    mat-spinner {
+       margin: 0 auto;
+         width: 50px;
+         height: 50px;
+         margin-bottom: 10px;
+     }
+  }
+  
+}

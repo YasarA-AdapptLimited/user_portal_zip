@@ -1,0 +1,135 @@
+<app-banner [loading]="loading" [leftColWidth]="8">
+  <div class="banner-left col-lg-8 col-md-12">
+    <div class="header-container" [class.loading]="loading">
+      <h1 class="sm-show">
+        {{itemType.title}}
+      </h1>
+
+      <button *ngIf="!loading" (click)="exit()" aria-label="Back to revalidation page" class="btn btn-back">
+        <i class="fa fa-arrow-left" style="color: white !important;"></i>
+      </button>
+    </div>
+
+    <p *ngIf="form" class="intro-text fadein-quick" [innerHTML]="form.formBody"></p>
+
+    <br/>
+    <p class="important registrant-message">
+      You can find revalidation resources including advice about writing entries <a href="https://www.pharmacyregulation.org/pharmacists/revalidation-renewal" target="_blank">here</a>
+    </p>
+
+    <!-- <div *ngIf="form?.formTitle === 'Reflective account'">
+      <p class="intro-text">
+        In your first year of completing a reflective account, you need to reflect on one or more of the following
+        standards:
+      </p>
+      <ul style="list-style-type: disc;">
+        <li>
+          <b>
+            standard 3
+          </b> - pharmacy professionals must communicate effectively
+        </li>
+        <li>
+          <b>
+            standard 6
+          </b> - pharmacy professionals must behave professionally
+        </li>
+        <li>
+          <b>
+            standard 9
+          </b>
+          - pharmacy professionals must demonstrate leadership
+        </li>
+      </ul>
+    </div> -->
+
+  </div>
+
+</app-banner>
+
+<div class="content sm-no-margin" *ngIf="!loading && started">
+
+  <app-form-layout class="cpd-item">
+    <div class="form-body">
+      <div class="item-container slide" [class.started]="started" [appTooltipContext]="'item'">
+
+        <section *ngIf="!validator.item.readonly">
+
+          <div class="title" style="margin-bottom:40px">
+
+            <div class="form-group" [class.invalid]="title.touched && title.errors?.required">
+              <label for="record-title">Title</label>
+
+              <input type="text" #title="ngModel" id="record-title" #focus required class="form-control" maxlength="60"
+                placeholder="Add a title for your record" arial-label="Add a title for your record"
+                (blur)="validator.validate()" (ngModelChange)="validator.validate()"
+                  [(ngModel)]="validator.item.title" pattern ="[a-zA-Z0-9!@#$%^*_|\-`\/(){}\[\]+~.,;? :=]+"/>
+
+              <app-collapsible [trigger]="title.touched && title.errors?.required">
+                <p class="form-error">You must enter a title</p>
+              </app-collapsible>
+              <app-collapsible [trigger]="title.touched && title.errors?.pattern">
+                <p class="form-error">Title should not contain any special characters</p>
+              </app-collapsible>
+            </div>
+          </div>
+          <section *ngFor="let questionGroup of form.questionGroups" style="margin-top: 60px; margin-bottom:60px">
+            <h4 *ngIf="questionGroup.title">{{ questionGroup.title }}</h4>
+
+            <div *ngIf="questionGroup.body" [innerHTML]="questionGroup.body"></div>
+            <div *ngFor="let question of questionGroup.questions; let i=index"
+              style="margin-top:40px;margin-bottom:40px">
+              <app-revalidation-question (infoChanged)="onInfoChanged(question, $event)"
+                [last]="i === questionGroup.questions.length-1" [form]="form" [question]="question">
+              </app-revalidation-question>
+            </div>
+          </section>
+          <section *ngIf="validationErrors && validationErrors.length">
+            <app-validation-errors [errors]="validationErrors"></app-validation-errors>
+          </section>
+
+          <div class="row  no-gutters button-section">
+            <div class="col-md-4 col-6 text-center">
+              <div class="progress-container">
+                <app-progress-indicator [light]="true" [tooltip]="getProgressTooltip()"
+                  (click)="validator.toggleCompleted()" [progressLabel]="progressLabel" [noLabel]="!progressLabel"
+                  [item]="form" [size]="3"></app-progress-indicator>
+              </div>
+              <div class="btn-text">
+                <span *ngIf="!form.progress">Not started</span>
+                <span *ngIf="form.progress && !form.completed">In progress</span>
+                <span *ngIf="form.completed">Complete</span>
+
+              </div>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+
+            </div>
+            <div class="col-md-4 col-6 text-center">
+              <div *ngIf="!saving">
+                <button type="button" aria-label="Save and exit" [disabled]="validator.untitled || form.invalid || title.errors?.pattern"
+                  class="btn  btn-lg btn-round  btn-primary shadow" (click)="save()">
+                  <i class="fa fa-save"></i>
+                </button>
+                <div class="btn-text">
+                  Save &amp; exit
+                </div>
+              </div>
+              <div *ngIf="saving">
+                <app-spinner></app-spinner>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section *ngIf="validator.item.readonly" class="fadein">
+          <h3>{{validator.item.title}} </h3>
+          <app-revalidation-readonly [form]="form">
+          </app-revalidation-readonly>
+        </section>
+
+      </div>
+
+    </div>
+
+  </app-form-layout>
+</div>

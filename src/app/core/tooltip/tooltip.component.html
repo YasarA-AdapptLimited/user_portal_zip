@@ -1,0 +1,17 @@
+<div #tooltipRef class="app-tooltip shadow-deep-heavy fadein-quick" 
+[style.width]="tooltip.width + 'px'"
+(keyup.escape)="exit()"
+[class.solo]="!service.activeContext"
+[class.walkthrough]="service.activeContext"
+>
+<div  [innerHTML]="tooltip.content"></div>
+<button *ngIf="service.activeContext" #focus 
+[attr.aria-label]="getAriaLabel()"
+class="tooltip-toolbar no-focus clickable" (click)="nextTip()">
+    <span  *ngIf="allowNext">Next tip &nbsp;<i class="fa fa-chevron-right no-focus"></i></span>
+    <span  *ngIf="!allowNext">Finish</span>
+</button>
+
+<div class="app-tooltip__arrow" x-arrow></div>
+
+</div>

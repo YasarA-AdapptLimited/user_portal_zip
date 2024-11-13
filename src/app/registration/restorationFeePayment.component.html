@@ -1,0 +1,108 @@
+<div class="content row no-gutters">
+
+    <div class="col-md-12">
+    <app-banner [loading]="loading" [application]="true" [progressDark]="true">
+      <div class="banner-left">
+        <h1 class="sm-show">{{title}}</h1>
+      </div>
+    </app-banner>
+    </div>
+
+    <div class="col-md-12" *ngIf="isApplicationPendingProcessing === false">
+      <div class="intro-text" style="margin-bottom:2em;"> 
+        <p>
+           Application status has been changed. Now no payment is expected.
+        </p>
+        <p>
+          <br/>
+          <a routerLink="/home">Click here to return to homepage.</a>
+          <br/>
+          <br />In 10 seconds you will be redirected to home page automatically.
+        </p>
+      </div>
+    </div>
+  
+    <div class="col-md-12 col-lg-8 fadein" *ngIf="worldpayConfig && isApplicationPendingProcessing">
+  
+      <section>
+        <h3>Fees to be paid
+          <img src="/assets/images/creditcards/poweredByWorldPay.gif" alt="Worldpay Logo" style="float:right" title="Payments Powered by WorldPay"
+          />
+  
+        </h3>
+  
+  
+        <h4 style="margin-bottom:40px">
+          {{title}}: {{fee | currency: 'GBP': 'symbol' :'.2'}}
+        </h4>
+        <div class="intro-text" style="margin-bottom:2em;">
+          <p *ngIf="payRestorationFee">
+             Now your application has been approved, you must pay the restoration fee of {{fee | currency: 'GBP': 'symbol' :'.2'}} before you
+            can join the register.
+          </p>
+          <p>
+            If you are returning to the register in the two months before the anniversary of your previous renewal deadline, your payment will include next years renewal fee.
+         </p>
+          <p *ngIf="payRestorationAndRenewalFee">
+              Important: do not practise as a pharmacy professional until your name appears on the online
+              register. It is your responsibility to check this before you practice. Your re-entry payment receipt is not proof of
+              your registration. Practising as a pharmacy professional while not on the register is breaking the law and you can be prosecuted.
+          </p>
+        </div>
+        <p style="color:red;">If you want to receive an email confirmation of your payment from Worldpay, you need to click "Edit" in the Contact Details on the next page and enter your email address.</p>
+      </section>
+      <section class="card-selection">
+        <h3>Accepted card types</h3>
+  
+        <div class="intro-text" style="margin-bottom:1em;">
+          <p>
+             We can only accept payments made in pounds sterling (GBP). Payments are processed using worldpay, for more information please
+            review their <a href="https://www.worldpay.com/uk/worldpay-privacy-notice" target="_blank">privacy policy</a>.
+          </p>
+          <p>
+             When you make a card payment, you may be redirected to your card provider’s site to enter another password before they authorise
+            your payment. You can find out more about 3-D Secure authentication from your card provider.
+          </p>
+        </div>
+  
+
+        <div class="row">
+          <span *ngFor="let card of creditCards" value="{{card.id}}" [aria-label]="card.id" class="padding-20">
+            <img src="/assets/images/creditcards/{{card.id}}.gif" alt="{{card.name}} Logo" title="{{card.name}} Logo" />
+          </span>
+        </div>        
+      </section>
+  
+  
+      <div class="row" style="padding:20px">
+  
+        <div style="flex-grow:1">
+  
+        </div>
+        <div class="text-center">
+          <div *ngIf="(!saving) else savingTemplate">
+            <button type="button" aria-label="Continue" (click)="next()" [class.disabled]="nextTouched && !allowNext" class="btn btn-primary btn-lg shadow btn-round"
+              title="Continue">
+              <i class="fa fa-arrow-right"></i>
+            </button>
+            <div class="btn-text">
+              Proceed to payment
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+      <ng-template #savingTemplate>
+        <div *ngIf="!layout.state.xs" class="foreground text-center saving large">
+          <app-spinner diameter="150">Saving</app-spinner>
+        </div>
+        <div *ngIf="layout.state.xs" class="foreground text-center saving">
+          <app-spinner diameter="120">Saving</app-spinner>
+        </div>
+      </ng-template>
+  
+    </div>
+  
+  
+  </div>

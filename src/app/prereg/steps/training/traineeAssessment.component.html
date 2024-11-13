@@ -1,0 +1,22 @@
+<div *ngIf="application.assessment.assessments.length > 0; else noAssessmentResults ">
+  <div *ngFor="let item of application.assessment.assessments">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="session">Session</label>
+        <input id="session" class="form-control" tabindex="-1" readonly [value]="item.session" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="sitting">Sitting</label>
+        <input id="sitting" class="form-control" tabindex="-1" readonly [value]="item.sitting" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="outcome">Outcome</label>
+        <input id="outcome" class="form-control" tabindex="-1" readonly [value]="item.outcome" />
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #noAssessmentResults>
+  You do not currently have any assessment results recorded.
+</ng-template>

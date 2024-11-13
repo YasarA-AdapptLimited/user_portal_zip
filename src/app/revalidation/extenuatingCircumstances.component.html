@@ -1,0 +1,175 @@
+<app-banner [leftColWidth]=9 [info]="true" [loading]="loading">
+  <div class="banner-left">
+    <h1 class="sm-show">
+      Telling us about exceptional circumstances
+    </h1>
+    <p class="intro-text fadein">
+      Use this form to tell us about issues affecting your revalidation submission and to request a change to your submission deadline,
+      or the number of entries you need to submit.
+      <br/>
+      <br/> 
+        <a class="header-link" [routerLink]="'help'" title='link to exceptional circumstance help'>When should I use this form ?</a>
+    </p>
+  </div>
+</app-banner>
+<div class="content sm-no-margin">
+  <div>
+    <div class="row body">
+      <div class="col-lg-8 col-md-12">
+        <div class="form-container slide" [class.started]="started">
+          <section *ngIf="!loading && !selectedYear">
+              <div class="intro-text">At the moment you don't have any revalidations to submit exceptional circumstances for.
+              </div>
+
+              <div class="important" *ngIf="showWarningMessage">Your registration is at risk. Please read the "Notice of intent to remove" letter that can be found under the registration tab as this details what actions you must take in order to continue to practise as a pharmacy professional.</div>
+              <div class="important" *ngIf="showNotDueMessage">As there is over 9 months before you are due to renew your registration as a pharmacy professional you are currently unable to submit an exceptional circumstances request. Please come back in a few weeks time when you will be able to do this.</div>
+
+              <br/><br/>
+                  <a routerLink="/revalidation">Return to revalidation screen</a>
+
+            </section>
+          <section *ngIf="!loading && selectedYear">
+           <!--- <div class="year-selector-wrapper">
+              <div class="year-selector">
+                <button class="year" *ngIf="lastYear" (click)="selectYear(lastYear)" [class.selected]="selectedYear===lastYear">{{lastYear | utcDate}}
+                  <div class="tip">last year</div>
+                  <div aria-hidden="true" class="indicator">►</div>
+                </button>
+                <button class="year" *ngIf="currentYear" (click)="selectYear(currentYear)" [class.selected]="selectedYear===currentYear">{{currentYear | utcDate}}
+                  <div class="tip">current year</div>
+                  <div aria-hidden="true" class="indicator">►</div>
+                </button>
+                <button class="year" *ngIf="nextYear" (click)="selectYear(nextYear)" [class.selected]="selectedYear===nextYear">{{nextYear | utcDate}}
+                  <div class="tip">next year</div>
+                  <div aria-hidden="true" class="indicator">►</div>
+                </button>
+              </div>
+            </div>-->
+
+            <app-collapsible [trigger]="selectedYear===lastYear">
+              <div class="important-block">
+                This submission deadline for this year has now closed. If you have not already submitted a full revalidation record, you
+                can still complete this form but you will be in “remediation”. Find out more about this in the revalidation
+                framework.
+              </div>
+            </app-collapsible>
+            <div style="min-height: 500px">
+              <div *ngIf="loading">
+                <app-spinner style="margin:0 auto"></app-spinner>
+              </div>
+              <div *ngIf="!loading" class="fadein">
+                <div>
+
+                  <div style="display:flex;margin: 20px 0; ">
+                    <label style="flex-grow: 1">This form is for the {{ selectedYearString }} registration year.
+                      <span class="link" *ngIf="!!extenuatingCircumstance.id" (click)="resetForm()">Click here to clear the form.</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 40px;margin-top: 20px;" [class.invalid]="subject.touched && subject.errors?.required">
+
+                  <label for="subject">Request title</label>
+
+                  <input type="text" #subject="ngModel" id="subject" name="subject" #focus required class="form-control" maxlength="60" placeholder="The title of your request"
+                    [(ngModel)]="extenuatingCircumstance.subject" />
+
+                  <app-collapsible [trigger]="subject.touched && subject.errors?.required">
+                    <p class="form-error">Please enter a title</p>
+                  </app-collapsible>
+                </div>
+
+                <div *ngFor="let questionGroup of extenuatingCircumstance.form.questionGroups">
+                  <ng-container *ngFor="let question of questionGroup.questions">
+                      <app-form-question *ngIf="!question.isHidden" [form]="extenuatingCircumstance.form"  [question]="question">
+                        </app-form-question>
+                  </ng-container>
+             
+                </div>
+
+                <div class="uploads">
+                  <div class="header" style="display: flex;justify-content: space-between">
+                    <label for="Evidence">Provide evidence to support your reasons</label>
+                    <app-gphc-icon [tooltip]="helpTooltip" [static]="true"
+                    [iconType]="'info'" (click)="helpVisible = !helpVisible;"></app-gphc-icon>
+                  </div>
+                  <app-collapsible [trigger]="helpVisible" class="help-block">
+                    <div class="row help-text" >
+                      <div class="col-md-12 col-sm-10">
+                        <p>
+                          Further information about the evidence that you need to provide to us as part of this application can be found here: 
+                          <a href="https://www.pharmacyregulation.org/revalidation-faqs" target="_blank" style="color:white; word-wrap: break-word;">https://www.pharmacyregulation.org/revalidation-faqs</a>
+                        </p>
+                      </div>
+                    </div>
+                  </app-collapsible>
+                  <p>You
+                    <b>must</b> provide at least one document to support your request – we will
+                    <b>not</b> consider a request without any supporting evidence. You can upload up to four documents. Each file must be smaller than 8MB.
+                  </p>
+                  <app-file-upload #files [existing]="extenuatingCircumstance.proofs" [sessionId]="extenuatingCircumstance.sessionId" [min]="1" [max]="4" deleteUrl="v1.0/registrant/revalidation/extenuatingcircumstances/proofs"
+                    [maxMb]="8" [type]="uploadType" (uploaded)="onUploaded($event)" (deleted)="onDeleted($event)"></app-file-upload>
+
+                </div>
+
+                <div class="form-group confirm-genuine"  [class.invalid]="notGenuine">
+                  <mat-checkbox name="confirmedGenuine" [(ngModel)]="confirmedGenuine">  
+                    I confirm that the exceptional circumstances described and the supporting evidence are genuine.  I understand that if I am found to have given false or misleading information, I will be in breach of the standards for pharmacy professionals as published by the GPhC.
+                  </mat-checkbox>
+
+                </div>
+
+                <app-collapsible [trigger]="!!serverErrors.length">
+                  <app-validation-errors [errors]="serverErrors"></app-validation-errors>
+                </app-collapsible>
+
+                <div class="row  no-gutters buttons button-section" style="margin-top:40px">
+                  <div class="col-4  text-center">
+                    <button type="button" aria-label="Close" class="btn  btn-lg btn-round  btn-default shadow" (click)="exit()">
+                      <i class="fa fa-close"></i>
+                    </button>
+                    <div class="btn-text">
+                      Cancel
+                    </div>
+                  </div>
+                  <div class="col-4 text-center">
+
+                    <div *ngIf="!saving">
+                      <button type="button" aria-label="Save" class="btn  btn-lg btn-round  btn-primary shadow" (click)="save()">
+                        <i class="fa fa-save"></i>
+                      </button>
+                      <div class="btn-text">
+                        Save
+                      </div>
+                    </div>
+                    <div *ngIf="saving">
+                      <app-spinner></app-spinner>
+                    </div>
+                  </div>
+                  <div class="col-4  text-center">
+                    <div *ngIf="!submitting && !submitted">
+                      <button type="button" aria-label="Submit" [disabled]="!valid" class="btn  btn-lg btn-round btn-success shadow" (click)="submit()">
+                        <i class="fa fa-upload"></i>
+                      </button>
+                      <div class="btn-text">
+                        Submit
+                      </div>
+                    </div>
+                    <div *ngIf="submitted" class="fadein">
+                      <i class="fa fa-check-circle completed completed-lg" aria-hidden="true"></i>
+                      <p class="intro-text">Submitted</p>
+                    </div>
+                    <div *ngIf="submitting">
+                      <app-spinner></app-spinner>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

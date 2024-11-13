@@ -1,0 +1,79 @@
+<div class="top-nav">
+
+  <button (click)="exit()" aria-label="Back" class="btn btn-back">
+    <i class="fa fa-arrow-left"></i>
+    Review summary
+  </button>
+  <div style="flex-grow: 1">
+
+  </div>
+  <div>
+    Review deadline: {{reviewDeadline | date: 'dd/MM/yyyy'}} | {{ reviewStage | caseSplit}}
+  </div>
+</div>
+<app-banner2 [info]="true" heading="Reviews"
+  subHeading="Reviews with deadline {{reviewDeadline | date: 'dd/MM/yyyy'}}">
+
+  <div class="toolbar-content">
+
+  </div>
+
+</app-banner2>
+<div class="content no-boxes fadein" style="background: #e0e0e0" *ngIf="!loading">
+
+  <div class="summary">
+
+      <div class="tab" *ngFor="let count of grouping.counts" [class.clickable]="reviewStage !== count.key && count.count" [class.selected]="reviewStage===count.key" (click)="select(count.key)" >
+ 
+            {{count.key | caseSplit}} ({{ count.count }})
+   
+      
+        </div>
+  </div>
+
+
+
+</div>
+<div class="content no-boxes fadein"  *ngIf="!loading">
+
+  <div *ngIf="items" [@slideIn]>
+
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th style="width: 200px">Title</th>
+          <th style="width: 100px">Deadline</th>
+          <th style="width: 150px">Lead reviewer?</th>
+          <th>Stage</th>
+<th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items"
+        [class.completed]="item.completed"
+         class="clickable" routerLink="/review/{{item.id}}">
+
+          <td>{{item.title}}</td>
+          <td>{{item.reviewDeadline | utcDate}}</td>
+          <td>{{ item.isLead ? 'Yes' : 'No' }}</td>
+
+          <td>
+            {{ ReviewStage[item.stage] | caseSplit }}
+
+          </td>
+          <td style="text-align: right">
+            <span *ngIf="item.stage === ReviewStage.Annotate && item.completed">Annotations submitted&nbsp; <i class="fa fa-check"> </i></span>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+
+
+  </div>
+
+
+</div>

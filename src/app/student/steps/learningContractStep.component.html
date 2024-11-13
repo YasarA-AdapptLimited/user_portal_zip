@@ -1,0 +1,96 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>{{title}}</div>
+      <!-- Add first bit of text into tooltip -->
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp" [static]='true'></app-gphc-icon>
+    </h2>
+  </div>
+  <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+    <div class="row help-text">
+      <div class="col">
+        <p>
+          This section of the application is an agreement between you and your designated supervisor(s). 
+          It covers the key aspects of working together and clarifies what is expected in preparation for, and during, foundation training. 
+          It should be discussed and agreed by you and your designated supervisor(s).  
+        </p>
+        <p>
+            If you have more than one designated supervisor, a copy of this contract will be sent to all of them. You will receive a notification when each designated supervisor has responded to your request.  
+        </p>
+        <p>
+            Your designated supervisor(s) will be sent details of the training site and training dates you have entered in your application and will be asked to confirm that the details entered are correct.
+        </p>
+      </div>
+    </div>
+  </app-collapsible>
+
+  <div *ngIf="ready$ | async else loadingTemplate" class="fadein mt-4 mb-4">
+
+    <section>
+      <app-learning-contract ></app-learning-contract>
+
+      <div class="ml-2 mt-4" [class.error]="touched && !application.activeForm.isLearningContractSigned">
+          <mat-checkbox  name="agreed" [(ngModel)]="application.activeForm.isLearningContractSigned" (ngModelChange)="setAgreed(application.activeForm.isLearningContractSigned)">
+              Tick here to confirm that an initial training plan template has been shared
+          </mat-checkbox>
+      </div>
+    </section>
+
+    <app-collapsible [trigger]="application.activeForm.isLearningContractSigned">
+
+
+      <section>
+    
+        <h3>Your designated supervisors</h3>
+        <table class="learning-contract table">
+            <tr>
+              <th>Name</th>
+              <th>Number</th>
+              <th>Town</th>
+              <th>Response</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let item of tutors"  style="font-size:0.8em" [class.disabled]="!!item.learningContractResponse">
+              <td>{{ item.forenames + ' ' + item.surname }}</td>
+              <td>{{ item.registrationNumber }}</td>
+              <td>{{ item.town }}</td>
+              <td>{{ LearningContractResponse[item.learningContractResponse] }}
+               
+              </td>
+              <td>
+                  <i style="font-size:1.4em" *ngIf="item.learningContractResponse === LearningContractResponse.Approved" class="fa fa-check success"></i>
+                  <i style="font-size:1.4em" *ngIf="item.learningContractResponse === LearningContractResponse.Rejected || item.learningContractResponse === LearningContractResponse.Refused" class="fa fa-warning error"></i>
+                  <i style="font-size:1.4em" *ngIf="item.learningContractResponse === LearningContractResponse.Pending" class=" fa fa-clock-o"></i>
+                 
+              </td>
+            </tr>
+          </table>
+ 
+          <div *ngIf="hasUnsentContracts">
+
+         
+          <p>The learning contract must now be sent to your designated supervisors so they can sign it. </p>
+
+        <button class="btn-lg btn-block btn-primary" [disabled]="sending" [class.disabled]="sending" (click)="sendLearningContracts()"><span *ngIf="!sending">Send learning contract to your
+          designated supervisor(s)</span><span *ngIf="sending">Sending learning contracts...</span></button>
+
+          </div>
+
+      </section>
+      <app-collapsible [trigger]="serverError">
+        <div class="form-error-block">
+          <p>
+            {{ personalDetailsErrorMessage }}
+          </p>
+        </div>
+      </app-collapsible>
+    </app-collapsible>
+  </div>
+
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div class="step-loading">
+    <mat-progress-bar aria-label="loading step" mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>

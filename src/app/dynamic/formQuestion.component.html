@@ -1,0 +1,35 @@
+<div class="form-group question" >
+  <div class="header">
+
+    <label *ngIf="question.type !== AnswerType.FreeText" [innerHTML]="question.title" 
+    [attr.for]="question.id" 
+    [id]="'labelFor-'+ question.id"
+    [class.has-help-text]="!!question.body"
+  
+    ></label>
+    <app-gphc-icon *ngIf="question.body && !readonly" [tooltip]="helpTooltip"  [static]="true"
+    [iconType]="'info'" (click)="toggleHelp()"></app-gphc-icon>
+  </div>
+ 
+  <h2 class="label"  
+   
+    *ngIf="question.type === AnswerType.FreeText" 
+    [innerHTML]="question.title" 
+    [id]="'labelFor-'+ question.id"
+    [class.has-help-text]="!!question.body"
+    (click)="setFocus()"
+    > </h2>
+
+  <app-collapsible [trigger]="helpVisible" class="help-block">
+    <div class="help-text" [innerHTML]="question.body">
+    </div>
+  </app-collapsible>
+
+  <app-form-question-control 
+   (infoChanged)="onInfoChanged($event)" 
+    [question]="question"
+    [form]="form"
+    [readonly]="readonly"
+  ></app-form-question-control>
+
+</div>

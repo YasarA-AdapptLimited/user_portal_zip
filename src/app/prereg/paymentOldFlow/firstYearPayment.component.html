@@ -1,0 +1,114 @@
+<div class="content row no-gutters">
+
+  <app-banner [loading]="loading" [application]="true" [progressDark]="true">
+    <div class="banner-left">
+      <h1 class="sm-show">First year registration fee</h1>
+    </div>
+  </app-banner>
+
+  <div class="col-md-12 col-lg-8 fadein" *ngIf="worldpayConfig">
+
+    <section>
+      <h3>Fees to be paid
+        <img src="/assets/images/creditcards/poweredByWorldPay.gif" alt="Worldpay Logo" style="float:right" title="Payments Powered by WorldPay"
+        />
+
+      </h3>
+
+
+      <h4 style="margin-bottom:40px">
+        First year registration fee: {{fee | currency: 'GBP': 'symbol' :'.2'}}
+      </h4>
+      <div class="intro-text" style="margin-bottom:2em;">
+        <p>
+           Now your application has been approved, you must pay the fee of {{fee | currency: 'GBP': 'symbol' :'.2'}} to cover your first year of registration before you
+          can join the register.
+        </p>
+        <p>
+            Important: do not practise as a pharmacist until you have received your GPhC registration number and your name appears on the online
+            register. It is your responsibility to check this before you practice. Your registration payment receipt is not proof of
+            your registration. Practising as a pharmacist while not on the register is breaking the law and you can be prosecuted.
+        </p>
+      </div>
+    </section>
+    <section class="card-selection">
+      <h3>Please select your card type</h3>
+
+      <div class="intro-text" style="margin-bottom:1em;">
+        <p>
+           We can only accept payments made in pounds sterling (GBP). Payments are processed using worldpay, for more information please
+          review their <a href="https://www.worldpay.com/uk/worldpay-privacy-notice" target="_blank">privacy policy</a>.
+        </p>
+        <p>
+           When you make a card payment, you may be redirected to your card provider’s site to enter another password before they authorise
+          your payment. You can find out more about 3-D Secure authentication from your card provider.
+        </p>
+      </div>
+
+      <mat-radio-group [(ngModel)]="selectedCard">
+        <mat-radio-button *ngFor="let card of creditCards" value="{{card.id}}" [aria-label]="card.id">
+          <img src="/assets/images/creditcards/{{card.id}}.gif" alt="{{card.name}} Logo" title="{{card.name}} Logo" />
+          <br/> {{card.name}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <app-collapsible [trigger]="messages.length && !selectedCard">
+        <p class="form-error-block" *ngFor="let message of messages">
+          {{message}}
+        </p>
+      </app-collapsible>
+
+      <app-collapsible [trigger]="serverErrors && !!serverErrors.length">
+        <p class="form-error-block" style="font-size:1.2em" *ngFor="let error of serverErrors">
+          {{ 'Server validation error: ' + error.errors.join(',') }}
+        </p>
+      </app-collapsible>
+
+      <form [action]="worldpayConfig.paymentUrl" name="worldayForm" method="post" #worldpayForm>
+        <input type="hidden" name="paymentType" [value]="selectedCard" />
+        <input type="hidden" name="testMode" [value]="worldpayConfig.testMode" />
+        <input type="hidden" name="instId" [value]="worldpayConfig.instId" />
+        <input type="hidden" name="M_Callback" [value]="worldpayConfig.worldPayCallbackUrl" />
+        <input type="hidden" name="desc" [value]="'GPhC registration application fee'" />
+        <input type="hidden" name="currency" [value]="'GBP'" />
+        <input type="hidden" name="hideCurrency" [value]="true" />
+        <input type="hidden" name="amount" [value]="fee" />
+        <input type="hidden" name="cartId" [value]="cartId" />
+      </form>
+
+
+    </section>
+
+
+    <div class="row" style="padding:20px">
+
+      <div style="flex-grow:1">
+
+      </div>
+      <div class="text-center">
+        <div *ngIf="(!saving) else savingTemplate">
+          <button type="button" aria-label="Continue" (click)="next()" [class.disabled]="nextTouched && !allowNext" class="btn btn-primary btn-lg shadow btn-round"
+            title="Continue">
+            <i class="fa fa-arrow-right"></i>
+          </button>
+          <div class="btn-text">
+            Proceed to payment
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <ng-template #savingTemplate>
+      <div *ngIf="!layout.state.xs" class="foreground text-center saving large">
+        <app-spinner diameter="150">Saving</app-spinner>
+      </div>
+      <div *ngIf="layout.state.xs" class="foreground text-center saving">
+        <app-spinner diameter="120">Saving</app-spinner>
+      </div>
+    </ng-template>
+
+  </div>
+
+
+</div>

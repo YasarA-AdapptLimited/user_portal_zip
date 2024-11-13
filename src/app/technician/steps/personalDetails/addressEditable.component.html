@@ -1,0 +1,21 @@
+<app-form-section [editable]="true" (onEdit)="onEdit()" (onCancel)="cancel()" (onSave)="save()" [saving]="saving" [invalid]="!valid"
+  [autoToggle]="false" [editing]="editing" [allowSave]="selectedAddress || manualInput">
+  <span class="section-header">Address</span>
+  <div class="section-body" *ngIf="address">
+    <div *ngIf="townChanged" style="padding-top: 10px;padding-bottom: 10px;">
+      <div class="important">Your entry on the public register will be updated to show the changes you have made to your postal town. The update may take up to 24 hours to show.</div>
+    </div>
+    <app-address-technician [address]="address"></app-address-technician>
+  </div>
+  <div class="section-edit" >
+    <app-collapsible [trigger]="!selectedAddress && !manualInput">
+      <app-address-search-technician [editing]="editing" (selected)="addressSelected($event)" (manualInput)="enableManualInput()"></app-address-search-technician>
+    </app-collapsible>
+    <app-collapsible [trigger]="selectedAddress || manualInput">
+      <app-address-technician  
+      [lineOneEditable]="!manualInput" 
+      [lineOneFocussed]="selectedAddress || manualInput"
+      [address]="editingAddress" [manualInput]="manualInput"></app-address-technician>
+    </app-collapsible>
+  </div>
+</app-form-section>

@@ -1,0 +1,107 @@
+{
+  "dynamicFormId": "1",
+  "formTitle": "Test form",
+  "formBody": "This form is about colour and ice cream",
+  "type": 1,
+  "questionGroups": [
+    {
+      "title": "Group 1",
+      "body": "Colour and ice cream",
+      "questions": [
+        {
+          "id": "1",
+          "shortName": "Q1",
+          "title": "Question 1",
+          "type": 1,
+          "body": "What is your favourite colour?",
+          "min": null,
+          "max": null,
+          "isRequired": true,
+          "alternatives": [
+            {
+              "id": "2",
+              "name": "Red",
+              "text": "Red",
+              "questions": [
+                {
+                  "id": "3",
+                  "shortName": null,
+                  "title": "Why do you like red?",
+                  "type": 1,
+                  "body": null,
+                  "min": null,
+                  "max": null,
+                  "isRequired": true,
+                  "alternatives": [
+                    {
+                      "id": "4",
+                      "name": "vampire",
+                      "text": "Because I'm a vampire",
+                      "questions": [],
+                      "isRequired": true,
+                      "showAdditionalInfo": false
+                    },
+                    {
+                      "id": "5",
+                      "name": "energy",
+                      "text": "Because it symbolises energy",
+                      "questions": [],
+                      "isRequired": false,
+                      "showAdditionalInfo": true
+                    }
+                  ]
+                }
+              ],
+              "isRequired": false,
+              "showAdditionalInfo": false
+            },
+            {
+              "id": "6",
+              "name": "Green",
+              "text": "Green",
+              "questions": [],
+              "isRequired": false,
+              "showAdditionalInfo": false
+            }
+          ]
+        },
+        {
+          "id": "7",
+          "shortName": "Q2",
+          "title": "Question 2",
+          "type": 1,
+          "body": "What is your favourite flavour of ice cream ?",
+          "min": null,
+          "max": null,
+          "isRequired": true,
+          "alternatives": [
+            {
+              "id": "8",
+              "name": "Chocolate",
+              "text": "Chocolate",
+              "questions": [],
+              "isRequired": false,
+              "showAdditionalInfo": false
+            },
+            {
+              "id": "9",
+              "name": "Strawberry",
+              "text": "Strawberry",
+              "questions": [],
+              "isRequired": false,
+              "showAdditionalInfo": false
+            },
+            {
+              "id": "10",
+              "name": "Vanilla",
+              "text": "Vanilla",
+              "questions": [],
+              "isRequired": false,
+              "showAdditionalInfo": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

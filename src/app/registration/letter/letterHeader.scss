@@ -1,0 +1,34 @@
+@import '../../style/variables';
+
+
+
+header {
+    width: 95%;
+    margin: 0 auto;
+
+
+    div {
+        &.address > p {
+            margin: 0;
+            padding: 0;
+        }
+        &.initial-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 3em;
+        }
+    }
+
+
+
+
+    .logo {
+        width: 100%;
+    }
+
+
+
+
+
+}

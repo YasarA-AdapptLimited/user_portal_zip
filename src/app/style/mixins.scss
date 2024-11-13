@@ -1,0 +1,19 @@
+@keyframes pulse-stay {
+  0% {
+    box-shadow: 0 0 0 0px $gphc-accent-yellow;
+  }
+  100% {
+    box-shadow:  0 0 0 7px $gphc-accent-yellow;
+  }
+}
+
+
+@mixin focus {
+  animation: pulse-stay 300ms;
+  box-shadow:  0 0 0 7px $gphc-accent-yellow !important;
+  outline: none !important;
+}
+
+@mixin fadein {
+  animation: fadein 300ms;
+}

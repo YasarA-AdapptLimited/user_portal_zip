@@ -1,0 +1,78 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>
+        Contact details
+      </div>
+    </h2>
+  </div>
+
+  <section>
+
+    <section>
+      <app-applicant [isAssessmentRegistration]="true" [(ngModel)]="applicant" [touched]="touched"
+        (ngModelChange)="update()">
+      </app-applicant>
+    </section>
+
+    <div class="important registrant-message">
+      <p>Please check that your first and last names show exactly as they appear on the identity document you intend to take with you to the assessment.</p>
+
+      <p>If you need to change your name please complete a<a
+          href="http://www.pharmacyregulation.org/pharmacists/changes-registration/changes-your-name" target="_blank">
+          Change of details form</a>.
+      </p>
+
+    </div>
+
+
+    <section>
+      <div class="header">
+        <h3 [class.error]="touched && contactValid === false">
+          <div>
+            Contact details
+          </div>
+          <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+            [static]="true">
+          </app-gphc-icon>
+        </h3>
+      </div>
+      <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+        <div class="help-text">
+          <p>
+            If any of the information shown below is incorrect, you can update it on the ‘Account’ section of myGPhC.
+          </p>
+        </div>
+      </app-collapsible>
+      <div class="limit-width">
+        <app-contact-edit #contact [emailReadonly]="true" [phoneNumberReadonly]="true" [(ngModel)]="applicant.contact"
+          (ngModelChange)="update()">
+        </app-contact-edit>
+      </div>
+    </section>
+
+  </section>
+
+
+  <section>
+    <h3 [class.error]="touched && hasAddress === false">Home address</h3>
+    <!--<p class="important">
+      Please check that your home address is shown correctly. We will use this address for correspondence - only the
+      town will
+      be shown on the public register.
+    </p>-->
+    <div class="limit-width">
+      <app-address [address]="applicant.address"></app-address>
+    </div>
+  </section>
+
+  <section>
+    <p class="important">
+      If you would like to receive your assessment results by email, please make sure that you have agreed to receive
+      essential
+      GPhC emails. You can check your communications preferences in the ‘Accounts’ section of myGPhC.</p>
+  </section>
+
+
+
+</ng-template>

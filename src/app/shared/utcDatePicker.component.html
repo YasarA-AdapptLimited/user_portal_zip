@@ -1,0 +1,13 @@
+<div   *ngIf="!readonly" class="input-group" [style.width]="width">
+  <input readonly [class.white-background]="whiteBackground" [class.border-red]="question?.isValid === false" [class.error]="error" [min]="min" [max]="max"  class="form-control" [(ngModel)]="dateValue" 
+  [matDatepicker]="picker" (ngModelChange)="dateChange($event)" placeholder="Choose a date" 
+  [name]="name" (click)="picker.open()">
+  <div class="input-group-addon" (click)="picker.open()">
+    <i class="fa fa-calendar" style="cursor:pointer"></i>
+  </div>
+  <mat-datepicker (closed)="onClose()" [touchUi]="layout.state.xs"  #picker></mat-datepicker>
+</div>
+
+
+
+<div class="form-control readonly form-control-med"  *ngIf="readonly">{{ dateValue | utcDate }}</div>

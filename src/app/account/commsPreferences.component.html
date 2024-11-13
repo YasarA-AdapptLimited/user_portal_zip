@@ -1,0 +1,107 @@
+<div class="form-group comms" *ngIf="saveState===SaveState.untouched || warning === Warning.None || !showWarnings">
+  <p class="intro-text">I agree that the GPhC may contact me with:</p>
+  <p><b>a)</b> 
+    <b> Receive essential information about my current registration or training</b> (For example if you are a registered pharmacy professional, registration renewal and revalidation submission reminders, 
+      and if you are a pre-registration applicant updates on the status of your application and essential information about the registration assessment): 
+  </p>
+  <div class="form-group" style="margin-top:7px">
+      <i class="fa fa-level-up"></i><mat-checkbox name="allowEssentialEmails" #focus [(ngModel)]="comms.essentialEmails">
+      email
+    </mat-checkbox>
+    <br/>
+    <i class="fa fa-level-up"></i><mat-checkbox name="allowEssentialTexts" [(ngModel)]="comms.essentialTexts">
+      text message
+    </mat-checkbox>
+  </div>
+  
+  <p><b>b)</b>
+    <b> Receive important information relevant to my current registration or training</b>
+   (such as updates on key regulatory changes, invitations to respond to consultations, and for pharmacist
+   pre-registration trainees, the pre-registration bulletin) by: 
+  </p>
+  <div class="form-group" style="margin-top:7px">
+      <i class="fa fa-level-up"></i><mat-checkbox name="allowImportantEmails" [(ngModel)]="comms.importantEmails">
+      email
+    </mat-checkbox>
+    <br/>
+    <i class="fa fa-level-up"></i><mat-checkbox name="allowImportantTexts" [(ngModel)]="comms.importantTexts">
+      text message
+    </mat-checkbox>
+  </div>
+ 
+  <div *ngIf="requireMobile" style="padding-top: 10px">
+    <div class="important">Please add your UK mobile number in the
+      <span style="font-style:italic">Account</span> section
+    </div>
+  </div>
+ 
+</div>
+
+<div *ngIf="showWarnings && (saveState===SaveState.confirmationRequired || saveState===SaveState.saving)">
+
+  <div [ngSwitch]="warning">
+
+    <div *ngSwitchCase="Warning.Three">
+      <p>You have chosen not to receive
+        <b>any essential information about your registration</b> by email and text message.</p>
+      <p>This means that we will
+        <b>only</b> contact you by post. Please be aware that you are responsible for making sure that you renew your registration
+        and complete revalidation on time, and you may be removed from the register if you do not.</p>
+      <p>Do you want to change your preferences?</p>
+    </div>
+
+    <div *ngSwitchCase="Warning.Four">
+      <p>You have chosen not to receive
+        <b>any essential information about your registration</b> by
+        <span *ngIf="!comms.essentialEmails">email</span>
+        <span *ngIf="!comms.essentialTexts">text message</span>.</p>
+      <p>This means that we will
+        <b>only</b> contact you by
+        <span *ngIf="comms.essentialEmails">email</span>
+        <span *ngIf="comms.essentialTexts">text message</span>. Please be aware that you are responsible for making sure that you renew your registration and
+        complete revalidation on time, and you may be removed from the register if you do not.</p>
+      <p>Do you want to change your preferences?</p>
+    </div>
+
+    <div *ngSwitchCase="Warning.Five">
+      <p>You have chosen not to receive
+        <b>important information relevant to your registration</b>. You may miss out on key information which sets out what
+        is expected of you to remain on the register.
+      </p>
+      <p>Do you want to change your preferences?</p>
+    </div>
+
+    <div *ngSwitchCase="Warning.Six">
+      <p>You have chosen not to receive any essential information about your registration by
+        <span *ngIf="!comms.essentialEmails">email</span>
+        <span *ngIf="!comms.essentialTexts">text message</span>.</p>
+      <p>This means that we will
+        <b>only</b> contact you by
+        <span *ngIf="comms.essentialEmails">email</span>
+        <span *ngIf="comms.essentialTexts">text message</span>
+        about your registration. Please be aware that you are responsible for making sure that you renew your registration and complete
+        revalidation on time, and you may be removed from the register if you do not.</p>
+      <p>
+        You have also chosen not to receive
+        <b>important information relevant to your registration</b>. You may miss out on key information which sets out what
+        is expected of you to remain on the register.</p>
+      <p>Do you want to change your preferences? </p>
+    </div>
+
+    <div *ngSwitchCase="Warning.Seven">
+      <p>You have chosen not to receive
+        <b>any essential information about your registration</b> by email and text message.</p>
+      <p>
+        This means that we will only contact you by post about your registration. Please be aware that you are responsible for making
+        sure that you renew your registration and complete revalidation on time, and you may be removed from the register
+        if you do not.
+      </p>
+      <p>
+        You have also chosen not to receive
+        <b>important information relevant to your registration</b>. You may miss out on key information which sets out what
+        is expected of you to remain on the register.
+      </p>
+      <p>Do you want to change your preferences?</p>
+    </div>
+
+  </div>

@@ -1,0 +1,503 @@
+<app-banner [info]="true">
+  <div class="banner-left">
+    <h1 class="sm-show">Renewal FAQs</h1>
+    <p class="intro-text">
+      Frequently asked questions regarding renewal
+    </p>
+  </div>
+</app-banner>
+<div class="content spread no-boxes">
+  <section>
+    <div class="row">
+
+      <div class="col-12 col-xl-8 faq-content fadein">
+        <app-faq>
+          <h2>
+            <button id="faqWhenIsMyRegistrationRenewalDue" 
+              (click)="toggleAccordion('faqWhenIsMyRegistrationRenewalDue')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqWhenIsMyRegistrationRenewalDue')"
+              aria-controls="faqWhenIsMyRegistrationRenewalDue">
+              When is my registration renewal due?
+            </button>
+          </h2>
+          <div role="region" id="faqWhenIsMyRegistrationRenewalDueContent" aria-labelledby="faqWhenIsMyRegistrationRenewalDue" tabindex="0">
+            <p>You need to renew your registration at least two months before it is due to expire. This requirement is to make
+              sure the register stays up to date and is set out in our legislation. </p>
+            <p>What you need do will depend on how you pay your fee. Please see your renewal notice for more information.</p>
+            <p>We will notify you around three months before your renewal is due (five months before your registration expires)
+              to tell you when you need to renew by – your ‘renewal due date’.</p>
+            <p>Your renewal status will also show as ‘due’ on the ‘Home’ page of your myGPhC account at the same time, and it
+              will show your renewal due date. Click on the button to follow the renewal process.</p>
+            <p>You can renew your registration at any point once you receive your letter, or your renewal status shows as due
+              on myGphC, until your renewal due date. See the <a faqLink="how">How do I renew?</a> section if you need help to renew your registration.
+            </p>
+            <p>If you do not renew your registration before your renewal date and you do not want to be removed from the register,
+              <a target="gphc_main_site" href="https://www.pharmacyregulation.org/about-us/contact-us">contact us</a>. </p>
+          </div>
+        </app-faq>
+
+
+        <app-faq faqId="how">
+          <h2>
+            <button id="faqHowDoIRenew" 
+              (click)="toggleAccordion('faqHowDoIRenew')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqHowDoIRenew')"
+              aria-controls="faqHowDoIRenew">
+              How do I renew?
+            </button>
+          </h2>
+          <div role="region" id="faqHowDoIRenewContent" aria-labelledby="faqHowDoIRenew" tabindex="0">
+            <h3>Step 1: Decide on your payment method</h3>
+            <p>You can pay your registration fee by:</p>
+            <ul>
+              <li>credit card</li>
+              <li>debit card</li>
+              <li>annual or quarterly Direct Debit</li>
+            </ul>
+            <p>
+              Unless you have already set up a Direct Debit, you should pay by credit or debit card. If you want to pay by Direct Debit,
+              see I want to pay by Direct Debit. How do I set one up?</p>
+
+            <h3>Step 2: Make your declarations</h3>
+            <ul>
+              <li>Click on the ‘Start’ button on the ‘Renewal’ page.</li>
+              <li>Fill in and confirm the declarations. If you need to give more information about any of your declarations,
+                you may asked to fill in some extra forms. Follows the prompts for more information.
+              </li>
+            </ul>
+
+            <h3>Step 3: Make your payment </h3>
+            <p>If you are paying by credit or debit card, please have your card with you. Once you have completed your declarations,
+              you will be transferred to the online payment system. You may be asked by your bank to enter a password to
+              complete your payment. You can find out more about this in <a faqLink="3dsecure">What is the extra password step I encountered when
+                making my online payment?</a></p>
+            <p>If you enter your email address on the payment page, you will receive a confirmation that your payment has been
+              processed – this is not a receipt.</p>
+            <p>Once your payment is complete, you will be transferred back to MyGPhC. You have finished your renewal.
+            </p>
+            <p>
+              <em>If you already have a yearly or quarterly Direct Debit set up</em> to pay your renewal fee, all you will need
+              to do is complete your renewal declarations by the date given in your renewal notice. Once you have done this,
+              you will have finished your renewal.
+            </p>
+
+            <h3>Step 4: Collect your receipt</h3>
+            <p>If you need a receipt for your renewal payment, you can view and download one from the
+              <a routerLink="/receipts">Receipts page</a>.</p>
+            <p>If you paid by card it may take up to 48 hours for your receipt to show. </p>
+            <p>If you are paying by Direct debit, it may take up to 21 days for your payment receipt to show.</p>
+            <p>If you are paying by quarterly Direct Debit, each time a payment is taken the amount paid and amount still owing
+              will be updated on your receipt.</p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqWhenCanIRenew" 
+              (click)="toggleAccordion('faqWhenCanIRenew')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqWhenCanIRenew')"
+              aria-controls="faqWhenCanIRenew">
+              When can I renew my registration?            
+            </button>
+          </h2>
+          <div role="region" id="faqWhenCanIRenewContent" aria-labelledby="faqWhenCanIRenew" tabindex="0">
+            <p>
+              You can renew your registration using myGphC at any point once you receive your renewal letter, or your renewal status shows
+              as ‘Due’ on myGphC, until your ‘renewal due date’ – two months before your registration expires. See the How
+              do I renew? section if you need help to renew your registration.</p>
+            <p>
+              If you do not renew your registration before your renewal due date and you do not want to be removed from the register, contact
+              us.
+            </p>
+            <p>
+
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqHowToGetReceipt" 
+              (click)="toggleAccordion('faqHowToGetReceipt')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqHowToGetReceipt')"
+              aria-controls="faqHowToGetReceipt">
+              How do I get a receipt for my renewal fee payment? 
+            </button>
+          </h2>
+          <div role="region" id="faqHowToGetReceiptContent" aria-labelledby="faqHowToGetReceipt" tabindex="0">
+            <p> If you need a receipt for your renewal payment, you can view and download one from the ‘Receipts’ page.</p>
+            <p>If you paid by card it may take up to 48 hours for your receipt to show. </p>
+            <p> If you are paying by Direct debit, it may take up to 21 days for your payment receipt to show.</p>
+            <p>
+              If you are paying by quarterly Direct Debit, each time a payment is taken the amount paid and amount still owing will be
+              updated on your receipt.</p>
+            <!--
+            <p>You can renew your registration using myGphC at any point once you receive your renewal letter, or your renewal
+              status shows as ‘Due’ on myGphC, until your ‘renewal due date’ – two months before your registration expires.
+              See the How do I renew? section if you need help to renew your registration.
+            </p>
+            <p>If you do not renew your registration before your renewal due date and you do not want to be removed from the
+              register, contact us .
+            </p>-->
+          </div>
+        </app-faq>
+
+        <app-faq faqId="3dsecure">
+          <h2>
+            <button id="faq3DSecure" 
+              (click)="toggleAccordion('faq3DSecure')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faq3DSecure')"
+              aria-controls="faq3DSecure">
+              What is the extra password step I encountered when making my online payment?
+            </button>
+          </h2>
+          <div role="region" id="faq3DSecureContent" aria-labelledby="faq3DSecure" tabindex="0">
+            <p>Depending on the type of card you use, you may be asked to enter a password before you can finish making your
+              payment. This is part of 3-D Secure, a password-based security system that your bank has introduced to reduce
+              the risks of fraudulent card use.
+            </p>
+            <p>Different card providers use different names for this services, for example:
+            </p>
+            <ul>
+              <li>Visa: Verified by Visa</li>
+              <li>MasterCard: MasterCard SecureCode</li>
+              <li>JCB International: J/Secure</li>
+            </ul>
+            <p>If your bank uses 3d Secure and you don’t have a password, you may be asked to set one up. If you are not sure
+              what to do, contact your bank.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faq3DSecurePart2" 
+              (click)="toggleAccordion('faq3DSecurePart2')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faq3DSecurePart2')"
+              aria-controls="faq3DSecurePart2">
+              What are 'Verified by Visa', 'MasterCard SecureCode', 'J/Secure'?
+            </button>
+          </h2>
+          <div role="region" id="faq3DSecurePart2Content" aria-labelledby="faq3DSecurePart2" tabindex="0">
+            <p>
+              Depending on the type of card you use, you may be asked to enter a password before you can finish making your payment. This
+              is part of 3-D Secure, a password-based security system that your bank has introduced to reduce the risks of
+              fraudulent card use. </p>
+            <p>
+              Different card providers use different names for this services, for example:</p>
+            <ul>
+              <li>Visa: Verified by Visa</li>
+              <li>MasterCard: MasterCard SecureCode</li>
+              <li>JCB International: J/Secure</li>
+            </ul>
+            <p>
+              If your bank uses 3d Secure and you don’t have a password, you may be asked to set one up. If you are not sure what to do,
+              contact your bank.</p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqBrowserHistory" 
+              (click)="toggleAccordion('faqBrowserHistory')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqBrowserHistory')"
+              aria-controls="faqBrowserHistory">
+              Why can't I use my web browser's ‘Back’ button or ‘History’ feature when I am renewing my registration?
+            </button>
+          </h2>
+          <div role="region" id="faqBrowserHistoryContent" aria-labelledby="faqBrowserHistory" tabindex="0">
+            <p>Completing your renewal using myGPhC involves submitting information which is sent as electronic data over the
+              internet. Using your web browser's ‘Back’ button or ‘History’ feature can interrupt the sending of the information
+              you have submitted, and some of it may be lost. If you try to use these features during your registration renewal,
+              you will see a pop up box which will ask you to either continue or start the process again.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqDirectDebitSetup" 
+              (click)="toggleAccordion('faqDirectDebitSetup')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqDirectDebitSetup')"
+              aria-controls="faqDirectDebitSetup">
+              I want to pay by Direct Debit. How do I set one up?
+            </button>
+          </h2>
+          <div role="region" id="faqDirectDebitSetupContent" aria-labelledby="faqDirectDebitSetup" tabindex="0">
+            <p>If you want to pay Direct Debit, you will need to set one up by the date set out in your renewal notice to make
+              sure you can complete the process in time.
+            </p>
+            <p>You can pay:
+            </p>
+            <ul>
+              <li>a one off annual fee</li>
+              <li>a portion each quarter (every three months from the date of your renewal)</li>
+            </ul>
+            <p>We will take payments on the first working day of each month. We will send you a payment schedule to show the
+              payments and the date(s) we will take them.
+            </p>
+            <p>To set up a direct debit you will need to:
+            </p>
+            <ol>
+              <li>Download a Direct Debit mandate form from the GPhC website.
+              </li>
+              <li>Fill in the form - use your registration number as the payment reference, and tick one of the boxes to show
+                if you want to pay annually or quarterly.</li>
+              <li>Send the form to us at registers@pharmacyregulation.org, or to our postal address below. The form must reach
+                us before the date shown in Step 4 of your renewal notice.</li>
+            </ol>
+            <p>Send your form to:
+            </p>
+            <address>
+              Registration Team
+              <br/> General Pharmaceutical Council
+              <br/> Level 14
+              <br/> One Cabot Square
+              <br/> London
+              <br/> E14 4QJ
+
+            </address>
+
+            <p>We will send you an email notice to confirm that your Direct Debit has been set up, and a payment schedule to
+              show the payments and the date(s) we will take them.
+            </p>
+            <p>The notice will also give you a new deadline by which you must make your renewal declarations. If you do not
+              complete your declarations in time, the Direct Debit will not be collected and you will need to make your full
+              registration payment using a debit or credit card.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+           <h2>
+            <button id="faqDirectDebitChangePaymentType" 
+              (click)="toggleAccordion('faqDirectDebitChangePaymentType')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqDirectDebitChangePaymentType')"
+              aria-controls="faqDirectDebitChangePaymentType">
+              I want to change from paying by Direct Debit to paying by card. How do I do this?
+            </button>
+          </h2>
+          <div role="region" id="faqDirectDebitChangePaymentTypeContent" aria-labelledby="faqDirectDebitChangePaymentType" tabindex="0">
+            <p>If you want to change from paying by direct debit to paying by card, you will need to tell us before you start
+              your registration renewal.
+              <em>Allow at least six weeks to before your registration renewal is due to make sure you can make the change.</em>
+            </p>
+            <p>To change from paying by Direct Debit to paying by card, you must:
+            </p>
+            <ol>
+              <li>Check your payment schedule if you pay quarterly, to see if you have any outstanding payments to make. If you
+                do, contact us on
+                <b>020 3713 8000</b> and we will take payment over the phone by credit or debit card. This will avoid any administration
+                fees for incomplete payments.</li>
+              <li>Contact your bank to cancel your Direct Debit.</li>
+              <li>Send an email to us at
+                <b>registers@pharmacyregulation.org</b> to confirm that you have cancelled your Direct Debit with your bank.
+                Tell us your registration number so we can find your details easily and make sure that they are updated.</li>
+              <li>We will send you an email giving a new date by which you need to complete your registration renewal. If you
+                do not receive an email from us within 10 working days of your email, contact us.</li>
+              <li>Sign in to myGPhC to renew your registration. After your have completed the declarations section, you should
+                be able to pay your renewal fee by card.</li>
+            </ol>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqDirectDebitChangePaymentTiming" 
+              (click)="toggleAccordion('faqDirectDebitChangePaymentTiming')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqDirectDebitChangePaymentTiming')"
+              aria-controls="faqDirectDebitChangePaymentTiming">
+              How do I change my Direct Debit payment from quarterly to yearly (or vice versa)?
+            </button>
+          </h2>
+          <div role="region" id="faqDirectDebitChangePaymentTimingContent" aria-labelledby="faqDirectDebitChangePaymentTiming" tabindex="0">
+            <p>If you want to change how often you make a Direct Debit payment, you need to tell us before you start your registration
+              renewal. Please see your renewal notice to find the date by which you will need to make the change, but
+              <em>make sure you allow at least eight weeks to before your registration renewal is due.</em>
+            </p>
+            <p>To change how often you make a Direct Debit payment, you must:
+            </p>
+            <ul>
+              <li>Send an email to us at
+                <b>registers@pharmacyregulation.org</b>. Tell us your registration number and how you want to change your Direct
+                Debit (from annually to quarterly, for example).</li>
+              <li>We will send you an email to confirm we have made the change.</li>
+              <li>Complete your registration renewal declarations as usual.</li>
+            </ul>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqDirectDebitChangePaymentDetails" 
+              (click)="toggleAccordion('faqDirectDebitChangePaymentDetails')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqDirectDebitChangePaymentDetails')"
+              aria-controls="faqDirectDebitChangePaymentDetails">
+              How do I change the banking details on my Direct Debit mandate?
+            </button>
+          </h2>
+          <div role="region" id="faqDirectDebitChangePaymentDetailsContent" aria-labelledby="faqDirectDebitChangePaymentDetails" tabindex="0">
+            <p>If you want to change the bank details we use to collect Direct Debit payments from you, you will need to set
+              up a new Direct Debit by completing a new Direct Debit mandate form. </p>
+            <p>If you are using the
+              <a target="_blank" href="https://www.currentaccountswitch.co.uk/Pages/Home.aspx">current account switching service</a> to change accounts, we will automatically be notified of the change,
+              so you don’t need to complete a form.
+            </p>
+            <p>
+              <em>Important: We take payments on the first working day of the month they are due. Please make sure that we know
+                about any changes at least five working days before a payment is due to be taken so that we can make sure
+                we request the payment from the right account. If a payment is refused, you will need to pay the outstanding
+                amount by credit or debit card.</em>
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+           <h2>
+            <button id="faqCancelRegistration" 
+              (click)="toggleAccordion('faqCancelRegistration')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqCancelRegistration')"
+              aria-controls="faqCancelRegistration">
+              I don’t want to continue my registration. What should I do?
+            </button>
+          </h2>
+          <div role="region" id="faqCancelRegistrationContent" aria-labelledby="faqCancelRegistration" tabindex="0">
+            <p>If you don’t want or need to be registered with the GPhC any longer, you should tell us by completing a
+              voluntary removal and we will remove your details from the register. You can access the voluntary removal form via your myGPhC account, it is located under the 'Applications' tab.
+            </p>
+            <p>This helps us to keep the register up to date and to show your status accurately.
+            </p>
+            <p>There is no charge to process your voluntary removal form. You can submit it any time until your registration
+              expiry date, and you can chose when your details are removed from the register if you want.
+            </p>
+            <p>If you complete a voluntary removal form and later want to be restored to the register, this process can be carried
+              out more easily and with a lower fee than if you take no action and let your registration lapse.
+            </p>
+            <p>If you have already completed you registration renewal and then decide that you want to be removed from the register,
+              we will refund your registration fee if we receive your voluntary removal form before your registration expiry
+              date.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqMissedRenewalDate" 
+              (click)="toggleAccordion('faqMissedRenewalDate')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqMissedRenewalDate')"
+              aria-controls="faqMissedRenewalDate">
+              I have missed my renewal due date. What should I do?
+            </button>
+          </h2>
+          <div role="region" id="faqMissedRenewalDateContent" aria-labelledby="faqMissedRenewalDate" tabindex="0">
+            <p>If you have attempted to renew your registration after your renewal date and have not been able to, you will
+              need to complete a restoration application.</p>
+            <p>Restoration applications can take 28 days to process, so you should fill in the application as soon as possible.</p>
+            <p>If you pay by Direct Debit and you do not complete your renewal declarations by the deadline in your renewal
+              notice, your Direct Debit will be cancelled. You have until your renewal due date to make your declarations
+              and pay your renewal fee by credit or debit card.</p>
+            <!--
+            <p>
+              <em>If you pay by credit or debit card</em> and you haven’t renewed your registration by the deadline in your renewal
+              notice but still want stay on the register after your registration expiry date, call our Customer Contact Centre
+              on
+              <em>020 3713 8000</em>.
+            </p>
+            <p>
+              <em>If you pay by direct debit</em>, you still need to complete your renewal declarations by the deadline in your
+              renewal notice.
+            </p>
+            <p>If you don’t complete your declarations by this date, your direct debit will be cancelled. You will have until
+              two months before your registration expiry date to complete your registration renewal process and pay with
+              a credit or debit card.
+            </p>
+            <p>
+              <em>Important: If you do not renew your registration on time, you will need to complete a restoration application.
+              </em>
+            </p>
+            <p>
+              <em>Restoration applications can take 28 days to process, so you should get the process started as soon as possible
+                by contacting us.
+              </em>
+            </p>
+          -->
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqMissedDirectDebitDeadline" 
+              (click)="toggleAccordion('faqMissedDirectDebitDeadline')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqMissedDirectDebitDeadline')"
+              aria-controls="faqMissedDirectDebitDeadline">
+              I pay by direct debit and have missed the deadline to make my renewal declarations. What should I do?
+            </button>
+          </h2>
+          <div role="region" id="faqMissedDirectDebitDeadlineContent" aria-labelledby="faqMissedDirectDebitDeadline" tabindex="0">
+            <p>
+              If you pay by Direct Debit and you do not complete your renewal declarations by the deadline in your renewal notice, your
+              Direct Debit will be cancelled. You have until your renewal due date to make your declarations and pay your
+              renewal fee by credit or debit card.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqReducedRenewalFee" 
+              (click)="toggleAccordion('faqReducedRenewalFee')"
+              class="faq-button" 
+              [attr.aria-expanded]="isButtonExpanded('faqReducedRenewalFee')"
+              aria-controls="faqReducedRenewalFee">
+              I work part time. Can I pay a reduced renewal fee?
+            </button>
+          </h2>
+          <div role="region" id="faqReducedRenewalFeeContent" aria-labelledby="faqReducedRenewalFee" tabindex="0">
+            <p>There is a standard fee to renew your registration as a pharmacist or pharmacy technician for a year. If you
+              practice as a pharmacy professional at any point during that time, you must pay the whole renewal fee.
+            </p>
+          </div>
+        </app-faq>
+
+        <app-faq>
+          <h2>
+            <button id="faqRefundRenewalFeePartial" 
+              (click)="toggleAccordion('faqRefundRenewalFeePartial')"
+              class="faq-button"
+              [attr.aria-expanded]="isButtonExpanded('faqRefundRenewalFeePartial')"
+              aria-controls="faqRefundRenewalFeePartial">
+              Can I receive a refund for part of my renewal payment if I don’t work for some of the time I am registered, or if I decide to remove myself from the register after I renew?
+            </button>
+          </h2>
+          <div role="region" id="faqRefundRenewalFeePartialContent" aria-labelledby="faqRefundRenewalFeePartial" tabindex="0">
+            <p>There is a standard fee to renew your registration as a pharmacist or pharmacy technician for a year. If you
+              practice as a pharmacy professional at any point during that time, you must pay the whole renewal fee - we
+              will not refund any part of it.
+            </p>
+          </div>
+        </app-faq>
+
+        <!--
+        <div class="question-wrapper">
+          <app-faq #question></h2>
+          <div class="answer"></div>
+        </div>
+          -->
+      </div>
+
+    </div>
+  </section>
+</div>

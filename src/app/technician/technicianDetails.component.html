@@ -1,0 +1,55 @@
+<app-banner>
+  <div class="banner-left">
+    <h1>Applicant details</h1>
+    <p class="intro-text">Your personal details as a pharmacy technician applicant
+    </p>
+  </div>
+</app-banner>
+<div class="content spread">
+  <div class="row fadein">
+    <div class="col-md-7 left-col">
+      <app-form-section [loading]="loading">
+        <span class="section-header">Technician details</span>
+        <div class="section-body">
+          <div class="form-group">
+            <label>Title</label>
+            <div class="form-control readonly" tabindex="-1" [innerHTML]="technicianApplicant?.title.name"></div>
+          </div>
+          <div class="form-group">
+            <label>First Name</label>
+            <div class="form-control readonly" tabindex="-1" [innerHTML]="technicianApplicant?.forenames"></div>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <div class="form-control readonly" tabindex="-1" [innerHTML]="technicianApplicant?.surname"></div>
+          </div>
+          <div class="form-group">
+            <label>Date of birth</label>
+            <div class="form-control readonly" tabindex="-1" [innerHTML]="technicianApplicant?.dateOfBirth | dobDate"
+              style="min-height: 2.3em;"></div>
+          </div>
+          <div class="form-group">
+            <label>Pre entry number</label>
+            <div class="form-control readonly" tabindex="-1" [innerHTML]="technicianApplicant?.preEntryNumber"></div>
+          </div>
+          <!-- <div class="form-group">
+            <label>Registration date limit</label>
+            <div class="form-control readonly" [innerHTML]="technicianApplicant?.registrationDateLimit | utcDate"
+              style="min-height: 2.3em;"></div>
+          </div> -->
+          <!-- <div class="form-group">
+            <label>Qualifications</label>
+            <div class="form-control readonly" [innerHTML]="student?.qualification.courseName"></div>
+          </div> -->
+        </div>
+      </app-form-section>
+    </div>
+    <div class="col-md-5 right-col" style="text-align: center">
+      <div class="section-body">
+        <app-user-badge link="/technician/technicianDetails" title="Technician Applicant">
+          {{ user }}
+        </app-user-badge>
+      </div>
+    </div>
+
+  </div>

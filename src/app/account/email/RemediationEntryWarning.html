@@ -1,0 +1,76 @@
+@model dynamic
+<div style="width: 100%;height: 100%;color: #3e3e3e;
+  font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma', 'sans-serif';font-size: 14px;font-style: normal;font-variant: normal;font-weight: 400;line-height: 20px;padding: 0 0 20px 0; ">
+  <!--[if mso]>
+ <table><tr><td width="450">
+<![endif]-->
+  <div style="max-width: 450px;width: 450px;">
+    <div style="margin: 0;margin-bottom: 10px;background: white;">
+      <img style="width: 450px;height: 93px;" alt="mygphc email banner" src="https://strgt1prdmgcnt4874ragrs.blob.core.windows.net/mail-templates/Content/mygphc-email-banner.png" />
+ 
+      <table style="width: 100%; margin-top: 10px;margin-bottom: 20px">
+          <tr>
+            <td style="color: white; width: 100%;background: #026f92;text-align: center;height:40px;vertical-align:middle;font-size: 17px;">
+                GPhC Remediation warning
+            </td>
+          </tr>
+        </table>
+      
+      <div style="padding-left: 10px;padding-right: 20px">
+        <p>Dear @Model.FirstName,</p>
+
+
+<p>You were due to submit your revalidation records by @Model.SubmissionDeadline.</p>
+
+<p>As you did not submit your revalidation records by this date, you are now in remediation.</p>
+
+<p>This means that you have six weeks from the date shown to submit your records or tell us why you cannot, before we take further action.</p>
+
+<p><b style="color:#553c73">What should I do next?</b></p>
+
+<p>You should submit your revalidation records to us through myGPhC as soon as possible.</p>
+
+<p>If you have a good reason why you are not able to submit some or all of your revalidation records, you should tell us. You can request an extension to your submission deadline, or to complete fewer entries covering the same period.</p>
+
+<p>To do this, log on to myGPhC and click on ‘Tell us why you can’t submit’ on the revalidation page. Fill in the form and submit it with supporting documents and we will consider your request.</p>
+
+<p>If you do submit records to us during the remediation period, your submission will automatically be selected for review.</p>
+
+<p><b style="color:#553c73">Why do you need my revalidation records?</b></p>
+
+<p>We have a statutory duty to make sure pharmacy professionals practise safely and effectively. Our revalidation requirements allow pharmacists and pharmacy technicians to show that they keep their knowledge and skills up to date in order to maintain and improve their practice.</p>
+
+
+<p><b style="color:#553c73">What if I don’t want to renew my registration?</b></p>
+
+<p>If you’re not intending to renew your registration, tell us that you no longer want to be registered by completing an <a style="color:#026f92" href="https://www.pharmacyregulation.org/registration/changes-your-registration/leaving-register">Application for voluntary removal form</a>. This helps us to keep the register information accurate and allows you to choose when you leave the register. There is no charge to leave the register.</p>
+
+<p><b style="color:#553c73">What happens if I don’t submit my records without good reason?</b></p>
+
+<p>If you do not submit your records by the end of the remediation period and do not provide a good reason why, we will take further action and begin the process to remove you from the register. This is called ‘administrative removal’.</p>
+
+<p>If you are removed from the register through this process and you later reapply to be registered, we will expect to receive and review your revalidation records as part of your application.</p>
+
+<p>If you have any question about what you must do each year to meet the revalidation requirement, <a style="color:#026f92" href="https://www.pharmacyregulation.org/sites/default/files/document/gphc_revalidation_framework_january_2018.pdf">read the revalidation framework</a>.</p>
+
+  
+<p>Yours sincerely,</p>
+<p><b>GPhC Customer services</b></p>
+</div>
+<table style="width: 100%">
+    <tr>
+      <td style="width: 100%;background: #35a079;text-align: center;height:70px;vertical-align:middle;font-size: 17px;">
+
+        <a href="@Model.Link" style="color: white;border-bottom: 1px solid white;text-decoration: none;">Go to
+          MyGPhC</a>
+
+      </td>
+    </tr>
+  </table>
+
+</div>
+</div>
+<!--[if mso]>
+</td></tr></table>
+<![endif]-->
+</div>

@@ -1,0 +1,21 @@
+
+@import '../../../style/variables';
+
+mat-radio-group {
+    mat-radio-button:first-child {
+        margin-bottom: 1em;
+    }
+
+    ::ng-deep .mdc-form-field label {
+        white-space: normal !important;
+    }
+}
+
+li {
+    &.Qdetail {
+        padding: .5em;
+        background: #e9f2ee;
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
+}

@@ -1,0 +1,1440 @@
+{
+    "success": true,
+    "error": null,
+    "data": {
+        "ethnicity": [
+            {
+                "group": "White",
+                "orderId": 0,
+                "subGroups": [
+                    {
+                        "isOther": false,
+                        "id": 717750017,
+                        "name": "British"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750018,
+                        "name": "Irish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360001,
+                        "name": "Gypsy or Irish traveler"
+                    },
+                    {
+                        "isOther": true,
+                        "id": 717750019,
+                        "name": "Other"
+                    }
+                ]
+            },
+            {
+                "group": "Black or black British",
+                "orderId": 1,
+                "subGroups": [
+                    {
+                        "isOther": false,
+                        "id": 717750008,
+                        "name": "Caribbean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750007,
+                        "name": "African"
+                    },
+                    {
+                        "isOther": true,
+                        "id": 717750009,
+                        "name": "Other"
+                    }
+                ]
+            },
+            {
+                "group": "Mixed",
+                "orderId": 2,
+                "subGroups": [
+                    {
+                        "isOther": false,
+                        "id": 717750022,
+                        "name": "White and black Caribbean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750021,
+                        "name": "White and black African"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750020,
+                        "name": "White and Asian"
+                    },
+                    {
+                        "isOther": true,
+                        "id": 717750014,
+                        "name": "Other mixed"
+                    }
+                ]
+            },
+            {
+                "group": "Asian or Asian British",
+                "orderId": 3,
+                "subGroups": [
+                    {
+                        "isOther": false,
+                        "id": 717750011,
+                        "name": "Indian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750015,
+                        "name": "Pakistani"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750006,
+                        "name": "Bangladeshi"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750010,
+                        "name": "Chinese / Chinese British"
+                    },
+                    {
+                        "isOther": true,
+                        "id": 717750005,
+                        "name": "Other Asian"
+                    },
+                    {
+                        "isOther": true,
+                        "id": 717750013,
+                        "name": "Other ethnic group"
+                    }
+                ]
+            },
+            {
+                "group": "Arab",
+                "orderId": 4,
+                "subGroups": [
+                    {
+                        "isOther": false,
+                        "id": 981360000,
+                        "name": "Arab"
+                    }
+                ]
+            }
+        ],
+        "sections": [
+            {
+                "name": "Gender",
+                "groups": [
+                    {
+                        "isOther": false,
+                        "id": 1,
+                        "name": "Male"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 2,
+                        "name": "Female"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360000,
+                        "name": "Other"
+                    }
+                ]
+            },
+            {
+                "name": "Religion",
+                "groups": [
+                    {
+                        "isOther": false,
+                        "id": 717750000,
+                        "name": "None"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750001,
+                        "name": "Christian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750002,
+                        "name": "Buddhist"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750003,
+                        "name": "Hindu"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750004,
+                        "name": "Jewish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750005,
+                        "name": "Muslim"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750007,
+                        "name": "Sikh"
+                    },
+                    {
+                        "isOther": true,
+                        "id": 717750006,
+                        "name": "Other"
+                    }
+                ]
+            },
+            {
+                "name": "Nationality",
+                "groups": [
+                    {
+                        "isOther": false,
+                        "id": 717750001,
+                        "name": "Afgan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750002,
+                        "name": "Albanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750003,
+                        "name": "Algerian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750004,
+                        "name": "American"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750005,
+                        "name": "American Samoan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750006,
+                        "name": "Andorran"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750007,
+                        "name": "Angolan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750008,
+                        "name": "Anguillian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750009,
+                        "name": "Antartican"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750010,
+                        "name": "Antiguans"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750011,
+                        "name": "Argentinean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750012,
+                        "name": "Armenian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750013,
+                        "name": "Aruban"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750014,
+                        "name": "Australian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750015,
+                        "name": "Austrian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750016,
+                        "name": "Azerbaijani"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750017,
+                        "name": "Bahraini"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750018,
+                        "name": "Bangladeshi"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750019,
+                        "name": "Barbadian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750020,
+                        "name": "Basotho"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750021,
+                        "name": "Batswana"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750022,
+                        "name": "Belarusian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750023,
+                        "name": "Belgian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750024,
+                        "name": "Belizean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750025,
+                        "name": "Beninese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750026,
+                        "name": "Bermudian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750027,
+                        "name": "Bhutanese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750028,
+                        "name": "Bolivian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750029,
+                        "name": "Bosnian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750030,
+                        "name": "Brazilian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750031,
+                        "name": "British"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750032,
+                        "name": "Bruneian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750033,
+                        "name": "Bulgarian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750034,
+                        "name": "Burkinabe"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750035,
+                        "name": "Burmese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750036,
+                        "name": "Burundian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750037,
+                        "name": "Cambodian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750038,
+                        "name": "Cameroonian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750039,
+                        "name": "Canadian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750040,
+                        "name": "Cape Verdean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750041,
+                        "name": "Caymanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750042,
+                        "name": "Central African"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750043,
+                        "name": "Chadian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750044,
+                        "name": "Chilean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750045,
+                        "name": "Chinese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750046,
+                        "name": "Christmas Islander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750047,
+                        "name": "CocosIslander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750048,
+                        "name": "Colombian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750049,
+                        "name": "Comoran"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750050,
+                        "name": "Congolese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750051,
+                        "name": "Cook Islander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750052,
+                        "name": "Costa Rican"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750053,
+                        "name": "Cote Divorian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750054,
+                        "name": "Croatian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750055,
+                        "name": "Cuban"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750056,
+                        "name": "Cypriot"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750057,
+                        "name": "Czech"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750058,
+                        "name": "Danish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750059,
+                        "name": "Djibouti"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750060,
+                        "name": "Dominican"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750061,
+                        "name": "Dutch"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750062,
+                        "name": "East Timorese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750063,
+                        "name": "Ecuadorean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750064,
+                        "name": "Egyptian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750065,
+                        "name": "Emirati"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750066,
+                        "name": "Equatorial Guinean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750067,
+                        "name": "Eritrean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750068,
+                        "name": "Estonian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750069,
+                        "name": "Ethiopian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750070,
+                        "name": "Falkland Islander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750071,
+                        "name": "Fijian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750072,
+                        "name": "Finnish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750073,
+                        "name": "French"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750074,
+                        "name": "Gabonese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750075,
+                        "name": "Gambian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750076,
+                        "name": "Georgian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750077,
+                        "name": "German"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750078,
+                        "name": "Ghanaian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750079,
+                        "name": "Gibraltan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750080,
+                        "name": "Greek"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750081,
+                        "name": "Greenlandic"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750082,
+                        "name": "Grenadian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750083,
+                        "name": "Guadeloupian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750084,
+                        "name": "Guamanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750085,
+                        "name": "Guatemalan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750086,
+                        "name": "Guinea Bissauan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750087,
+                        "name": "Guinean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750088,
+                        "name": "Guyanese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750089,
+                        "name": "Haitian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750090,
+                        "name": "Herzegovinian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750091,
+                        "name": "Honduran"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750092,
+                        "name": "Hungarian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750093,
+                        "name": "Icelander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750094,
+                        "name": "I-Kiribati"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750095,
+                        "name": "Indian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750096,
+                        "name": "Indonesian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750097,
+                        "name": "Iranian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750098,
+                        "name": "Iraqi"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750099,
+                        "name": "Irish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750100,
+                        "name": "Israeli"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750101,
+                        "name": "Italian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750102,
+                        "name": "Jamaican"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750103,
+                        "name": "Japanese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750104,
+                        "name": "Jordanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750105,
+                        "name": "Kazakhstani"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750106,
+                        "name": "Kenyan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750107,
+                        "name": "Kittitian, Nevisian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750108,
+                        "name": "Kuwaiti"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750109,
+                        "name": "Kyrgyz"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750110,
+                        "name": "Laotian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750111,
+                        "name": "Latvian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750112,
+                        "name": "Lebanese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750113,
+                        "name": "Liberian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750114,
+                        "name": "Libyan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750115,
+                        "name": "Liechtensteiner"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750116,
+                        "name": "Lithuanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750117,
+                        "name": "Luxembourger"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750118,
+                        "name": "Macanese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750119,
+                        "name": "Macedonian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750120,
+                        "name": "Mahoran"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750121,
+                        "name": "Malagasy"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750122,
+                        "name": "Malawian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750123,
+                        "name": "Malaysian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750124,
+                        "name": "Maldivan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750125,
+                        "name": "Malian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750126,
+                        "name": "Maltese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750127,
+                        "name": "Manx"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750128,
+                        "name": "Marshallese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750129,
+                        "name": "Martiniquais"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750130,
+                        "name": "Mauritanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750131,
+                        "name": "Mauritian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750132,
+                        "name": "Mexican"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750133,
+                        "name": "Miconesian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750134,
+                        "name": "Moldovan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750135,
+                        "name": "Monacan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750136,
+                        "name": "Mongolian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750137,
+                        "name": "Montserratian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750138,
+                        "name": "Morroccan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750139,
+                        "name": "Mozambican"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750140,
+                        "name": "Not Applicable"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750141,
+                        "name": "Not applicable Uninhabited"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750142,
+                        "name": "Namibian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750143,
+                        "name": "Nauruan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750144,
+                        "name": "Nepalese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750145,
+                        "name": "Item"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750146,
+                        "name": "New Caledonian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750147,
+                        "name": "New Zealander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750148,
+                        "name": "Nicaraguan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750149,
+                        "name": "Nigerian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750150,
+                        "name": "Nigerien"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750151,
+                        "name": "Niuen"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750152,
+                        "name": "Ni-Vanuatu"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750153,
+                        "name": "Norfolk Islander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750154,
+                        "name": "North Korean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750155,
+                        "name": "Norwegian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750156,
+                        "name": "Omani"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750157,
+                        "name": "Pakistani"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750158,
+                        "name": "Palauan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750159,
+                        "name": "Palestinian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750160,
+                        "name": "Panamanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750161,
+                        "name": "Papua New Guinean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750162,
+                        "name": "Paraguayan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750163,
+                        "name": "Peruvian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750164,
+                        "name": "Phillippine"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750165,
+                        "name": "Pitcairn Islander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750166,
+                        "name": "Polish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750167,
+                        "name": "Portuguese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750168,
+                        "name": "Puertorican"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750169,
+                        "name": "Qatari"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750170,
+                        "name": "Reunionese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750171,
+                        "name": "Romanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750172,
+                        "name": "Russian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750173,
+                        "name": "Rwandan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750174,
+                        "name": "Sahrawian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750175,
+                        "name": "Saint Lucian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750176,
+                        "name": "Salvadoran"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750177,
+                        "name": "Samoan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750178,
+                        "name": "San Marinese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750179,
+                        "name": "Sao Tomean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750180,
+                        "name": "Saudi"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750181,
+                        "name": "Senegalese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750182,
+                        "name": "Serbian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750183,
+                        "name": "Seychellois"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750184,
+                        "name": "Sierra Leonean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750185,
+                        "name": "Singaporean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750186,
+                        "name": "Slovakian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750187,
+                        "name": "Slovenian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750188,
+                        "name": "Solomon Islander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750189,
+                        "name": "Somali"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750190,
+                        "name": "South African"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750191,
+                        "name": "South Korean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750192,
+                        "name": "Spanish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750193,
+                        "name": "Sri Lankan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750194,
+                        "name": "St Helenian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750195,
+                        "name": "Sudanese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750196,
+                        "name": "Surinamese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750197,
+                        "name": "Swazi"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750198,
+                        "name": "Swedish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750199,
+                        "name": "Swiss"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750200,
+                        "name": "Syrian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750201,
+                        "name": "Taiwanese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750202,
+                        "name": "Tajik"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750203,
+                        "name": "Tanzanian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750204,
+                        "name": "Thai"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750205,
+                        "name": "Togolese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750206,
+                        "name": "Tokelauan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750207,
+                        "name": "Tongan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750208,
+                        "name": "Trinidadianor Tobagonian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750209,
+                        "name": "Tunisian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750210,
+                        "name": "Turkish"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750211,
+                        "name": "Turkmen"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750212,
+                        "name": "Tuvaluan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750213,
+                        "name": "Ugandan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750214,
+                        "name": "Ukrainian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750215,
+                        "name": "Uruguayan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750216,
+                        "name": "Uzbekistani"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750217,
+                        "name": "Venezuelan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750218,
+                        "name": "Vietnamese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750219,
+                        "name": "Vincentian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750220,
+                        "name": "Wallisian Futunan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750221,
+                        "name": "Yemenite"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750222,
+                        "name": "Yugoslavian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750223,
+                        "name": "Zambian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750224,
+                        "name": "Zimbabwean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750225,
+                        "name": "Bahamian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750226,
+                        "name": "Korean"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750227,
+                        "name": "Kosovan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750228,
+                        "name": "Somalian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360001,
+                        "name": "Barbudan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360002,
+                        "name": "British Virgin Islander"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360003,
+                        "name": "Faroese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360004,
+                        "name": "French St Pierre and Miquelon"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360005,
+                        "name": "French Guianese"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360006,
+                        "name": "French Polynesian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360007,
+                        "name": "Hong Kong"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360008,
+                        "name": "Montenegrin"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360009,
+                        "name": "Myanmar Tibetan"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360010,
+                        "name": "Turks and Caicos Islanders"
+                    }
+                ]
+            },
+            {
+                "name": "Disability",
+                "groups": [
+                    {
+                        "isOther": false,
+                        "id": 717750000,
+                        "name": "Yes"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 717750001,
+                        "name": "No"
+                    }
+                ]
+            },
+            {
+                "name": "SexualOrientation",
+                "groups": [
+                    {
+                        "isOther": false,
+                        "id": 981360000,
+                        "name": "Heterosexual / straight"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360001,
+                        "name": "Gay woman / lesbian"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360002,
+                        "name": "Gay man"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360003,
+                        "name": "Bisexual"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360004,
+                        "name": "Other"
+                    },
+                    {
+                        "isOther": false,
+                        "id": 981360005,
+                        "name": "Prefer not to say"
+                    }
+                ]
+            }
+        ]
+    }
+}

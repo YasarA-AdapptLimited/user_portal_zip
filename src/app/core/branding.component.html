@@ -1,0 +1,15 @@
+<div class="branding">
+    <div style="position:absolute;top:0;left:0;width: 20px;height: 20px" [routerLink]="'/diagnostics'"></div>
+  
+    <img src='/assets/images/rings-large.png' *ngIf="showRings" class="rings" alt=""  aria-hidden="true" />
+  
+    <div class="mygphc">
+      <span class="mygphc-logo" (click)="goHome()">myGPhC</span>
+      <div aria-hidden="true" *ngIf="showVersion" tabindex="-1" class="version clickable" [routerLink]="'/diagnostics'">V{{appVersion}}</div>
+    </div>
+  
+    <span class="logo" (click)="goHome()">
+      <img src="/assets/images/logo-GPhC-blue-cropped.png" alt="General Pharmaceutical Council logo" />
+    </span>
+    <div style="position:absolute;top:0;right:0;width: 20px;height: 20px"  (click)="login()"></div>
+  </div>

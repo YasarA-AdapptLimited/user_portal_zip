@@ -1,0 +1,264 @@
+<app-banner>
+  <div class="banner-left">
+    <h1>Home</h1>
+    <p class="intro-text" *ngIf="showPreregApp">
+      A summary of the status of your application for registration
+    </p>
+    <p class="intro-text" *ngIf="showAssessmentRegistration">
+      A summary of the status of your application to sit the registration assessment
+    </p>
+    <p class="intro-text" *ngIf="showAssessmentReport">
+      A summary of the status of your application for 39 week progress report
+    </p>
+  </div>
+</app-banner>
+<div class="content spread registrant-summary">
+  <div class="row" *ngIf="twoColumns && showPreregApp">
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="preregTile"></ng-container>
+    </div>
+    <div class="col-sm-6 right-col">
+      <ng-container [ngTemplateOutlet]="applicationTile"></ng-container>
+    </div>
+  </div>
+  <div class="row" *ngIf="twoColumns && showAssessmentReport">
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="preregTile"></ng-container>
+    </div>
+    <div class="col-sm-6 right-col">
+      <ng-container [ngTemplateOutlet]="assessmentReportTile"></ng-container>
+    </div>
+  </div>
+  <div class="row" *ngIf="twoColumns && showAssessmentRegistration">
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="preregTile"></ng-container>
+    </div>
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="assessmentRegistrationTile"></ng-container>
+    </div>
+  </div>
+  <div class="row" *ngIf="twoColumns && showFinalDeclaration">
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="preregTile"></ng-container>
+    </div>
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="finalDeclarationTile"></ng-container>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="twoColumns && isInEligibleToRegister">
+
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="preregTile"></ng-container>
+    </div>
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="inEligibleToRegisterTile"></ng-container>
+    </div>
+  </div>
+
+
+  <div class="row" *ngIf="threeColumns">
+    <div class="col-sm-4 left-col">
+      <ng-container [ngTemplateOutlet]="preregTile"></ng-container>
+    </div>
+    <div class="col-sm-4">
+      <ng-container [ngTemplateOutlet]="applicationTile"></ng-container>
+    </div>
+    <div class="col-sm-4 right-col">
+      <ng-container *ngIf="showFirstYearPayment" [ngTemplateOutlet]="paymentTile"></ng-container>
+      <ng-container *ngIf="showNoticeOfEntry" [ngTemplateOutlet]="noticeOfEntryTile"></ng-container>
+    </div>
+  </div>
+  <div class="row" *ngIf="regApplication?.pastApplications?.length">
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="pastApplicationsTile"></ng-container>
+    </div>
+  </div>
+
+  <ng-template #errorTemplate>
+    <div class="section-body">
+      <div class="text-center">
+        <i class="fa fa-warning error status-icon" aria-hidden="true"></i>
+        <!-- <div class="intro-text">{{ error.statusText || error.message }}</div>-->
+        <div class="intro-text">Error</div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #applicationTile>
+    <app-form-section class="fadein" [link]="isApplicationOpen ? '/prereg/application' : ''"
+      [loading]="loadingApplication" [loaderFill]="true">
+      <span class="section-header">Registration application</span>
+
+      <div class="section-body" *ngIf="isApplicationOpen; else applicationClosed">
+        <div class="text-center">
+          <i class="fa fa-id-card-o status-icon " aria-hidden="true"></i>
+          <div class="btn-text">
+            {{ ApplicationStatus[regApplication?.status] | caseSplit }}
+          </div>
+          <div class="text-center btn-text">
+            Only apply once you have sat the registration assessment and you have a satisfactory final declaration
+          </div>
+        </div>
+
+      </div>
+
+
+      <ng-template #applicationClosed>
+        <div class="text-center">
+          <i class="fa fa-clock-o status-icon notdue " aria-hidden="true"></i>
+          <div class="btn-text" *ngIf="applicationClosedMessage">
+            {{ applicationClosedMessage }}
+          </div>
+        </div>
+      </ng-template>
+    </app-form-section>
+  </ng-template>
+
+  <ng-template #assessmentReportTile>
+    <app-form-section class="fadein" [link]="isApplicationOpen ? '/prereg/assessment-report' : ''"
+      [loading]="loadingApplication" [loaderFill]="true">
+      <span class="section-header">39 week progress report</span>
+
+
+      <div class="section-body" *ngIf="isApplicationOpen; else applicationClosed ">
+        <div class="text-center">
+          <i class="fa fa-id-card-o status-icon " aria-hidden="true"></i>
+          <div class="btn-text">
+            {{ AssessmentApplicationStatus[assessmentReport?.status] | caseSplit }}
+          </div>
+        </div>
+      </div>
+
+      <ng-template #applicationClosed>
+        <div class="text-center">
+          <i class="fa fa-clock-o status-icon notdue " aria-hidden="true"></i>
+          <div class="btn-text" *ngIf="applicationClosedMessage">
+            {{ applicationClosedMessage }}
+          </div>
+        </div>
+      </ng-template>
+
+    </app-form-section>
+  </ng-template>
+
+  <ng-template #assessmentRegistrationTile>
+    <app-form-section class="fadein" [link]="isAssessmentRegistrationOpen ? '/prereg/assessment-registration' : ''"
+      [loading]="loadingApplication" [loaderFill]="true">
+      <span class="section-header">Application to sit the registration assessment
+        <br /> ( {{ assessmentRegistration?.activeAssessment }} )</span>
+      <div class="section-body" *ngIf="isAssessmentRegistrationOpen">
+        <div class="text-center">
+          <i class="fa fa-id-card-o status-icon " aria-hidden="true"></i>
+          <div class="btn-text">
+            {{ ApplicationStatus[assessmentRegistration?.status] | caseSplit }}
+
+          </div>
+        </div>
+      </div>
+    </app-form-section>
+  </ng-template>
+
+  <ng-template #finalDeclarationTile>
+    <app-form-section class="fadein" [link]="isFinalDeclarationOpen ? '/prereg/final-declaration' : ''"
+      [loading]="loadingApplication" [loaderFill]="true">
+      <span class="section-header">Final declaration (52 week progress report)</span>
+
+      <div class="section-body" *ngIf="isFinalDeclarationOpen; else applicationClosed">
+        <div class="text-center">
+          <i class="fa fa-id-card-o status-icon " aria-hidden="true"></i>
+          <div class="btn-text">
+            {{ ApplicationStatus[finalDeclaration?.status] | caseSplit }}
+          </div>
+        </div>
+      </div>
+
+      <ng-template #applicationClosed>
+        <div class="text-center">
+          <i class="fa fa-clock-o status-icon notdue " aria-hidden="true"></i>
+          <div class="btn-text" *ngIf="applicationClosedMessage">
+            {{ applicationClosedMessage }}
+          </div>
+        </div>
+      </ng-template>
+    </app-form-section>
+  </ng-template>
+
+  <ng-template #preregTile>
+    <app-user-badge link="/prereg" title="Trainee" class="trainee-userBadge">
+      {{ user }}
+    </app-user-badge>
+  </ng-template>
+
+  <ng-template #noticeOfEntryTile>
+    <app-form-section link="/notice-of-entry">
+      <span class="section-header">Notice of entry</span>
+      <div class="section-body text-center">
+        <i class="fa fa-envelope status-icon letter"></i>
+        <div class="btn-text">
+          View or print
+        </div>
+      </div>
+    </app-form-section>
+  </ng-template>
+
+  <ng-template #paymentTile>
+    <app-form-section class="fadein" *ngIf="user.useNewWorldpayFlow" link="/prereg/application/first-year-payment" [loading]="loadingApplication"
+      [loaderFill]="true">
+      <span class="section-header">First year fee</span>
+
+      <div class="section-body" *ngIf="!error; else errorTemplate">
+        <div class="text-center" *ngIf="regApplication?.isFirstYearPaymentAvailable">
+          <i class="fa fa-arrow-circle-right due status-icon success" aria-hidden="true"></i>
+          <div class="btn-text">
+            Make payment now
+          </div>
+        </div>
+      </div>
+    </app-form-section>
+    <app-form-section class="fadein" *ngIf="!user.useNewWorldpayFlow" link="/prereg/application/first-year-payment2" [loading]="loadingApplication"
+      [loaderFill]="true">
+      <span class="section-header">First year fee</span>
+
+      <div class="section-body" *ngIf="!error; else errorTemplate">
+        <div class="text-center" *ngIf="regApplication?.isFirstYearPaymentAvailable">
+          <i class="fa fa-arrow-circle-right due status-icon success" aria-hidden="true"></i>
+          <div class="btn-text">
+            Make payment now
+          </div>
+        </div>
+      </div>
+    </app-form-section>
+  </ng-template>
+
+  <ng-template #pastApplicationsTile>
+    <app-form-section class="fadein" [loading]="loadingApplication" [loaderFill]="true">
+      <span class="section-header">Past Applications</span>
+      <div class="section-body" *ngIf="!error; else errorTemplate">
+        <ul class="global-list">
+          <li *ngFor="let form of regApplication?.pastApplications" [routerLink]="['/prereg/pastApplication', form.id]">
+            <h5>
+              {{ form.createdAt | date: "dd/MM/yyyy" }}
+            </h5>
+            <h5>{{ ApplicationStatus[form.formStatus] | caseSplit }}</h5>
+          </li>
+        </ul>
+      </div>
+    </app-form-section>
+  </ng-template>
+
+  <ng-template #inEligibleToRegisterTile>
+    <app-form-section class="fadein" [loaderFill]="true">
+      <span class="section-header">Application</span>
+      <div class="section-body" *ngIf="!error; else errorTemplate">
+        <div class="text-center" *ngIf="isInEligibleToRegister">
+          <i class="fa fa-clock-o status-icon notdue" aria-hidden="true"></i>
+          <div class="btn-text">
+            Ineligible to register
+          </div>
+        </div>
+      </div>
+    </app-form-section>
+  </ng-template>
+
+</div>

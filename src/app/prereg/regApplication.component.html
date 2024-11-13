@@ -1,0 +1,148 @@
+<div class="content row no-gutters">
+  <div class="col-lg-9 col-md-12 form-column">
+
+    <app-banner [loading]="loading" [error]="loadingError" [application]="true" [progressDark]="true">
+      <div class="banner-left">
+
+        <div style="display:flex;align-items:center">
+          <h1 style="flex-grow:1">Application for registration</h1>
+          <div class="d-md-none" style="flex-grow:1"></div>
+
+          <app-gphc-icon style="margin-bottom: 20px;" class="d-lg-none" [matMenuTriggerFor]="menu" [static]="true"
+            label="Steps" iconType="list"></app-gphc-icon>
+          <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <app-form-stepper-menu [summary]="formStepperService.summary$ | async" (navigate)="goToStep($event)">
+            </app-form-stepper-menu>
+          </mat-menu>
+        </div>
+
+
+        <div class="important" *ngIf="showGuidanceWarning">
+          <p>Before you begin your application for registration,
+            read the guidance on providing correctly certified supporting documents [hyperlink to policy website]</p>
+        </div>
+
+        <p *ngIf="loadingError" class="intro-text">
+          <i class="fa fa-warning"></i> An error occurred while attempting to load your application
+        </p>
+
+      </div>
+    </app-banner>
+
+    <div *ngIf="!loading && !!application">
+
+      <ng-container *ngIf="isApplicationOpen else applicationClosed">
+
+        <div *ngIf="terminated || refused" class="form-control"
+          style="font-size: 1.2em; padding: 40px;line-height: 1.2em">
+          <p>This application has been marked as Terminated.</p>
+          <div *ngIf="allowResubmit else restart">
+            <p>You can either re-submit this application as it is, or re-open this one for editing if you need to make
+              changes.</p>
+            <button class="btn btn-primary btn-lg" (click)="resubmitApplication()">Re-submit application</button>
+            <button class="btn btn-primary btn-lg" (click)="reopenApplication()">Re-open application</button>
+          </div>
+          <ng-template #restart>
+            <p>You can re-open this application if you would like to submit again.</p>
+            <button class="btn btn-primary btn-lg" (click)="reopenApplication()">Re-open application</button>
+          </ng-template>
+        </div>
+
+        <app-reg-application-review *ngIf="application.activeForm.readonly || ineligible" [readonly]="true"
+          [application]="application"></app-reg-application-review>
+
+        <app-form-stepper *ngIf="!application.activeForm.readonly" [ready]="ready" [stepChange]="stepChange()"
+          (stepChanged)="stepChanged($event)" [saving]="saving" [maxStep]="maxStep" [minStep]="minStep">
+
+          <app-guidance [application]="application"></app-guidance>
+
+          <app-personal-details-step [application]="application">
+          </app-personal-details-step>
+
+          <app-confirm-training-step [application]="application">
+          </app-confirm-training-step>
+
+          <app-letter-step [application]="application"></app-letter-step>
+
+          <app-ftp-declaration-step formIndex="0" [application]="application">
+          </app-ftp-declaration-step>
+
+          <app-ftp-declaration-step formIndex="1" [application]="application">
+          </app-ftp-declaration-step>
+
+          <app-overall-declaration-step [application]="application">
+          </app-overall-declaration-step>
+
+          <app-supporting-documents-step [application]="application">
+          </app-supporting-documents-step>
+
+          <app-equality-diversity-step [application]="application">
+          </app-equality-diversity-step>
+
+          <app-review-step [application]="application" (navigate)="goToStepId($event)"></app-review-step>
+
+          <app-countersigning-step [application]="application"></app-countersigning-step>
+
+          <app-review-step [readonly]="true" [application]="application" [stepId]="RegApplicationStep.FinalReview"
+            (navigate)="goToStepId($event)"></app-review-step>
+
+          <app-payment-step-old *ngIf="application.activeForm.requirePayment && !useNewPaymentFlow" [application]="application"></app-payment-step-old>
+
+          <app-payment-step *ngIf="application.activeForm.requirePayment && useNewPaymentFlow" (savingDetails)="savingDetails($event)" [application]="application">
+          </app-payment-step>
+
+          <app-submit-step [application]="application"></app-submit-step>
+
+        </app-form-stepper>
+
+      </ng-container>
+
+
+    </div>
+
+  </div>
+
+  <div class="col-lg-3 d-none d-lg-block" *ngIf="isApplicationOpen">
+
+    <div class="toolbar">
+
+      <button *ngIf="!layout.state.fullscreen" (click)="layout.setFullscreen(true)" aria-label="Maximise"
+        class="btn btn-back">
+        <i class="fa fa-window-maximize"></i>
+        <span>Maximise</span>
+      </button>
+      <button *ngIf="layout.state.fullscreen" (click)="layout.setFullscreen(false)" aria-label="Restore"
+        class="btn btn-back">
+        <i class="fa fa-window-restore"></i>
+        <span>Restore</span>
+      </button>
+
+    </div>
+
+    <div *ngIf="application" class="menu">
+      <app-form-stepper-menu [summary]="formStepperService.summary$ | async" (navigate)="goToStep($event)">
+      </app-form-stepper-menu>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #applicationClosed>
+
+  <div class="col-sm-6 text-center">
+    <app-form-section class="fadein">
+      <span class="section-header">Application</span>
+      <span class="section-body">
+        <div class="text-center">
+          <i class="fa fa-clock-o status-icon notdue " aria-hidden="true" style="font-size: 9em"></i>
+          <div class="btn-text">
+            <p style="font-size: 1.5em;">
+              {{ applicationClosedMessage }}
+            </p>
+          </div>
+        </div>
+      </span>
+    </app-form-section>
+  </div>
+
+</ng-template>

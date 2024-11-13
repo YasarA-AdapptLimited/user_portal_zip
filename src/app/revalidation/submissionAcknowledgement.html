@@ -1,0 +1,171 @@
+<app-form-section *ngIf="!remediation else remediationTemplate">
+  <span class="section-header">Submission declaration</span>
+  <div class="section-body confirm-revalidation">
+    <form #confirmRevalidationForm="ngForm" novalidate>
+
+      <label class="mb-2">
+        As part of my revalidation submission, I confirm that:
+      </label>
+      <div class="form-group" [class.invalid]="question1.value === false">
+        <label class="confirm-revalidation " for="question1"> I have not included any confidential patient information,
+          or details that could be used to identify a patient
+        </label>
+        <mat-radio-group [(ngModel)]="confirmRevalidationQuestions.question1" name="question1" id="question1"
+          #question1="ngModel" required>
+          <mat-radio-button [value]="true" name="Yes">Yes</mat-radio-button>
+          <mat-radio-button [value]="false" name="No">No</mat-radio-button>
+        </mat-radio-group>
+        <app-collapsible [trigger]="question1.value === false">
+          <p class="form-error">
+            Please go back to your records and edit them to make sure that there is no information which could identify
+            a patient.
+          </p>
+        </app-collapsible>
+      </div>
+
+
+      <div *ngIf="allQuestionsRequired" class="form-group" [class.invalid]="question2.value === false">
+        <label class="confirm-revalidation " for="question2">my peer has given me permission to share their email
+          address with the GPhC, and they are aware that we may contact
+          them to verify that the peer review took place
+        </label>
+        <mat-radio-group [(ngModel)]="confirmRevalidationQuestions.question2" name="question2" id="question2"
+          #question2="ngModel" required>
+          <mat-radio-button [value]="true" name="Yes">Yes</mat-radio-button>
+          <mat-radio-button [value]="false" name="No">No</mat-radio-button>
+        </mat-radio-group>
+        <app-collapsible [trigger]="question2.value === false">
+          <p class="form-error">
+            Please contact your peer and make sure you have permission to share their contact details with us and that
+            they are aware
+            that we may contact them to verify that the peer discussion took place.
+          </p>
+        </app-collapsible>
+        <!-- <label class="italics">Our system requires you to click 'yes' to this declaration to submit your revalidation. 
+          You do not need to submit a peer review at this time, and so we will not use your response to this declaration.
+        </label> -->
+      </div>
+
+      <div class="form-group" [class.invalid]="question3.value === false">
+        <label class="confirm-revalidation " for="question3">I understand if I do not submit a complete record or if,
+          after review, I have not met the core criteria, I will be
+          moved into remediation and my registration as a pharmacy professional is at risk.
+        </label>
+        <mat-radio-group [(ngModel)]="confirmRevalidationQuestions.question3" name="question3" id="question3"
+          #question3="ngModel" required>
+          <mat-radio-button [value]="true" name="Yes">Yes</mat-radio-button>
+          <mat-radio-button [value]="false" name="No">No</mat-radio-button>
+        </mat-radio-group>
+        <app-collapsible [trigger]="question3.value === false">
+          <p class="form-error">
+            Please see the revalidation framework for more information about meeting the revalidation requirement as
+            part of the criteria
+            for registration as a pharmacist.
+          </p>
+        </app-collapsible>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-lg btn-primary mr-4" [disabled]="!valid || submitting" (click)="acknowledged.emit()">
+          <span *ngIf="!submitting">Submit revalidation</span>
+          <span *ngIf="submitting" style="display:flex;align-items:center">
+            <app-spinner [tiny]="true" [light]="true"></app-spinner>&nbsp;Submitting...
+          </span>
+
+        </button>
+        <button class="btn btn-lg btn-default" (click)="cancel.emit()">
+          Cancel
+        </button>
+      </div>
+
+
+    </form>
+  </div>
+</app-form-section>
+
+<ng-template #remediationTemplate>
+  <app-form-section>
+    <span class="section-header">Revalidation submission acknowledgment</span>
+    <div class="section-body remediation-revalidation">
+      <form #RemediationConfirmForm="ngForm" novalidate>
+        <p>
+          <b>
+            Before the submission of your revalidation record can be completed, please confirm that you have considered
+            the following:
+          </b>
+        </p>
+        <div class="form-group" [class.invalid]="remq1.value === false">
+          <label class="remediation-revalidation " for="question1">I have not included any confidential patient details
+            or details that could be used to identify a patient
+          </label>
+          <br>
+          <mat-radio-group [(ngModel)]="remediationConfirmationQuestions.question1" name="question1" id="question1"
+            #remq1="ngModel" required>
+            <mat-radio-button [value]="true" name="Yes">Yes</mat-radio-button>
+            <mat-radio-button [value]="false" name="No">No</mat-radio-button>
+          </mat-radio-group>
+          <app-collapsible [trigger]="remq1.value === false">
+            <p class="form-error">
+              Please anonymise any patient details and then complete your submission.
+            </p>
+          </app-collapsible>
+        </div>
+
+        <div *ngIf="allQuestionsRequired" class="form-group" [class.invalid]="remq2.value === false">
+          <label class="confirm-revalidation " for="question2"> The person named as my peer reviewer has given me
+            permission to divulge their email address to the GPhC and they are aware
+            that they may be contacted by the GPhC for the sole purpose of verifying that the conversation occurred.
+          </label>
+          <mat-radio-group [(ngModel)]="remediationConfirmationQuestions.question2" name="question2" id="question2"
+            #remq2="ngModel" required>
+            <mat-radio-button [value]="true" name="Yes">Yes</mat-radio-button>
+            <mat-radio-button [value]="false" name="No">No</mat-radio-button>
+          </mat-radio-group>
+          <app-collapsible [trigger]="remq2.value === false">
+            <p class="form-error">
+              Please contact your peer reviewer and obtain permission before completing your submission.
+            </p>
+          </app-collapsible>
+        </div>
+
+        <div class="form-group" [class.invalid]="remq3.value === false">
+          <label class="confirm-revalidation " for="question3">
+
+            I have read and understood the information provided to me by the GPhC and I am fully aware that by not
+            submitting a complete record or if, after review, I have not met the core criteria, my registration as a
+            pharmacy professional is at severe risk. You can review the revalidation framework <a
+              href="https://www.pharmacyregulation.org/sites/default/files/document/gphc_revalidation_framework_january_2018.pdf"
+              target="_blank">here</a>.
+          </label>
+          <mat-radio-group [(ngModel)]="remediationConfirmationQuestions.question3" name="question3" id="question3"
+            #remq3="ngModel" required>
+            <mat-radio-button [value]="true" name="Yes">Yes</mat-radio-button>
+            <mat-radio-button [value]="false" name="No">No</mat-radio-button>
+          </mat-radio-group>
+          <app-collapsible [trigger]="remq3.value === false">
+            <p class="form-error">
+              Please review the revalidation framework <a
+                href="https://www.pharmacyregulation.org/sites/default/files/document/gphc_revalidation_framework_january_2018.pdf"
+                target="_blank">here</a>.
+            </p>
+          </app-collapsible>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-lg btn-primary mr-4" [disabled]="!isRemediationFormValid || submitting"
+            (click)="acknowledged.emit()">
+            <span *ngIf="!submitting">Submit revalidation</span>
+            <span *ngIf="submitting" style="display:flex;align-items:center">
+              <app-spinner [tiny]="true" [light]="true"></app-spinner>&nbsp;Submitting...
+            </span>
+          </button>
+          <button *ngIf="!submitting" class="btn btn-lg btn-default" (click)="cancel.emit()">
+            Cancel
+          </button>
+        </div>
+
+
+      </form>
+    </div>
+  </app-form-section>
+</ng-template>

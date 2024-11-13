@@ -1,0 +1,17 @@
+<ng-template #content>
+  <h2 class="spacer">{{ declarationHeading }}</h2>
+  <p class="important">
+      If you answer ‘yes’ to any of the declarations please provide more information in the box which appears. 
+      We will use the information you provide to assess your fitness to practise.
+  </p>
+  <section  *ngIf="(form$ | async) as form else loading" class="fadein" [class.touched]="!valid && touched">
+    <app-declaration [form]="form" [titleVisible]="false">
+    </app-declaration>
+  </section>
+</ng-template>
+
+<ng-template #loading>
+  <div class="step-loading">
+    <mat-progress-bar aria-label="loading step"  mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+</ng-template>

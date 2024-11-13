@@ -1,0 +1,59 @@
+@import "../style/variables";
+
+:host {
+
+  .top-nav {
+    display: flex;
+    background: #024e67;
+    align-items: center;
+    color: white;
+    button {
+      color: white;
+    }
+    padding-right: 20px;
+  }
+
+  h4 {
+    font-family: 'Open sans', sans-serif !important;
+    border-bottom: 2px solid $gphc-blue;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 22px;
+    line-height: 1.3em;
+    padding-top: 25px;
+}
+
+h5 {
+  margin-top: 15px;
+}
+
+  .feedback-sections-container {
+    padding-top: 0;
+    padding-bottom: 30px;
+  
+
+  }
+  .left-col, .right-col {
+    height: calc(100vh - 150px); 
+    overflow-y:auto;
+  }
+
+  @media(max-width:767px) {
+    .content {
+      max-height: calc(100vh - #{$navbar-height}px);
+      overflow-y: scroll; /* has to be scroll, not auto */
+      -webkit-overflow-scrolling: touch;
+    }
+
+  }
+
+  .btn:focus {
+    box-shadow: 0 0 0 1px #ececec !important;
+  }
+
+  ::ng-deep app-carousel-nav {
+    button:focus {
+      box-shadow: 0 0 0 1px #ececec !important;
+    } 
+  }
+}

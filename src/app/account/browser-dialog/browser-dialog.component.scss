@@ -1,0 +1,45 @@
+@import '../../style/variables';
+
+:host {
+  h2.alertTitle{
+    color:red !important;
+    text-align: center !important;
+  }
+  
+  mat-dialog-content {
+    min-height: 100px;
+    
+  }
+  mat-dialog-actions {
+    background: $gphc-blue;
+    margin-left: -24px;
+    margin-right: -24px;
+    height: 80px;
+    text-align:center;
+    transition: background 200ms linear;
+    cursor:pointer;
+
+    &:hover {
+      background: $gphc-purple; 
+    }
+  
+
+    button {
+      margin: 0 auto;
+      border-radius: 0 !important;
+      width: 100%;
+      background: transparent !important;
+      &:focus {
+        box-shadow: 0 0 0 2px $gphc-accent-yellow !important;
+      }
+    
+    }
+    .dialogTitle{
+color:red;
+text-align:center;
+    }
+  }
+
+
+
+}

@@ -1,0 +1,30 @@
+:host {
+  .card-selection {
+ @media (min-width: 768px) {
+   mat-radio-button {
+     margin: 30px 40px;
+     text-align: center;
+   }
+   .mdc-form-field label {
+     width: 160px;
+   }
+ }
+ @media (max-width: 767px) {
+   mat-radio-button {
+     margin: 10px 20px;
+   }
+   .mdc-form-field label {
+     width: 100px;
+   }
+ }
+}
+
+
+section {
+ margin-top: 0;
+ h3 { 
+   margin-bottom: 20px;
+ }
+ 
+}
+}

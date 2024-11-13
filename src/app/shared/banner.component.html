@@ -1,0 +1,18 @@
+<header class="banner" role="banner"
+[class.important]="important" 
+[class.info]="info"
+[class.application]="application"
+[class.error]="error"
+[class.loading]="loading"
+>
+  <div class="info">
+    <div class="info-content  no-gutters" #focusMain>
+        <ng-content select=".banner-left"></ng-content>
+    </div>
+  </div>
+  <div *ngIf="!noButtons" class="buttons">
+    <ng-content *ngIf="!loading"  select=".banner-right"></ng-content>
+  </div>
+
+</header>
+<mat-progress-bar aria-label="loading"  *ngIf="loading" mode="indeterminate" color="primary"></mat-progress-bar>

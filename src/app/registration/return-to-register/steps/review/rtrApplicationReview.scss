@@ -1,0 +1,43 @@
+:host {
+
+ 
+  section {
+    app-gphc-icon {
+      display:none;
+    }
+
+    &.allow-edit {
+      app-gphc-icon {
+        display:block;
+      }
+    }
+    section {
+      margin-bottom: 40px !important;
+    }
+   
+  }
+  
+  h3 {
+    display: flex;
+    position:relative;
+    .grow {
+      flex-grow: 1;
+    }
+
+    ::ng-deep button.gphc-icon.edit circle {
+      background: transparent !important;
+    }
+
+  }
+
+  ::ng-deep {
+    @import '../../../../style/sectionHeaders';
+ }
+
+
+}
+
+.margin-0 {
+  margin: 0px !important;
+}
+

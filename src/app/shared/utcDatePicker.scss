@@ -1,0 +1,24 @@
+@import '../style/variables';
+:host {
+  .fa-calendar {
+    color: $gphc-blue;
+    font-size: 1.3em;
+  }
+}
+
+.input-group-addon {
+  position: absolute;
+  right: .75rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 999;
+}
+
+input.white-background {
+  background: white !important;
+}
+
+.border-red {
+  border: 5px solid $error;
+}

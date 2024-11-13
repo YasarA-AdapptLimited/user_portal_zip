@@ -1,0 +1,66 @@
+<section *ngIf="step === 1 && activation" >
+
+  <div class="card">
+    <h2>Student details</h2>
+    
+
+    <div class="form-group">
+      <label for="lastName">
+        Last name
+      </label>
+      <input id="lastName" #focus class="form-control" placeholder="Enter your last name here..." type="text" [(ngModel)]="activation.lastname" />
+    </div>
+
+    <app-dob (selected)="dobSelected($event)"></app-dob>
+
+    <div class="form-group">
+      <label for="qualification">
+        Qualification
+      </label>
+
+      <select id="qualification" class="form-control" [(ngModel)]="selectedCourseType" (ngModelChange)="populateCourses()" style="margin-bottom: 10px">
+        <option value="undefined">Select course type...</option>
+        <option *ngFor="let courseType of courseTypes" [ngValue]="courseType">{{courseType.value}}</option>
+      </select>
+
+      <app-collapsible [trigger]="selectedCourseType && selectedCourseType !== 'undefined'">
+        <select  class="form-control" [(ngModel)]="activation.qualificationId">
+          <option value="0">Select course...</option>
+          <option *ngFor="let course of coursesForSelectedCourseType" [ngValue]="course.id">{{course.courseName}}</option>
+        </select>
+      </app-collapsible>
+      
+
+    </div>
+
+    <app-collapsible [trigger]="activationFailed">
+      <div class="form-error" style="text-align:center;font-size:18px;padding:10px;">
+        <app-validation-errors [errors]="serverErrors"></app-validation-errors>
+      </div>
+    </app-collapsible>
+
+
+    <app-collapsible [trigger]="!loading"  class="padded">
+      <button [disabled]="!activation.dob || !activation.lastname || !activation.qualificationId || activation.qualificationId === '0'" class="btn btn-primary btn-block"
+        (click)="activate()">Activate</button>
+      <button class="btn btn-default btn-block" (click)="prev()">Cancel</button>
+    </app-collapsible>
+
+    <app-collapsible [trigger]="loading" class="spinner-container">
+      <app-spinner [small]="true"></app-spinner>
+      <label>Attempting activation...</label>
+    </app-collapsible>
+
+  </div>
+</section>
+
+<section *ngIf="step === 2" >
+  <div class="card">
+    <h2>Account activated</h2>
+    <p>Congratulations! You have successfully activated your pre-registration trainee account.</p>
+    <p>To complete the process you must now sign out and back in again. </p>
+
+    <button [disabled]="step !== 2" class="btn btn-primary btn-block" (click)="logout()">Sign out</button>
+  </div>
+
+</section>

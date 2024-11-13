@@ -1,0 +1,23 @@
+<div *ngIf="attachments.length === 0; else showDocs">
+  <div class="form-control readonly">
+    No supporting documents
+  </div>
+</div>
+<ng-template #showDocs>
+  <div *ngFor="let file of attachments" class="form-group">
+    <label [for]="'file-'+i" *ngIf="file.type !== 15 && file.type !== 16">{{ AttachmentType[file.type] | caseSplit }}</label>
+    <label [for]="'file-'+i" *ngIf="file.type === 15">IELTS certificate</label>
+    <label [for]="'file-'+i" *ngIf="file.type === 16">Employer reference</label>
+    <a (click)="download(file)" class="download-link">
+      <div class="form-control" readonly id="'file-'+i">
+        <div class="icon">
+          <i class="fa fa-download"></i>
+        </div>
+        <div>{{file.filename}}</div>
+        <div
+          *ngIf="(file.title && !isTechnician) || (file.title && !isAros) || (file.title && !isAssessmentRegistration)">
+          {{file.title}} - expires {{file.expiryDate | utcDate}}</div>
+      </div>
+    </a>
+  </div>
+</ng-template>

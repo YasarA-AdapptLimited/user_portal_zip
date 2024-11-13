@@ -1,0 +1,195 @@
+@import '../style/mixins';
+
+section:not(.page), .section {
+    background: white;
+    padding: 20px;
+    padding-top: 25px;
+    margin-top: 20px;
+
+&.important {
+  background: $gphc-purple !important;
+  color: white !important;
+  h2, p {
+    color: white !important;
+  }
+}
+
+    div.important  {
+        padding: 25px;
+        margin: 1em 0;
+    }
+
+
+
+
+    &.buttons {
+        background: $very-light-grey;
+    }
+
+    section:not(.page), .section {
+        box-shadow: none;
+        padding: 0;
+        margin: 0 !important;
+    }
+
+    h2 {
+        padding-top: 5px;
+        padding-bottom: 15px;
+        margin-bottom: 0;
+        color: $gphc-blue;
+        font-weight: 900;
+        font-size: 32px;
+
+        i {
+            color: $gphc-blue;
+        }
+    }
+
+    .button-section {
+      margin: -20px;
+      margin-top: 40px;
+      padding: 10px;
+      padding-top: 40px;
+      padding-bottom: 20px;
+      background: darken($gphc-background,3%);
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1) inset;
+    }
+    
+
+    .section-sub {
+        text-align: left;
+        background: #f2f7f4;
+        text-align: left;
+        color: #000;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: -20px;
+        padding: 20px;
+        margin-top: 50px;
+        font-size: 16px;
+
+        .intro-text {
+            color: #000 !important;
+            font-size: 16px !important;
+        }
+
+        @media (max-width: 767px) {
+            margin-left: -15px;
+            margin-right: -15px;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    }
+}
+
+.spread {
+    section {
+        margin-top: 16px;
+    }
+}
+
+.section-header-container {
+    position: relative;margin-bottom: 10px;
+}
+
+section.info {
+  background: $gphc-purple;
+  @media(min-width:768px) {
+    border-radius: 12px;
+  }
+  
+  a,h2,p {
+    color: white !important;
+  }
+  h2 { font-size:1.9em;}
+  p { font-size: 1.2em;}
+
+  @media (min-width:992px) {
+  h2 { font-size:1.5em;}
+  p { font-size: 1em;}
+  }
+
+  @media (min-width:1222px) {
+
+    h2 { font-size:1.9em;}
+    p { font-size: 1.2em;}
+  
+  }
+ 
+  a {
+    border-bottom: 1px solid white !important;
+  }
+}
+
+@media (max-width: 767px) {
+    section:not(.page) {
+        margin-top: 0 !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        
+       
+
+        section:not(.page) {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        h3 {
+          font-size: 20px;
+        }
+
+        p.intro-text {
+            margin-bottom: 20px;
+        }
+      
+    }
+
+    .section-header-container {
+       
+     
+      border-top: 1px solid $gphc-background;
+      
+        margin: -25px -15px 0 -15px;
+        padding: 15px;
+        padding-top:22px;
+
+        h2, h3, h4 {
+          padding: 0 !important;
+          color: $gphc-blue;
+        }
+
+        ::ng-deep .gphc-icon-wrapper {
+          
+            margin-right: 20px !important;
+
+            .gphc-icon.info {
+                i {
+                    color: white !important;
+                }
+
+                &:not(.active) {
+                    &:not(:hover) {
+                        .circle {
+                            background-color: transparent !important;
+                        }
+                    }
+
+                    &:hover, &.info {
+                        .circle {
+                            background-color: $gphc-aqua !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section-body-container {
+        padding-top: 20px;
+    }
+
+}

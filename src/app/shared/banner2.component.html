@@ -1,0 +1,36 @@
+<header class="banner" 
+role="banner" 
+[class.important]="important" 
+[class.info]="info" 
+[class.error]="error"
+>
+
+
+  <div class="header">
+    <div class="toolbar">
+      <div style="flex-grow: 1"></div>
+      <ng-content select=".toolbar-content"></ng-content>
+    </div>
+    <div style="flex-grow: 1; order: 1"></div>
+    <div class="title" *ngIf="!dynamicHeading">
+      <div class="title-content">
+        <h1 class="sm-show">{{heading}}</h1>
+        <p class="intro-text" [innerHTML]="subHeading"></p>
+      </div>
+      <ng-content select=".title-content"></ng-content>
+    </div>
+    <app-collapsible *ngIf="dynamicHeading" [trigger]="!loading">
+      <div class="title">
+        <div class="title-content">
+          <h1 class="sm-show">{{heading}}</h1>
+          <p class="intro-text">{{subHeading}}</p>
+        </div>
+        <ng-content select=".title-content"></ng-content>
+      </div>
+    </app-collapsible>
+  </div>
+
+
+
+</header>
+<mat-progress-bar aria-label="loading"  style="position:absolute;" *ngIf="loading || updating" mode="indeterminate" color="primary"></mat-progress-bar>

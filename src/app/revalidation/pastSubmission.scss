@@ -1,0 +1,22 @@
+:host {
+
+  ::ng-deep {
+
+    .template-container {
+      max-width: 700px;
+      margin: 0 auto;
+      @media (max-width: 800px) {
+        margin-left: 0;
+      }
+     
+    }
+
+
+  
+    button.gphc-icon .circle {
+      border: none;
+    }
+  }
+
+}
+

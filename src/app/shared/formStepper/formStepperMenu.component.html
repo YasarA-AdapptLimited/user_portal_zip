@@ -1,0 +1,12 @@
+<div mat-mdc-menu-item (click)="goToStep(item)" *ngFor="let item of summary" 
+  [class.selected]="item.current"
+  [disabled]="item.disabled"
+  [class.disabled]="item.disabled" 
+  [class.danger]="item.validity?.touched && item.validity?.valid === false" 
+  [class.success]="item.validity?.valid === true" 
+  style="display:flex; align-items: center">
+
+  <span class="title">{{ item.title }}</span>
+
+  <i [ngClass]="getIconCss(item)"></i>
+</div>

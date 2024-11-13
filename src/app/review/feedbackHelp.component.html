@@ -1,0 +1,53 @@
+<div [ngSwitch]="type" class="help-text">
+
+  <div *ngSwitchCase="RevalidationItemType.Planned">
+    <div>As a reviewer please consider whether the record described:</div>
+    <figure class="highlight">
+      <ul>
+        <li>what the registrant wanted to learn</li>
+        <li>the relevance of the learning to their practice</li>
+        <li>how the learning will affect the people using the services provided by the registrant</li>
+        <li>the options or activities the registrant selected to carry out</li>
+        <li>how the registrant applied the learning</li>
+        <li>how the learning – once you have applied it – has benefited the people using your services, illustrated with an example
+        </li>
+      </ul>
+    </figure>
+  </div>
+  <div *ngSwitchCase="RevalidationItemType.Unplanned">
+    <div>As a reviewer please consider whether the record describes:</div>
+    <figure class="highlight">
+      <ul>
+        <li>the activity that the registrant took part in enabled new learning</li>
+        <li>what the registrant learnt</li>
+        <li>how the registrant applied the learning</li>
+        <li>how the learning benefited the people who use the services provided by the registrant. (This should be illustrated
+          with an example)</li>
+      </ul>
+    </figure>
+  </div>
+
+  <div *ngSwitchCase="RevalidationItemType.PeerDiscussion">
+    <div>As a reviewer please consider whether there is a description of:</div>
+    <figure class="highlight">
+      <ul>
+        <li>why the registrant chose their peer(s)</li>
+        <li>how the process of peer discussion has benefited the registrant’s practice</li>
+        <li>how the process of peer discussion has benefited the people using the services provided by the registrant, illustrated
+          with an example</li>
+      </ul>
+    </figure>
+  </div>
+
+  <div *ngSwitchCase="RevalidationItemType.ReflectiveAccount">
+    <div>As a reviewer please consider whether there is a description of:</div>
+    <figure class="highlight">
+      <ul>
+        <li>The registrant’s area(s) of practice</li>
+        <li>the typical users of the service(s) provided by the registrant</li>
+        <li>how the registrant is meeting one or more of the standards for pharmacy professionals, illustrated with real example(s)
+        </li>
+      </ul>
+    </figure>
+  </div>
+</div>

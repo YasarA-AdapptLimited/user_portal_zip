@@ -1,0 +1,184 @@
+<form #form="ngForm">
+
+
+    <ng-container *ngIf="application">
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="p-2">
+                    <h3>Qualification Details</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="courseProvider">Course title</label>
+                        <div class="form-control readonly" [innerHTML]="application.courseTitle"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dateAwarded">Date awarded</label>
+                        <div class="form-control readonly" [innerHTML]="application.dateAwarded | dobDate"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="clinicalSpecialities">Clinical specialties in which you will have prescribing
+                            responsibilities</label>
+                        <div class="form-control readonly" [innerHTML]="application.activeForm.clinicalSpecialities ">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+<app-collapsible [trigger]="!getAwardedDate">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="prescriberMentor">Is your prescriber mentor registered with the GPhC?<br /></label>
+                        <div class="form-control readonly"
+                            [innerHTML]="application.activeForm.countersignatures[0].isMentorRegistered === true ? 'Yes': 'No'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" *ngIf="application.activeForm.countersignatures[0].isMentorRegistered === true">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="mentorName">Prescriber mentor name</label>
+                        <div type="text" class="form-control readonly" >
+                            {{ mentorName }}
+                          </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="registrationNumber">Mentor registration number</label>
+                        <div class="form-control readonly"
+                            [innerHTML]="application.activeForm.countersignatures[0].registrationNumber"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" *ngIf="application.activeForm.countersignatures[0].isMentorRegistered === false">
+          
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mentorName">Prescriber mentor name</label>
+                            <div class="form-control readonly"
+                                [innerHTML]="application.activeForm.countersignatures[0].prescriberMentorName"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="registrationNumber">Mentor registration number</label>
+                            <div class="form-control readonly"
+                                [innerHTML]="application.activeForm.countersignatures[0].prescriberRegistrationNo"></div>
+                        </div>
+                    </div>
+                </div>
+            
+          
+            <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="regulatoryBody">UK regulatory body </label>
+                    <div class="form-control readonly"
+                        [innerHTML]="application.activeForm.countersignatures[0].ukRegulatoryBody "></div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="supportingDocuments">Supporting documents</label>
+                    <div *ngFor="let file of attachments" class="form-group">
+
+                        <div (click)="download(file)" class="form-control readonly link">
+                            <div style="display:flex" id="'file-'+i">
+                                <div class="icon">
+                                    <i class="fa fa-download"></i>
+                                </div>
+                                <div class="ml-2">{{file.filename}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </div>
+    </app-collapsible>
+
+    </ng-container>
+
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <h3>
+                <div class="grow">Equality and diversity</div>
+            </h3>
+            <app-edi-summary [edi]="application.activeForm.equalityDiversity"></app-edi-summary>
+        </div>
+    </div>
+
+
+    <div class="p-2">
+        <h3>
+            Declarations
+        </h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <label for="qualifiedIndependentPrescriber"> I am qualified to practise as an independent prescriber</label>
+            <div class="form-control readonly"
+                [innerHTML]="application.activeForm.declaration.isQ1Confirmed === true ? 'Yes':'No'">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <label for="part1EntryAnnotation">I request my entry in Part 1 of the register to be annotated as an
+                independent prescriber</label>
+            <div class="form-control readonly"
+                [innerHTML]="application.activeForm.declaration.isQ2Confirmed === true ? 'Yes':'No'">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <label for="confirmNotificationFromGphc">I understand that I must not prescribe until I receive the
+                confirmation notification within myGPhC</label>
+            <div class="form-control readonly"
+                [innerHTML]="application.activeForm.declaration.isQ3Confirmed === true ? 'Yes':'No'">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <label for="confirmingInformationIsAccurate">The information that I have provided in this application, and
+                within any supporting documentation that I have uploaded, is complete, true and accurate</label>
+            <div class="form-control readonly"
+                [innerHTML]="application.activeForm.declaration.isQ4Confirmed === true ? 'Yes':'No'">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <label for="confirmingNotGivenMisleadingInfo">I understand that if I am found to have given false or
+                misleading information in connection with my application, this may be treated as misconduct, and could
+                result in my removal from the register</label>
+            <div class="form-control readonly"
+                [innerHTML]="application.activeForm.declaration.isQ5Confirmed === true ? 'Yes':'No'">
+            </div>
+        </div>
+    </div>
+
+</form>

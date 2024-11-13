@@ -1,0 +1,404 @@
+/* @import url("https://fonts.googleapis.com/css?family=Bitter|Open+Sans"); */
+@use '@angular/material' as mat;
+@import "./mat-theme";
+@import "./variables";
+ 
+:host {
+    background: darken($gphc-background, 5%);
+    /*
+    @media(max-width:767px) {
+      background: white;
+    }*/
+}
+
+::ng-deep {
+    // TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+@include mat.all-component-typographies;
+/* TODO(mdc-migration): Remove legacy-core once all legacy components are migrated */
+@include mat.core();
+    /* TODO(mdc-migration): Remove all-legacy-component-themes once all legacy components are migrated */
+    // @include mat.all-legacy-component-themes($app-theme);
+    @include mat.all-component-themes($app-theme);
+    @import "./mixins";
+    @import "./page";
+    @import "./notificationBanners";
+    @import "./focus";
+    @import "./animation";
+    @import "./sections";
+    @import "./buttons";
+    @import "./cards";
+    @import "./forms";
+    @import "./md";
+    @import "./tables";
+    @import "./print";
+    @import "./icons";
+    @import "./lists";
+
+    .btn-primary.disabled, .btn-primary:disabled {
+      background-color: #eee !important;
+      border-color: #eee !important;
+  }
+
+    .scroll-y {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .footer {
+      display:flex;
+     padding: 20px;
+      font-size:0.9em;
+      color: $gphc-purple;
+      box-shadow: 0px 2px 2px rgba(0,0,0,0.05) inset;
+      background: darken($gphc-background,5%);
+      a {
+        color: $gphc-purple !important;
+        text-decoration: none !important;
+      }
+    }
+
+    &.fullscreen {
+      .footer {
+        display: none;
+      }
+    }
+
+    .badge {
+      font-family: 'Open-sans', sans-serif;
+      background: $gphc-purple;
+      &.badge-danger {
+        background: $error !important;
+      }
+      &.badge-notification {
+        position: absolute;
+        border-radius: 10px;
+        top: 7px;
+        font-size: 14px;
+        font-weight: normal;
+        z-index: 9;
+      }
+    }
+
+ 
+
+    i.success {
+        color: $gphc-aqua !important;
+    }
+
+    i.important {
+        color: $gphc-purple !important;
+        background: white !important;
+      
+    }
+
+    .pull-right {
+        float: right;
+    }
+
+    .collapsible {
+      
+        overflow: hidden;
+    }
+
+    .no-pad {
+        padding: 0 !important;
+    }
+
+    p > i {
+        font-size: 1.6em !important;
+        vertical-align: middle;
+    }
+
+    .warning-icon {
+        font-size: 1.2em !important;
+    }
+
+    .error {
+      color:  #c52e2e;
+    }
+    .important {
+        background: $gphc-purple;
+        color: white;
+        padding: 15px;
+        font-size: 1.1em;
+
+        p.intro-text, .intro-text, h4 {
+          color: white;
+        }
+
+        a {
+            color: white !important;
+            border-color: white !important;
+        }
+
+        i {
+            color: white;
+            vertical-align: middle;
+            height: 50px;
+            float: left;
+            margin-right: 20px;
+            margin-top: 7px;
+            margin-left: 5px;
+            font-size: 2.5em;
+        }
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color:rgba(54, 93, 121, 0.5);
+      z-index:6;
+      transition: opacity 3s ease-in-out;
+    
+      &.secondary {
+        z-index:100;
+      }
+    }
+    .overlay-transparent {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: transparent;
+      z-index:7;
+    }
+
+    app, .mat-radio-button, .mat-checkbox, input, select, option {
+        font-family: 'Open Sans', sans-serif !important;
+    }
+
+    select {
+        height: 45px !important;
+    }
+    ul {
+      list-style-type: none;
+    }
+
+    .shadow-deep {
+        box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.1);
+    }
+    .shadow-deep-heavy {
+        box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .card, .form-control, .card-header, .card-header:first-child, select {
+        border-radius: 0 !important;
+    }
+
+    .no-data {
+        color: $gphc-blue;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 20px;
+        padding-left: 0;
+    }
+
+    .table {
+        padding-bottom: 20px;
+    }
+
+    .form-control:disabled, .readonly {
+      background: lighten($gphc-background, 5%);
+      padding: 5px;
+      margin-left: 5px;
+  }
+
+
+    .help-text {
+      color: $gphc-aqua; font-weight:bold;
+        padding-bottom: 15px;
+        /*
+        @media (min-width:768px) {
+          font-size:18px;
+        }
+        */
+    }
+
+    .h2, h2 {
+        font-size: 2rem;
+        padding-bottom: 15px;
+        margin: 0;
+    }
+    /*
+    p:last-child {
+      margin-bottom: 0;
+    }
+*/
+    a, a:hover, a:visited {
+        text-decoration: none !important;
+        font-weight: 900;
+    }
+
+    h1, h2, h3, h3, h4, h5 {
+        color: $gphc-blue;
+        font-weight: 900;
+    }
+
+    h1, h2  {
+        font-family: 'Bitter',  sans-serif !important;
+    }
+
+    h3, h4, h5, h6 {
+        font-family: 'Open sans', sans-serif;
+    }
+
+    h3 {
+        font-size: 1.9em;
+    }
+
+    h5 {
+        line-height: 1.4em;
+    }
+
+    .intro-text {
+        font-size: 1.15em;
+        color: #444;
+        font-weight: bold;
+    }
+
+    .alert-info {
+        background: white;
+        border-color: white;
+        color: $gphc-purple !important;
+        border-radius: 0;
+        color: white;
+        font-weight: bold;
+    }
+
+
+    .performance-indicator {
+      background: #f7f7f7;
+      color: white;
+      padding: 10px;
+      margin-right: 5px;
+      text-align: center;
+      &.ReviewAtRandomAfterTwoYears {
+          background: $gphc-aqua;
+      }
+      &.ReviewNextYear {
+          background: $gphc-accent-orange;
+      }
+      &.CoreCriteriaNotMet {
+          background: $error;
+      }
+      &.Unknown {
+          color: black;
+      }
+  }
+
+  .hr-space{
+    width: 20px;
+    text-align: center;
+  }
+
+
+
+    .item-count {
+        white-space: nowrap;
+    }
+
+    @import "./responsive";
+
+    .mdc-form-field{ 
+      font-family: Open Sans,sans-serif;
+
+      label {
+        font-size: 18px;
+      }
+    }
+
+    .mat-mdc-dialog-container {       
+        .mat-mdc-dialog-surface {
+          display: block;
+          padding: $legacy-modal-padding;
+          border-radius: 4px;
+          box-sizing: border-box;
+          overflow: auto;
+          outline: 0;
+          width: 100%;
+          height: 100%;
+          min-height: inherit;
+          max-height: inherit;
+        } 
+
+        .mat-mdc-dialog-title {
+          color: $gphc-blue!important;
+          font-size: 32px!important;
+          font-weight: bold!important;
+          margin: 0 0 20px;
+          // padding-top:24px;
+        }        
+
+        .mat-mdc-dialog-content {
+          color: $legacy-modal-text-color!important;
+          padding: 0px;
+          i.fa-level-up {
+            margin-top: 6px;
+          }
+        }
+
+        app-preference-dialog{
+          display: block;
+          margin: 0px $legacy-negative-modal-padding $legacy-negative-modal-padding $legacy-negative-modal-padding;
+        }
+    }    
+
+    .skip-link {
+      width: 100%;
+      background: rgb(255 255 255 / 81%);
+      z-index: 99999;
+      padding: 10px;
+      font-weight: bolder;
+      left: 0px;
+      right: 0px;
+      margin-left: auto;
+      margin-right: auto;
+      outline: none;
+      border-bottom: 1px solid black;
+      padding-left: 20px;
+      text-align: center;
+      font-size: 1.15rem;
+      position: absolute;
+      color: $gphc-blue !important;
+      font-size: 1.15rem;
+    }
+
+    .visibility-hidden{
+      visibility: hidden;
+    }
+
+    .skip-link-active {
+      top: 0px;
+      color: white;
+      animation-name: swipeUp;
+      animation-duration: 0.6s;
+    }
+
+    .skip-link-active:focus {
+      animation-name: swipeDown;
+      animation-duration: 0.6s;
+      top:0px;
+    }
+
+    .skip-link-hidden {
+      top: -50px;
+    }
+
+    @keyframes swipeDown {
+      0%   {top:-50px;}
+      100% {top:0px;}
+    }
+
+    @keyframes swipeUp {
+      0%   {top:0px;}
+      100% {top:-50px;}
+    }
+    a {
+      outline-color: #101010; // retaining same color as before in chrome
+    }
+}

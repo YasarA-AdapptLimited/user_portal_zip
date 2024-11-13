@@ -1,0 +1,208 @@
+<ng-template #content>
+  <div class="header">
+    <h2>
+      <div>
+        Supporting documents
+      </div>
+      <app-gphc-icon [tooltip]="tooltip" [iconType]="'info'" (click)="showDetailsHelp = !showDetailsHelp"
+        [static]='true' class="headingIcon"></app-gphc-icon>
+    </h2>
+  </div>
+  <app-collapsible [trigger]="showDetailsHelp" class="help-block">
+    <div class="row help-text">
+      <div class="col-md-12">
+        <p>
+          Please upload scanned copies of the documents we need to verify the information you have given us as part of
+          your application
+          to register as pharmacist. Click on the ‘I’ icon next to each section to find out more about the documents you
+          need to provide.
+          <a href="https://pharmacyregulation.org/pharmacists/registering-pharmacist/uk-qualified-pharmacist-registration"
+            target="_blank" class="tooltip-link">
+            Read the application guidance on providing correctly certified documents
+          </a> to check how to get copies of your original
+          documents certified correctly.
+        </p>
+        <p>
+          <b>Important:</b> the files you upload here <b>must</b> be scanned versions of the certified copies of your
+          documents. Make sure your scanned versions
+          are clear and the text is readable. You must post hard copies of the documents you have scanned to us, with an
+          application
+          cover sheet.
+        </p>
+        <p>
+          <b>We will never ask you for the original versions of your identity and qualification documents and you should
+            not send these
+            to us.</b>
+        </p>
+        <p>You will also need to <a class="tooltip-link" target="_gphc_main_site"
+            href="https://pharmacyregulation.org/pharmacists/registering-pharmacist/uk-qualified-pharmacist-registration">complete
+            and upload a statutory declaration form if:</a> </p>
+        <ul class="tooltip-list">
+          <li>If your birth certificate is not written in English or the registration date on your birth certificate is
+            not within one
+            year of your birth</li>
+          <li>your name is written differently on any of your supporting documents</li>
+          <li>you want to register using a different version of your name than the one on your birth certificate</li>
+        </ul>
+        <p>
+          <a href="https://pharmacyregulation.org/pharmacists/registering-pharmacist/uk-qualified-pharmacist-registration"
+            target="_blank" class="tooltip-link">
+            See the application guidance for more information about completing a statutory declaration form.
+          </a>
+        </p>
+      </div>
+    </div>
+  </app-collapsible>
+  <div [hidden]="(application.finalTrainingResult == FinalTrainingReport.Pass)">
+    <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId" [touched]="touched"
+      (uploaded)="onUploaded($event)" [attachments]="attachments" [attachmentType]="AttachmentType.FinalDeclarationForm"
+      [requireCertifier]="false" title="Final declaration form" [mandatory]="(application.finalTrainingResult == null || application.finalTrainingResult == FinalTrainingReport.Fail)">
+      <div class="help-text">
+        <p>
+          Upload a scanned version of your <a class="tooltip-link" target="_gphc_main_site"
+            href="https://www.pharmacyregulation.org/sites/default/files/prereg_manual/pharmacist_final_declaration.pdf">foundation
+            training final declaration</a> which
+          has been signed off by your designated supervisor.
+        </p>
+      </div>
+    </app-supporting-documents-item>
+  </div>
+
+
+
+
+
+  <app-supporting-documents-item #doc (registered)="onRegistered($event)" [max]="9" [requireTitle]="true"
+    [requireExpiryDate]="true" [sessionId]="sessionId" [touched]="touched" (uploaded)="onUploaded($event)"
+    [mandatory]="true" [attachments]="attachments" [attachmentType]="AttachmentType.ProofOfIdentity"
+    title="Proof of identity">
+
+    <div class="help-text">
+      <p>
+        Upload a scanned version of your certified copy of your proof of identity document(s)
+      </p>
+      <p>
+        <b>Important:</b> All documents you submit as proofs of your identity must be correctly certified copies of
+        original documents
+        which are valid on the date you submit your application.
+      </p>
+      <p>
+        <b>What documents can be used as proof of identity ?</b>
+      </p>
+      <p>
+        As proof of identity, you can submit a correctly certified copy of either:
+      </p>
+      <ul class="tooltip-list">
+        <li>
+          a page of your current valid passport page showing your photo and the expiry date
+        </li>
+        <li>
+          <b>or</b>, if you do not have a current valid
+          passport, you can submit a correctly certified copy of:
+        </li>
+        <li>your valid full or provisional photocard driving licence together with a correctly certified copy of your:
+        </li>
+        <li>UK national Insurance card</li>
+        <li>NHS card</li>
+        <li>photo identity card from an non-UK EEA country</li>
+      </ul>
+
+      <p>
+        Your name should be written <b>exactly the same</b> on all the documents you submit as proof of identity. If
+        any letter or word
+        in your name is written differently on any of them, you must complete <a
+          href="https://pharmacyregulation.org/pharmacists/registering-pharmacist/uk-qualified-pharmacist-registration" target="_blank"
+          class="tooltip-link">a statutory declaration form</a> – see the application
+        guidance for more information.
+      </p>
+    </div>
+
+
+  </app-supporting-documents-item>
+
+  <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId" [touched]="touched"
+    (uploaded)="onUploaded($event)" [attachments]="attachments" [attachmentType]="AttachmentType.BirthCertificate"
+    [mandatory]="true" title="Birth certificate">
+    <div class="help-text">
+      <p>
+        Upload a scan of your birth certificate. If you were born in England, Wales and Scotland, please upload your birth certificate 
+        issued by the General Registry Office, or the General Registers Office for Scotland.
+      </p>
+      <p>
+        <b>If you were NOT born in England, Wales or Scotland</b> you must submit a certified copy of your birth certificate. Any document that is not written in English must be accompanied by a translation.
+      </p>
+
+<p>
+  <b>If you are not able to provide a birth certificate</b> you can submit Statutory Declaration A, which needs to be completed with a solicitor. 
+</p>
+
+    </div>
+  </app-supporting-documents-item>
+
+  <app-supporting-documents-item #doc (registered)="onRegistered($event)"
+    [sessionId]="sessionId" [touched]="touched" (uploaded)="onUploaded($event)" [attachments]="attachments"
+    [mandatory]="true" [attachmentType]="AttachmentType.QualificationCertificate" title="Qualification certificate" [requireCertifier]="false">
+    <div class="help-text">
+      <p>
+        Upload a scanned version of your MPharm or OSPAP qualification certificate.
+        The name on the certificate must match the one on your identification document. If it does not, see the
+        application guidance and <a class="tooltip-link" target="_gphc_main_site"
+          href="https://pharmacyregulation.org/pharmacists/registering-pharmacist/uk-qualified-pharmacist-registration">complete a
+          statutory declaration form.</a>
+      </p>
+    </div>
+  </app-supporting-documents-item>
+
+  <!-- <app-supporting-documents-item [isAros]="true" #doc (registered)="onRegistered($event)" [sessionId]="sessionId" [touched]="touched"
+      (uploaded)="onUploaded($event)" [attachments]="attachments" [attachmentType]="3"
+      [mandatory]="true" [requireCertifier]="false" title="Photo and supporting form">
+      <div class="help-text">
+        <p>
+          Upload both sides of a certified copy of a passport photograph of you which has been certified on the back as
+          well as the
+          <a href="https://www.pharmacyregulation.org/registration/registering-pharmacist/uk-recognised-pharmacist-qualifications"
+            target="_blank" class="tooltip-link">photograph certification form.</a>
+        </p>
+      </div>
+    </app-supporting-documents-item>  -->
+
+  <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId" [touched]="touched"
+    (uploaded)="onUploaded($event)" [isStudent]="false" [attachments]="attachments"
+    [attachmentType]="AttachmentType.Photo" min="1" max="1" [mandatory]="true" [requireCertifier]="false"
+    [isTechnician]="false" title="Photo">
+    <div class="help-text">
+      <p>
+        Upload a recent photograph of yourself and a completed photo certification form that has been countersigned by one of the people
+        who is listed as an acceptable counter signatory by the Home Office passport service. This should be someone who has known you for
+        at least two years and is resident in the UK.
+      </p>
+    </div>
+  </app-supporting-documents-item>
+
+  <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId" [touched]="touched"
+    (uploaded)="onUploaded($event)" [attachments]="attachments" [attachmentType]="AttachmentType.Other"
+    title="Other supporting documents" [requireCertifier]="false" [max]="9">
+    <div class="help-text">
+      <p>
+        If you need to submit any other documents such as a statutory declaration form or proof of change of name,
+        upload them here.
+      </p>
+    </div>
+  </app-supporting-documents-item>
+
+ <!-- https://mygphc.atlassian.net/browse/NWU-1
+  <app-supporting-documents-item #doc (registered)="onRegistered($event)" [sessionId]="sessionId" [touched]="touched"
+    (uploaded)="onUploaded($event)" [attachments]="attachments" [requireCertifier]="false"
+    [attachmentType]="AttachmentType.SomethingToDeclareForm" title="Something to declare form">
+    <div class="help-text">
+      <p>
+        If you answered any of the declarations and indicated that you need to declare something
+        which may affect your fitness to practise, <a class="tooltip-link" target="_gphc_main_site"
+          href="https://www.pharmacyregulation.org/forms">upload a copy of the something to declare form</a>
+        which you have filled out.
+      </p>
+    </div>
+  </app-supporting-documents-item> -->
+
+
+</ng-template>

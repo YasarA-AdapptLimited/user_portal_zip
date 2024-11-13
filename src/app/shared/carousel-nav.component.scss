@@ -1,0 +1,45 @@
+.carousel-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+}
+
+.carousel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  transition: transform 1s, -webkit-transform 1s;
+}
+/*
+.active-carousel-item {
+transition: width 300ms ease-in-out;
+}
+*/
+.controls {
+  pointer-events: none;
+  position: absolute;
+  top: -75px;
+  width: 100%;
+}
+
+.controls button {
+  pointer-events: all;
+  background: transparent;
+  border: 0;
+  position:absolute;
+  top:25px;
+  &.next {
+    right:50px;
+  }
+  &.prev {
+    right:110px;
+  }
+}

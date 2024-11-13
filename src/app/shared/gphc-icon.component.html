@@ -1,0 +1,23 @@
+<div class="gphc-icon-wrapper"  
+[style.right]="offsetPixelsRight" 
+[style.left]="offsetPixelsLeft" 
+[style.position]="position"
+[class.btn-abs]="position === 'absolute'"
+[style.top]="offsetPixelsTop"
+[ngClass]="iconType" 
+ >
+  <button  class="gphc-icon fa-lg" [class.primary]="primary" [ngClass]="iconType" 
+
+  [class.disabled]="disabled" [class.active]="active" [class.small]="small"
+  [style.fontSize]="fontSize"
+  (click)="onClick($event)"
+  (keyup.enter)="onKeyupEnter($event)"
+  (keydown.enter)="onKeydownEnter($event)"
+  [appTooltip]="tooltip"
+  >
+    <div   class="circle fa-stack" >
+      <i class="fa fa-stack-1x fa-inverse" [ngClass]="iconTypes[iconType].fa"></i>
+    </div>
+    <div id="buttonLabel" *ngIf="showLabel" class="icon-label" [class.always]="showLabelAlways">{{label || iconType}}</div>
+  </button>
+</div>

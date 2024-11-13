@@ -1,0 +1,14 @@
+@import "../style/variables";
+
+:host {
+
+    tbody {
+        tr {
+            transition: background 100ms linear;
+        }
+
+        tr:hover {
+            background: lighten($gphc-background, 10%);
+        }
+    }
+}

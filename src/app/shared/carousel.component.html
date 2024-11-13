@@ -1,0 +1,25 @@
+<div class="carousel-container">
+  <div class="carousel-wrapper" [style.width]="width + 'px'" >
+    <div class="carousel" [attr.startPress]="startPress" 
+      [style.transition]="startPress > 0 ? 'none' : '-webkit-transform 500ms'"
+      [style.webkitTransition]="startPress > 0 ? 'none' : '-webkit-transform 500ms'" 
+      [style.transform]="'translateX('+amount+'px)'"
+      [style.webkitTransform]="'translateX('+amount+'px)'"
+      [style.width]="(items.length * width) + 'px'"
+     
+      #carousel>
+
+      <div #template *ngFor="let item of items; let i = index" 
+     
+      [class.active-carousel-item]="childIndex === i"
+      [style.width]="(width-(margin*2))+'px'" 
+      [style.margin-left]="margin + 'px'"
+      [style.margin-right]="margin + 'px'">
+
+        <ng-template   [ngTemplateOutlet]="$item" [ngTemplateOutletContext]="{$implicit: item, index: i}"></ng-template>
+
+      </div>
+    </div>
+  </div>
+
+</div>

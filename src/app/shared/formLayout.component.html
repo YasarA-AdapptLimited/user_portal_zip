@@ -1,0 +1,17 @@
+
+<!--
+col-md-7 col-lg-8 
+col-md-5 col-lg-4
+-->
+
+<div >
+  <ng-content select=".form-steps"></ng-content>
+  <div class="row body" >
+    <div class="col-lg-8 col-md-12 left-col">
+    <h2 class="content-header" #formHeader [style.display]="showHeader ? 'inline': 'none'" [attr.aria-hidden]="!showHeader" tabindex="0">
+      <ng-content select=".form-header"></ng-content>
+    </h2>
+      <ng-content select=".form-body" tabindex="0"></ng-content>
+    </div>
+  </div>
+</div>

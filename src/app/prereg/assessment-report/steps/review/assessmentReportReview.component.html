@@ -1,0 +1,206 @@
+<form #form="ngForm">
+
+  <div class="row">
+    <div class="col-md-12 p-2">
+      <h3>Trainee details</h3>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Full name</label>
+        <div type="text" class="form-control readonly" [innerHTML]="traineeFullName">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Foundation training number </label>
+        <div type="text" class="form-control readonly" [innerHTML]="trainee.preEntryNumber">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="application">
+    <div class="row" *ngFor="let site of application.training.trainedAt; let i = index;">
+      <div class="form-group col-md-4">
+        <label>Trained at</label>
+        <div class="form-control" tabindex="-1" readonly style="line-height: 1.7em;">
+          <b>{{site.trainingSite}}</b>
+          <br />
+          <span [innerHTML]="trainingSiteAdress[i]"></span>
+        </div>
+      </div>
+      <div class="form-group col-md-4 col-6">
+        <label for="startDate">Start date</label>
+        <input id="startDate" class="form-control" tabindex="-1" readonly [value]="site.startDate | utcDate" />
+      </div>
+      <div class="form-group col-md-4 col-6">
+        <label for="endDate">End date</label>
+        <input id="endDate" class="form-control" tabindex="-1" readonly [value]="site.endDate | utcDate" />
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Designated supervisor's full name </label>
+        <div type="text" class="form-control readonly"
+          [innerHTML]="application.activeForm.countersignatures[0].forenames + ' ' + application.activeForm.countersignatures[0].surname">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Designated supervisor's registration number </label>
+        <div type="text" class="form-control readonly"
+          [innerHTML]="application.activeForm.countersignatures[0].registrationNumber">
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- <div class="col-md-6">
+      <div class="form-group">
+        <label>Time since start of training (weeks) </label>
+        <div type="text" class="form-control readonly" [innerHTML]="application.training.numberOfWeeks">
+        </div>
+      </div>
+    </div>-->
+
+  <div class="p-2">
+    <h3>
+      Comments
+    </h3>
+  </div>
+
+  <!--<div class="form-group p-2">
+    <label>This progress report and outcome has been discussed with a second 
+      pharmacy/healthcare professional</label>
+    <div type="text" class="form-control readonly" name="anyProblemsEffected">
+      {{comments.anyProblemsEffected===false ? "No" : "Yes"}}
+    </div>
+    <div class="form-group p-2" *ngIf="comments.anyProblemsEffected===true">
+      <label>Supporting text</label>
+      <div type="text" class="form-control readonly" name="problemDetails" [innerHTML]="comments.problemDetails">
+      </div>
+    </div>
+  </div>-->
+  <div class="form-group p-2">
+    <label>
+      Comments on your trainee’s progress to date with the interim learning outcomes, registration assessment
+      framework and calculation questions:</label>
+    <div type="text" class="form-control readonly" name="traineeProgressComments"
+      [innerHTML]="comments.traineeProgressComments">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 pt-4">
+      <label>Number of days the trainee has been absent since starting foundation training:</label>
+    </div>
+
+    <div class="col-md-4 ">
+      <div class="form-group p-2">
+        <label>Annual Leave</label>
+        <div type="number" class="form-control readonly" [innerHTML]="comments.annualLeaves"></div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4 ">
+      <div class="form-group p-2">
+
+        <label>Sickness:</label>
+        <div type="number" class="form-control readonly" [innerHTML]="comments.sickLeaves"></div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4 ">
+      <div class="form-group p-2">
+        <label>Other</label>
+        <div type="number" class="form-control readonly" [innerHTML]="comments.otherLeaves" name="otherLeaves"></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group p-2" *ngIf="comments.otherLeaves > 0">
+    <label>Reason for other leave by trainee</label>
+    <div type="text" class="form-control readonly" [innerHTML]="comments.otherLeaveDetails"></div>
+  </div>
+
+  <div class="form-group p-2">
+    <label>Any other comments by designated supervisor?</label>
+    <div type="text" class="form-control readonly" [innerHTML]="comments.commentsByTutor"></div>
+  </div>
+
+  <section>
+
+
+    <div>
+      <h3>Outcome of final report</h3>
+    </div>
+    <div class="form-group">
+      <div type="text" class="form-control readonly"
+        *ngIf="countersigner.decision===CountersignatureOutcome.Approved || countersigner.decision===CountersignatureOutcome.Rejected">
+        {{countersigner.decision === 999 ? "unsatisfactory" : "satisfactory"}}</div>
+    </div>
+
+    <p class="important" *ngIf="countersigner.decision === CountersignatureOutcome.Rejected">
+      You are not eligible to apply for provisional registration, or to apply to sit the registration assessment when
+      this is
+      scheduled, until you receive a satisfactory final progress report.
+    </p>
+
+
+
+    <!--<section *ngIf="traineeComments">
+      <h3>
+        <div class="grow">Applied to join provisional register</div>
+      </h3>
+      <div type="text" class="form-control readonly" [innerHTML]="application.activeForm.confirmTempRegistration === true ? 'Yes' : 'No'">
+      </div>
+    </section>
+    <div *ngIf="traineeComments && tempRegValid">
+      <section>
+        <h3>
+          <div class="grow">Provisional registration: declarations of fitness to practise</div>
+        </h3>
+        <app-assessment-report-declaration-summary [formId]="formId" formIndex="0" [application]="application">
+        </app-assessment-report-declaration-summary>
+      </section>
+
+      <section>
+        <h3>
+          <div class="grow">Overall declaration</div>
+        </h3>
+        <div class="form-group">
+          <div class="form-control" readonly>
+            I have read and understand the overall declaration
+          </div>
+        </div>
+      </section>
+    </div>-->
+
+
+    <div *ngIf="mapComments && traineeComments">
+      <div>
+        <h3>Your comments</h3>
+      </div>
+      <div class="form-group ">
+        <div type="text" class="form-control readonly"
+          *ngIf="comments.traineeFeedbackOnTutorAssessment; else noComments"
+          [innerHTML]="comments.traineeFeedbackOnTutorAssessment"></div>
+        <ng-template #noComments>
+          <div class="form-control readonly">
+            No comments
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+</form>

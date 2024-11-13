@@ -1,0 +1,83 @@
+<!----<app-toolbar [loading]="loading" [title]="'Discuss'">
+
+  <div class="toolbar-left">
+    <app-gphc-icon [static]="true" (click)="exit()" [iconType]="'return'"></app-gphc-icon>
+  </div>
+  <div class="toolbar-right">
+
+    <app-gphc-icon style="border-right: 1px solid #6c9fb7;" [static]="true" [active]="helpVisible" (click)="toggleHelp()" [iconType]="'info'"></app-gphc-icon>
+
+    <app-gphc-icon [static]="true" (click)="toggleChat()" [iconType]="'discussion'" [active]="chatVisible"></app-gphc-icon>
+
+    <app-carousel-nav *ngIf="review" [items]="review.entries" [selectedIndex]="selectedIndex" (selected)="selectedIndex=$event.index"></app-carousel-nav>
+
+
+    <app-gphc-icon [static]="true" (click)="submit()" [iconType]="'submit'"></app-gphc-icon>
+
+
+  </div>
+</app-toolbar>-->
+
+<app-review-header>
+
+  <div class="buttons">
+    <button class="btn no-focus" (click)="submit()" [disabled]="manager.currentReviewerCompletedDiscussion">
+      <i class="fa  fa-upload"></i>
+      done
+    </button>
+
+
+  </div>
+</app-review-header>
+<app-collapsible [trigger]="manager.helpVisible$ | async">
+  <app-banner [important]="true">
+    <div class="banner-left">
+      <ng-container *ngIf="review.isLeadReviewer && manager.feedbackRejected">
+        Your feedback was rejected for the following reason:
+        <blockquote class="blockquote">
+          {{manager.feedbackRejectionReason }}
+        </blockquote>
+      </ng-container>
+
+      <ng-container *ngIf="!review.isLeadReviewer && manager.feedbackRejected">
+        The lead reviewer's feedback was rejected.
+      </ng-container>
+
+      <ng-container *ngIf="!manager.currentReviewerCompletedDiscussion && !manager.otherReviewerCompletedDiscussion">
+        Use the discussion pane on the left to engage in a discussion with the other reviewer.
+      </ng-container>
+      <ng-container *ngIf="manager.currentReviewerCompletedDiscussion">
+        You have indicated that you are ready to move on from the discussion stage, but your peer reviewer hasn't yet.
+      </ng-container>
+      <ng-container *ngIf="manager.otherReviewerCompletedDiscussion">
+        The other reviewer has indicated that they are ready to move on from the discussion stage. Hit 'done' when you
+        are ready.
+      </ng-container>
+    </div>
+    <div class="banner-right">
+      <button (click)="manager.closeHelp()" style="font-weight:bold" class="btn btn-lg btn-default">OK</button>
+    </div>
+
+  </app-banner>
+</app-collapsible>
+
+<div class="row discuss review-content spread-bottom" #container [class.chat-visible]="manager.chatVisible$ | async">
+  <div class="col-md-9 align-space" style="flex-grow: 1;" [@slideInOut]="(this.manager.chatVisible$ | async) ? 'open' : 'closed'">
+    <app-carousel [items]="manager.items" [$item]="itemTemplate" [selectedIndex]="manager.selectedEntryIndex$ |async">
+    </app-carousel>
+  </div>
+
+  <div class="col-md-3 messaging-container slide align-space" 
+    [@slideInOut]="(this.manager.chatVisible$ | async) ? 'open' : 'closed'">
+    <app-discussion></app-discussion>
+  </div>
+</div>
+
+
+<ng-template let-item let-i="index" #itemTemplate>
+  <div class="scroll-y template-container">
+    <section class="cpd-entry-section">
+      <app-cpd-entry [cpdEntry]="item" [annotationsVisible]="true" [typeVisible]="true"></app-cpd-entry>
+    </section>
+  </div>
+</ng-template>

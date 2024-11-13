@@ -1,0 +1,79 @@
+<app-banner>
+  <div class="banner-left">
+    <h1>Home</h1>
+    <p class="intro-text">
+      A summary of your trainee pharmacist application status.
+    </p>
+  </div>
+</app-banner>
+<div class="content spread registrant-summary">
+
+  <div class="row">
+
+    <div class="col-sm-6 left-col">
+
+      <app-user-badge link="/student" title="Student">
+        {{ user }}
+      </app-user-badge>
+    </div>
+
+    <div class="col-sm-6 right-col">
+
+      <app-form-section class="fadein" [link]="isApplicationOpen ? '/student/application' : undefined" [loading]="loadingApplication" [loaderFill]="true">
+        <span class="section-header">Application</span>
+
+
+        <div class="section-body" *ngIf="isApplicationOpen else applicationClosed">
+          <div class="text-center">
+            <i class="fa fa-id-card-o status-icon " aria-hidden="true"></i>
+            <div class="btn-text" *ngIf="application">
+              {{ ApplicationStatus[application.status] | caseSplit }}
+            </div>
+          </div>
+        </div>
+        <ng-template #applicationClosed>
+
+          <div class="text-center">
+            <i  class="fa fa-clock-o status-icon notdue " aria-hidden="true"></i>
+            <div class="btn-text" *ngIf="application">
+              {{ applicationClosedMessage }}
+            </div>
+          </div>
+
+        </ng-template>
+      </app-form-section>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="application?.pastApplications.length">
+    <div class="col-sm-6 left-col">
+      <ng-container [ngTemplateOutlet]="pastApplicationsTile"></ng-container>
+    </div>
+  </div>
+
+</div>
+<!-- 
+<ng-template #pastApplicationsTile>
+  <app-form-section class="fadein" [loading]="loadingApplication" [loaderFill]="true">
+    <span class="section-header">Past Applications</span>
+    <div class="section-body" *ngIf="!error else errorTemplate">
+      <ul class="global-list">
+        <li *ngFor="let form of application?.pastApplications" [routerLink]="['/student/pastApplication', form.id]">
+          <h5>
+            {{ form.createdAt | date:'dd/MM/yyyy'}}
+          </h5>
+          <h5>{{ ApplicationStatus[form.formStatus] | caseSplit }}</h5>
+        </li>
+      </ul>
+    </div>
+  </app-form-section>
+</ng-template> -->
+
+<ng-template #errorTemplate>
+  <div class="section-body">
+    <div class="text-center">
+      <i class="fa fa-warning error status-icon" aria-hidden="true"></i>
+      <div class="intro-text">Error</div>
+    </div>
+  </div>
+</ng-template>

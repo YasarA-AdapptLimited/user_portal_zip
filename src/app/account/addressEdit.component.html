@@ -1,0 +1,18 @@
+<app-collapsible [trigger]="!address && !manualInput">
+  <app-address-search (selected)="onSelect($event)" (manualInput)="enableManualInput()" [editing]="editing">
+  </app-address-search>
+</app-collapsible>
+
+<app-collapsible [trigger]="address || manualInput">
+  <app-address #addressedit [(ngModel)]="address" (ngModelChange)="propagateChange(address)"
+    [lineOneEditable]="!manualInput" [lineOneFocussed]="lineOneFocussed" [manualInput]="manualInput"
+    [touched]="touched"></app-address>
+  <p class="text-center">
+    <button *ngIf="address && !manualInput" class="btn btn-default btn-lg " (click)="reselect()">Select a different
+      address</button>
+  </p>
+  <p class="text-center">
+    <button *ngIf="manualInput" class="btn btn-default btn-lg " (click)="reselect()">Use postcode lookup
+      instead</button>
+  </p>
+</app-collapsible>

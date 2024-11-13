@@ -1,0 +1,15 @@
+<div class="tooltip-container" >
+  <div *ngFor="let tooltip of service.active; let i = index">
+      <app-tooltip *ngIf="tooltip === service.activeTooltip" 
+      [tooltip]="tooltip" 
+      [index]="i"
+      ></app-tooltip>
+  </div>
+  <app-tooltip *ngIf="showSoloTip()" 
+    [tooltip]="service.soloTip" 
+    [index]="i"
+    ></app-tooltip>
+</div>
+<div *ngIf="service.activeTooltip" (click)="service.close()"  class="overlay-transparent">
+
+</div>

@@ -1,0 +1,90 @@
+<app-banner [loading]="loading">
+  <div class="banner-left">
+    <div style="display:flex">
+        <h1 class="sm-show" style="flex-grow:1">View receipt</h1>
+        <div class="button-container" *ngIf="receipt">
+            <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+              <i class="fa fa-print"></i>
+            </button>
+            <div class="btn-text" >Print</div>
+          </div>
+        <div class="button-container" >
+          <button class="btn btn-primary btn-round btn-round-sm"  aria-label="Back" (click)="exit()">
+            <i class="fa fa-arrow-left"></i>
+          </button>
+          <div class="btn-text" >Back</div>
+        </div>
+     
+    </div>
+
+  </div>
+ 
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+  <section *ngIf="receipt else noReceipt" class="receipt section-to-print">
+    <img class="logo" alt="General Pharmaceutical Council logo" src="/assets/images/logo-GPhC-blue-cropped.png" />
+
+    <h2>Receipt</h2>
+
+    <table class="table table-padding">
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            Description
+          </th>
+          <th>
+            Date
+          </th>
+          <th>
+            Amount
+          </th>
+          <th *ngIf="user.isRegistrant">
+            Registration number
+          </th>
+          <th>
+            Registration name
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            {{receipt.paymentNumber}}
+          </td>
+          <td>
+            {{receipt.description}}
+          </td>
+          <td>
+            {{ receipt.paymentDate | utcDate }}
+          </td>
+          <td>
+            {{ receipt.amount | currency: 'GBP' : 'symbol' : '.2' }}
+          </td>
+          <td *ngIf="user.isRegistrant">
+            {{ user.registrant.registrationNumber }}
+          </td>
+          <td>
+            {{ user.toString() }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="disclaimer">
+         <b>Disclaimer</b>: this receipt does not confirm that the recipient is currently registered with the GPhC.
+       <br>
+       It should not be used as proof of registration. To confirm if a pharmacy professional is currently registered, check the
+       GPhC register online at <a href="https://www.pharmacyregulation.org/registers" target="_blank">https://www.pharmacyregulation.org/registers</a>.
+    </div>
+  </section>
+</div>
+
+
+<ng-template #noReceipt>
+  <p class="intro-text">No receipt found for id {{id}}.</p>
+</ng-template>

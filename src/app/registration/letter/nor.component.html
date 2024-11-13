@@ -1,0 +1,106 @@
+<app-banner [loading]="loading">
+    <div class="banner-left">
+        <div style="display:flex">
+            <h1 class="sm-show" style="flex-grow:1">Notice of removal</h1>
+            <div class="button-container">
+                <button class="btn btn-primary btn-round btn-round-sm" aria-label="Print" (click)="print()">
+                    <i class="fa fa-print"></i>
+                </button>
+                <div class="btn-text">Print</div>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-primary btn-round btn-round-sm" aria-label="Back" (click)="exit()">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+                <div class="btn-text">Back</div>
+            </div>
+        </div>
+    </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+
+    <section class="letter-header">
+        <app-letter-header 
+        [letterDate]="letterDate"
+        [registrant]="auth.user.registrant" 
+        [registrantAddress]="auth.user.address">
+        </app-letter-header>
+        <section class="notice-of-entry section-to-print">
+            <section class="notice-of-entry-wrapper">
+
+                <h2 class="longer-notice">Notice of removal from the GPhC register for revalidation non-compliance</h2>
+
+                <div class="main-content">
+
+                    <p>
+                        On {{ letter?.data.NIRLetterSentDate | date: 'd MMMM yyyy' }}, we issued you with a notice of
+                        intention to remove your entry from the register.
+                        The notice explained that not submitting a complete revalidation record and not providing
+                        evidence of exceptional circumstances would mean that your registration is at risk.
+                        The notice also set out the options available to you, with a response date of
+                        {{ letter?.data.NIRResponseDate | date: 'd MMMM yyyy'  }}.
+                    </p>
+                    <p>
+                        To date we have not received a response from you. You have not submitted your complete
+                        revalidation record or provided a written representation, explaining why you have been unable to
+                        submit your revalidation record or why your entry should not be removed from the register.
+                    </p>
+                    <p>
+                        <b>
+                            I am writing to inform you that your entry will be removed from the register on
+                            {{ letter?.data.RemovalDate  | date: 'd MMMM yyyy'  }} for failure to comply with the
+                            revalidation
+                            framework. This means that you will no longer be able to practise as a {{ registrantType }}
+                            from
+                            this date.
+                        </b>
+                    </p>
+                    <p>
+                        Under article 40 of the Pharmacy Order 2010, you have a right to appeal the decision to remove
+                        your entry from the GPhC register. If you want to do this, you must submit a completed ‘notice
+                        of appeal’ form by
+                       <b>
+                           {{appealDate | date: 'd MMMM yyyy'}}.
+                       </b> 
+
+                    </p>
+                    <p>
+                        The form and guidance about how to complete it is available from the registration section of the
+                        GPhC website at <a
+                            href="https://www.pharmacyregulation.org/decisions-about-your-application-or-registration"
+                            target="_blank`">www.pharmacyregulation.org/decisions-about-your-application-or-registration</a>
+                    </p>
+                    <p>
+                        The process followed by the appeals committee is set out in the GPhC (Appeals Committee Rules)
+                        Order of Council 2010. The appeals committee has the power to award costs against any party to
+                        an appeal, so you may want to seek independent legal advice before lodging an appeal.
+                    </p>
+                    <p>
+                        <b>Important: </b>If you submit a notice of appeal in relation your removal, we may suspend your
+                        entry from the register until the final outcome of your appeal. This is set out in the GPhC
+                        (Continuing Professional Development and Consequential Amendments Rules) Order of Council 2011.
+                        Practising as a pharmacist or pharmacy technician while not on the register is a criminal
+                        offence. Make sure that you have appropriate staffing cover in place after your removal date if
+                        necessary, and that you notify your employer of your removal date, if you are not self-employed.
+                        You should also check your indemnity arrangements, as these may need to continue after your
+                        removal.
+                    </p>
+                  
+                    <p>
+                        You can apply to restore your entry to the register by completing an application for
+                        restoration, which you can find on our website. Please note you must submit the outstanding
+                        revalidation records with your application for restoration.
+                    </p>
+                    <p>
+                        If you have any queries or require any further information, please contact us by email at <a
+                            href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a> or on <b>020 3713 8000.</b> 
+                    </p>
+                    <app-letter-footer [signature]="'Customer Service Team'"></app-letter-footer>
+                </div>
+
+            </section>
+        </section>
+    </section>
+</div>

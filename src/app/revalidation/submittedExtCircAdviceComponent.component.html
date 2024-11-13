@@ -1,0 +1,177 @@
+<app-banner [loading]="loading" [info]="true">
+  <div class="banner-left">
+    <div style="display:flex">
+      <div style="flex-grow:1">
+        <h1 class="sm-show">Exceptional circumstance</h1>
+        <p class="intro-text">
+          Notice of decision
+        </p>
+      </div>
+
+      <div class="button-container">
+        <button aria-label="Print" class="btn btn-primary btn-round btn-round-sm" (click)="print()">
+          <i class="fa fa-print"></i>
+        </button>
+        <div class="btn-text">Print</div>
+      </div>
+      <div class="button-container">
+        <button aria-label="Back" class="btn btn-primary btn-round btn-round-sm" (click)="exit()">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        <div class="btn-text">Back</div>
+      </div>
+    </div>
+  </div>
+
+</app-banner>
+
+<div class="content fadein" *ngIf="!loading && !failed">
+  <section class="notice-of-advice section-to-print">
+    <header class="left-align">
+      <div class="logos">
+        <img class="logo" alt="General Pharmaceutical Council logo" src="/assets/images/logo-GPhC-blue-cropped.png" />
+      </div>
+
+      <p class="dear">
+        Dear {{registrant?.title + ' ' + registrant?.surname}},
+      </p>
+    </header>
+
+    <div class="main-content">
+      <h2 class="notice">
+        Notice of decision - reference: {{ extCirc.referenceNumber }}
+      </h2>
+      <!-- <h3 style="margin:">Reference: </h3> -->
+
+      <ng-container *ngIf="extCirc.decision === Decision.Rejected">
+
+        <ng-container *ngIf="isExtension">
+          <p>
+             Thank you for submitting a request to extend the deadline
+            to submit your revalidation records.
+          </p>
+          <p>
+           I have reviewed your request and any supporting evidence you provided. I have taken the decision to reject your request
+          as the evidence and reasons given do not support the changes you have requested to the revalidation requirement.
+          </p>
+          <p>
+             You must now complete your revalidation submission according to the standard revalidation requirement set out in the revalidation
+            framework. There are other supporting materials in the <a routerLink="/revalidation">Revalidation section of the GPhC website</a>.
+          </p>
+          <p>
+             The number of records and the date that they are due are displayed on the <a routerLink="/revalidation">revalidation page</a> of your myGPhC account.
+          </p>
+        </ng-container>
+        <ng-container *ngIf="isReduction">
+          <p>
+           Thank you for submitting a request to reduce the number of records in your revalidation submission.
+          <p>
+           I have reviewed your request and any supporting evidence you provided. I have taken the decision to reject your request
+          as the evidence and reasons given do not support the changes you have requested to the revalidation requirement.
+          </p>
+        <p>
+          You must now complete your revalidation submission according to the standard revalidation requirement set out in the revalidation
+          framework. There are other supporting materials in the
+          <a routerLink="/revalidation">Revalidation section of the GPhC website</a>.
+        </p>
+        <p>
+          The number of records and the date that they are due are displayed on the
+          <a routerLink="/revalidation">revalidation page</a> of your myGPhC account.
+        </p>
+
+        </ng-container>
+
+      </ng-container>
+      <ng-container *ngIf="extCirc.decision === Decision.Approved || extCirc.decision === Decision.PartiallyApproved">
+
+        <ng-container *ngIf="isExtension">
+
+          <p>
+              Thank you for submitting a request to extend the deadline
+              to submit your revalidation records.
+          </p>
+      
+          <p *ngIf="extCirc.decision === Decision.Approved">
+             I have reviewed your request and any supporting evidence you provided. I have taken the decision to accept your request
+            as the evidence and reasons given support the changes you have requested to the revalidation requirement. This extension only applies to your revalidation submission deadline. If you have not yet completed your annual renewal you must still do this on time.
+          </p>
+
+          <p *ngIf="extCirc.decision === Decision.PartiallyApproved">
+           I have reviewed your request and the supporting evidence you provided. I have taken the decision to partially accept your
+          request. This extension only applies to your revalidation submission deadline. If you have not yet completed your annual renewal you must still do this on time.
+          </p>
+
+          <p>
+             The information about number of records and the date that they are due, which is displayed on the <a routerLink="/revalidation">revalidation page</a> of your
+            myGPhC account, now reflects the agreed changes.
+          </p>
+
+        </ng-container>
+
+        <ng-container *ngIf="isReduction">
+
+          <p>
+           Thank you for submitting a request to reduce the number of records in your revalidation submission.
+          </p>
+
+          <ng-container *ngIf="extCirc.decision === Decision.Approved">
+            <p>
+               I have reviewed your request and any supporting evidence you provided. I have taken the decision to accept your request
+              as the evidence and reasons given support the changes you have requested to the revalidation requirement.
+            </p>
+          </ng-container>
+
+          <ng-container *ngIf="extCirc.decision === Decision.PartiallyApproved">
+            <p>
+                I have reviewed your request and the supporting evidence you provided. I have taken the decision to partially accept your
+              request.
+            </p>
+          </ng-container>
+
+          <p>
+             The information about number of records and the date that they are due, which is displayed on the <a routerLink="/revalidation">revalidation page</a> of your
+            myGPhC account, now reflects the agreed changes.
+          </p>
+
+
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="extCirc.decision === Decision.RequestResubmission">
+
+        <ng-container *ngIf="isExtension">
+          <p>
+             Thank you for submitting a request to extend the deadline
+            to submit your revalidation records.
+          </p>
+          <p>
+           I have reviewed your request and any supporting evidence you provided. 
+        </ng-container>
+        <ng-container *ngIf="isReduction">
+          <p>
+           Thank you for submitting a request to reduce the number of records in your revalidation submission.
+          <p>
+           I have reviewed your request and any supporting evidence you provided.
+
+        </ng-container>
+
+      </ng-container>
+
+      <p [innerHTML]="extCirc.review.noticeOfAdvice"></p>
+
+      <p>
+         If you have any questions about your request, you can contact us via the <a href="https://www.pharmacyregulation.org" target="_blank"> GPhC website</a>, or via email at <a href="mailto:info@pharmacyregulation.org">info@pharmacyregulation.org</a>.
+      </p>
+
+      <p>
+        Yours sincerely
+      </p>
+
+      <div class="signature">
+        <p style="font-weight:bold;margin-top: 0">
+          Customer Services Team
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

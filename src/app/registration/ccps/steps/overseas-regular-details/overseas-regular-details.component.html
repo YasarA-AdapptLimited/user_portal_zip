@@ -1,0 +1,155 @@
+<ng-template #content>
+    <h2 class="step-header" [ngClass]="!showTooltip ? 'spacer' : 'mrgn-btm-15' ">  {{title}}</h2>
+
+    <p class="important">
+      Please select the country and the name of the regulatory organisation which has requested a CCPS for you.
+      <br /><br/>
+      If the regulator is not listed below, please <a href="https://www.pharmacyregulation.org/about-us/contact-us" alt="Click here to contact us" target="_blank">contact us</a>.
+      We will not be able to process your request until we have verified the details of the regulator. We will send the CCPS directly to your selected regulator.
+    </p>
+
+    <form #form="ngForm" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((country.touched && country.invalid) || (touched && country.invalid))">
+                    <label for="counrty" id="countryId">Country</label>
+                    <select class="form-control" 
+                    name="counrty" required 
+                    #country="ngModel" 
+                    [(ngModel)]="professionalStandingDetail.country" 
+                    (change)="onCountryChange($event)"
+                    aria-labelledby="countryId"> 
+                        <option value="null" disabled default>Select country ...</option>     
+                        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" [class.invalid]="((regBody.touched && regBody.invalid) || (touched && regBody.invalid) || isRegBodySubmitted)">
+                    <label for="regBody" id="regBodyId">Regulatory body</label>
+                    <select class="form-control"
+                            name="regBody" required
+                            #regBody="ngModel"
+                            [(ngModel)]="professionalStandingDetail.regulatoryBodyId"
+                            (change)="selectChangeRegulatoryBodyHandler($event.target.value)"
+                            aria-labelledby="regBodyId">  
+                        <option value="null" disabled default>Select regulatory body ...</option>      
+                        <option *ngFor="let regulator of regulatoryBodies" [value]="regulator.id">{{regulator.name}}</option>
+                    </select>
+                    <p class="form-error" *ngIf="isRegBodySubmitted">
+                        CCPS application for selected regulatory body is already submitted
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <section *ngIf="regulatoryBody">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="emailId" id="addressLine1">Address line 1</label>
+                    <input class="form-control readonly" aria-readonly="true" aria-labelledby="addressLine1" readonly="true" [value]="regulatoryBody.addressLine1 || '-'">
+                </div>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="addressLine2">Address line 2</label>
+                    <input class="form-control readonly" aria-labelledby="addressLine2" aria-readonly="true" readonly="true" [value]="regulatoryBody.addressLine2 || '-'">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="addressLine3">Address line 3</label>
+                    <input class="form-control readonly" aria-labelledby="addressLine3" aria-readonly="true" readonly="true" [value]="regulatoryBody.addressLine3 || '-'">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="townId">County/State</label>
+                    <input class="form-control readonly" aria-labelledby="townId" aria-readonly="true" readonly="true" [value]="regulatoryBody.countyState || '-'">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="stateId">Country</label>
+                    <input class="form-control readonly" aria-labelledby="stateId" aria-readonly="true" readonly="true" [value]="regulatoryBody.country || '-'">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="postalId">Postal Code</label>
+                    <input class="form-control readonly" aria-labelledby="postalId" aria-readonly="true" readonly="true" [value]="regulatoryBody.postCode || '-'">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="emailAddressId">Email address</label>
+                    <input class="form-control readonly" aria-labelledby="emailAddressId" aria-readonly="true" readonly="true" [value]="regulatoryBody.standardEmail || '-'"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <p class="important">
+            We will send your CCPS and FTP history directly to the organisation you have identified above. This will usually be in the form of an email and PDF attachment. If there is a specific contact to whom we should send it please add the details below.
+        </p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="contactName">Contact name</label>
+                    <input aria-labelledby="contactName" class="form-control" type="text" name="contactName" [(ngModel)]="professionalStandingDetail.contactName" maxlength="500">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" [class.invalid]="(touched || mob.touched) && mob.errors?.pattern">
+                    <label id="telNumber">Telephone number</label>
+                    <input class="form-control" aria-labelledby="telNumber" #mob="ngModel" name="mob" id="mob" [(ngModel)]="professionalStandingDetail.telephone" maxlength="16"
+                    type="text" (ngModelChange)="validate()" pattern="^[0-9\+]+$"/>
+                <app-collapsible [trigger]="((touched || mob.touched) && mob.errors?.pattern) || ((touched || mob.touched) && invalidTelNumber)">
+                    <p class="form-error">
+                        Please check that you have entered your mobile phone number correctly (only numbers and '+' allowed)
+                    </p>
+                </app-collapsible>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="toEmailId">Email address</label>
+                    <input class="form-control" aria-labelledby="toEmailId" #focus #email="ngModel" name="email" id="email" [(ngModel)]="professionalStandingDetail.emailAddress"
+                    pattern="[-a-zA-Z0-9~!$%^&*_=+}{\'?]+(\.[-a-zA-Z0-9~!$%^&*_=+}{\'?]+)*@([a-zA-Z0-9_][-a-zA-Z0-9_]*(\.[-a-zA-Z0-9_]+)*\.([a-zA-Z]{2,})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?" 
+                    maxlength="200"/>
+                    <app-collapsible [trigger]="(touched || email.touched) && email.errors?.pattern">
+                    <p class="form-error">
+                        Please check that you have entered your email address correctly
+                    </p>
+                    </app-collapsible>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</ng-template>
